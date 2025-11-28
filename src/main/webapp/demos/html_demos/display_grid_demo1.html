@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../css/demo5.css">
+</head>
+<body>
+
+	<h3>d1 - div layout by default</h3>
+	<div class="wrapper d1">
+		<div>One</div>
+		<div>Two</div>
+		<div>Three</div>
+		<div>Four</div>
+		<div>Five</div>
+	</div>
+
+	<h3>d2 - grid-template-columns: 200px 200px 200px;</h3>
+	<div class="wrapper d2">
+		<div>One</div>
+		<div>Two</div>
+		<div>Three</div>
+		<div>Four</div>
+		<div>Five</div>
+	</div>
+
+
+	<h3>
+		d3 - grid-template-columns: 2fr 1fr 1fr;
+		<br>
+		grid-column-gap: 10px;
+		<br>
+		grid-row-gap: 1em;
+
+
+	</h3>
+	<div class="wrapper d3">
+		<div>One</div>
+		<div>Two</div>
+		<div>Three</div>
+		<div>Four</div>
+		<div>Five</div>
+	</div>
+
+
+	<h3>
+		d4 - grid-auto-rows: 150px;
+		<br>
+		grid-template-columns: 200px 1fr 1fr;
+		<br>
+		gap: 20px;
+	</h3>
+	<div class="wrapper d4">
+		<div>One</div>
+		<div>Two</div>
+		<div>Three</div>
+		<div>Four</div>
+		<div>Five</div>
+	</div>
+
+
+
+	<h3>d5 - grid-template-columns: 50px repeat(3, 1fr) 50px;</h3>
+	<div class="wrapper d5">
+		<div>One</div>
+		<div>Two</div>
+		<div>Three</div>
+		<div>Four</div>
+		<div>Five</div>
+	</div>
+
+
+	<h3>
+		d6 - grid-template-columns: repeat(3, 1fr);
+		<br>
+		grid-auto-rows: minmax(100px, auto);
+	</h3>
+	<p>высота строки будет минимум 100px, максимум - высота самой высокой ячейки</p>
+
+
+	<div class="wrapper d6">
+		<div>One</div>
+		<div>
+			Two
+			<p>I have some more content in.</p>
+			<p>This makes me taller than 100 pixels.</p>
+		</div>
+		<div>Three</div>
+		<div>Four</div>
+		<div>Five</div>
+	</div>
+
+
+
+
+
+	<h3>d7 - .box1 {grid-column: 1 / 4;grid-row: 1 / 3;}</h3>
+
+	<div class="wrapper d7">
+		<div class="box1">One</div>
+		<div class="box2">Two</div>
+		<div class="box3">Three</div>
+		<div class="box4">Four</div>
+		<div class="box5">Five</div>
+	</div>
+
+	<h3>d8 - наложение элементов: .box1 {grid-area: 1 / 1 / 3 / 4;}  .box2 {grid-column: 1 / 2;grid-row: 2 / 4;}</h3>
+
+	<div class="wrapper d8">
+		<div class="box1">One</div>
+		<div class="box2">Two</div>
+		<div class="box3">Three</div>
+		<div class="box4">Four</div>
+		<div class="box5">Five</div>
+	</div>
+
+
+
+
+
+
+
+
+</body>
+</html>

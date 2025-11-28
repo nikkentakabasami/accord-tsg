@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8" />
+<title>tet slick grid demo</title>
+
+<script src="../../jquery31/js/jquery.js"></script>
+
+<link rel="stylesheet" type="text/css" href="../../accord/css/accord.css">
+<script type="module" src="../../accord/js/accord-publish.js"></script>
+
+<link rel="stylesheet" href="../css/tet.slick.grid.css" type="text/css" />
+<link rel="stylesheet" href="tsgDemoStyles.css" />
+
+<script type="text/javascript" src="testDataSources.js"></script>
+<script type="module" src="tsgExample6.js"></script>
+
+</head>
+
+<body>
+			<!-- Панель фильтрации -->
+			<form id="mainFilter" role="form" class="form-horizontal" action="." method="post">
+
+	<div class="basePanel">
+		<div class="headerPanel">
+			<h1>Пример 6: Получение строк из сервера</h1>
+			<a href="tsgExample6.js" target="source">Source code</a>
+
+
+			<p>
+			В данном примере данные загружаются постранично с сервера (с сервлета TSGDemoServlet1).
+			<br>Для этого мы не задаём данные при создании таблицы.
+			<br>Но при этом задаём url для работы с сервером:pageUrl, updateFilterUrl, clearFilterUrl.
+			<br>По умолчанию данные отправляются в формате "x-www-form-urlencoded". Чтобы они отправлялись как json мы задаём опцию postFormDataAsJson.
+			
+			</p>
+
+		</div>
+		<div class="tablePanel">
+
+			
+				<div id="myGrid"></div>
+
+				<div id="filterContainer" style="display: none;">
+
+				</div>
+
+
+
+
+		</div>
+	</div>
+
+			</form>
+
+</body>
+
+</html>
+
+

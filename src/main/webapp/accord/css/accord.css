@@ -1,0 +1,252 @@
+.no-select {
+	user-select: none;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+}
+
+/* Приличный шрифт по умолчанию. Задаётся на body */
+.acc-default-font {
+	font-family: Arial, sans-serif;
+}
+
+/*------ WaitPanel ------*/
+
+.loading-indicator {
+	position: absolute;
+	display: none;
+	padding: 12px;
+	background: white;
+	color: black;
+	font-weight: bold;
+	z-index: 999999;
+	border: 1px solid red;
+	-webkit-border-radius: 10px;
+	-webkit-box-shadow: 0px 0px 5px red;
+	font-family: Helvetica, Arial, sans-serif;
+	font-size: 14px;
+}
+
+.loading-indicator label {
+	padding-left: 20px;
+	background: url('../images/ajax-loader-small.gif') no-repeat center left;
+}
+
+
+/*------ Кнопка с картинкой <img> (и текстом)  ------*/
+
+.acc-btn {
+	display: inline-flex;
+	align-items: center;
+	gap: 5px;
+	font-size: 16px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	padding: 4px 8px; /* top_bottom  right_left */
+	cursor: pointer;
+	min-width: 25px;
+	min-height: 30px;
+}
+
+
+/*------ Иконки на кнопку  ------*/
+
+
+
+.acc-btn-add {
+	background-image: url(../icons/add.png);
+}
+
+.acc-btn-cross {
+	background-image: url(../icons/cross.png);
+}
+
+.acc-btn-check {
+	background-image: url(../icons/check.png);
+}
+
+.acc-btn-arrow-up {
+	background-image: url(../icons/arrow-small-up.png);
+}
+.acc-btn-arrow-down {
+	background-image: url(../icons/arrow-small-down.png);
+}
+
+.acc-btn-eye {
+	background-image: url(../icons/eye.png);
+}
+
+.acc-btn-eye-crossed {
+	background-image: url(../icons/eye-crossed.png);
+}
+
+.acc-btn-rotate-left {
+	background-image: url(../icons/rotate-left.png);
+}
+
+.acc-btn-icon-text {
+	background-repeat: no-repeat;
+	background-position: 6px 6px;
+	padding-left: 30px;
+}
+
+
+.acc-btn-icon {
+	background-repeat: no-repeat;
+	background-position: 6px 6px;
+	padding-left: 20px;
+}
+
+
+/*
+.topic-hot::before {
+  content: url("/shared-assets/images/examples/fire.png") / "On fire";
+  margin-right: 6px;
+}
+
+.btn2 {
+    background-image: url(../icons/check.png);
+    background-repeat: no-repeat;
+    background-position: 6px 4px;
+    padding-left: 30px;
+    min-height: 25px;
+}
+
+
+
+
+
+-----------------
+
+.acc-btn-add {
+	background-image: url(../icons/add.png);
+}
+
+.acc-btn-cross {
+	background-image: url(../icons/cross.png);
+}
+
+.acc-btn-check {
+	background-image: url(../icons/check.png);
+}
+
+.acc-btn-add, .acc-btn-cross, .acc-btn-check {
+	background-repeat: no-repeat;
+	background-position: 6px 6px;
+	padding-left: 30px;
+}
+
+.acc-btn-icon {
+	background-image: url(../icons/add.png);
+}
+
+
+*/
+
+/*------  Вертикальная панель с кнопками acc-btn ------*/
+.acc-vert-button-panel {
+	display: flex;
+	flex-direction: column;
+	gap: 5px;
+	align-items: flex-start;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	padding: 5px;
+}
+
+/*------  Горизонтальная панель с кнопками acc-btn ------*/
+.acc-button-panel {
+	display: flex;
+	gap: 5px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	padding: 5px;
+}
+
+
+/*
+.acc-button-panel .acc-btn {
+	flex-basis: 30px;
+	flex-grow: 0.1;
+}
+*/
+
+
+/*------ AccModalDialog ------*/
+.acc-dialog {
+	position: absolute;
+	top: 200px;
+	left: 200px;
+	width: 400px;
+	height: 300px;
+	flex-direction: column;
+	background-color: white;
+	border: 1px solid black;
+	border-radius: 4px;
+	display: none;
+	font-family: Helvetica, Arial, sans-serif;
+}
+
+.acc-dialog-title {
+	font-weight: bold;
+}
+
+.acc-dialog-dtop {
+	flex-basis: 20px;
+	background-color: #b3e6ff;
+	padding: 5px;
+	border-bottom: 1px solid black;
+}
+
+.acc-dialog-dbody {
+	flex-grow: 1;
+	padding: 5px;
+}
+
+.acc-dialog-dbottom {
+	padding: 5px;
+	border-top: 1px solid black;
+	display: flex;
+	justify-content: flex-end;
+	background-color: whitesmoke;
+	gap: 10px;
+}
+
+.acc-dialog-content {
+	height: 100%;
+	width: 100%;
+}
+
+.acc-close-btn {
+	float: right;
+	background-image: url('../icons/cross.png');
+	background-repeat: no-repeat;
+	width: 20px;
+	height: 20px;
+}
+
+.acc-ok span {
+	padding-left: 20px;
+	background-image: url('../icons/check.png');
+	background-repeat: no-repeat;
+}
+
+.acc-cancel span {
+	padding-left: 20px;
+	background-image: url('../icons/cross.png');
+	background-repeat: no-repeat;
+}
+
+
+
+/*
+
+<button type="button" class="btn3 icon-button"><img src="demos/icons/check.png"/><span>img внутри кнопки</span></button>	
+
+<button type="button" class="btn4 icon-button"><img src="demos/icons/check.png"/></button>	
+
+
+
+
+
+*/

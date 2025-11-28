@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible"
+          content="IE=edge">
+    <meta name="viewport" 
+          content="width=device-width, initial-scale=1.0">
+    <title>Dynamic</title>
+  
+     <!-- the static loading of app.js file-->
+    <script src="../js/dynamic-load.js"></script>
+</head>
+<body>
+    
+    <h3>Демо динамической загрузки css и js</h3>
+    
+    <div>
+       
+    
+        <div id="upper">
+          
+            <h3 id="mssg">
+               We are here to learn how to load
+               CSS and JS file dynamically
+            </h3>
+
+            <button onclick="message()"> View Message </button>
+        </div>
+        <br>
+      
+        <div id="lower">  
+          
+            <button onclick="loadCSS('../css/styles-to-load.css');">
+              Load CSS 
+            </button>
+
+            <button onclick="loadJS('../js/script-to-load.js');">
+              Load JS 
+            </button>            
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8" />
+<title>tet slick grid demo</title>
+
+<script src="../../jquery31/js/jquery.js"></script>
+
+<link rel="stylesheet" type="text/css" href="../../accord/css/accord.css">
+<script type="module" src="../../accord/js/accord-publish.js"></script>
+
+<link rel="stylesheet" href="../css/tet.slick.grid.css" type="text/css" />
+<link rel="stylesheet" href="tsgDemoStyles.css" />
+
+<script type="text/javascript" src="testDataSources.js"></script>
+<script type="module" src="tsgExample4.js"></script>
+
+</head>
+
+<body>
+
+	<div class="basePanel">
+		<div class="headerPanel">
+		  <h1>Пример 4: Форматирование и подсветка</h1>
+			<a href="tsgExample4.js" target="source">Source code</a>
+
+
+			<p>Добавлен кастомный форматтер для первого столбца, который превращает текст в ссылку.
+			<br>Добавлена опция cssClassForRowCallback: нечётные строки будут подкрашиваться серым
+			<br>Добавлена опция cssClassForCellCallback: столбец percentComplete будет подкрашиваться цветом,  в зависимости от его значения.
+			</p>
+
+		</div>
+		<div class="tablePanel">
+			<div id="myGrid"></div>
+		</div>
+	</div>
+
+</body>
+
+</html>
+
+
+

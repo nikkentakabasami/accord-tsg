@@ -1,0 +1,83 @@
+table {
+	font-family: arial, sans-serif;
+	width: 100%;
+}
+
+.basic-table {
+	border-collapse: collapse;
+}
+
+.basic-table td, .basic-table th {
+	border: 1px solid #dddddd;
+	text-align: left;
+	padding: 8px;
+}
+
+/*              t1              */
+.t1 tr:nth-child(even) {
+	background-color: #dddddd;
+}
+
+/*              t2              */
+.t2 {
+	border: 1px solid red;
+	border-spacing: 10px;
+}
+
+.t2 th, .t2 td {
+	border: 1px solid black;
+}
+
+/*              t3              */
+.t3 {
+	border-collapse: collapse;
+}
+
+.t3, .t3 th, .t3 td {
+	border: 1px solid #dddddd;
+}
+
+/*              t4              */
+.t4 {
+	border-collapse: collapse;
+	background-color: #96D4D4;
+}
+
+.t4, .t4 th, .t4 td {
+	border: 1px solid white;
+}
+
+/*              t5              */
+.t5 th:first-child {
+	width: 100px;
+}
+
+.t5 th:nth-child(3) {
+	width: 100px;
+}
+
+.t5 tr:first-child {
+	height: 100px;
+}
+
+.t5 tr:nth-child(4) {
+	height: 100px;
+}
+
+.t7 caption {
+	border: 1px solid red;
+}
+
+.t8 td:nth-child(odd), .t8 th:nth-child(odd) {
+	background-color: #D6EEEE;
+}
+
+.t9 {
+	border-collapse: collapse;
+}
+
+.t9 tr {
+	border-bottom: 1px solid #ddd;
+}
+
+.t9 tr:hover {background-color: #D6EEEE;}

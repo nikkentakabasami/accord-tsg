@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8" />
+<title>Пример 7</title>
+
+
+<script src="../../jquery31/js/jquery.js"></script>
+
+
+
+<link rel="stylesheet" type="text/css" href="../../accord/accord.css">
+<link rel="stylesheet" href="../css/tet.slick.grid.css" type="text/css" />
+<link rel="stylesheet" href="tsgExampleStyles.css" />
+
+
+
+<link rel="stylesheet" type="text/css" href="../../css/bootstrap-multiselect.css">
+  <script src="../../js/bootstrap-multiselect.js"></script>
+
+
+
+<script type="text/javascript" src="../../js/moment.min.js"></script>
+<script type="text/javascript" src="../../js/daterangepicker.js"></script>
+<link rel="stylesheet" type="text/css" href="../../css/daterangepicker.css" />
+
+<!-- 
+<script src="../mtp/date-filter-dialog.js"></script>
+ -->
+
+
+
+
+<script type="text/javascript" src="../su-misc.js"></script>
+
+<script type="text/javascript" src="testDataSources.js"></script>
+<script type="module" src="tsgExample7.js"></script>
+
+
+</head>
+
+<body>
+
+  <h1>Пример 7: кастомный заголовок, фильтры множественного выбора</h1>
+  <a href="/enettc-web/v3/customerRequests" target="login">Необходимо залогиниться!</a>
+  <br><a href="tsgExample6.js" target="source">Source code</a>
+
+
+
+<!-- Панель фильтрации -->
+<form id="mainFilter" role="form" class="form-horizontal" action="." method="post">
+
+
+<div id="filterContainer" style="display:none;">
+
+ <input id="currentPage" name="currentPage" type="hidden" value=""/>
+
+
+  <select id="regionName" name="regionName" class="form-control"   multiple="multiple">
+  <option value="507">Агрызский</option><option value="2239214">Азнакаевский РЭС</option><option value="226">Аксубаевский</option><option value="1000019">Актанышский</option><option value="220">Алексеевский</option><option value="218">Алькеевский</option><option value="2337601">Альметьевский городской РЭС</option><option value="109">Альметьевский РЭС</option><option value="216">Апастовский</option><option value="215">Арский</option><option value="5000002">Бавлинский</option><option value="225">Балтасинский</option><option value="124">Боровецкий РЭС</option><option value="5000001">Бугульминский</option><option value="214">Буинский</option><option value="232">Верхнеуслонский</option><option value="6000044">Восточный</option><option value="228">Высокогорский</option><option value="219">Дрожжановский</option><option value="502">Елабужский</option><option value="1000017">Заинский</option><option value="6000045">Западный</option><option value="229">Зеленодольский</option><option value="234">Камско-Устьинский</option><option value="504">Кукморский</option><option value="233">Лаишевский</option><option value="5000003">Лениногорский</option><option value="501">Мамадышский</option><option value="503">Менделеевский</option><option value="1000018">Мензелинский</option><option value="2239216">Муслюмовский РЭС</option><option value="1095900">Нижнекамские городские электрические сети</option><option value="1000015">Нижнекамский</option><option value="224">Нурлатский</option><option value="230">Пестречинский РЭС</option><option value="125">Прибрежный</option><option value="231">Пригородный</option><option value="103">Рыб. Слободский</option><option value="505">Сабинский</option><option value="2239215">Сармановский РЭС</option><option value="235">Свияжский</option><option value="6000046">Северный</option><option value="217">Спасский</option><option value="236">Тетюшский</option><option value="130">Тукаевский</option><option value="6000049">Центральный</option><option value="221">Чистопольский</option><option value="6000047">Южный</option>
+  </select>
+  
+  
+  <select id="enplantName" name="enplantName" class="form-control"  multiple="multiple">
+    <option value="05DD26BE1B1A4874AF65F0157436F560">АЭС</option><option value="9BC1EC8EAB664632803C3B3C96B9E891">БЭС</option><option value="D6DC552CB6424E43827F7AD740964C1B">БуЭС</option><option value="54396B26797C4D248BECBF811BF4935D">ЕЭС</option><option value="A3472B3D7BF04935B17A2874E6DDA243">КЭС</option><option value="E51EA2310FAD452E968D47761796E6AA">НчЭС</option><option value="E4253281642645E2B09698F1FB2667FE">НкЭС</option><option value="21CA1E5F089E4BB2A943F1A087869E75">ПЭС</option><option value="0E040736C0B445EB81C73A2B4D325E9B">ЧЭС</option>
+  </select>
+
+
+     <input id="requestDate" name="requestDate" class="date-input" />
+
+     <input id="maxPower" name="maxPower" class="number-input" />
+     <input id="earlyPower" name="earlyPower" class="number-input" />
+     <input id="earlyPowerMkg" name="earlyPowerMkg" class="number-input" />
+
+
+</div>
+
+
+<!-- 
+     <input id="regionName" name="regionName" type="hidden" value=""/>
+     <input id="enplantName" name="enplantName" type="hidden" value="АЭС,БуЭС,ЧЭС"/>
+     
+    <option value="">-</option>
+
+
+    <div class="custom-grid-header grid-header">
+  <span class="panel-title">Тестовая таблица</span>
+
+
+  <span id="rowsCountSpan1" class="badge pull-right count-span-no-filter" style="margin: 5px;">0</span>
+  <span id="secondRequestCountSpan" class="badge pull-right count-span-no-filter" style="margin: 5px;">0</span>
+
+   <a href="#" id="clearFilters1" class="pull-right" style="margin-left: 10px;" title="Очистить фильтры" >
+    <img src="tm/images/rotate-left.png" style="height: 12px;">
+   </a>
+
+   <a href="#" class="pull-right" style="margin-left: 5px;margin-top: 3px;" id="customGridColumns">
+    <ri:glyphicon icon="th-list" size="15px" classes="text-info" />
+   </a>
+
+
+ </div> -->
+    <div class="custom-grid-header grid-header">
+      <span class="panel-title">Тестовая таблица</span>
+      <span id="rowsCountSpan1" class="count-span-filter">100</span> 
+      <a href="#" id="customGridColumns1" class="pull-right" style="margin-right: 10px; margin-top: 3px;"> <span class="list-png"></span></a>
+        
+        <a href="#" id="clearFilters1" class="pull-right" style="margin-right: 10px; margin-top: 3px;" title="Очистить фильтры"><span class="rotate-left-png"></span></a>
+    </div>
+
+
+
+
+
+ <div id="myGrid2"></div>
+
+
+</form>
+
+
+
+
+
+</body>
+
+</html>

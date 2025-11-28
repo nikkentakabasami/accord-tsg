@@ -1,0 +1,106 @@
+.dfgrid {
+	border: 2px solid #f76707;
+	border-radius: 5px;
+	background-color: #fff4e6;
+	display: grid;
+	grid-template-columns: 400px 1fr;
+}
+
+.dfgrid>div {
+	border: 2px solid gray;
+	border-radius: 5px;
+	background-color: WhiteSmoke;
+	padding: 1em;
+}
+
+
+
+
+/* ------------------------------------- */
+
+
+#form1 {
+  grid-area: 1 / 1 / 2 / 3;
+}
+
+
+.myForm1 {
+	display: grid;
+	grid-template-rows: 40px;
+	grid-template-columns: 1fr 1fr 1fr 1fr;
+	grid-auto-rows: 25px;
+	grid-column-gap: 5px;
+	grid-row-gap: 5px;
+}
+
+
+.myForm1>h3 {
+  grid-area: 1 / 1 / 2 / 5;
+}
+
+
+
+/* ------------------------------------- */
+.form-group {
+	margin-bottom: 20px;
+	font-family: "Josefin Sans", sans-serif;
+}
+
+.form-group select {
+	appearance: none;
+	width: 100%;
+	height: 100%;
+}
+
+.form-group .select-wrapper {
+	position: relative;
+	width: 100%;
+	max-width: 300px;
+}
+
+.form-group .select-wrapper::after {
+	content: "▼";
+	font-size: 1rem;
+	top: 3px;
+	right: 10px;
+	position: absolute;
+}
+
+.form-group button, .form-group label, .form-group input, .form-group select,
+	.form-group progress, .form-group meter {
+	display: block;
+	font-family: inherit;
+	font-size: 100%;
+	margin: 0;
+	box-sizing: border-box;
+	width: 100%;
+	max-width: 300px;
+	padding: 5px;
+	height: 30px;
+}
+
+.form-group input[type="text"] {
+	box-shadow: inset 1px 1px 3px #cccccc;
+	border-radius: 5px;
+}
+
+.form-group label {
+	font-weight: 700;
+	margin-bottom: 5px;
+}
+
+.form-button {
+	width: 60%;
+	margin: 0 auto;
+}
+
+
+.t3-two-col {
+	grid-template-columns: 1fr 1fr;
+    display: grid;
+    column-gap: 10px;
+}
+
+
+
+

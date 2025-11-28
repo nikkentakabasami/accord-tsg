@@ -1,0 +1,484 @@
+
+* {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+body {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	line-height: 1.8;
+}
+
+
+
+
+/* чтобы растягивались фильтры-мультиселекты  */
+.tsc-grid button.multiselect {
+	width: 100%;
+}
+.tsc-grid div.btn-group {
+	width: 100%;
+}
+
+
+.pull-right {
+	float: right;
+	margin-right: 10px;
+}
+
+.panel-title {
+	font-size: 15px;
+	font-weight: 700
+}
+
+.tsc-grid {
+	background: white;
+	outline: 0;
+	border: 1px solid gray;
+	position: relative;
+}
+
+/*
+.ui-widget {
+	font-family: Verdana, Arial, sans-serif;
+	font-size: 1.0em;
+}
+*/
+
+.slick-headerrow {
+	width: 100%;
+	overflow: hidden;
+	position: relative;
+}
+
+.slick-headerrow-columns {
+	position: relative;
+	white-space: nowrap;
+	cursor: default;
+	overflow: hidden;
+	height: 30px;
+	background: #e6e6e6 url(images/ui-bg_glass_75_e6e6e6_1x400.png) 50% 50% repeat-x;
+	font-weight: normal;
+	color: #555555;
+	width: 100%;
+	
+	
+	
+}
+
+.tick-png {
+    content:url(images/tick.png);
+    margin: auto;
+}
+
+.rotate-left-png {
+    content:url(images/rotate-left.png);
+    margin: auto;
+    height: 16px;
+}
+
+.list-png {
+    content:url(images/list30.png);
+    height: 22px;
+}
+
+
+
+.slick-headerrow-column {
+	position: relative;
+    display: inline-block;
+    
+    
+	overflow: hidden;
+	text-overflow: ellipsis;
+	-o-text-overflow: ellipsis;
+	height: 100%;
+	line-height: 16px;
+	padding: 4px;
+	border: 1px solid #d3d3d3;	
+}
+
+
+
+
+
+
+
+
+.slick-header {
+	width: 100%;
+	overflow: hidden;
+	position: relative;
+	border-left: 0px;
+}
+
+.slick-header-columns {
+	position: relative;
+	white-space: nowrap;
+	cursor: default;
+	overflow: hidden;
+	height: 30px;
+	background: #e6e6e6 url(images/ui-bg_glass_75_e6e6e6_1x400.png) 50% 50% repeat-x;
+	font-weight: normal;
+	color: #555555;
+	height: 100%;	
+}
+
+
+
+
+.slick-header-column:hover, .slick-header-column-active {
+	border: 1px solid #999999; 
+	background: #dadada url(images/ui-bg_glass_75_dadada_1x400.png) 50% 50% repeat-x; 
+	color: #212121; 
+	
+}
+
+
+.slick-header-column {
+	/*  
+	font-weight: normal; 
+    margin: 0;
+    border-right: 1px solid silver;
+    border-left: 0px;
+    border-top: 0px;
+    border-bottom: 0px;
+    height: 30px;
+
+*/
+	position: relative;
+    display: inline-block;
+    
+    
+	overflow: hidden;
+	text-overflow: ellipsis;
+	-o-text-overflow: ellipsis;
+	height: 100%;
+	line-height: 16px;
+	padding: 4px;
+	border: 1px solid #d3d3d3;
+}
+
+.slick-row {
+	position: absolute;
+}
+
+.slick-row .def-cell {
+
+	position: absolute;
+	height: 100%;
+	
+	padding: 2px;
+	border-right: 1px solid #aaaaaa;
+	border-bottom: 1px solid #aaaaaa;
+	cursor: default;
+	
+    overflow: hidden;
+    -o-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+	
+}
+
+.slick-row .hidden-cell {
+	visibility: hidden;
+}
+
+.slick-row .merged-cell {
+	position: absolute;
+	
+	padding: 2px;
+	border-right: 1px solid #aaaaaa;
+	border-bottom: 1px solid #aaaaaa;
+	cursor: default;
+    overflow: hidden;
+	
+	
+	display: flex;
+	align-items: center;
+}
+
+
+
+/*
+.slick-viewport {
+	z-index: 0;
+	width: 100%;
+	overflow: auto;
+	outline: 0px;
+	position: relative;
+}
+*/
+.slick-viewport {
+	z-index: 0;
+	width: 100%;
+	position: absolute;
+	overflow: auto;
+	outline: 0px;
+	top: 0px;
+	bottom: 0px;
+}
+
+
+
+
+.selected {
+    background-color: rgba(179, 217, 255, 0.5);
+}
+
+
+
+.slick-resizable-handle {
+    position: absolute;
+    font-size: 0.1px;
+    display: block;
+    cursor: col-resize;
+    width: 10px;
+    right: 0px;
+    top: 0;
+    height: 100%;
+}
+
+
+.no-select{
+  -moz-user-select: none; 
+  -webkit-user-select: none; 
+  -ms-user-select:none; 
+  -user-select:none;	
+}	
+
+
+.grid-header {
+    color: #333333;
+    border: 1px solid #dddddd;
+    border-radius: 3px;
+    background-image: linear-gradient(to bottom, #f5f5f5 0%, #e8e8e8 100%);
+    background-repeat: repeat-x;
+    height: 36px;
+    padding: 4px;
+    line-height: 24px;
+}
+
+
+
+.slick-header-column-sorted {
+    font-style: italic;
+    font-weight: 900;
+}
+
+
+
+.slick-sort-indicator-desc {
+    background: url(images/sort-desc.gif);
+}
+
+.slick-sort-indicator-asc {
+    background: url(images/sort-asc.gif);
+}
+
+
+.slick-sort-indicator {
+	position: absolute;
+    right: 2px;
+    top: 15px;	
+    width: 8px;
+    height: 5px;
+	
+}
+
+
+/*
+    display: inline-block;
+    float: right;
+
+.slick-cell, .slick-headerrow-column {
+    position: absolute;
+    border-right: 1px dotted silver;
+    border-bottom-color: silver;
+    overflow: hidden;
+    -o-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+    vertical-align: middle;
+    z-index: 1;
+    padding: 1px 2px 2px 1px;
+    margin: 0;
+    white-space: nowrap;
+    cursor: default;
+}
+ */
+ 
+.grid-filter-input {
+    width: 100%;
+} 
+ 
+.slick-headerrow-column {
+    padding: 2px;
+} 
+ 
+ 
+
+
+
+
+
+
+.grid-context-menu {
+	background: #e1efc7;
+	border: 1px solid gray;
+	padding: 2px;
+	min-width: 100px;
+	-moz-box-shadow: 2px 2px 2px silver;
+	-webkit-box-shadow: 2px 2px 2px silver;
+	z-index: 99999;
+	display: none; 
+	position: absolute
+}
+
+.grid-context-menu li {
+	padding: 4px 4px 4px 14px;
+	list-style: none;
+	cursor: pointer;
+	background: url("images/arrow_right_peppermint.png") no-repeat center left;
+}
+
+.grid-context-menu li:hover {
+	background-color: #f1ffd7;
+}
+
+.grid-context-menu li.disabled {
+	color: gray;
+}
+
+.grid-context-menu li.disabled:hover {
+	background-color: #e1efc7;
+}
+
+
+.count-span-filter {
+    background-color: #31708f!important;
+    cursor: default;    
+    float: right;
+    padding: 4px;
+    margin: 5px;
+	display: inline-block;
+    min-width: 10px;
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 1;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    background-color: #777;
+    border-radius: 10px;    
+}
+
+
+/* Диалог настройки столбцов */
+
+
+#columnsOrderingGrid {
+    background: white;
+    outline: 0;
+    border: 1px solid gray;
+    position: relative;
+    
+}   
+/*
+    position: absolute;
+    top: 5px;
+    left: 9px;
+    right: 90px;
+    bottom: 5px;
+
+    position: absolute;
+    top: 5px;
+    left: 525px;
+    right: 5px;
+    bottom: 5px;
+
+*/
+   
+   
+.grid-dialog-panel {
+  width: 350px;
+  height: 500px;
+
+}   
+   
+#columnsOrderingButtonPane {
+	padding: 10px;
+	flex-basis: 30px;
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
+.mt-5 {
+    margin-top: 10px!important;
+}
+   
+
+
+#numberRadios input.form-check-input {
+  margin-left: 10px
+}
+
+.cssOrangeRow{
+  background-color: #ffdd99;
+}
+
+.cssOrangeFont{
+  color: #cc7a00;
+}
+
+.edit-popup {
+    position: absolute;
+    top: 224px;
+    left: 353px;
+    display: none;
+
+    background: #f2f2f2;
+    border: 1px solid gray;
+    border-radius: 4px;
+    
+    padding: 1px;
+    -moz-box-shadow: 2px 2px 2px silver;
+    -webkit-box-shadow: 2px 2px 2px silver;
+    z-index: 99999;
+}
+
+.edit-popup-button {
+  background-color: #eeeeee;
+  border: 1px solid #cccccc;
+  border-radius: 4px;
+  padding: 4px;
+  color: #31708f;
+}
+
+
+
+
+/*  columns dialog  */
+
+#columnsOrderingDialog .acc-dialog-dbody{
+	display: flex; 
+	flex-direction: row;
+}
+
+
+.tsg-columns-dialog-content {
+}
+
+
+.tsg-columns-dialog-grid {
+	flex-grow: 1;
+}
+
+.tsg-columns-dialog-button-pane {
+	flex-basis: 200px;
+}
+
+

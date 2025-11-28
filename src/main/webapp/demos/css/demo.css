@@ -1,0 +1,142 @@
+/* разнообразные стили для демок  */
+
+.custom-dialog {
+	position: absolute;
+	display: block;
+	width: 600px;
+	height: 300px;
+	left: 100px;
+	top: 100px;
+	display: flex;
+	flex-direction: row;
+}
+
+.right-pane {
+	width: 200px;
+}
+
+.main-pane {
+	flex: 1;
+}
+
+
+
+/* flex2  */
+
+.f2-bg {
+	position: absolute;
+	top: 10px;
+	bottom: 10px;
+	left: 10px;
+	right: 10px;
+	display: flex;
+	flex-direction: row;
+	
+}
+
+.f2-left {
+	flex-basis: 200px;
+	background-color:  #ffcccc;
+}
+
+.f2-right {
+	flex-grow: 1;
+	background-color: #ccffff;
+}
+
+
+
+.f2-dialog {
+	position: absolute;
+	top: 200px;
+	left: 200px;
+	width: 400px;
+	height: 300px;
+	display: flex;
+	flex-direction: column;
+	background-color: white;
+}
+
+
+.f2-dtop {
+	flex-basis: 80px;
+}
+
+.f2-dbody {
+	flex-grow: 1;
+}
+
+.f2-dbottom {
+	flex-basis: 100px;
+}
+
+
+
+/*
+.custom-dialog {
+	position: absolute;
+	display: block;
+	width: 600px;
+	height: 300px;
+	left: 100px;
+	top: 100px;
+	
+	padding: 10px;
+	
+	z-index: 999888;
+	border: 1px solid black;
+}
+
+
+
+.main-pane {
+    position: absolute;
+    top: 5px;
+    left: 9px;
+	width: 300px;
+	height: 280px;
+}   
+   
+   
+   
+.right-pane {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+	width: 150px;
+	height: 280px;
+    
+}   
+
+*/
+
+
+
+/*  
+	border: 1px solid #ACA899;
+*/
+.demo-form-div {
+	margin: 10px 15px;
+}
+
+.red-border {
+	border: 1px solid red;
+}
+
+.blue-border {
+	border: 1px solid blue;
+}
+
+.green-border {
+	border: 1px solid green;
+}
+
+.my-custom-size-dialog {
+	position: absolute;
+	width: 900px;
+	height: 1200px;
+	left: 20px;
+	top: 20px;
+}
+
+

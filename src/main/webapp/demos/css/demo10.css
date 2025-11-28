@@ -1,0 +1,82 @@
+
+.button-panel {
+	display: flex;
+	flex-direction: column;  
+	flex-wrap: wrap;
+	align-content: flex-start;
+	gap: 5px;
+	align-items: flex-start;
+	
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 5px;
+}
+
+/*
+.button-panel button {
+    display: inline-flex;
+    align-items: center;
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    cursor: pointer;
+  }
+
+	font-size: 14px;
+
+*/
+
+.icon-button {
+    display: inline-flex;
+    align-items: center;
+	font-family: Helvetica, Arial, sans-serif;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+	padding: 4px 8px; /* top_bottom  right_left */
+	cursor: pointer;
+}
+
+
+.btn1 span {
+	padding-left: 20px;
+	background-image: url('../icons/check.png');
+	background-repeat: no-repeat;
+}
+
+
+.btn2 {
+	background-image: url('../icons/check.png');
+	background-repeat: no-repeat;
+	background-position: 6px 4px; /* xpos ypos  */
+	padding-left: 30px; /* отступ для текста*/
+}
+
+.btn3 {
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	cursor: pointer;
+}
+
+
+
+
+.btn-add::before {
+  content: url(../../accord/icons/add.png);
+  margin-right: 6px;
+  transform: translate(0px, 2px);
+}
+
+.btn-cross::before {
+  content: url(../../accord/icons/cross.png);
+  margin-right: 6px;
+  transform: translate(0px, 2px);
+}
+
+.btn-check::before {
+  content: url(../../accord/icons/check.png);
+  margin-right: 6px;
+  transform: translate(0px, 2px);
+}
+
+

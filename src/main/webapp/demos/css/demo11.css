@@ -1,0 +1,21 @@
+@font-face {
+	font-family: KouzanGyousho;
+	src: url(KouzanGyoushoOTF.otf) format("opentype");
+}
+
+@font-face {
+	font-family: KouzanSousho;
+	src: url(KouzanSoushoOTF.otf) format("opentype");
+}
+
+
+
+.KouzanGyousho {
+	font-family: KouzanGyousho;
+	font-size: 40px;
+}
+
+.KouzanSousho {
+	font-family: KouzanSousho;
+	font-size: 40px;
+}

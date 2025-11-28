@@ -1,0 +1,68 @@
+.basePanel {
+	position: absolute;
+	top: 9px;
+	left: 9px;
+	right: 9px;
+	bottom: 9px;
+	display: flex;
+	flex-direction: column;
+}
+
+.headerPanel {
+	flex-basis: 100px;
+	flex-grow: 0.1;
+}
+
+/*
+*/
+
+.tablePanel {
+	flex-grow: 1;
+}
+
+#myGrid {
+	width: 100%;
+	height: 100%;
+}
+
+/*
+#myGrid {
+	position: absolute;
+	top: 128px;
+	left: 9px;
+	right: 9px;
+	bottom: 9px;
+}
+*/
+
+
+#myGrid2 {
+	position: absolute;
+	top: 130px;
+	left: 9px;
+	right: 9px;
+	bottom: 9px;
+}
+
+
+
+
+.cssGrayRow{
+  background-color: #f2f2f2;
+}
+
+.cssRedRow{
+  background-color: red;
+}
+
+.cssGreenRow{
+  background-color: green;
+}
+
+
+.custom-grid-header{
+    position: absolute;
+    top: 92px;
+    left: 9px;
+    right: 9px;
+}

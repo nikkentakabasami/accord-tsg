@@ -1,0 +1,20 @@
+
+hideWaitPanel
+showWaitPanel
+
+использовать accord
+
+
+getTetSlickRelativePath
+  replace
+
+
+при изменении страницы - съезжают столбцы.
+
+
+Сделать общий обработчик
+			bootbox.alert("Ошибка отправления запроса : " + textStatus);
+
+
+
+

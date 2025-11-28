@@ -1,0 +1,61 @@
+
+<div id="numberFilterDialog" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Условия фильтрации</h4>
+      </div>
+
+      <div class="modal-body">
+      
+         <form role="form">
+
+          <div class="col-sm-12" id="numberRadios" >
+                 
+                   <input class="form-check-input" type="radio" name="numberFilterType" value="1" id="ni1" checked>
+                   <label class="form-check-label" for="ni1">
+                     Равно
+                   </label>
+                   
+                   <input class="form-check-input" type="radio" name="numberFilterType" id="ni2" value="2" >
+                   <label class="form-check-label" for="ni2">
+                     Больше
+                   </label>
+                   
+                   <input class="form-check-input" type="radio" name="numberFilterType" id="ni3" value="3" >
+                   <label class="form-check-label" for="ni3">
+                     Меньше
+                   </label>
+
+                   <input class="form-check-input" type="radio" name="numberFilterType" id="ni4" value="4" >
+                   <label class="form-check-label" for="ni4">
+                     Диапазон
+                   </label>
+
+          </div>
+           
+           <div id="divNumber1" class="form-group col-sm-6">
+             <input type="text" class="form-control" id="filterNumber1" autocomplete="off">
+           </div>
+
+           <div id="divNumber2" class="form-group col-sm-6 div-hidden">
+             <input type="text" class="form-control" id="filterNumber2" autocomplete="off">
+           </div>
+           
+         </form>
+               
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" id="selectNumberButton" class="btn btn-default ">Применить</button>
+        <button type="button" id="clearNumberButton" class="btn btn-default">Очистить</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>
+      </div>
+
+    </div>
+
+  </div>
+</div>

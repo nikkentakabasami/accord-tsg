@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../css/demo7.css">
+
+</head>
+<body>
+
+
+	<div class="dfgrid">
+
+
+
+
+
+		<div id="form1">
+			<form class="myForm1">
+				<h3>grid layout for form</h3>
+
+				<label for="number"> Card number:</label> <input type="number" id="number" name="cardnumber" /> <label for="fname">First name:</label> <input type="text" id="fname" name="fname" value="John">
+				<label for="date">Datetime local:</label> <input type="date" id="date" name="expiration" />
+
+
+				<button class="form-button">Отправить</button>
+
+			</form>
+
+		</div>
+
+
+
+		<div>
+			<form>
+				<h3>Default form view</h3>
+
+				<fieldset>
+					<legend>Fruit juice size</legend>
+					<input type="radio" name="size" id="size_1" value="small" checked="checked" /> <label for="size_1">Small</label>
+					<br>
+					<input type="radio" name="size" id="size_2" value="medium" /> <label for="size_2">Medium</label>
+					<br>
+					<input type="radio" name="size" id="size_3" value="large" /> <label for="size_3">Large</label>
+				</fieldset>
+
+
+				<fieldset>
+					<legend>checkboxes</legend>
+					<input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"> <label for="vehicle1"> I have a bike</label>
+					<br>
+					<input type="checkbox" id="vehicle2" name="vehicle2" value="Car" checked="checked"> <label for="vehicle2"> I have a car</label>
+					<br>
+					<input type="checkbox" id="vehicle3" name="vehicle3" value="Boat"> <label for="vehicle3"> I have a boat</label>
+				</fieldset>
+
+				<fieldset>
+					<legend>selects</legend>
+
+
+					<div>
+						<label for="select">Select box:</label>
+						<div class="select-wrapper">
+							<select id="select" name="select">
+								<option>Banana</option>
+								<option>Cherry</option>
+								<option>Lemon</option>
+							</select>
+						</div>
+					</div>
+					<div>
+						<label for="myFruit">"Favorite fruit?" datalist:</label> <input type="text" name="myFruit" id="myFruit" list="mySuggestion" />
+						<datalist id="mySuggestion">
+							<option>Apple</option>
+							<option>Banana</option>
+							<option>Blackberry</option>
+							<option>Blueberry</option>
+							<option>Lemon</option>
+							<option>Lychee</option>
+							<option>Peach</option>
+							<option>Pear</option>
+						</datalist>
+					</div>
+
+					<div>
+						<label for="cars">Choose a car:</label> <select id="cars" name="cars" size="3" multiple>
+							<option value="volvo">Volvo</option>
+							<option value="saab">Saab</option>
+							<option value="fiat">Fiat</option>
+							<option value="audi">Audi</option>
+						</select>
+					</div>
+				</fieldset>
+
+				<fieldset>
+					<legend>ranges</legend>
+
+					<div>
+						<label for="range">Range: </label> <input id="range" name="range" type="range" />
+					</div>
+					<div>
+						<label for="color">Color: </label> <input id="color" name="color" type="color" />
+					</div>
+
+					<div>
+						<label for="progress">Progress: </label>
+						<progress max="100" value="75" id="progress">75/100</progress>
+					</div>
+					<div>
+						<label for="meter">Meter: </label>
+						<meter id="meter" min="0" max="100" value="75" low="33" high="66" optimum="50"> 75 </meter>
+					</div>
+
+
+				</fieldset>
+
+				<fieldset>
+					<legend>inputs</legend>
+
+					<div>
+						<label for="file">File picker: </label> <input id="file" name="file" type="file" multiple />
+					</div>
+
+					<div>
+						<label for="number"> Card number:</label> <input type="number" id="number" name="cardnumber" />
+					</div>
+
+					<div>
+						<label for="fname">First name:</label> <input type="text" id="fname" name="fname" value="John">
+					</div>
+
+					<div>
+						<label for="date">Datetime local:</label> <input type="date" id="date" name="expiration" />
+					</div>
+
+
+				</fieldset>
+
+				<div>
+					<button>Submit?</button>
+				</div>
+
+			</form>
+
+		</div>
+
+
+
+
+
+
+
+
+
+		<div>
+			<form>
+				<h3>My style1: form-group</h3>
+
+
+				<div class="t3-two-col">
+					<div>
+
+
+						<div class="form-group">
+							<label for="select">Select box:</label>
+							<div class="select-wrapper">
+								<select id="select" name="select">
+									<option>Banana</option>
+									<option>Cherry</option>
+									<option>Lemon</option>
+								</select>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label for="myFruit">"Favorite fruit?" datalist:</label> <input type="text" name="myFruit" id="myFruit" list="mySuggestion" />
+							<datalist id="mySuggestion">
+								<option>Apple</option>
+								<option>Banana</option>
+								<option>Blackberry</option>
+								<option>Blueberry</option>
+								<option>Lemon</option>
+								<option>Lychee</option>
+								<option>Peach</option>
+								<option>Pear</option>
+							</datalist>
+						</div>
+
+						<div class="form-group">
+							<label for="number"> Card number:</label> <input type="number" id="number" name="cardnumber" />
+						</div>
+
+						<div class="form-group">
+							<label for="fname">First name:</label> <input type="text" id="fname" name="fname" value="John">
+						</div>
+
+						<div class="form-group">
+							<label for="date">Datetime local:</label> <input type="date" id="date" name="expiration" />
+						</div>
+
+					</div>
+
+					<div>
+
+
+						<div class="form-group">
+							<label for="range">Range: </label> <input id="range" name="range" type="range" />
+						</div>
+
+						<div class="form-group">
+							<label for="color">Color: </label> <input id="color" name="color" type="color" />
+						</div>
+
+						<div class="form-group">
+							<label for="file">File picker: </label> <input id="file" name="file" type="file" multiple />
+						</div>
+
+						<div class="form-group">
+							<label for="progress">Progress: </label>
+							<progress max="100" value="75" id="progress">75/100</progress>
+						</div>
+						<div class="form-group">
+							<label for="meter">Meter: </label>
+							<meter id="meter" min="0" max="100" value="75" low="33" high="66" optimum="50"> 75 </meter>
+						</div>
+						<div>
+							<button class="form-button">Отправить</button>
+						</div>
+
+					</div>
+
+				</div>
+
+
+			</form>
+
+		</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	</div>
+
+
+
+
+
+
+
+
+
+</body>
+</html>
