@@ -1,0 +1,8 @@
+target/
+printedNotes/
+*.classpath
+*.project
+**/.settings/
+**/.idea/
+**/Thumbs.db
+**/.directory
