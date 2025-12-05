@@ -1,13 +1,15 @@
 package ru.tet.tsg.misc;
 
-import static ru.tet.tsg.util.LocalDaoUtils.filter;
-import static ru.tet.tsg.util.LocalDaoUtils.sort;
+import static ru.tet.tsg.util.TsgLocalDaoUtils.filter;
+import static ru.tet.tsg.util.TsgLocalDaoUtils.sort;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -23,15 +25,24 @@ public class TSGTasksDao {
 
 	List<TSGTaskRow> allRows;
 
+	
 	public TSGTasksDao(int rowCount) {
-
+		
+		
 		allRows = new ArrayList<>(rowCount);
 
+		Map<Integer, TsgSection> sectionsMap = TSGDictionaries.getInstance().getSectionsMap();
+		
+		
 		//генерируем строки
 		for (int i = 0; i < rowCount; i++) {
 			TSGTaskRow row = new TSGTaskRow();
 			row.setId(i);
-			row.setProcessed("Отдел №" + Math.round(Math.random() * 10));
+			
+			int sectionId = (int)Math.round(Math.random() * 10);
+			TsgSection section = sectionsMap.get(sectionId);
+			row.setSection(section);
+			
 			row.setTitle("Мой таск " + i);
 			row.setDuration(Math.round(Math.random() * 20) + " дней");
 			row.setPercentComplete((int) Math.round(Math.random() * 100));
@@ -67,15 +78,19 @@ public class TSGTasksDao {
 		Integer startRow = filter.getStartRow();
 		Integer pageSize = filter.getPageSize();
 
+		List<TSGTaskRow> pageRows = rows;
 		if (startRow != null
-				&& pageSize != null &&
-				rows.size() > (startRow + pageSize)) {
+				&& pageSize != null) {
 
-			rows = rows.subList(startRow, (startRow + pageSize));
+			int end = Math.min(startRow + pageSize,rows.size());
+			
+//			rows.size() > (startRow + pageSize)			
+			
+			pageRows = rows.subList(startRow, end);
 
 		}
 
-		SUPage<TSGTaskRow> page = new SUPage<>(rows, startRow, pageSize, allRows.size());
+		SUPage<TSGTaskRow> page = new SUPage<>(pageRows, startRow, pageSize, rows.size());
 		
 		
 		return page;
@@ -125,4 +140,6 @@ public class TSGTasksDao {
 
 	}
 
+	
+	
 }

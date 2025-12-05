@@ -1,5 +1,5 @@
 
-import {AbstractModule,extractCellValue} from './tet.slick.grid.misc.js';
+import {AbstractModule} from './tet.slick.grid.misc.js';
 import {tableEvents} from './tet.slick.grid.events.js';
 
 
@@ -198,7 +198,7 @@ export class GridMenuModel1  extends AbstractModule {
 				}
 				
 //				let fieldValue = row[this.currentColumn.id]
-				let fieldValue = extractCellValue(row, this.currentColumn.id);
+				let fieldValue = this.grid.model.extractRowCellValue(row, this.currentColumn);
 				
 				accordUtils.copyTextToBuffer(fieldValue);
 				
@@ -209,7 +209,7 @@ export class GridMenuModel1  extends AbstractModule {
 				}
 				
 //				let fieldValue = row[this.currentColumn.id];
-				let fieldValue = extractCellValue(row, this.currentColumn.id);
+				let fieldValue = this.grid.model.extractRowCellValue(row, this.currentColumn);
 				
 				fieldValue = filtersModel.fixFilterValue(this.currentColumn.id, fieldValue, true)
 				

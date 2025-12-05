@@ -13,6 +13,13 @@
 	flex-grow: 0.1;
 }
 
+
+
+.custom-grid-header{
+	flex-basis: 40px;
+}
+
+
 /*
 */
 
@@ -59,10 +66,16 @@
   background-color: green;
 }
 
-
+/*
 .custom-grid-header{
     position: absolute;
     top: 92px;
     left: 9px;
     right: 9px;
 }
+
+*/
+
+
+
+

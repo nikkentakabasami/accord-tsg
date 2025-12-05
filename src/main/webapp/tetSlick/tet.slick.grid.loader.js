@@ -1,7 +1,8 @@
 
 import { tableEvents } from './tet.slick.grid.events.js';
-import {filterRows,sortRows} from './tet.slick.grid.misc.js';
+//import {filterRows,sortRows} from './tet.slick.grid.misc.js';
 
+import { LocalFilter } from './tet.slick.grid.local-filter.js';
 
 
 /**
@@ -140,6 +141,12 @@ export class GetRequestPageDataLoader extends AbstractDataLoader {
 
 	ensureData(start,end, ensureDataCallback){
 		
+		this.grid.logDebug("ensureData",start,"-",end);
+		
+//		if (this.grid.model.options.debugMode){
+//			console.log("ensureData",start,"-",end);
+//		}
+		
 		this.ensureQueue.push({
 			start: start,
 			end: end,
@@ -191,8 +198,8 @@ export class GetRequestPageDataLoader extends AbstractDataLoader {
 		this.grid.dispatch(tableEvents.beforeDataLoad);
 		
 		showWaitPanel("Загрузка");
-		console.log("loading rows: " + ensureRequest.start + " to " + ensureRequest.end);
-
+		this.grid.logDebug("loading rows. startRow:",requestParams.startRow,", pageSize:",requestParams.loadPageSize);
+				
 		//загружаем данные с сервера		
 		ensureRequest.ajaxRequest = $.ajax({
 			url : this.makeUrl(requestParams),
@@ -205,7 +212,12 @@ export class GetRequestPageDataLoader extends AbstractDataLoader {
 					return;
 				}
 				
-				console.log("loaded pages " + requestParams.fromPage + " to " + requestParams.toPage);
+				this.grid.logDebug("loaded pages:",requestParams.fromPage, "-", requestParams.toPage);
+				
+				if (responsePage.rows.length>requestParams.loadPageSize){
+					console.error("requested",requestParams.loadPageSize,"rows. returned",responsePage.rows.length,"rows.");
+				}				
+
 				
 				this.totalRowsCount = responsePage.totalRowsCount;
 			    this.data.length = Math.min(parseInt(responsePage.totalRowsCount), this.maxRows); 
@@ -248,10 +260,8 @@ export class GetRequestPageDataLoader extends AbstractDataLoader {
 		}
 		
 		let clearFilterUrl = this.grid.model.options.clearFilterUrl;
-		$.get(clearFilterUrl,callback)
-		.fail(function(jqXHR, textStatus, errorThrown) {
-			bootbox.alert("Ошибка отправления запроса : " + textStatus);
-		});
+		$.post(clearFilterUrl,callback)
+		.fail(this.grid.failHandler);
 	}	
 
 
@@ -271,17 +281,13 @@ export class GetRequestPageDataLoader extends AbstractDataLoader {
 			  data: JSON.stringify(formData),
 			  contentType: 'application/json',
 			  success: callback,
-			  error : (jqXHR, textStatus, errorThrown) => {
-				bootbox.alert("Ошибка отправления запроса : " + textStatus);
-			  }
+			  error : this.grid.failHandler
 			});
 						
 		} else {
 			let serializedForm = this.grid.filtersModel.$form.serialize();
 
-			$.post(updateFilterUrl, serializedForm, callback).fail(function(jqXHR, textStatus, errorThrown) {
-				bootbox.alert("Ошибка отправления запроса : " + textStatus);
-			});
+			$.post(updateFilterUrl, serializedForm, callback).fail(this.grid.failHandler);
 			
 		}
 		
@@ -313,13 +319,18 @@ export class LocalDataLoader extends AbstractDataLoader {
 	//Если используется dataLoader, то всегда sourceData===data
 	sourceData;
 
+	localFilter;
 
 	constructor(sourceData){
 		super();
 		this.sourceData = sourceData;
 	}
 
-
+	init(){
+		this.localFilter = new LocalFilter(this.grid);		
+		this.localFilter.init();
+	}
+	
 	ensureData(start,end, ensureDataCallback){
 		
 		//Если данные пока не загружены - проводим фильтрацию и сортировку
@@ -347,14 +358,24 @@ export class LocalDataLoader extends AbstractDataLoader {
 		let data;
 		
 		if (this.grid.filtersModel){
-			let filter = this.grid.filtersModel.makeFilterObject();
-			data = filterRows(this.sourceData, filter);
+//			let filter = this.grid.filtersModel.makeFilterObject();
+			
+//			data = filterRows(this.sourceData, filter);
+			data = this.localFilter.filterRows(this.sourceData);
+			
+			
+			
 		} else {
 			data = this.sourceData.slice();
 		}
 		
+		this.localFilter
+		
 		let sortColumns = this.grid.getSortColumns();
-		sortRows(data, sortColumns);
+//		sortRows(data, sortColumns);
+		this.localFilter.sortRows(data, sortColumns);
+		
+		
 		
 //		let filter = this.grid.filtersModel.makeFilterObject();
 //		let data = filterRows(this.sourceData, filter);

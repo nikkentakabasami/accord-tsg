@@ -3,8 +3,7 @@
 export { AccModalDialogEvents, AccModalDialog, LoadModes };
 
 
-//import { alignToCenter } from './misc-utils.js';
-import { accordUtils } from './misc-utils.js';
+import { accordUtils } from './accord-utils.js';
 
 
 const LoadModes = Object.freeze({

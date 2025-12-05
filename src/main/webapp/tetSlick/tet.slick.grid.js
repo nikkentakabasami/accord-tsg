@@ -167,9 +167,17 @@ export class TetSlickGrid extends EventTarget {
 			this.dispatch(tableEvents.afterDataLoad);
 		}
 		
-		this.view.render();
 		
-		this.dispatch(tableEvents.afterGridInit);
+		if (this.model.options.clearFilterAtInit){
+			this.dataLoader.clearFilters(()=>{
+				this.view.render();
+				this.dispatch(tableEvents.afterGridInit);
+			});
+		} else {
+			this.view.render();
+			this.dispatch(tableEvents.afterGridInit);
+		}
+		
 	}
 	
 
@@ -257,7 +265,6 @@ export class TetSlickGrid extends EventTarget {
 	 * Запускается при прокрутке таблицы
 	 */
 	_handleScroll = event => {
-//		console.log(this.view.$viewport[0].scrollLeft);
 		
 		let scrollLeft =  this.view.$viewport[0].scrollLeft;
 		
@@ -271,6 +278,7 @@ export class TetSlickGrid extends EventTarget {
 		
 		//перерисовываем таблицу		
 		this.model.scrollTop = this.view.$viewport[0].scrollTop;
+		
 		this.model.recalcAfterScroll();
 		this.view.render();
 
@@ -370,5 +378,25 @@ export class TetSlickGrid extends EventTarget {
 	dispatch(eventName, detail){
 		this.dispatchEvent(new CustomEvent(eventName, { detail:detail }));
 	}
+	
+	//вывод отладочных сообщений
+	logDebug(...mess){
+		if (this.model.options.debugMode){
+			console.log(...mess);
+		}
+	}
+	
+	alert(mess){
+		if (typeof bootbox!='undefined'){
+			bootbox.alert(mess);
+			return;
+		}
+		alert(mess);
+	}
+	
+	failHandler = (jqXHR, textStatus, errorThrown) => {
+		this.alert("Ошибка отправления запроса : " + textStatus);
+	}
+	
 
 }

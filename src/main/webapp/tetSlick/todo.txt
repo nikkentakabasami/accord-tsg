@@ -1,19 +1,13 @@
-
-hideWaitPanel
-showWaitPanel
-
-использовать accord
+фильтрация дат - локально и серверно
 
 
-getTetSlickRelativePath
-  replace
+css for columns option
+
 
 
 при изменении страницы - съезжают столбцы.
 
 
-Сделать общий обработчик
-			bootbox.alert("Ошибка отправления запроса : " + textStatus);
 
 
 

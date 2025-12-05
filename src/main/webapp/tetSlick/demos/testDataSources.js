@@ -35,11 +35,19 @@ function makeTableData1(rowCount){
 			finish: makeRandomDate(),
 			effortDriven: (i % 5 == 0),
 			odd: (i % 2 == 1)
+			
+			
+			
+			
+
+			
 		};
 	}
 	return data;
 	
 }
+
+
 
 
 
@@ -53,6 +61,10 @@ function makeTableData2(rowCount){
 		data[i] = {
 			id: i,
 			processed: "Отдел №"+ Math.round(Math.random() * 10),
+			section: {
+				
+				
+			},
 			title: "Мой таск " + i,
 			duration: "5 дней",
 			percentComplete: Math.round(Math.random() * 100),

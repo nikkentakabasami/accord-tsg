@@ -7,7 +7,7 @@ import {tableEvents} from '../tet.slick.grid.events.js';
  * Инициализирует поля фильтрации для ввода даты.
  * На них должен быть назначен класс .date-input.
  *  
- * Для использования требуется подключить библиотеки moment.min.js и daterangepicker.js
+ * Для использования требуется подключить библиотеки moment.js и daterangepicker.js
  * 
  */
 export class DateRangeModule  extends AbstractModule {

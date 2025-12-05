@@ -1,7 +1,7 @@
 
 
 
-import {AbstractModule,extractCellValue} from './tet.slick.grid.misc.js';
+import {AbstractModule} from './tet.slick.grid.misc.js';
 import {tableEvents} from './tet.slick.grid.events.js';
 
 
@@ -149,7 +149,7 @@ export class GroupExcelModule  extends AbstractModule {
 			row.geParent = null;
 			
 //			let gf = row[groupFieldId];
-			let gf = extractCellValue(row, groupFieldId);
+			let gf = this.grid.model.extractRowCellValue(row, groupFieldId);
 			
 			if (gf!=lgf){
 				

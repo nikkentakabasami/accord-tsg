@@ -201,7 +201,7 @@ export class ColumnOrderDialogModel extends AbstractModule {
 
 		let cr = this.colsData[colNo];
 		if (!cr.visible) {
-			bootbox.alert('Этот столбец не показывается в таблице!');
+			this.grid.alert('Этот столбец не показывается в таблице!');
 			return;
 		}
 

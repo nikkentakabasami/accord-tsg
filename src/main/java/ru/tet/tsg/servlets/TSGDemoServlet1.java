@@ -1,6 +1,8 @@
 package ru.tet.tsg.servlets;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -11,9 +13,11 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import ru.tet.tsg.misc.TSGDictionaries;
 import ru.tet.tsg.misc.TSGTaskFilter;
 import ru.tet.tsg.misc.TSGTaskRow;
 import ru.tet.tsg.misc.TSGTasksDao;
+import ru.tet.tsg.misc.TsgSection;
 import ru.tet.tsg.util.SUPage;
 
 /**
@@ -27,6 +31,8 @@ public class TSGDemoServlet1 extends HttpServlet {
 	
 	
 	public static final String PAGE_URL = "/getTasksJson";
+	public static final String SECTIONS_URL = "/getSectionsJson";
+	
 	public static final String UPDATE_FILTER_URL = "/updateTasksFilter";
 	public static final String CLEAR_FILTER_URL = "/clearTasksFilter";
 	
@@ -73,8 +79,20 @@ public class TSGDemoServlet1 extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+		
+		
 		// "/getCustomerRequestJson/10/20"
 		String pathInfo = req.getPathInfo();
+		
+		//справочник секций
+		if (pathInfo.startsWith(SECTIONS_URL)) {
+			List<TsgSection> sections = TSGDictionaries.getInstance().getSections();
+			
+			ObjectMapper mapper = new ObjectMapper();
+			mapper.writeValue(resp.getOutputStream(), sections);
+			return;
+		}
+		
 		
 		String[] parts = pathInfo.split("/");
 		if (!pathInfo.startsWith(PAGE_URL) || parts.length != 4) {
@@ -83,6 +101,7 @@ public class TSGDemoServlet1 extends HttpServlet {
 			return;
 		}
 
+		
 		try {
 			Integer startRow = Integer.parseInt(parts[2]);
 			Integer pageSize = Integer.parseInt(parts[3]);
@@ -92,6 +111,7 @@ public class TSGDemoServlet1 extends HttpServlet {
 				filter = new TSGTaskFilter();
 			}
 			
+//			TSGTaskFilter filter = new TSGTaskFilter();
 			filter.setStartRow(startRow);
 			filter.setPageSize(pageSize);
 
@@ -104,7 +124,7 @@ public class TSGDemoServlet1 extends HttpServlet {
 			mapper.writeValue(resp.getOutputStream(), page);
 //			resp.getOutputStream().close();
 			
-			Thread.sleep(1000);
+			Thread.sleep(200);
 			
 		} catch (Exception e) {
 			resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);

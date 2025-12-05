@@ -1,13 +1,13 @@
 
-import {AbstractModule,getTetSlickRelativePath,loadFragment} from '../tet.slick.grid.misc.js';
+import {AbstractModule,loadFragment} from '../tet.slick.grid.misc.js';
 import {tableEvents} from '../tet.slick.grid.events.js';
 
 
 /**
- * Инициализирует поля фильтрации для ввода даты.
- * На них должен быть назначен класс .date-input.
+ * Инициализирует поля фильтрации для ввода чисел.
+ * На них должен быть назначен класс .number-input.
  *  
- * Для использования требуется подключить библиотеки moment.min.js и daterangepicker.js
+ * Для использования требуется подключить библиотеки moment.js и daterangepicker.js
  * 
  */
 export class NumberRangeModule  extends AbstractModule {
@@ -43,11 +43,6 @@ export class NumberRangeModule  extends AbstractModule {
 }
 
 
-export function loadNumberFilterDialog(){
-	loadFragment("selectNumberFilterDialog.html", () => {
-		initNumberFilterDialog();
-	});
-}
 
 
 export function initNumberFilter($filter, setValueCallback){
@@ -70,67 +65,66 @@ export function initNumberFilter($filter, setValueCallback){
 	
 }
 
+export function loadNumberFilterDialog() {
+
+	$numberFilterDialog = loadFragment("selectNumberFilterDialog.html");
+
+//	$numberFilterDialog = $("#numberFilterDialog");
+//	$numberFilterDialog.remove().appendTo("body");
+
+	$numberFilterDialog.find('input[name="numberFilterType"]').change(function() {
+
+		currentNumberFilterType = $numberFilterDialog.find('input[name="numberFilterType"]:checked').val();
+
+		$numberFilterDialog.find("#divNumber2").addClass('div-hidden');
+
+		if (currentNumberFilterType == "4") {
+			$numberFilterDialog.find("#divNumber2").removeClass('div-hidden');
+		}
+
+		//    alert(val);
+	});
 
 
-function initNumberFilterDialog(){
+	$numberFilterDialog.find("#clearNumberButton").click(function() {
 
-  $numberFilterDialog = $("#numberFilterDialog");
-  
-  $numberFilterDialog.remove().appendTo("body");
-  
-  $('input[name="numberFilterType"]').change(function () {
-    
-    currentNumberFilterType = $('input[name="numberFilterType"]:checked').val();
-    
-    $("#divNumber2").addClass('div-hidden');
-    
-    if (currentNumberFilterType=="4"){
-      $("#divNumber2").removeClass('div-hidden');
-    }
-    
-//    alert(val);
-  });  
-  
-  
-  $("#clearNumberButton").click(function(){
-    
-    $numberFilterDialog.modal("hide");
-    currentNumberFilterCallback("");    
-    
-  });
-  
-  
-  $("#selectNumberButton").click(function(){
-    
-    var v1 = $("#filterNumber1").val();
-    var v2 = $("#filterNumber2").val();
-    
-    
-    
-    if (currentNumberFilterType=="1"){
-      currentNumberFilterResult = v1;
-    } else if (currentNumberFilterType=="2"){
-      currentNumberFilterResult = ">"+v1;
-    } else if (currentNumberFilterType=="3"){
-      currentNumberFilterResult = "<"+v1;
-    } else if (currentNumberFilterType=="4"){
-      currentNumberFilterResult = v1+":"+v2;
-    }
-    
-    currentNumberFilterResult = currentNumberFilterResult.trim();
-    
-    if (!currentNumberFilterResult){
-      bootbox.alert('Выберите значение!');
-      return;
-    }
-    
-    $numberFilterDialog.modal("hide");
-    
-    currentNumberFilterCallback(currentNumberFilterResult);
-    
-  });
-  
-  	
+		$numberFilterDialog.modal("hide");
+		currentNumberFilterCallback("");
+
+	});
+
+
+	$("#selectNumberButton").click(function() {
+
+		var v1 = $("#filterNumber1").val();
+		var v2 = $("#filterNumber2").val();
+
+
+
+		if (currentNumberFilterType == "1") {
+			currentNumberFilterResult = v1;
+		} else if (currentNumberFilterType == "2") {
+			currentNumberFilterResult = ">" + v1;
+		} else if (currentNumberFilterType == "3") {
+			currentNumberFilterResult = "<" + v1;
+		} else if (currentNumberFilterType == "4") {
+			currentNumberFilterResult = v1 + ":" + v2;
+		}
+
+		currentNumberFilterResult = currentNumberFilterResult.trim();
+
+		if (!currentNumberFilterResult) {
+			this.grid.alert('Выберите значение!');
+			return;
+		}
+
+		$numberFilterDialog.modal("hide");
+
+		currentNumberFilterCallback(currentNumberFilterResult);
+
+	});
+
+
 }
 
 

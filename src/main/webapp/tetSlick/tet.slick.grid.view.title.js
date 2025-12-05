@@ -1,5 +1,5 @@
 
-import {AbstractModule} from './tet.slick.grid.misc.js';
+import {AbstractModule,tetSlickRelativePath} from './tet.slick.grid.misc.js';
 
 
 /**
@@ -29,19 +29,39 @@ export class TsgTitleView  extends AbstractModule {
 
 	createDomElements(){
 		
-		if (this.grid.model.options.showTitleHeader){
-			this.#createStandartDomElements();
-		} else {
-			this.#findExistingDomElements();
+		let gridHeaderId = "gridHeader"+this.grid.id;
+		
+		//ищем существующий заголовок таблицы
+		this.$titleHeader = $("#"+gridHeaderId);
+		
+		//если он не найден - создаём его на основе шаблона gridHeader.html
+		if (this.$titleHeader.length==0 && this.grid.model.options.showTitleHeader){
+			this.$titleHeader = accordUtils.loadHtmlFragmentXHR(tetSlickRelativePath+"fragments/gridHeader.html", this.grid.view.$container, false);
+			this.$titleHeader.attr("id",gridHeaderId)
+		}
+
+		//ищем встроенные элементы
+		this.$titlePanel = this.$titleHeader.find(".panel-title");		
+		this.$rowsCountSpan = this.$titleHeader.find(".count-span-filter");
+		this.$customGridColumnsButton = this.$titleHeader.find(".tsg-col-dialog-btn");
+		this.$clearFiltersButton = this.$titleHeader.find(".tsg-clear-filters-btn");
+		
+
+		//удаляем лишние кнопки		
+		if (!this.grid.model.options.withColumnDialog){
+			this.$customGridColumnsButton.remove();
+		}
+		if (!this.grid.model.options.enableHeaderRowFilters){
+			this.$clearFiltersButton.remove();
 		}
 		
 		this.#addButtonHandlers();
 	}
 
-	/**
-	 * Ищет кнопки, панели и элементы управления таблицей, которые могут быть определены в другом месте
-	 */
+	/*
 	#findExistingDomElements(){
+		
+		$(".grid-header").attr("id","test111")
 		this.$titleHeader = $("#gridHeader"+this.grid.id);
 		this.$titlePanel = $("#gridPanelTitle"+this.grid.id);
 		this.$rowsCountSpan = $("#rowsCountSpan"+this.grid.id);
@@ -49,37 +69,17 @@ export class TsgTitleView  extends AbstractModule {
 	}
 
 
-	/**
-	 * создаёт стандартную панель с заголовком и прочими кнопками. Вставляет её в контейнер таблицы. 
-	 */	
 	#createStandartDomElements(){
-		
-		this.$titleHeader = $('<div class="grid-header"/>').appendTo(this.grid.view.$container);
-		this.$titlePanel = $('<span class="panel-title"/>').appendTo(this.$titleHeader);
-
-		this.$rowsCountSpan = $("#rowsCountSpan"+this.grid.id);
-		if (this.$rowsCountSpan.length==0){
-			this.$rowsCountSpan = $('<span id="rowsCountSpan'+this.grid.id+'" class="count-span-filter"/>').appendTo(this.$titleHeader);
-		}
-		
-		
-		if (this.grid.model.options.withColumnDialog){
-			this.$customGridColumnsButton = $('<a href="#" class="pull-right" style="margin-right: 10px;margin-top: 3px;"> <span class="list-png"/></a>')
-				.appendTo(this.$titleHeader);
-		}
-	
-		if (this.grid.model.options.enableHeaderRowFilters){
-			this.$clearFiltersButton = $("#clearFilters"+this.grid.id);
-			if (this.$clearFiltersButton.length==0){
-				this.$clearFiltersButton = $('<a href="#" class="pull-right" style="margin-right: 10px;margin-top: 3px;" title="Очистить фильтры"><span class="rotate-left-png"/></a>')
-					.appendTo(this.$titleHeader);
-			}
-		}
-		
-		
+		this.$titleHeader = accordUtils.loadHtmlFragmentXHR(tetSlickRelativePath+"fragments/gridHeader.html", this.grid.view.$container, false);
+		this.$titlePanel = this.$titleHeader.find(".panel-title");		
+		this.$rowsCountSpan = this.$titleHeader.find(".count-span-filter");
+		this.$customGridColumnsButton = this.$titleHeader.find(".tsg-col-dialog-btn");
+		this.$clearFiltersButton = this.$titleHeader.find(".tsg-clear-filters-btn");
 		
 	}
-
+*/
+	
+	
 	#addButtonHandlers(){
 		
 		if (this.$customGridColumnsButton){
@@ -100,7 +100,7 @@ export class TsgTitleView  extends AbstractModule {
 	}
 	
 	setTitle(title){
-		this.$titlePanel.append(title);
+		this.$titlePanel.empty().append(title);
 	}
 
 	clear() {

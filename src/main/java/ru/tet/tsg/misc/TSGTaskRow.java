@@ -6,7 +6,10 @@ import lombok.Data;
 public class TSGTaskRow {
 
 	int id;
-	String processed;
+//	String processed;
+	
+	TsgSection section;
+	
 	
 	String title;
 	String duration;

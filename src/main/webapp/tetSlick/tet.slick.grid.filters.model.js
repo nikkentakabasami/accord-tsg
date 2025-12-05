@@ -264,7 +264,9 @@ export class FiltersModel  extends AbstractModule {
 		} else {
 			sortString = this.grid.sortModel.getSortString();
 		}
-		this.$sortField.val(sortString);
+		if (this.$sortField){
+			this.$sortField.val(sortString);
+		}
 		
 		this.grid.dispatch(tableEvents.beforeApplyFilter);
 		

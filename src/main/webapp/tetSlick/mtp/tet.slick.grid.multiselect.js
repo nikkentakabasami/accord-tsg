@@ -1,11 +1,14 @@
 
-import {AbstractModule} from './tet.slick.grid.misc.js';
-import {tableEvents} from './tet.slick.grid.events.js';
+import {AbstractModule} from '../tet.slick.grid.misc.js';
+import {tableEvents} from '../tet.slick.grid.events.js';
 
 
 /**
  * Инициализирует мультиселекты в полях фильтрации.
  * Для использования требуется подключить библиотеки bootstrap 3 и bootstrap-multiselect
+ * селекты должны иметь атрибут multiple!
+ * Например:
+ * <select id="section" name="section" multiple="multiple"></select>
  * 
  */
 export class MultiselectModule  extends AbstractModule {

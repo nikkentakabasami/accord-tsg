@@ -1,6 +1,6 @@
 
 
-import {columnDefaults,tableDefaults,getPosition,AbstractModule,_compareValues} from './tet.slick.grid.misc.js';
+import {columnDefaults,tableDefaults,getPosition,AbstractModule} from './tet.slick.grid.misc.js';
 import {tableEvents} from './tet.slick.grid.events.js';
 
 
@@ -111,6 +111,18 @@ export class TsgModel extends AbstractModule {
 			this.columnsById[m.id] = m;
 			m.index = i;
 			
+			if (!m.captionField){
+				m.captionField = m.id;
+			}
+			if (!m.valueField){
+				m.valueField = m.id;
+			}
+
+			
+			if (!m.sortField){
+				m.sortField = m.captionField;
+			}
+			
 			m.width = Math.max(m.width,this.options.minColumnWidth);
 			m.width = Math.min(m.width,this.options.maxColumnWidth);
 		}
@@ -178,6 +190,58 @@ export class TsgModel extends AbstractModule {
 		return null;
 	}
 
+	
+	
+
+	/**
+	 * Извлекает из строки значение по id столбца.
+	 * Либо можно использовать дот-нотацию. Например "request.customer.name"
+	 * Использует буферизацию для ускорения.
+	 */
+	extractRowCellValue(row, colId){
+
+		let column;
+		if (colId.valueField){
+			column = colId;
+		} else {
+			column = this.columnsById[colId];
+		}
+		if (column){
+			colId = column.valueField;
+		}
+		return this.extractRowCell(row,colId);
+	}
+
+	extractRowCellCaption(row, colId){
+		let column;
+		if (colId.valueField){
+			column = colId;
+		} else {
+			column = this.columnsById[colId];
+		}
+		if (column){
+			colId = column.captionField;
+		}
+		return this.extractRowCell(row,colId);
+	}
+	
+	
+	colIdSplits = {};
+	extractRowCell(row, path){
+
+		let split = this.colIdSplits[path];
+		if (!split){
+			split = path.split('.');
+			this.colIdSplits[path] = split;
+		}
+
+		if (split.length==1){
+			return row[path];
+		}
+
+		return split.reduce((val, currFieldName) => val[currFieldName], row);		
+	}
+		
 
 }
 

@@ -1,7 +1,7 @@
 
 
 
-import { AbstractModule, extractCellValue } from './tet.slick.grid.misc.js';
+import { AbstractModule} from './tet.slick.grid.misc.js';
 import { TsgTitleView } from './tet.slick.grid.view.title.js';
 import { tableEvents } from './tet.slick.grid.events.js';
 
@@ -64,6 +64,9 @@ export class TsgView extends AbstractModule {
 				//правим размеры холста
 				let canvasHeight = totalRowsCount != null ? this.grid.model.options.rowHeight * totalRowsCount : 0;
 				this.$canvas.height(canvasHeight);
+				
+				this.grid.logDebug("resize canvas.","totalRowsCount:",totalRowsCount,"canvasHeight:",canvasHeight);
+				
 			}
 
 			//показываем новое число записей
@@ -325,10 +328,10 @@ export class TsgView extends AbstractModule {
 		//		let dataLoaderMode = (this.grid.dataLoader!=null);
 
 		//Если данных нет - просто очищаем записи
-		if (dataLoader.totalRowsCount == 0) {
-			this.clearRows();
-			return;
-		}
+//		if (!dataLoader.totalRowsCount) {
+//			this.clearRows();
+//			return;
+//		}
 
 		let renderedStart = this.renderedRowsDiapazon[0];
 		let renderedEnd = this.renderedRowsDiapazon[1];
@@ -351,6 +354,10 @@ export class TsgView extends AbstractModule {
 		let start = Math.max(visibleStart - renderReserve, 0);
 		let end = visibleEnd + renderReserve;
 
+//		end = Math.min(end,dataLoader.totalRowsCount-1);
+//		if (this.grid.dataLoader.totalRowsCount>0){
+//		}
+		
 		//		console.log("going to render: %i:%i",start,end);
 
 		//удаляем ненужные строки		
@@ -367,6 +374,8 @@ export class TsgView extends AbstractModule {
 			}
 		}
 
+		this.grid.logDebug("model.scrollTop",this.grid.model.scrollTop);
+		
 		this.grid.dataLoader.ensureData(start, end, responsePage => {
 			//			this.resizeCanvas();
 
@@ -387,11 +396,22 @@ export class TsgView extends AbstractModule {
 		//прорисовываем новые строки
 		let model = this.grid.model;
 
-
+		let actualStart = null, actualEnd = null;
 		for (let i = start; i <= end; i++) {
-			this.#renderRow(i);
+			let r = this.#renderRow(i);
+			if (r){
+				actualEnd = i;
+				if (actualStart==null){
+					actualStart = i;
+				}
+			}
+		}
+		
+		if (actualStart!=null){
+			this.grid.logDebug("rendered rows: ",actualStart,"-",actualEnd);
 		}
 
+		
 		this.renderedRowsDiapazon = [start, end];
 
 		this.grid.dispatch(tableEvents.afterRowsRendered, this.renderedRowsDiapazon);
@@ -402,7 +422,7 @@ export class TsgView extends AbstractModule {
 	#renderRow(rowNo) {
 
 		if (this.$rows[rowNo] != null) {
-			return;
+			return false;
 		}
 
 		let model = this.grid.model;
@@ -414,7 +434,7 @@ export class TsgView extends AbstractModule {
 
 		let r = dataLoader.data[rowNo];
 		if (r == null) {
-			return;
+			return false;
 		}
 
 		let currTop = rowNo * model.options.rowHeight;
@@ -430,7 +450,7 @@ export class TsgView extends AbstractModule {
 
 			let formatter = col.formatter != null ? col.formatter : model.options.defaultFormatter;
 
-			let rowVal = extractCellValue(r, col.id);
+			let rowVal = this.grid.model.extractRowCellCaption(r, col);
 
 			//			let val = formatter(rowNo, c, r[col.id], r);
 			let val = formatter(rowNo, c, rowVal, r);
@@ -483,6 +503,7 @@ export class TsgView extends AbstractModule {
 			row: r
 		});
 
+		return true;
 	}
 
 
@@ -555,7 +576,7 @@ export class TsgView extends AbstractModule {
 			r += this.$headerRowScroller.outerHeight();
 		}
 
-		if (this.titleHeader.$titleHeader.length > 0) {
+		if (this.titleHeader.$titleHeader.length>0 && this.grid.model.options.showTitleHeader){
 			r += this.titleHeader.$titleHeader.outerHeight();
 		}
 		return r;

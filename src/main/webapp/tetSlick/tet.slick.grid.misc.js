@@ -90,6 +90,9 @@ export const tableDefaults = {
 	// 'dblClick' - редактирование ячейки при двойном клике
 	editMode: null,
 	
+	//режим отладки: выводит отладочные сообщения
+	debugMode: false,
+	
 	//---------------------remote data load---------------------------------
 	
 	//отправлять данные формы через updateFilterUrl в формате Json.
@@ -103,6 +106,8 @@ export const tableDefaults = {
 	//url для очистки условий фильтрации на сервере
 	clearFilterUrl: null,
 	
+	//при инициализации таблицы будет очищать текущий фильтр на сервере, вызывая метод dataLoader.clearFilters(); 
+	clearFilterAtInit: false,
 	
 	hiddenFields: null,
 	colCookieName: null,
@@ -144,13 +149,33 @@ export const tableDefaults = {
 	
 };
 
+//способ фильтрации записей по полю
+export const matchTypes = Object.freeze({
+	
+	//авто определение по типу данных в строках
+	AUTO_CALC: 0,
+	//фильтровать как числа
+	NUMBER: 1,
+	//прямое соответствие (default)
+	STRING_EQUAL: 2,
+	//искать похожие записи
+	STRING_LIKE: 3
+	
+});	
+
 export const columnDefaults = {
-	name: "",
+	id: null,			//поле, в котором лежит значение столбца. Так же является идентификатором столбца.
+	name: "",			//заголовок столбца
+	captionField: null,	//поле, в котором лежит отформатированное значение, которое нужно показывать в таблице. (default = id)
+	valueField: null,	//поле, в котором лежит значение, по которому выполняется фильтрация. (default = id)
+	sortField: null,	//поле, по которому выполняется сортировка. (default = captionField)
 	resizable: true,	//Столбец можно растягивать/сокращать
 	sortable: true,		//Столбец можно сортировать
 	formatter: null,	//Кастомный форматтер
 	editor: null,		//Редактор столбца. Срабатывает при двойном щелчке. Стандартные редакторы - в модуле tet.slick.grid.editors.js
-	showTitleForContent: false  //показывать текстовое содержимое ячейки во всплывающей подсказке 
+	showTitleForContent: false,  //показывать текстовое содержимое ячейки во всплывающей подсказке,
+	matchType: matchTypes.AUTO_CALC,	//как фильтровать по данному полю
+	matchFunction: null		//кастомная функция фильтрации по данному полю
 };
 
 
@@ -243,28 +268,6 @@ export function mkExpSortColDesc(id,name,sortName,width,sort,formatter) {
 }
 
 
-let colIdSplits = {};
-
-/**
- * Извлекает из строки значение по имени столбца.
- * Можно использовать дот-нотацию.
- * Использует буферизацию для ускорения.
- */
-export function extractCellValue(row, colId){
-	
-	let split = colIdSplits[colId];
-	if (!split){
-		split = colId.split('.');
-		colIdSplits[colId] = split;
-	}
-	
-	if (split.length==1){
-		return row[colId];
-	}
-	
-	return split.reduce((val, currFieldName) => val[currFieldName], row);
-}
-
 
 export function nameFormatter(rowNo, column, value, row) {
 	if (value){
@@ -307,147 +310,18 @@ export function getPosition(e){
 
 
 
-function rowFitFilter(row, filter){
-	
-	
-	for (let columnId in filter) {
-		
-		let filterVal = filter[columnId];
-		if (!filterVal){
-			continue;
-		}
-		
-//		let val = row[columnId]+'';
-		let val = extractCellValue(row, columnId)+'';
-		
-		if (!val){
-			return false;
-		}
-		
-		if (Array.isArray(filterVal) && filterVal.length>0){
-			if (filterVal.indexOf(val)<0){
-				return false;
-			}
-		} else if (val.indexOf(filterVal)<0){
-			return false;
-		}
-	}
-	return true;
-}
-
-
-//фильтрация строк в соответствии с заданным фильтром.
-//используется только в LocalDataLoader
-export function filterRows(sourceData, filter){
-	
-	let filterParams = Object.keys(filter);
-	if (filterParams.length==0){
-		return sourceData.slice();
-	}
-
-	
-	let filteredData = [];
-
-	for (let i = 0; i < sourceData.length; i++) {
-		let row = sourceData[i];
-		
-		if (!rowFitFilter(row, filter)){
-			continue;
-		}
-		
-//		row = jsonCopy(row);
-		filteredData.push(row);
-	}
-	
-	return filteredData;
-}
-
-export function sortRows(data, sortColumns){
-	if (sortColumns.length==0){
-		return;
-	}
-		
-	data.sort((a, b)=> {
-		
-		for(let i=0;i<sortColumns.length;i++){
-			let sc = sortColumns[i];
-			
-//			let val1 = a[sc.columnId];
-//			let val2 = b[sc.columnId];
-			let val1 = extractCellValue(a,sc.columnId);
-			let val2 = extractCellValue(b,sc.columnId);
-			
-			let r = _compareValues(val1,val2,sc.sortAsc);
-			if (r!=0){
-				return r;
-			}
-		}
-		return 0;
-	});
-	
-}
-
-
-export function _compareValues(val1,val2,sortAsc){
-	let r;
-	
-	let type = typeof val1; 
-	if (type === 'number' || type === 'boolean'){
-		r = val1-val2;
-	} else {
-		r = val1.localeCompare(val2);
-	}
-	if (!sortAsc){
-		r = -r;
-	}
-	return r;
-}
-
 
 
 let scriptSrc = import.meta.url;
 export let tetSlickRelativePath = scriptSrc.substring(0, scriptSrc.lastIndexOf('/') + 1);
 
 
-/*
-let tetSlickRelativePath = null;
 
-//Возвращает путь к библиотеке tetSlick
-export function getTetSlickRelativePath() {
-	if (tetSlickRelativePath){
-		return;
-	}
-    let links = document.getElementsByTagName('link');
-    const cssPath = "css/tet.slick.grid.css";
-	for( var i = 0; i < links.length; i++){
-		let ref = links[i].getAttribute("href");
-		let ind = ref.indexOf(cssPath);
-		if (ind>=0){
-			tetSlickRelativePath = ref.substring(0,ind);
-			return tetSlickRelativePath;
-		}
-    }    
-    return null;
-}
-*/
-
-
-//невидимый div, в который складываются различные вспомогательные элементы (диалоги, всплывашки, поля фильтрации)
-let $loadedElementsContainer;
 
 
 //загрузка в dom фрагментов из папки  fragments
-export function loadFragment(fragmentFileName, callback){
-	
-	//загружаем элементы диалога на страницу
-	let path = getTetSlickRelativePath();
-	
-	$loadedElementsContainer.load( path+"fragments/"+fragmentFileName, () => {
-		if (callback){
-			callback();
-		}
-	});
-	
+export function loadFragment(fragmentFileName, $target){
+	return accordUtils.loadHtmlFragmentXHR(tetSlickRelativePath+"fragments/"+fragmentFileName, $target, false);	
 }
 
 
@@ -470,11 +344,6 @@ export function fixSelectTextToVal(selector){
 
 $(document).ready(function() {
 
-	$loadedElementsContainer = $("#tsgHiddenElements");
-	if ($loadedElementsContainer.length==0){
-		$loadedElementsContainer = $('<div id="tsgHiddenElements"/>');
-		$loadedElementsContainer.appendTo(document.body);
-	}
 
 
 });

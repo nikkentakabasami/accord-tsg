@@ -5,7 +5,7 @@
 
 
 
-import { accordUtils } from './misc-utils.js';
+import { accordUtils } from './accord-utils.js';
 export {accordUtils};
 
 import {AccModalDialogEvents,AccModalDialog} from './modal-dialog.js';

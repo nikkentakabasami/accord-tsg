@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8" />
+<title>tet slick grid demo</title>
+
+<script src="../../jquery31/js/jquery.js"></script>
+
+
+<link rel="stylesheet" type="text/css" href="../../bootstrap3/css/bootstrap.min.css">
+<script src="../../bootstrap3/js/bootstrap.js"></script>
+<script src="../../bootstrap3/js/bootbox.min.js"></script>
+
+
+<link rel="stylesheet" type="text/css" href="../../bootstrap3/css/bootstrap-multiselect.css">
+<script src="../../bootstrap3/js/bootstrap-multiselect.js"></script>
+
+
+
+<script type="text/javascript" src="../../jquery31/js/moment.min.js"></script>
+<script type="text/javascript" src="../../jquery31/js/daterangepicker.js"></script>
+<link rel="stylesheet" type="text/css" href="../../jquery31/css/daterangepicker.css" />
+
+
+<link rel="stylesheet" type="text/css" href="../../accord/css/accord.css">
+<script type="module" src="../../accord/js/accord-publish.js"></script>
+
+<link rel="stylesheet" href="../css/tet.slick.grid.css" type="text/css" />
+<link rel="stylesheet" href="tsgDemoStyles.css" />
+
+<script type="text/javascript" src="testDataSources.js"></script>
+<script type="module" src="tsgExample70.js"></script>
+
+</head>
+
+<body>
+	<!-- Панель фильтрации -->
+	<form id="mainFilter" role="form" class="form-horizontal" action="." method="post">
+
+		<div class="basePanel">
+			<div class="headerPanel">
+				<h1>Пример: кастомный заголовок, кастомные фильтры, модули модифицирующие фильтры</h1>
+				<a href="tsgExample70.js" target="source">Source code</a>
+
+
+				<p>
+				1)Задаётся опция "showTitleHeader: false", отключающая стандартный заголовок таблицы.
+				<br>Вместо него мы подключаем свой, задав ему класс "grid-header".
+				<br>2)Подключаются дополнительные модули: 
+				<br>new DateRangeModule(myGrid); - Инициализирует поля фильтрации для ввода даты.
+				<br>new NumberRangeModule(myGrid); - Инициализирует поля фильтрации для ввода чисел.
+				<br>new MultiselectModule(myGrid); - Инициализирует мультиселекты в полях фильтрации (библиотекой bootstrap-multiselect).
+				</p>
+
+			</div>
+
+		<div class="grid-header custom-grid-header" id="gridHeader1">
+			<span class="panel-title">Мой кастомный заголовок</span>
+			<span id="rowsCountSpan1" class="count-span-filter">0</span>
+			<a href="#" class="tsg-col-dialog-btn"><span class="list-png"></span></a>
+			<a href="#" class="tsg-clear-filters-btn" title="Очистить фильтры"><span class="rotate-left-png"></span></a>
+		</div>
+
+
+			<div class="tablePanel">
+
+
+
+
+
+				<div id="myGrid"></div>
+
+				<div id="filterContainer" style="display: none;">
+					<select id="section" name="section" multiple="multiple"></select>
+					
+					<select id="effortDriven" name="effortDriven">
+						<option value="" selected>-</option>
+						<option value="true">Да</option>
+						<option value="false">Нет</option>
+					</select>
+
+				     <input id="start" name="start" class="date-input" />
+				     <input id="finish" name="finish" class="date-input" />
+				     <input id="percentComplete" name="percentComplete" class="number-input" />
+
+
+				</div>
+
+
+
+
+			</div>
+		</div>
+
+
+
+
+
+
+
+
+
+
+	</form>
+
+</body>
+
+</html>
+
+

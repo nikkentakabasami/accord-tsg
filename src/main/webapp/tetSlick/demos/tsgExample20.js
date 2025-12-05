@@ -1,22 +1,53 @@
 
 
 import { TetSlickGrid } from '../tet.slick.grid.js';
-import {mkColDesc,checkmarkFormatter} from '../tet.slick.grid.misc.js';
+import {mkColDesc,checkmarkFormatter,matchTypes} from '../tet.slick.grid.misc.js';
+import {TsgDataSource1} from './tsgDataSource1.js'
 
 let myGrid;
 
-//Упрощённый способ объявления столбцов
 var columns = [
 	mkColDesc("title","Заголовок",150),
+	{
+		id: "customer", 
+		captionField: "customer.name",
+		valueField: "customer.name",
+		sortField: "customer.name",
+		matchType: matchTypes.STRING_LIKE,
+		name: "Заказчик",
+		width: 150 
+	},{
+		id: "section",
+		captionField: "section.name",
+		valueField: "section.id",
+		name: "Раздел",
+		width: 150 
+	},
 	mkColDesc("duration","Длительность",150),
 	mkColDesc("percentComplete","% Завершения",150),
-	mkColDesc("start","Начало",150),
-	mkColDesc("finish","Окончание",150),
 	
-	//Кастомное форматирование для поля с булевым значением
-	mkColDesc("effortDriven","Выполнено",150,true,checkmarkFormatter)
+	{
+		id: "start", 
+		captionField: "startStr",
+		valueField: "startStr",
+		sortField: "start",
+		name: "Начало",
+		width: 150 
+	},{
+		id: "finish", 
+		captionField: "finishStr",
+		valueField: "finishStr",
+		sortField: "finish",
+		name: "Окончание",
+		width: 150 
+	},{
+		id: "effortDriven", 
+		name: "Окончание",
+		width: 150,
+		formatter: checkmarkFormatter,
+	},
+	
 ];
-
 
 let options = {
 	
@@ -43,9 +74,8 @@ let options = {
 
 $(function() {
 
-	let myData = makeTableData1(100);
-
-	myGrid = new TetSlickGrid("#myGrid", myData, columns, options);
+	let ds = new TsgDataSource1(100);
+	myGrid = new TetSlickGrid("#myGrid", ds.rows, columns, options);
 	myGrid.init();
 
 	myGrid.view.titleHeader.setTitle('Тестовая таблица')

@@ -18,7 +18,7 @@
 
 
 <script type="text/javascript" src="testDataSources.js"></script>
-<script type="module" src="tsgExample1.js"></script>
+<script type="module" src="tsgExample10.js"></script>
 
 
 
@@ -32,13 +32,13 @@
 	<div class="basePanel">
 		<div class="headerPanel">
 			<h1>Пример1: Простейшая таблица. Минимальная конфигурация</h1>
-			<a href="tsgExample1.js" target="source">Source code</a>
+			<a href="tsgExample10.js" target="source">Source code</a>
 
 			
 			<p>По умолчанию работает сортировка по столбцам. Сделайте щелчок мышью на столбцах чтобы задать столбец и направление сортировки.
 			<br>Кроме того есть возможность изменять размеры столбцов, растягивая их по границам.
 			<br>К самому объекту-таблице можно получить доступ через глобальный объект grid1. 
-			<br>grid1.dataLoader.data - показываемые строки
+			<br>Например grid1.dataLoader.data - показываемые строки; grid1.model.columns - текущие столбцы. grid1.getSortColumns() - столбцы, по которым идёт сортировка.
 			
 			</p>
 

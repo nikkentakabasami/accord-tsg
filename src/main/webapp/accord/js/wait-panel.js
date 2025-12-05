@@ -13,7 +13,7 @@
  * 
  */
 
-import { accordUtils } from './misc-utils.js';
+import { accordUtils } from './accord-utils.js';
 
 export {WaitPanel,waitPanel};
 
