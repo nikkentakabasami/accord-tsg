@@ -10,16 +10,16 @@ var columns = [
 	mkColDesc("title","Заголовок",150),
 	{
 		id: "customer", 
-		captionField: "customer.name",
 		valueField: "customer.name",
-		sortField: "customer.name",
-		matchType: matchTypes.STRING_LIKE,
+//		captionField: "customer.name",
+//		sortField: "customer.name",
+//		matchType: matchTypes.STRING_LIKE,
 		name: "Заказчик",
 		width: 150 
 	},{
 		id: "section",
-		captionField: "section.name",
-		valueField: "section.id",
+//		captionField: "section.name",
+		valueField: "section.name",
 		name: "Раздел",
 		width: 150 
 	},

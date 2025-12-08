@@ -156,9 +156,9 @@ export const matchTypes = Object.freeze({
 	AUTO_CALC: 0,
 	//фильтровать как числа
 	NUMBER: 1,
-	//прямое соответствие (default)
+	//прямое соответствие
 	STRING_EQUAL: 2,
-	//искать похожие записи
+	//искать похожие записи (default)
 	STRING_LIKE: 3
 	
 });	
@@ -166,16 +166,25 @@ export const matchTypes = Object.freeze({
 export const columnDefaults = {
 	id: null,			//поле, в котором лежит значение столбца. Так же является идентификатором столбца.
 	name: "",			//заголовок столбца
-	captionField: null,	//поле, в котором лежит отформатированное значение, которое нужно показывать в таблице. (default = id)
-	valueField: null,	//поле, в котором лежит значение, по которому выполняется фильтрация. (default = id)
-	sortField: null,	//поле, по которому выполняется сортировка. (default = captionField)
 	resizable: true,	//Столбец можно растягивать/сокращать
 	sortable: true,		//Столбец можно сортировать
 	formatter: null,	//Кастомный форматтер
 	editor: null,		//Редактор столбца. Срабатывает при двойном щелчке. Стандартные редакторы - в модуле tet.slick.grid.editors.js
 	showTitleForContent: false,  //показывать текстовое содержимое ячейки во всплывающей подсказке,
-	matchType: matchTypes.AUTO_CALC,	//как фильтровать по данному полю
-	matchFunction: null		//кастомная функция фильтрации по данному полю
+
+	//--------настройки для фильтрации локальных данных-----------------
+	
+	valueField: null,	//поле, в котором лежит значение, по которому выполняется фильтрация. (default = id)
+	captionField: null,	//поле, в котором лежит отформатированное значение, которое нужно показывать в таблице. (default = valueField)
+	sortField: null,	//поле, по которому выполняется сортировка. (default = captionField)
+	
+	matchType: matchTypes.AUTO_CALC,
+	//как фильтровать по данному полю.
+	
+	matchFunction: null
+	//кастомная функция фильтрации по данному полю
+	//Пример функции: function matchNumberFunction(filterVal, val){ return val == parseInt(filterVal);}
+	
 };
 
 

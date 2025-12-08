@@ -11,7 +11,7 @@
 
 	<div class="well col-md-6">
 			<h4>libs</h4>
-		<a href="./accord/demos/index.html	" target="acc"> accord libs</a>
+		<a href="./accord/demos/index.html	" target="accIndex"> accord libs</a>
 		<br>
 		<a href="./tetSlick/demos/index.html" target="tc"> Демки для tet.slick.grid</a>
 	</div>

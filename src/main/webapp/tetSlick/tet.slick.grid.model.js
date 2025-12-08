@@ -111,13 +111,13 @@ export class TsgModel extends AbstractModule {
 			this.columnsById[m.id] = m;
 			m.index = i;
 			
-			if (!m.captionField){
-				m.captionField = m.id;
-			}
 			if (!m.valueField){
 				m.valueField = m.id;
 			}
-
+			
+			if (!m.captionField){
+				m.captionField = m.valueField;
+			}
 			
 			if (!m.sortField){
 				m.sortField = m.captionField;

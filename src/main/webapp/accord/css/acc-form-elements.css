@@ -1,6 +1,13 @@
 
+/* ----набор стилей для элементов ввода, чтобы они выглядели не так уродливо------ */
 
-/* ------------------------------------- */
+.form-panel {
+	border: 2px solid gray;
+	border-radius: 5px;
+	background-color: WhiteSmoke;
+	padding: 1em;
+}
+
 .form-group {
 	margin-bottom: 20px;
 	font-family: "Josefin Sans", sans-serif;
@@ -50,14 +57,18 @@
 }
 
 .form-button {
-	width: 60%;
 	margin: 0 auto;
+    font-size: 100%;
+    width: 100%;
+    max-width: 300px;
+    padding: 5px;
+    height: 30px;
 }
+
 
 
 .t3-two-col {
 	grid-template-columns: 1fr 1fr;
-    display: grid;
-    column-gap: 10px;
+	display: grid;
+	column-gap: 10px;
 }
-

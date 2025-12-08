@@ -1,5 +1,20 @@
 
+#myTabbedPanel1 {
+	width: 500px;
+    height: 600px;
+}
+
+
+
 /*
+.tabbed-panel {
+	border: 2px solid gray;
+	border-radius: 5px;
+	background-color: WhiteSmoke;
+	padding: 2px;
+}
+
+
 body {
 	font-family: "Josefin Sans", sans-serif;
 }
@@ -42,5 +57,3 @@ body {
 }
 
 */
-
-

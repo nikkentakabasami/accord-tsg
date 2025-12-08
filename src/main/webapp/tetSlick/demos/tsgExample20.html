@@ -31,14 +31,30 @@
 <body>
 
 	<div class="basePanel">
-		<div class="headerPanel">
-			<h1>Пример: Заголовок, строка с фильтрами, множественный выбор</h1>
+		<div class="titlePanel">
+			<h2>Пример: строка с фильтрами</h2>
 			<a href="tsgExample20.js" target="source">Source code</a>
 
+		</div>
+
+		<div class="headerPanel">
+
+			<div class="sourcesPanel">
+				<div></div>
+				<div>let options = { enableHeaderRowFilters: true, };</div>
+
+			</div>
+
+
+
 			<p>
-			 Добавлена строка с элементами фильтрации. Записи можно фильтровать. 
-			<br>В заголовке появилась кнопка отмены фильтрации.
-			
+				Добавлена строка с элементами фильтрации. Записи можно фильтровать. Число записей в заголовке при этом обновляется.
+				<br>
+				В заголовке появилась кнопка отмены фильтрации.
+				<br>
+				Для столбца "Окончание" задан checkmarkFormatter - булевы значения показываются иконкой.
+
+
 			</p>
 
 

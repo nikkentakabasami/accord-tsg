@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8" />
+
+<!-- jquery 3.1 -->
+<script src="../../jquery31/js/jquery.js"></script>
+
+<!-- accord - мои вспомогательные компоненты, классы, утилиты -->
+<link rel="stylesheet" type="text/css" href="../css/acc-form-elements.css">
+
+<!-- 
+<script type="module" src="../js/tabbed-panel.js"></script>
+ -->
+
+</head>
+<body class="acc-default-font">
+
+
+
+
+
+	<div class="form-panel">
+		<form>
+			<h3>Набор стилей для форм и элементов ввода</h3>
+
+
+			<div class="t3-two-col">
+				<div>
+
+
+					<div class="form-group">
+						<label for="select">Select box:</label>
+						<div class="select-wrapper">
+							<select id="select" name="select">
+								<option>Banana</option>
+								<option>Cherry</option>
+								<option>Lemon</option>
+							</select>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label for="myFruit">"Favorite fruit?" datalist:</label> <input type="text" name="myFruit" id="myFruit" list="mySuggestion" />
+						<datalist id="mySuggestion">
+							<option>Apple</option>
+							<option>Banana</option>
+							<option>Blackberry</option>
+							<option>Blueberry</option>
+							<option>Lemon</option>
+							<option>Lychee</option>
+							<option>Peach</option>
+							<option>Pear</option>
+						</datalist>
+					</div>
+
+					<div class="form-group">
+						<label for="number"> Card number:</label> <input type="number" id="number" name="cardnumber" />
+					</div>
+
+					<div class="form-group">
+						<label for="fname">First name:</label> <input type="text" id="fname" name="fname" value="John">
+					</div>
+
+					<div class="form-group">
+						<label for="date">Datetime local:</label> <input type="date" id="date" name="expiration" />
+					</div>
+
+				</div>
+
+				<div>
+
+
+					<div class="form-group">
+						<label for="range">Range: </label> <input id="range" name="range" type="range" />
+					</div>
+
+					<div class="form-group">
+						<label for="color">Color: </label> <input id="color" name="color" type="color" />
+					</div>
+
+					<div class="form-group">
+						<label for="file">File picker: </label> <input id="file" name="file" type="file" multiple />
+					</div>
+
+					<div class="form-group">
+						<label for="progress">Progress: </label>
+						<progress max="100" value="75" id="progress">75/100</progress>
+					</div>
+					<div class="form-group">
+						<label for="meter">Meter: </label>
+						<meter id="meter" min="0" max="100" value="75" low="33" high="66" optimum="50"> 75 </meter>
+					</div>
+					<div>
+						<button class="form-button">Отправить</button>
+					</div>
+
+				</div>
+
+			</div>
+
+
+		</form>
+
+	</div>
+
+
+
+
+
+</body>
+</html>

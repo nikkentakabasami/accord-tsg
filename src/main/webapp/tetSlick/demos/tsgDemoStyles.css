@@ -1,3 +1,4 @@
+/*  Стили для демок tet slick grid  */
 .basePanel {
 	position: absolute;
 	top: 9px;
@@ -6,23 +7,63 @@
 	bottom: 9px;
 	display: flex;
 	flex-direction: column;
+	gap: 5px;
 }
 
 .headerPanel {
 	flex-basis: 100px;
-	flex-grow: 0.1;
+	flex-grow: 0;
 }
 
+.titlePanel {
+	display: flex;
+}
+
+.titlePanel h2 {
+	flex: 1;
+	margin: 0px;
+}
+
+.titlePanel a {
+	flex-grow: 0;
+}
+
+.sourcesPanel {
+	display: flex;
+	gap: 10px;
+}
+
+.sourcesPanel * {
+	flex: 1;
+}
+/*  
+	background-color: #f0f0f0;
+	padding: 2px;
+	border-radius: 4px;
+	border: 1px solid #ccc;
+	margin: 0px;
+*/
 
 
-.custom-grid-header{
+/*  
+.descPanel {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	padding: 10px;
+	border-radius: 4px;
+	border: 1px solid #ccc;
+	background-color: LightYellow;
+	white-space: pre-wrap;
+}
+*/
+
+
+.custom-grid-header {
 	flex-basis: 40px;
 }
 
-
 /*
 */
-
 .tablePanel {
 	flex-grow: 1;
 }
@@ -41,8 +82,6 @@
 	bottom: 9px;
 }
 */
-
-
 #myGrid2 {
 	position: absolute;
 	top: 130px;
@@ -51,31 +90,14 @@
 	bottom: 9px;
 }
 
-
-
-
-.cssGrayRow{
-  background-color: #f2f2f2;
+.cssGrayRow {
+	background-color: #f2f2f2;
 }
 
-.cssRedRow{
-  background-color: red;
+.cssRedRow {
+	background-color: red;
 }
 
-.cssGreenRow{
-  background-color: green;
+.cssGreenRow {
+	background-color: green;
 }
-
-/*
-.custom-grid-header{
-    position: absolute;
-    top: 92px;
-    left: 9px;
-    right: 9px;
-}
-
-*/
-
-
-
-

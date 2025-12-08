@@ -1,3 +1,32 @@
+
+
+
+
+/* Панель с описанием  "<pre class="acc-desc-panel">"  */
+.acc-desc-panel {
+	font-family: Arial, sans-serif;
+	font-size: 14px;
+	padding: 10px;
+	border-radius: 4px;
+	border: 1px solid #ccc;
+	background-color: LightYellow;
+	white-space: pre-wrap;
+	margin: 0px;
+}
+
+/* Панель с описанием программным кодом  "<pre class="acc-code-panel">"  */
+.acc-code-panel {
+	flex: 1;
+	background-color: #f0f0f0;
+	padding: 2px;
+	border-radius: 4px;
+	border: 1px solid #ccc;
+	margin: 0px;
+}
+
+
+
+/* Запрет на выделение */
 .no-select {
 	user-select: none;
 	-webkit-user-select: none;
@@ -10,7 +39,7 @@
 	font-family: Arial, sans-serif;
 }
 
-/*------ WaitPanel ------*/
+/*------ WaitPanel - панель ожидания ------*/
 
 .loading-indicator {
 	position: absolute;
@@ -164,15 +193,8 @@
 }
 
 
-/*
-.acc-button-panel .acc-btn {
-	flex-basis: 30px;
-	flex-grow: 0.1;
-}
-*/
 
-
-/*------ AccModalDialog ------*/
+/*------ AccModalDialog - модальный диалог ------*/
 .acc-dialog {
 	position: absolute;
 	top: 200px;
@@ -238,15 +260,3 @@
 }
 
 
-
-/*
-
-<button type="button" class="btn3 icon-button"><img src="demos/icons/check.png"/><span>img внутри кнопки</span></button>	
-
-<button type="button" class="btn4 icon-button"><img src="demos/icons/check.png"/></button>	
-
-
-
-
-
-*/

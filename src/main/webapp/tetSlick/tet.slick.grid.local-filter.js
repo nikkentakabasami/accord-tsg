@@ -76,7 +76,8 @@ export class LocalFilter {
 						} else if (valType == "boolean"){
 							matchFunction = matchBooleanFunction;
 						} else {
-							matchFunction = matchEqualFunction;
+//							matchFunction = matchEqualFunction;
+							matchFunction = matchLikeFunction;
 						}
 					}	
 				
@@ -223,7 +224,7 @@ function compareValues(val1,val2,sortAsc){
 
 
 function matchLikeFunction(filterVal, val){
-	return String(val.toLowerCase()).indexOf(filterVal.toLowerCase())>=0; 			
+	return String(val).toLowerCase().indexOf(filterVal.toLowerCase())>=0; 			
 }
 
 function matchEqualFunction(filterVal, val){

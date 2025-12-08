@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8" />
+
+<!-- jquery 3.1 -->
+<script src="../../jquery31/js/jquery.js"></script>
+
+<!-- accord - мои вспомогательные компоненты, классы, утилиты -->
+<link rel="stylesheet" type="text/css" href="../css/tabbed-panel.css">
+<link rel="stylesheet" type="text/css" href="css/demos.css">
+
+
+<!-- 
+<script type="module" src="../js/tabbed-panel.js"></script>
+ -->
+
+<script type="module" src="../js/accord-publish.js"></script>
+
+<script type="module" src="js/tabbed-panel-demo.js"></script>
+
+
+
+
+</head>
+<body class="acc-default-font">
+
+	<h2>Панель с закладками</h2>
+
+	<div id="myTabbedPanel1" class="tabbed-panel">
+
+		<div class="tab-container">
+			<button class="tab active" data-tab="1">Закладка 1</button>
+			<button class="tab" data-tab="2">Закладка 2</button>
+			<button class="tab" data-tab="3">Закладка 3</button>
+			<div class="tab-filler"></div>
+		</div>
+
+		<div id="tab-1" class="tab-content active">
+			<h3>Содержимое закладки 1</h3>
+			<p>Это содержимое для первой закладки.</p>
+		</div>
+
+		<div id="tab-2" class="tab-content">
+			<h3>Содержимое закладки 2</h3>
+			<p>Это содержимое для второй закладки.</p>
+		</div>
+
+		<div id="tab-3" class="tab-content">
+			<h3>Содержимое закладки 3</h3>
+			<p>Это содержимое для третьей закладки.</p>
+		</div>
+
+	</div>
+
+
+
+
+</body>
+</html>

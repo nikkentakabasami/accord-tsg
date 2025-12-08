@@ -15,7 +15,8 @@
 
 import { accordUtils } from './accord-utils.js';
 
-export {WaitPanel,waitPanel};
+//export {WaitPanel,waitPanel};
+export {showWaitPanel,hideWaitPanel};
 
 class WaitPanel {
 
@@ -47,7 +48,21 @@ class WaitPanel {
 }
 
 
-let waitPanel = new WaitPanel();
+let waitPanel = null;
+
+
+function showWaitPanel(mess) {
+	if (!waitPanel){
+		waitPanel = new WaitPanel();
+	}
+	waitPanel.show(mess);
+}
+
+function hideWaitPanel(mess) {
+	if (waitPanel){
+		waitPanel.hide();
+	}
+}
 
 
 

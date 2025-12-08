@@ -1,5 +1,4 @@
 
-import { waitPanel } from '../../accord/wait-panel.js';
 
 
 let $myModal2;
@@ -31,9 +30,6 @@ $(document).ready(function() {
 	
 
 
-	$("#b4").click(function() {
-		waitPanel.show();
-	});
 
 	
 

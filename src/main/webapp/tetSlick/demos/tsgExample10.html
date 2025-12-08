@@ -9,6 +9,7 @@
 
 
 <link rel="stylesheet" type="text/css" href="../../accord/css/accord.css">
+<link rel="stylesheet" type="text/css" href="../../accord/css/accord.css">
 <script type="module" src="../../accord/js/accord-publish.js"></script>
 
 
@@ -23,26 +24,47 @@
 
 
 
-
+<!-- 
+		<div class="headerPanel">
+		</div>
+ -->
 
 </head>
 
 <body>
 
 	<div class="basePanel">
-		<div class="headerPanel">
-			<h1>Пример1: Простейшая таблица. Минимальная конфигурация</h1>
+		<div class="titlePanel">
+			<h2>Пример1: Простейшая таблица. Минимальная конфигурация</h2>
 			<a href="tsgExample10.js" target="source">Source code</a>
 
-			
-			<p>По умолчанию работает сортировка по столбцам. Сделайте щелчок мышью на столбцах чтобы задать столбец и направление сортировки.
-			<br>Кроме того есть возможность изменять размеры столбцов, растягивая их по границам.
-			<br>К самому объекту-таблице можно получить доступ через глобальный объект grid1. 
-			<br>Например grid1.dataLoader.data - показываемые строки; grid1.model.columns - текущие столбцы. grid1.getSortColumns() - столбцы, по которым идёт сортировка.
-			
-			</p>
-
 		</div>
+
+
+			<div class="sourcesPanel">
+				<pre class="acc-code-panel">
+let columns = [ {
+	id: "title", 
+	name: "Заголовок",
+	width: 150 
+},{ ...
+</pre>
+				<pre class="acc-code-panel">
+let options = {
+	singleRowSelectionModel: true
+};				
+
+myGrid = new TetSlickGrid("#myGrid", ds.rows, columns, options);
+</pre>
+
+			</div>
+			<pre class="acc-desc-panel">
+По умолчанию работает сортировка по столбцам. Сделайте щелчок мышью на столбцах чтобы задать столбец и направление сортировки.
+Кроме того есть возможность изменять размеры столбцов, растягивая их по границам.
+К самому объекту-таблице можно получить доступ через глобальный объект grid1.
+Например grid1.dataLoader.data - показываемые строки; grid1.model.columns - текущие столбцы. grid1.getSortColumns() - столбцы, по которым идёт сортировка.
+</pre>
+
 		<div class="tablePanel">
 			<div id="myGrid"></div>
 		</div>

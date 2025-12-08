@@ -1,0 +1,38 @@
+body {
+	font-family: Arial, sans-serif;
+	margin: 20px;
+}
+
+/* Стиль для панели закладок */
+.tab-container {
+	display: flex;
+	border-bottom: 2px solid #ccc;
+	margin-bottom: 10px;
+}
+
+/* Стиль для каждой закладки */
+.tab {
+	padding: 10px 20px;
+	cursor: pointer;
+	border: none;
+	background: none;
+	font-size: 16px;
+	transition: background-color 0.3s;
+}
+
+/* Активная закладка */
+.tab.active {
+	border-bottom: 3px solid #007BFF;
+	font-weight: bold;
+}
+
+/* Контент для каждой вкладки */
+.tab-content {
+	display: none;
+	padding: 10px 0;
+}
+
+/* Показывать активный контент */
+.tab-content.active {
+	display: block;
+}
