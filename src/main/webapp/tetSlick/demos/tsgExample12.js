@@ -75,7 +75,7 @@ $(function() {
 //	myGrid = new TetSlickGrid("#myGrid", myData, columns, options);
 	myGrid.init();
 
-	myGrid.view.titleHeader.setTitle('Тестовая таблица')
+	myGrid.view.titleHeader.setTitle('Тестовая таблица');
 
 })
 

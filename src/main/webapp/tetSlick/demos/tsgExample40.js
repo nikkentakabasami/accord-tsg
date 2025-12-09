@@ -13,10 +13,7 @@ var columns = [
 	mkColDesc("title","Заголовок",150),
 	{
 		id: "customer", 
-		captionField: "customer.name",
 		valueField: "customer.name",
-		sortField: "customer.name",
-		matchType: matchTypes.STRING_LIKE,
 		name: "Заказчик",
 		formatter: (rowNo, column, value, row) => {
 			return '<a href="myTestPage?requestid=' + row.id

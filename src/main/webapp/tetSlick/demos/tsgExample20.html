@@ -4,32 +4,25 @@
 <meta charset="utf-8" />
 <title>tet slick grid demo</title>
 
-
 <script src="../../jquery31/js/jquery.js"></script>
 
-
 <link rel="stylesheet" type="text/css" href="../../accord/css/accord.css">
+<link rel="stylesheet" type="text/css" href="../../accord/css/tabbed-panel.css">
 <script type="module" src="../../accord/js/accord-publish.js"></script>
-
 
 <link rel="stylesheet" href="../css/tet.slick.grid.css" type="text/css" />
 <link rel="stylesheet" href="tsgDemoStyles.css" />
-
-
-<script type="text/javascript" src="../su-misc.js"></script>
-
 <script type="text/javascript" src="testDataSources.js"></script>
 <script type="module" src="tsgExample20.js"></script>
-
-
-
-
-
+<script>
+  $(function() {
+    let tp = new TabbedPanel("#tabbedPanel1");
+  });
+</script>
 
 </head>
 
 <body>
-
 	<div class="basePanel">
 		<div class="titlePanel">
 			<h2>Пример: строка с фильтрами</h2>
@@ -37,37 +30,73 @@
 
 		</div>
 
-		<div class="headerPanel">
+		<div id="tabbedPanel1" class="tabbed-panel">
 
-			<div class="sourcesPanel">
-				<div></div>
-				<div>let options = { enableHeaderRowFilters: true, };</div>
-
+			<div class="tab-container">
+				<button class="tab active" data-tab="1">Описание</button>
+				<button class="tab" data-tab="2">Ключевой код</button>
+				<div class="tab-filler"></div>
 			</div>
 
+			<div id="tab-1" class="tab-content active">
+				<pre class="acc-desc-panel">
+Добавлена строка с элементами фильтрации. Записи можно фильтровать. Число записей в заголовке при этом обновляется.
+Для числовых столбцов условия фильтрации можно задавать в форматах: "&gt;50", "&lt;=50", "20:50"
+В заголовке появилась кнопка отмены фильтрации.
+Для столбца "Окончание" задан checkmarkFormatter - булевы значения показываются иконкой.
+</pre>
+			</div>
+
+			<div id="tab-2" class="tab-content">
+				<pre class="acc-code-panel">
+var columns = [
+	mkColDesc("title","Заголовок",150),
+	{
+		id: "customer", 
+		valueField: "customer.name",	//поле, по которому выполняется фильтрация. (default = id)
+		captionField: "customer.name",	//поле, которое нужно показывать в таблице. (default = valueField)
+		sortField: "customer.name",		//поле, по которому выполняется сортировка. (default = captionField)
+		matchType: matchTypes.STRING_LIKE,	//можно явно задать тип фильтрации
+//		matchFunction: null, 				//можно явно задать функцию для фильтрации
+		name: "Заказчик",
+		width: 150 
+		
+	},{
+		id: "section",
+		valueField: "section.name",
+		name: "Раздел",
+		width: 150 
+	} ...
 
 
-			<p>
-				Добавлена строка с элементами фильтрации. Записи можно фильтровать. Число записей в заголовке при этом обновляется.
-				<br>
-				В заголовке появилась кнопка отмены фильтрации.
-				<br>
-				Для столбца "Окончание" задан checkmarkFormatter - булевы значения показываются иконкой.
+let options = {
+	explicitInitialization: true,
+	showTitleHeader: true,
+	enableHeaderRowFilters: true,	//активирует функционал фильтрации
+	multiRowSelectionModel: true,
+	rowHeight: 30,
+};
 
+myGrid = new TetSlickGrid("#myGrid", ds.rows, columns, options);
+myGrid.init();
 
-			</p>
-
+</pre>
+			</div>
 
 		</div>
+
 		<div class="tablePanel">
 			<div id="myGrid"></div>
 		</div>
 	</div>
 
-
 </body>
-
 </html>
+
+
+
+
+
 
 
 

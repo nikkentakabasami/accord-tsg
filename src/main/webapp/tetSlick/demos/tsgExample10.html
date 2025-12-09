@@ -9,7 +9,7 @@
 
 
 <link rel="stylesheet" type="text/css" href="../../accord/css/accord.css">
-<link rel="stylesheet" type="text/css" href="../../accord/css/accord.css">
+<link rel="stylesheet" type="text/css" href="../../accord/css/tabbed-panel.css">
 <script type="module" src="../../accord/js/accord-publish.js"></script>
 
 
@@ -22,6 +22,11 @@
 <script type="module" src="tsgExample10.js"></script>
 
 
+<script>
+  $(function() {
+    let tp = new TabbedPanel("#tabbedPanel1");
+  });
+</script>
 
 
 <!-- 
@@ -34,36 +39,65 @@
 <body>
 
 	<div class="basePanel">
+
 		<div class="titlePanel">
 			<h2>Пример1: Простейшая таблица. Минимальная конфигурация</h2>
 			<a href="tsgExample10.js" target="source">Source code</a>
 
 		</div>
 
+		<div id="tabbedPanel1" class="tabbed-panel">
 
-			<div class="sourcesPanel">
-				<pre class="acc-code-panel">
-let columns = [ {
-	id: "title", 
-	name: "Заголовок",
-	width: 150 
-},{ ...
-</pre>
-				<pre class="acc-code-panel">
-let options = {
-	singleRowSelectionModel: true
-};				
-
-myGrid = new TetSlickGrid("#myGrid", ds.rows, columns, options);
-</pre>
-
+			<div class="tab-container">
+				<button class="tab active" data-tab="1">Описание</button>
+				<button class="tab" data-tab="2">Ключевой код</button>
+				<div class="tab-filler"></div>
 			</div>
-			<pre class="acc-desc-panel">
+
+			<div id="tab-1" class="tab-content active">
+				<pre class="acc-desc-panel">
 По умолчанию работает сортировка по столбцам. Сделайте щелчок мышью на столбцах чтобы задать столбец и направление сортировки.
 Кроме того есть возможность изменять размеры столбцов, растягивая их по границам.
 К самому объекту-таблице можно получить доступ через глобальный объект grid1.
 Например grid1.dataLoader.data - показываемые строки; grid1.model.columns - текущие столбцы. grid1.getSortColumns() - столбцы, по которым идёт сортировка.
 </pre>
+			</div>
+
+			<div id="tab-2" class="tab-content">
+				<pre class="acc-code-panel">
+let columns = [
+	{
+		id: "title", 
+		name: "Заголовок",
+		width: 150 
+	},{
+		id: "customer", 
+		valueField: "customer.id",
+		name: "Заказчик",
+		width: 150 
+	},{
+		id: "section",
+		valueField: "section.name",
+		name: "Раздел",
+		width: 150 
+	},{
+		id: "duration", 
+		name: "Длительность",
+		width: 150 
+	},{  ...
+	
+let options = {
+	singleRowSelectionModel: true
+};
+...
+myGrid = new TetSlickGrid("#myGrid", ds.rows, columns, options);
+</pre>
+			</div>
+
+
+		</div>
+
+
 
 		<div class="tablePanel">
 			<div id="myGrid"></div>

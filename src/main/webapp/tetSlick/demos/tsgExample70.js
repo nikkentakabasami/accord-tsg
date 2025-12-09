@@ -74,7 +74,7 @@ async function loadSections(callback){
 				code+=`<option value="${section.id}">${section.name}</option>`;
 				return code;
 			},"");
-			$("#section").append(options);
+			$("select[name='section']").append(options);
 			callback();
 		},
 		error: (jqXHR, textStatus, errorThrown) => {

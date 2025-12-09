@@ -79,14 +79,17 @@ public class TSGTasksDao {
 		Integer pageSize = filter.getPageSize();
 
 		List<TSGTaskRow> pageRows = rows;
+		
+		
 		if (startRow != null
 				&& pageSize != null) {
 
-			int end = Math.min(startRow + pageSize,rows.size());
-			
-//			rows.size() > (startRow + pageSize)			
-			
-			pageRows = rows.subList(startRow, end);
+			if (startRow>=rows.size()) {
+				pageRows = new ArrayList<>();
+			} else {
+				int end = Math.min(startRow + pageSize,rows.size());
+				pageRows = rows.subList(startRow, end);
+			}
 
 		}
 

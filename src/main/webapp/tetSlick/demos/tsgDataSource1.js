@@ -49,13 +49,13 @@ class TsgDataSource1 {
 
 	constructor(rowCount) {
 
-		for (let i = 0; i < 10; i++) {
+		for (let i = 0; i < 14; i++) {
 
-			let r = rand(100);
+//			let r = rand(100);
 
 			let section = {
-				id: r,
-				name: "Отдел №" + r
+				id: i,
+				name: "Отдел №" + i
 			};
 			this.sections.push(section);
 		}

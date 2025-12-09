@@ -45,11 +45,10 @@
 
 .tab-content {
 	display: none;
-	padding: 10px;
-	
+	padding: 5px;
 	border: 2px solid #ccc;
-	font-weight: bold;
 	border-top: none;
+	overflow: auto;
 	flex: 1;
 	
 	

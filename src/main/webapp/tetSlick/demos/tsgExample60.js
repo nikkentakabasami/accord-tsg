@@ -5,7 +5,16 @@ import { checkmarkFormatter, nameFormatter, mkColDesc, fixSelectTextToVal } from
 
 
 var columns = [
-	mkColDesc("section", "Раздел", 150, true, nameFormatter),
+	{
+		id: "section",
+		captionField: "section.name",
+		valueField: "section.id",
+		sortField: "section.id",
+		name: "Раздел",
+		width: 150 
+	},
+	
+//	mkColDesc("section", "Раздел", 150, true, nameFormatter),
 	mkColDesc("id", "Id", 150),
 	mkColDesc("title", "Заголовок", 150),
 	mkColDesc("duration", "Длительность", 150),
@@ -42,6 +51,9 @@ let options = {
 	//url для очистки условий фильтрации на сервере
 	clearFilterUrl: "/accord/tsg/clearTasksFilter/",
 
+	//при инициализации таблицы будет очищать текущий фильтр на сервере, вызывая метод dataLoader.clearFilters(); 
+	clearFilterAtInit: true,
+	
 	//отправлять данные формы через updateFilterUrl в формате Json.
 	//По умолчанию используется формат "application/x-www-form-urlencoded"
 	postFormDataAsJson: true

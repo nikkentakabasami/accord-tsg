@@ -22,10 +22,7 @@ var columns = [
 	mkColDesc("title","Заголовок",150),
 	{
 		id: "customer", 
-		captionField: "customer.name",
 		valueField: "customer.name",
-		sortField: "customer.name",
-		matchType: matchTypes.STRING_LIKE,
 		name: "Заказчик",
 		width: 150 
 	},
@@ -63,9 +60,6 @@ let options = {
 	
 	//Добавит заголовок таблицы
 	showTitleHeader: true,
-
-	//Добавит в таблицу дополнительную заголовочную строку (для элементов фильтрации)
-	showHeaderRow: true,
 	
 	//Добавит элеметы фильтрации в заголовочную строку.
 	enableHeaderRowFilters: true,

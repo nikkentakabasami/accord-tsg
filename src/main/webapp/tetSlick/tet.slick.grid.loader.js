@@ -125,7 +125,7 @@ export class GetRequestPageDataLoader extends AbstractDataLoader {
 	
 	//Текущий запрос на получение данных с сервера (ожидается ответ)
 	currentEnsureRequest;
-
+	
 	//возвращает url для получения заданной страницы с сервера
 	makeUrl(requestParams){
 		

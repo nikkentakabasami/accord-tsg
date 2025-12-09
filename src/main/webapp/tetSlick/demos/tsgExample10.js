@@ -36,15 +36,12 @@ let columns = [
 		width: 150 
 	},{
 		id: "customer", 
-		captionField: "customer.name",
 		valueField: "customer.id",
 		name: "Заказчик",
 		width: 150 
 	},{
 		id: "section",
-		captionField: "section.name",
-		valueField: "section.id",
-		sortField: "section.id",
+		valueField: "section.name",
 		name: "Раздел",
 		width: 150 
 	},{

@@ -19,7 +19,7 @@ export class TabbedPanel {
 		
 //		this.$tabs.click(function(e) {
 		this.$tabs.click(e => {
-
+			e.preventDefault();
 			this.$tabs.removeClass("active");
 			let selectedTab = $(e.target).addClass("active").data("tab");
 			//		let t = $(this).data("tab");

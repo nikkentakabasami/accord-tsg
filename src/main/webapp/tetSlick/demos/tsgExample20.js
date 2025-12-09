@@ -10,15 +10,16 @@ var columns = [
 	mkColDesc("title","Заголовок",150),
 	{
 		id: "customer", 
-		valueField: "customer.name",
-//		captionField: "customer.name",
-//		sortField: "customer.name",
-//		matchType: matchTypes.STRING_LIKE,
+		valueField: "customer.name",	//поле, по которому выполняется фильтрация. (default = id)
+		captionField: "customer.name",	//поле, которое нужно показывать в таблице. (default = valueField)
+		sortField: "customer.name",		//поле, по которому выполняется сортировка. (default = captionField)
+		matchType: matchTypes.STRING_LIKE,	//можно явно задать тип фильтрации
+//		matchFunction: null, 				//можно явно задать функцию для фильтрации
 		name: "Заказчик",
 		width: 150 
+		
 	},{
 		id: "section",
-//		captionField: "section.name",
 		valueField: "section.name",
 		name: "Раздел",
 		width: 150 

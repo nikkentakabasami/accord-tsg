@@ -94,8 +94,12 @@ public enum FilterTokens {
 		}
 
 		String s = filterVal.substring(token.length());
-		int fvi = Integer.parseInt(s);
-		return match(val, fvi);
+		try {
+			int fvi = Integer.parseInt(s);
+			return match(val, fvi);
+		} catch (Exception e) {
+			return false;
+		}
 
 	}
 

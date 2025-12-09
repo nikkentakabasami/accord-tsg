@@ -174,8 +174,8 @@ export const columnDefaults = {
 
 	//--------настройки для фильтрации локальных данных-----------------
 	
-	valueField: null,	//поле, в котором лежит значение, по которому выполняется фильтрация. (default = id)
-	captionField: null,	//поле, в котором лежит отформатированное значение, которое нужно показывать в таблице. (default = valueField)
+	valueField: null,	//поле, по которому выполняется фильтрация. (default = id)
+	captionField: null,	//поле, которое нужно показывать в таблице. (default = valueField)
 	sortField: null,	//поле, по которому выполняется сортировка. (default = captionField)
 	
 	matchType: matchTypes.AUTO_CALC,

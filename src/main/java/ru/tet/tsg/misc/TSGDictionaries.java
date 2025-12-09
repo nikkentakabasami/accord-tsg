@@ -19,10 +19,10 @@ public class TSGDictionaries {
 
 		sectionsMap = new HashMap<>();
 		sections = new ArrayList<>();
-		for (int i = 0; i <= 10; i++) {
+		for (int i = 0; i <= 13; i++) {
 			
-			int rand = (int)Math.round(Math.random() * 100);
-			TsgSection s = new TsgSection(i, "Отдел №" + rand);
+//			int rand = (int)Math.round(Math.random() * 100);
+			TsgSection s = new TsgSection(i, "Отдел №" + i);
 			
 			sectionsMap.put(s.getId(), s);
 			sections.add(s);
