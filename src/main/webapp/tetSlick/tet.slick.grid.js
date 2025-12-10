@@ -11,8 +11,8 @@ import { EditorsModule } from './tet.slick.grid.editors.js';
 import {ColumnOrderDialogModel} from './tet.slick.grid.column.dialog.js';
 import {GridMenuModel1} from './tet.slick.grid.menu.js';
 
-
-//import { AuxModule } from './tet.slick.grid.aux.js';
+import {tsgUtils} from './tet.slick.grid.utils.js'
+export {tsgUtils};
 
 import { GetRequestPageDataLoader, LocalDataLoader } from './tet.slick.grid.loader.js';
 

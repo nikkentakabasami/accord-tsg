@@ -1,6 +1,6 @@
 
 
-import { TetSlickGrid } from '../tet.slick.grid.js';
+import { TetSlickGrid, tsgUtils } from '../tet.slick.grid.js';
 import {tableDefaults, mkColDesc,checkmarkFormatter} from '../tet.slick.grid.misc.js';
 
 let myGrid;

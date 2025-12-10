@@ -1,9 +1,6 @@
-import { AbstractModule, checkmarkFormatter, tetSlickRelativePath } from './tet.slick.grid.misc.js';
+import { AbstractModule} from './tet.slick.grid.misc.js';
 import { TetSlickGrid } from './tet.slick.grid.js';
-
-import { tableEvents } from './tet.slick.grid.events.js';
-
-//import { AccModalDialog } from '../accord/modal-dialog.js';
+import {tsgUtils} from './tet.slick.grid.utils.js';
 
 
 /**
@@ -17,7 +14,7 @@ export class ColumnOrderDialogModel extends AbstractModule {
 		id: "visible",
 		name: "",
 		field: "visible",
-		formatter: checkmarkFormatter,
+		formatter: tsgUtils.checkmarkFormatter,
 		width: 50
 	}, {
 		id: "name",
@@ -73,7 +70,7 @@ export class ColumnOrderDialogModel extends AbstractModule {
 			id: "columnsOrderingDialog",
 			//			dialogSelector: "#columnsOrderingDialog",
 			title: "Параметры столбцов",
-			contentUrl: tetSlickRelativePath + "fragments/columnsDialogContent.html",
+			contentUrl: tsgUtils.tetSlickRelativePath + "fragments/columnsDialogContent.html",
 			dialogWidth: 700,
 			dialogHeight: 500,
 
@@ -248,7 +245,7 @@ export class ColumnOrderDialogModel extends AbstractModule {
 
 			this.colsGrid = new TetSlickGrid("#columnsOrderingGrid", this.colsData, ColumnOrderDialogModel.colsColumns, colsOptions);
 
-			this.colsGrid.addEventListener(tableEvents.gridClick, e => {
+			this.colsGrid.addEventListener(tsgUtils.tableEvents.gridClick, e => {
 				if (e.detail.row == null) {
 					return;
 				}

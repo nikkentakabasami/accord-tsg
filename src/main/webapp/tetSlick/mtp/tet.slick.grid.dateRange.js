@@ -1,6 +1,6 @@
 
 import {AbstractModule} from '../tet.slick.grid.misc.js';
-import {tableEvents} from '../tet.slick.grid.events.js';
+import {tsgUtils} from '../tet.slick.grid.utils.js';
 
 
 /**
@@ -15,7 +15,7 @@ export class DateRangeModule  extends AbstractModule {
 	constructor(grid){
 		super(grid);
 		
-		this.grid.addEventListener(tableEvents.beforeInitFilter, e => {
+		this.grid.addEventListener(tsgUtils.tableEvents.beforeInitFilter, e => {
 			
 			let $filter = e.detail.$afe;
 

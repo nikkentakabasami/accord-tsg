@@ -1,7 +1,7 @@
 
 
-import {tableEvents} from './tet.slick.grid.events.js';
 import {AbstractModule} from './tet.slick.grid.misc.js';
+import {tsgUtils} from './tet.slick.grid.utils.js';
 
 
 /**
@@ -32,7 +32,7 @@ export class FiltersModel  extends AbstractModule {
 	constructor(grid){
 		super(grid);
 		
-		this.grid.addEventListener(tableEvents.sortChanged, e => {
+		this.grid.addEventListener(tsgUtils.tableEvents.sortChanged, e => {
 			
 			this.grid.dataLoader.updateFilter(resp => {
 				this.applyMainFilter();
@@ -100,7 +100,7 @@ export class FiltersModel  extends AbstractModule {
 			
 			this.moveFiltersToHeaderRow();
 			
-			this.grid.dispatch(tableEvents.afterFiltersSetInGrid, this.$filters);
+			this.grid.dispatch(tsgUtils.tableEvents.afterFiltersSetInGrid, this.$filters);
 			
 			this._fillActualFilterElements();
 			
@@ -188,7 +188,7 @@ export class FiltersModel  extends AbstractModule {
 					$afe: $afe,
 					column: m
 				};
-				this.grid.dispatch(tableEvents.beforeInitFilter, detail);
+				this.grid.dispatch(tsgUtils.tableEvents.beforeInitFilter, detail);
 				
 //				fpc($afe, m);
 			}
@@ -268,7 +268,7 @@ export class FiltersModel  extends AbstractModule {
 			this.$sortField.val(sortString);
 		}
 		
-		this.grid.dispatch(tableEvents.beforeApplyFilter);
+		this.grid.dispatch(tsgUtils.tableEvents.beforeApplyFilter);
 		
 //		this.grid.dataLoader.updateFilter();
 		this.grid.dataLoader.updateFilter(resp => {
@@ -371,7 +371,7 @@ export class FiltersModel  extends AbstractModule {
 			filterName: filterName,
 			handled: false
 		};
-		this.grid.dispatch(tableEvents.onFilterSetValue, detail);
+		this.grid.dispatch(tsgUtils.tableEvents.onFilterSetValue, detail);
 
 		if (!detail.handled){
 			this._defaultSetFilterValueFunction($filterInput,filterValue, filterName);

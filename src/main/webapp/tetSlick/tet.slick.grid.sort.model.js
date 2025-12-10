@@ -1,6 +1,6 @@
 
-import { tableEvents } from './tet.slick.grid.events.js';
 import { AbstractModule } from './tet.slick.grid.misc.js';
+import {tsgUtils} from './tet.slick.grid.utils.js';
 
 /**
  * Добавляет в таблицу поддержку сортировки по столбцам.
@@ -20,7 +20,7 @@ export class TsgSortModel extends AbstractModule {
 	constructor(grid) {
 		super(grid);
 
-		this.grid.addEventListener(tableEvents.headersClick, e => {
+		this.grid.addEventListener(tsgUtils.tableEvents.headersClick, e => {
 
 			let column = e.detail.column;
 
@@ -34,7 +34,7 @@ export class TsgSortModel extends AbstractModule {
 				if (sortOpts.columnId == column.id) {
 					sortOpts.sortAsc = !sortOpts.sortAsc;
 					this.renderColumnSort();
-					this.grid.dispatch(tableEvents.sortChanged, this.getSortString());
+					this.grid.dispatch(tsgUtils.tableEvents.sortChanged, this.getSortString());
 					return;
 				}
 			}
@@ -126,7 +126,7 @@ export class TsgSortModel extends AbstractModule {
 		}
 
 		this.renderColumnSort();
-		this.grid.dispatch(tableEvents.sortChanged, this.sortColumns);
+		this.grid.dispatch(tsgUtils.tableEvents.sortChanged, this.sortColumns);
 
 
 	}

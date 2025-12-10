@@ -1,8 +1,5 @@
 
-import { tableEvents } from './tet.slick.grid.events.js';
-import {matchTypes} from './tet.slick.grid.misc.js';
-
-
+import {tsgUtils} from './tet.slick.grid.utils.js';
 
 
 /**
@@ -64,7 +61,7 @@ export class LocalFilter {
 					return;
 				}
 				
-				if (col.matchType==matchTypes.AUTO_CALC){
+				if (col.matchType==tsgUtils.matchTypes.AUTO_CALC){
 					
 					if (firstRow){
 
@@ -82,10 +79,10 @@ export class LocalFilter {
 					}	
 				
 				
-				} else if (col.matchType==matchTypes.NUMBER){
+				} else if (col.matchType==tsgUtils.matchTypes.NUMBER){
 					matchFunction = calcMatchNumberFunction(filterVal)
 					
-				} else if (col.matchType==matchTypes.STRING_LIKE){
+				} else if (col.matchType==tsgUtils.matchTypes.STRING_LIKE){
 					matchFunction = matchLikeFunction;
 				} else {
 					matchFunction = matchEqualFunction;

@@ -4,15 +4,14 @@
 import { TetSlickGrid } from './tet.slick.grid.js';
 import { GetRequestPageDataLoader } from './tet.slick.grid.loader.js';
 import {GridMenuModel1} from './tet.slick.grid.menu.js';
-import {tableDefaults,getPosition} from './tet.slick.grid.misc.js';
 
 import {ColumnOrderDialogModel} from './tet.slick.grid.column.dialog.js';
-import {tableEvents} from './tet.slick.grid.events.js';
 import {v2Mode} from './mtp/tet.slick.mtp.js';
 
 import {MultiselectModule,initMultiselect} from './tet.slick.grid.multiselect.js';
 import {DateRangeModule} from './mtp/tet.slick.grid.dateRange.js';
 import {NumberRangeModule} from './mtp/tet.slick.grid.numberRange.js';
+import {tsgUtils} from './tet.slick.grid.utils.js';
 
 
 
@@ -106,7 +105,7 @@ export class TetSlickGridBasePagedView {
 		
 
 		//Фиксим положение таблицы - на случай, если разрешение небольшое
-		let pos = getPosition($("div.grid-header").get(0));
+		let pos = tsgUtils.getPosition($("div.grid-header").get(0));
 		$(containerSelector).css("top",pos.y+40);
 		
 		
@@ -143,7 +142,7 @@ export class TetSlickGridBasePagedView {
 		this.showExpWarning();
 //		$("#expandedMode").val(this.expandedMode+"");
 		
-		this.grid.addEventListener(tableEvents.afterColumnsChanged, e => {
+		this.grid.addEventListener(tsgUtils.tableEvents.afterColumnsChanged, e => {
 			this.saveColsWidth(() =>{
 				
 				let expandedColsShown = this.expandedColsShown();
@@ -169,7 +168,7 @@ export class TetSlickGridBasePagedView {
 		
 		
 		if (this.enplantAlwaysSelected){
-			this.grid.addEventListener(tableEvents.onFilterSetValue, e => {
+			this.grid.addEventListener(tsgUtils.tableEvents.onFilterSetValue, e => {
 				let $filter = e.detail.$filter;
 				let val = e.detail.filterValue;
 				
@@ -190,7 +189,7 @@ export class TetSlickGridBasePagedView {
 			$("#clearCookies img").attr("src","../"+src)
 		}
 		
-		this.grid.addEventListener(tableEvents.afterDataLoad, e => {
+		this.grid.addEventListener(tsgUtils.tableEvents.afterDataLoad, e => {
 			if (e.detail.param1){
 				$("#secondRequestCountSpan").empty().append(e.detail.param1);
 			}
@@ -201,7 +200,7 @@ export class TetSlickGridBasePagedView {
 		//Если задана опция - меняем список ресов при изменении выбранных пэсов
 		if (options.resReload){
 			this.reinitResFilter();
-			this.grid.addEventListener(tableEvents.beforeApplyFilter, e => {
+			this.grid.addEventListener(tsgUtils.tableEvents.beforeApplyFilter, e => {
 				this.reinitResFilter();
 			});
 		}

@@ -15,6 +15,10 @@ multiselect
 
 boolean, int inputs
 
+---------------
+tsg
+
+bundle module
 
 
 servlet rows
@@ -35,8 +39,14 @@ css for columns option
 
 при изменении страницы - съезжают столбцы.
 
+	col.exp = true;
 
-
+	let col = {
+			id : id,
+			name : name,
+			sortName : sortName,
+		};
+???
 
 
 

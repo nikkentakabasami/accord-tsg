@@ -1,6 +1,6 @@
 
-import {AbstractModule,loadFragment} from '../tet.slick.grid.misc.js';
-import {tableEvents} from '../tet.slick.grid.events.js';
+import {AbstractModule} from '../tet.slick.grid.misc.js';
+import {tsgUtils} from '../tet.slick.grid.utils.js';
 
 
 /**
@@ -20,7 +20,7 @@ export class NumberRangeModule  extends AbstractModule {
 		
 		loadNumberFilterDialog();
 		
-		this.grid.addEventListener(tableEvents.beforeInitFilter, e => {
+		this.grid.addEventListener(tsgUtils.tableEvents.beforeInitFilter, e => {
 			
 			let $filter = e.detail.$afe;
 			
@@ -67,7 +67,7 @@ export function initNumberFilter($filter, setValueCallback){
 
 export function loadNumberFilterDialog() {
 
-	$numberFilterDialog = loadFragment("selectNumberFilterDialog.html");
+	$numberFilterDialog = tsgUtils.loadFragment("selectNumberFilterDialog.html");
 
 //	$numberFilterDialog = $("#numberFilterDialog");
 //	$numberFilterDialog.remove().appendTo("body");

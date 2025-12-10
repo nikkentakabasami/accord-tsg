@@ -2,7 +2,7 @@
 
 
 import {AbstractModule} from './tet.slick.grid.misc.js';
-import {tableEvents} from './tet.slick.grid.events.js';
+import {tsgUtils} from './tet.slick.grid.utils.js';
 
 
 /**
@@ -16,16 +16,16 @@ export class GroupExcelModule  extends AbstractModule {
 	constructor(grid){
 		super(grid);
 		
-		this.grid.addEventListener(tableEvents.afterDataLoad, event => {
+		this.grid.addEventListener(tsgUtils.tableEvents.afterDataLoad, event => {
 			this.recalcData();
 		});
 		
-		this.grid.addEventListener(tableEvents.afterRowsRendered, event => {
+		this.grid.addEventListener(tsgUtils.tableEvents.afterRowsRendered, event => {
 			this.mergeViewCells();
 		});
 		
 		//при задании нового порядка столбцов
-		this.grid.addEventListener(tableEvents.afterColumnsChanged, event => {
+		this.grid.addEventListener(tsgUtils.tableEvents.afterColumnsChanged, event => {
 			this.calcSubgroupColumns();
 		});
 	}

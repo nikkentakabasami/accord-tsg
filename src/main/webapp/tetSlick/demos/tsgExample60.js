@@ -1,6 +1,5 @@
 
-import { TetSlickGrid } from '../tet.slick.grid.js';
-import { checkmarkFormatter, nameFormatter, mkColDesc, fixSelectTextToVal } from '../tet.slick.grid.misc.js';
+import { TetSlickGrid, tsgUtils } from '../tet.slick.grid.js';
 
 
 
@@ -15,13 +14,13 @@ var columns = [
 	},
 	
 //	mkColDesc("section", "Раздел", 150, true, nameFormatter),
-	mkColDesc("id", "Id", 150),
-	mkColDesc("title", "Заголовок", 150),
-	mkColDesc("duration", "Длительность", 150),
-	mkColDesc("percentComplete", "% Завершения", 150),
-	mkColDesc("start", "Начало", 150),
-	mkColDesc("finish", "Окончание", 150),
-	mkColDesc("effortDriven", "Выполнено", 150, true, checkmarkFormatter)
+	tsgUtils.mkColDesc("id", "Id", 150),
+	tsgUtils.mkColDesc("title", "Заголовок", 150),
+	tsgUtils.mkColDesc("duration", "Длительность", 150),
+	tsgUtils.mkColDesc("percentComplete", "% Завершения", 150),
+	tsgUtils.mkColDesc("start", "Начало", 150),
+	tsgUtils.mkColDesc("finish", "Окончание", 150),
+	tsgUtils.mkColDesc("effortDriven", "Выполнено", 150, true, tsgUtils.checkmarkFormatter)
 ];
 
 

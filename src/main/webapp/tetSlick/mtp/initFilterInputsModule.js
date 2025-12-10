@@ -1,8 +1,9 @@
 
 
-import {MultiselectModule,initMultiselect} from '../tet.slick.grid.multiselect.js';
-import {DateRangeModule, initTableDateRange} from './tet.slick.grid.dateRange.js';
-import {NumberRangeModule, initNumberFilter,loadNumberFilterDialog} from './tet.slick.grid.numberRange.js';
+import {initMultiselect} from '../tet.slick.grid.multiselect.js';
+import {initTableDateRange} from './tet.slick.grid.dateRange.js';
+import {initNumberFilter,loadNumberFilterDialog} from './tet.slick.grid.numberRange.js';
+import {tsgUtils} from '../tet.slick.grid.utils.js';
 
 
 

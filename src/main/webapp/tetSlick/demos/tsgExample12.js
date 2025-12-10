@@ -1,14 +1,14 @@
 
 
-import { TetSlickGrid } from '../tet.slick.grid.js';
-import {mkColDesc,checkmarkFormatter} from '../tet.slick.grid.misc.js';
+import { TetSlickGrid,tsgUtils} from '../tet.slick.grid.js';
 import {TsgDataSource1} from './tsgDataSource1.js'
+//import {tsgUtils} from '../tet.slick.grid.utils.js';
 
 let myGrid;
 
 //Упрощённый способ объявления столбцов
 var columns = [
-	mkColDesc("title","Заголовок",150),
+	tsgUtils.mkColDesc("title","Заголовок",150),
 	{
 		id: "customer", 
 		captionField: "customer.name",
@@ -22,8 +22,8 @@ var columns = [
 		name: "Раздел",
 		width: 150 
 	},
-	mkColDesc("duration","Длительность",150),
-	mkColDesc("percentComplete","% Завершения",150),
+	tsgUtils.mkColDesc("duration","Длительность",150),
+	tsgUtils.mkColDesc("percentComplete","% Завершения",150),
 	
 	{
 		id: "startStr", 
@@ -38,7 +38,7 @@ var columns = [
 	},
 	
 	//Кастомное форматирование для поля с булевым значением
-	mkColDesc("effortDriven","Выполнено",150,true,checkmarkFormatter)
+	tsgUtils.mkColDesc("effortDriven","Выполнено",150,true,tsgUtils.checkmarkFormatter)
 ];
 
 

@@ -1,6 +1,6 @@
 
 import {AbstractModule} from '../tet.slick.grid.misc.js';
-import {tableEvents} from '../tet.slick.grid.events.js';
+import {tsgUtils} from '../tet.slick.grid.utils.js';
 
 
 /**
@@ -20,7 +20,7 @@ export class MultiselectModule  extends AbstractModule {
 	constructor(grid){
 		super(grid);
 		
-		this.grid.addEventListener(tableEvents.beforeInitFilter, e => {
+		this.grid.addEventListener(tsgUtils.tableEvents.beforeInitFilter, e => {
 			
 			let $filter = e.detail.$afe;
 			
@@ -51,7 +51,7 @@ export class MultiselectModule  extends AbstractModule {
 			
 		});
 		
-		this.grid.addEventListener(tableEvents.onFilterSetValue, e => {
+		this.grid.addEventListener(tsgUtils.tableEvents.onFilterSetValue, e => {
 			
 			if (e.detail.handled){
 				return;

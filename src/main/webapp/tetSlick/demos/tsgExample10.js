@@ -1,7 +1,7 @@
 
 
-import { TetSlickGrid } from '../tet.slick.grid.js';
-import {TsgDataSource1} from './tsgDataSource1.js'
+import { TetSlickGrid,tsgUtils} from '../tet.slick.grid.js';
+import {TsgDataSource1} from './tsgDataSource1.js';
 
 let myGrid;
 

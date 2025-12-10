@@ -1,8 +1,6 @@
 
-import { tableEvents } from './tet.slick.grid.events.js';
-//import {filterRows,sortRows} from './tet.slick.grid.misc.js';
-
 import { LocalFilter } from './tet.slick.grid.local-filter.js';
+import {tsgUtils} from './tet.slick.grid.utils.js';
 
 
 /**
@@ -195,7 +193,7 @@ export class GetRequestPageDataLoader extends AbstractDataLoader {
 		}
 	
 		//запускаем событие beforeDataLoad
-		this.grid.dispatch(tableEvents.beforeDataLoad);
+		this.grid.dispatch(tsgUtils.tableEvents.beforeDataLoad);
 		
 		showWaitPanel("Загрузка");
 		this.grid.logDebug("loading rows. startRow:",requestParams.startRow,", pageSize:",requestParams.loadPageSize);
@@ -232,7 +230,7 @@ export class GetRequestPageDataLoader extends AbstractDataLoader {
 		//		_writeRowIndex();
 				
 				//запускаем событие afterDataLoad
-				this.grid.dispatch(tableEvents.afterDataLoad, responsePage);
+				this.grid.dispatch(tsgUtils.tableEvents.afterDataLoad, responsePage);
 				
 				ensureRequest.ensureDataCallback(responsePage);
 				
@@ -348,7 +346,6 @@ export class LocalDataLoader extends AbstractDataLoader {
 //		this._setData(this.sourceData.slice());
 		this.#recalcData();
 		
-//		this.grid.dispatch(tableEvents.afterDataLoad, null);
 	}
 
 
@@ -385,7 +382,7 @@ export class LocalDataLoader extends AbstractDataLoader {
 		this.totalRowsCount = data.length;
 		this._writeRowIndex();
 				
-		this.grid.dispatch(tableEvents.afterDataLoad, null);
+		this.grid.dispatch(tsgUtils.tableEvents.afterDataLoad, null);
 	}
 	
 

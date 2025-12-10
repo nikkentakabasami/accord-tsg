@@ -1,14 +1,13 @@
 
 
-import { TetSlickGrid } from '../tet.slick.grid.js';
-import {tableDefaults, mkColDesc,checkmarkFormatter,matchTypes} from '../tet.slick.grid.misc.js';
+import { TetSlickGrid, tsgUtils } from '../tet.slick.grid.js';
 import {TsgDataSource1} from './tsgDataSource1.js'
 
 let myGrid;
 
 
 var columns = [
-	mkColDesc("title","Заголовок",150),
+	tsgUtils.mkColDesc("title","Заголовок",150),
 	{
 		id: "customer", 
 		valueField: "customer.name",
@@ -19,12 +18,12 @@ var columns = [
 		captionField: "section.name",
 		valueField: "section.id",
 		sortField: "section.id",
-		matchType: matchTypes.NUMBER,
+		matchType: tsgUtils.matchTypes.NUMBER,
 		name: "Раздел",
 		width: 150 
 	},
-	mkColDesc("duration","Длительность",150),
-	mkColDesc("percentComplete","% Завершения",150),
+	tsgUtils.mkColDesc("duration","Длительность",150),
+	tsgUtils.mkColDesc("percentComplete","% Завершения",150),
 	
 	{
 		id: "start", 
@@ -44,7 +43,7 @@ var columns = [
 		id: "effortDriven", 
 		name: "Окончание",
 		width: 150,
-		formatter: checkmarkFormatter,
+		formatter: tsgUtils.checkmarkFormatter,
 	},
 	
 ];

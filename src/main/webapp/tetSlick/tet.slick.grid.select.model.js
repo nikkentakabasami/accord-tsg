@@ -1,7 +1,7 @@
 
 
-import {tableEvents} from './tet.slick.grid.events.js';
 import {AbstractModule} from './tet.slick.grid.misc.js';
+import {tsgUtils} from './tet.slick.grid.utils.js';
 
 
 export class NoSelectModel  extends AbstractModule {
@@ -17,7 +17,7 @@ export class NoSelectModel  extends AbstractModule {
 		}
 		this._initiated = true;
 		
-		this.grid.addEventListener(tableEvents.gridClick, this._onGridClick);
+		this.grid.addEventListener(tsgUtils.tableEvents.gridClick, this._onGridClick);
 	}
 
 
@@ -26,7 +26,7 @@ export class NoSelectModel  extends AbstractModule {
 			return;
 		}
 		
-		this.grid.removeEventListener(tableEvents.gridClick, this._onGridClick);
+		this.grid.removeEventListener(tsgUtils.tableEvents.gridClick, this._onGridClick);
 		this._initiated = false;
 	}
 
@@ -62,7 +62,7 @@ export class NoSelectModel  extends AbstractModule {
 	
 	_dispatchChangeEvent(dispatchEvent = true){
 		if (dispatchEvent){
-			this.grid.dispatch(tableEvents.selectionChanged);
+			this.grid.dispatch(tsgUtils.tableEvents.selectionChanged);
 		}
 	}
 	

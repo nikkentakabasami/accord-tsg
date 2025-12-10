@@ -1,7 +1,7 @@
 
-import {AbstractModule,loadFragment} from './tet.slick.grid.misc.js';
-import {tableEvents} from './tet.slick.grid.events.js';
+import {AbstractModule} from './tet.slick.grid.misc.js';
 import {initDateEditor} from './mtp/tet.slick.grid.dateRange.js';
+import {tsgUtils} from './tet.slick.grid.utils.js';
 
 
 
@@ -34,7 +34,7 @@ export class EditorsModule  extends AbstractModule {
 			return;
 		}
 
-		loadFragment("editors.html", () =>{
+		tsgUtils.loadFragment("editors.html", () =>{
 			
 //			textEditPopup = new TextEditPopup();
 //			booleanEdit = new BooleanEditor();		
@@ -70,7 +70,7 @@ export class EditorsModule  extends AbstractModule {
 		});
 
 		//при щелчке на таблице - прячем текущий редактор
-		this.grid.addEventListener(tableEvents.gridClick, () => {
+		this.grid.addEventListener(tsgUtils.tableEvents.gridClick, () => {
 			if (this.currentEditor!=null && this.currentEditor.visible){
 				this.currentEditor.hide();
 			}
@@ -78,9 +78,9 @@ export class EditorsModule  extends AbstractModule {
 
 		//обработчики для показа диалога редактирования
 		if (this.editMode=='clickSelected'){
-			this.grid.addEventListener(tableEvents.gridClickSelectedRow, this.clickHandler);			
+			this.grid.addEventListener(tsgUtils.tableEvents.gridClickSelectedRow, this.clickHandler);			
 		} else if (this.editMode=='dblClick'){
-			this.grid.addEventListener(tableEvents.gridDblClick, this.clickHandler);			
+			this.grid.addEventListener(tsgUtils.tableEvents.gridDblClick, this.clickHandler);			
 		}		
 		
 	}
@@ -139,7 +139,7 @@ class BooleanEditor extends AbstractEdit {
 		
 		row[column.id] = !this.lastValue; 
 		this.grid.updateRow(row);
-		this.grid.dispatch(tableEvents.rowEdited, row);
+		this.grid.dispatch(tsgUtils.tableEvents.rowEdited, row);
 	}
 	
 	
@@ -201,7 +201,7 @@ class AbstractEditPopup extends AbstractEdit {
 		this.row[this.column.id] = value; 
 		this.grid.updateRow(this.row);
 		this.$popup.hide();
-		this.grid.dispatch(tableEvents.rowEdited, this.row);
+		this.grid.dispatch(tsgUtils.tableEvents.rowEdited, this.row);
 		
 	}
 	

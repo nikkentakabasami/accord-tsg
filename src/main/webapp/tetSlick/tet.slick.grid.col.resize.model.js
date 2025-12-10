@@ -1,11 +1,7 @@
 
-//import {TetSlickGrid} from './tet.slick.grid.js';
 
-
-import {getPosition,AbstractModule} from './tet.slick.grid.misc.js';
-import {tableEvents} from './tet.slick.grid.events.js';
-
-
+import {AbstractModule} from './tet.slick.grid.misc.js';
+import {tsgUtils} from './tet.slick.grid.utils.js';
 
 
 export class ColumnResizeModel  extends AbstractModule {
@@ -45,7 +41,7 @@ export class ColumnResizeModel  extends AbstractModule {
 			return;
 		}
 		this.$headers = this.grid.view.$headers;
-		this.headersPos = getPosition(this.grid.view.$headerScroller[0]).x;
+		this.headersPos = tsgUtils.getPosition(this.grid.view.$headerScroller[0]).x;
 		
 		this.#recalcSplitterPositions();
 		
@@ -162,7 +158,7 @@ export class ColumnResizeModel  extends AbstractModule {
 		//меняем ширину прорисованных ячеек таблицы
 		this.grid.view.createCssRules();
 		
-		this.grid.dispatch(tableEvents.afterColumnsChanged);
+		this.grid.dispatch(tsgUtils.tableEvents.afterColumnsChanged);
 		
 		setTimeout(()=>{
 			this.resizingInProcess = false;

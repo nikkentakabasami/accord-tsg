@@ -3,7 +3,7 @@
 
 import { AbstractModule} from './tet.slick.grid.misc.js';
 import { TsgTitleView } from './tet.slick.grid.view.title.js';
-import { tableEvents } from './tet.slick.grid.events.js';
+import {tsgUtils} from './tet.slick.grid.utils.js';
 
 
 
@@ -55,7 +55,7 @@ export class TsgView extends AbstractModule {
 		this.$container = $(containerSelector);
 
 		//после подгрузки данных
-		this.grid.addEventListener(tableEvents.afterDataLoad, event => {
+		this.grid.addEventListener(tsgUtils.tableEvents.afterDataLoad, event => {
 
 			//Если изменилось общее число строк - меняем соответственно высоту холста
 			let totalRowsCount = this.grid.dataLoader.totalRowsCount;
@@ -414,7 +414,7 @@ export class TsgView extends AbstractModule {
 		
 		this.renderedRowsDiapazon = [start, end];
 
-		this.grid.dispatch(tableEvents.afterRowsRendered, this.renderedRowsDiapazon);
+		this.grid.dispatch(tsgUtils.tableEvents.afterRowsRendered, this.renderedRowsDiapazon);
 
 
 	}
@@ -479,7 +479,7 @@ export class TsgView extends AbstractModule {
 
 			}
 
-			this.grid.dispatch(tableEvents.afterCellRendered, {
+			this.grid.dispatch(tsgUtils.tableEvents.afterCellRendered, {
 				$row: $row,
 				rowNo: rowNo,
 				row: r,
@@ -498,7 +498,7 @@ export class TsgView extends AbstractModule {
 			}
 		}
 
-		this.grid.dispatch(tableEvents.afterRowRendered, {
+		this.grid.dispatch(tsgUtils.tableEvents.afterRowRendered, {
 			$row: $row,
 			row: r
 		});

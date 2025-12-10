@@ -163,6 +163,7 @@ export const matchTypes = Object.freeze({
 	
 });	
 
+
 export const columnDefaults = {
 	id: null,			//поле, в котором лежит значение столбца. Так же является идентификатором столбца.
 	name: "",			//заголовок столбца
@@ -177,7 +178,12 @@ export const columnDefaults = {
 	valueField: null,	//поле, по которому выполняется фильтрация. (default = id)
 	captionField: null,	//поле, которое нужно показывать в таблице. (default = valueField)
 	sortField: null,	//поле, по которому выполняется сортировка. (default = captionField)
-	
+
+	filterInput: null,
+	//jquery объект, содержащий поле ввода, которое должно использоватся для фильтрации по этому столбцу
+	//по умолчанию эти поля ищутся в div#filterContainer. И создаются автоматом, если они не найдены. 
+	//Можно сгенерировать такой input кастомной функцией.
+		
 	matchType: matchTypes.AUTO_CALC,
 	//как фильтровать по данному полю.
 	
@@ -186,6 +192,15 @@ export const columnDefaults = {
 	//Пример функции: function matchNumberFunction(filterVal, val){ return val == parseInt(filterVal);}
 	
 };
+
+
+function defaultFormatter(rowNo, column, value, row) {
+	if (value == null) {
+		return "";
+	} else {
+		return (value + "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+	}
+}
 
 
 /**
@@ -221,82 +236,11 @@ export class AbstractModule {
 	
 }
 
-//вспомогательная функция для создания объекта с описанием столбца таблицы
-export function mkColDesc(id,name,width,sort,formatter,editor) {
-	
-	let col = {
-			id : id,
-			name : name
-		};
-
-	if (width){
-		col.width = width;
-	}
-	if (sort){
-		col.sort = sort;
-	}
-	if (formatter){
-		col.formatter = formatter;
-	}
-	if (editor){
-		col.editor = editor;
-	}
-	return col;
-	
-}
-
-//с заданием имени столбца, который используется для сортировки
-export function mkSortColDesc(id,name,sortName,width,sort,formatter,editor) {
-	
-	let col = {
-			id : id,
-			name : name,
-			sortName : sortName,
-		};
-
-	if (width){
-		col.width = width;
-	}
-	if (sort!=null){
-		col.sortable = sort;
-	}
-	if (formatter){
-		col.formatter = formatter;
-	}
-	if (editor){
-		col.editor = editor;
-	}
-	return col;
-	
-}
-
-export function mkExpSortColDesc(id,name,sortName,width,sort,formatter) {
-	let col = mkSortColDesc(id,name,sortName,width,sort,formatter);
-	col.exp = true;
-	return col;
-}
+/*
 
 
 
-export function nameFormatter(rowNo, column, value, row) {
-	if (value){
-		return value.name;
-	}
-	return "";
-}
 
-
-export function defaultFormatter(rowNo, column, value, row) {
-	if (value == null) {
-		return "";
-	} else {
-		return (value + "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
-	}
-}
-
-export function checkmarkFormatter(rowNo, column, value, row) {
-  return value ? '<div class="tick-png"></div>' : '';
-}
 
 //вычисляет положение заданного тега в окне
 export function getPosition(e){
@@ -358,7 +302,7 @@ $(document).ready(function() {
 });
 
 
-
+*/
 
 
 

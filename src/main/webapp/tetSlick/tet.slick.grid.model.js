@@ -1,7 +1,7 @@
 
 
-import {columnDefaults,tableDefaults,getPosition,AbstractModule} from './tet.slick.grid.misc.js';
-import {tableEvents} from './tet.slick.grid.events.js';
+import {columnDefaults,tableDefaults,AbstractModule} from './tet.slick.grid.misc.js';
+import {tsgUtils} from './tet.slick.grid.utils.js';
 
 
 
@@ -126,7 +126,7 @@ export class TsgModel extends AbstractModule {
 			m.width = Math.max(m.width,this.options.minColumnWidth);
 			m.width = Math.min(m.width,this.options.maxColumnWidth);
 		}
-		this.grid.dispatch(tableEvents.afterColumnsChanged);
+		this.grid.dispatch(tsgUtils.tableEvents.afterColumnsChanged);
 	}
 
 	hideColumn(colId){
@@ -149,7 +149,7 @@ export class TsgModel extends AbstractModule {
 		let viewportH = grid1.view.$viewport.height()
 		this.numVisibleRows = Math.ceil(viewportH / this.options.rowHeight);
 		
-		this.containerPosition = getPosition(this.grid.view.$container[0]).x;
+		this.containerPosition = tsgUtils.getPosition(this.grid.view.$container[0]).x;
 		
 		this.recalcAfterScroll();
 	}

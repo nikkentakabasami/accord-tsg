@@ -1,6 +1,6 @@
 
 import {AbstractModule} from './tet.slick.grid.misc.js';
-import {tableEvents} from './tet.slick.grid.events.js';
+import {tsgUtils} from './tet.slick.grid.utils.js';
 
 
 /**
@@ -56,7 +56,7 @@ export class GridMenuModel1  extends AbstractModule {
 			'</ul>').appendTo(document.body);
 		
 		
-		this.grid.addEventListener(tableEvents.headersContextmenu, e => {
+		this.grid.addEventListener(tsgUtils.tableEvents.headersContextmenu, e => {
 			
 			let re = e.detail.rootEvent;
 			
@@ -115,7 +115,7 @@ export class GridMenuModel1  extends AbstractModule {
 
 
 		//показ меню в таблице
-		this.grid.addEventListener(tableEvents.canvasContextmenu, e => {
+		this.grid.addEventListener(tsgUtils.tableEvents.canvasContextmenu, e => {
 			
 			let re = e.detail.rootEvent;
 			
@@ -156,7 +156,7 @@ export class GridMenuModel1  extends AbstractModule {
 		
 
 		//показ меню в столбце с фильтрами
-		this.grid.addEventListener(tableEvents.headerRowContextmenu, e => {
+		this.grid.addEventListener(tsgUtils.tableEvents.headerRowContextmenu, e => {
 			
 			this.currentRow = null;
 			
