@@ -56,6 +56,7 @@ $(function() {
 
 		tsgDaterangepickerUtils.initDateEditor($("#tf5"), {
 			decorInput: true,
+			autoApply: false,
 			changeCallback: (val,$input)=>{
 				console.log('selected date:'+val);
 			}

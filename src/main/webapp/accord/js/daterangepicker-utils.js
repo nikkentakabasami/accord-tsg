@@ -122,6 +122,7 @@ function initDateEditor($input, addOptions) {
 		opens: 'right',
 		autoUpdateInput: true,
 		autoApply: true,
+		autoUpdateInput: false,
 		locale: tsgDaterangepickerUtils.dateRangeLocale,
 		ranges: ranges,
 		alwaysShowCalendars: true
@@ -153,7 +154,11 @@ function initDateEditor($input, addOptions) {
 
 	$input.on('apply.daterangepicker', function(ev, picker) {
 		let val = picker.startDate.format('DD.MM.YYYY');
-
+		if (picker.clear) {
+			val = "";
+		}
+		$input.val(val);
+		
 		if (options.dontHideOnSelect) {
 			//не прятать при выборе даты
 			$input.click();

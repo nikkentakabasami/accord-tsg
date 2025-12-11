@@ -16,6 +16,7 @@ window.AccModalDialogEvents = AccModalDialogEvents;
 
 
 import {showWaitPanel,hideWaitPanel} from './wait-panel.js';
+export {showWaitPanel,hideWaitPanel};
 window.showWaitPanel = showWaitPanel;
 window.hideWaitPanel = hideWaitPanel;
 
