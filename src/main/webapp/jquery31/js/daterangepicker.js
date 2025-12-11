@@ -472,7 +472,7 @@
             if (this.element.is('input') || this.element.is('button')) {
               this.element.on({
                 'click.daterangepicker' : $.proxy(this.show, this),
-                'focus.daterangepicker' : $.proxy(this.show, this),
+//                'focus.daterangepicker' : $.proxy(this.show, this),	//;!!!  убрал вручную
                 'keyup.daterangepicker' : $.proxy(this.elementChanged, this),
                 'keydown.daterangepicker' : $.proxy(this.keydown, this)
               // IE 11 compatibility

@@ -1,6 +1,8 @@
 
 import {AbstractModule} from './tet.slick.grid.misc.js';
-import {initDateEditor} from './mtp/tet.slick.grid.dateRange.js';
+
+//import {initDateEditor} from './mtp/tet.slick.grid.dateRange.js';
+
 import {tsgUtils} from './tet.slick.grid.utils.js';
 
 
@@ -34,18 +36,13 @@ export class EditorsModule  extends AbstractModule {
 			return;
 		}
 
-		tsgUtils.loadFragment("editors.html", () =>{
-			
-//			textEditPopup = new TextEditPopup();
-//			booleanEdit = new BooleanEditor();		
-			
-			this.standartEditors.boolean = new BooleanEditor(this.grid);
-			this.standartEditors.text = new TextEditPopup(this.grid);
-			this.standartEditors.date = new DateEditPopup(this.grid);
-			
-			this._doInit();
-		});		
+		tsgUtils.loadFragment("editors.html");		
 		
+		this.standartEditors.boolean = new BooleanEditor(this.grid);
+		this.standartEditors.text = new TextEditPopup(this.grid);
+		this.standartEditors.date = new DateEditPopup(this.grid);
+
+		this._doInit();
 		
 		
 		
@@ -122,7 +119,7 @@ class AbstractEdit {
 	editValue(row, column, rootEvent){
 		this.row = row;
 		this.column = column;
-		this.lastValue = this.row[this.column.id];
+		this.lastValue = this.row[this.column.valueField];
 	}
 	
 }
@@ -137,7 +134,7 @@ class BooleanEditor extends AbstractEdit {
 	editValue(row, column, rootEvent){
 		super.editValue(row, column, rootEvent);
 		
-		row[column.id] = !this.lastValue; 
+		row[column.valueField] = !this.lastValue; 
 		this.grid.updateRow(row);
 		this.grid.dispatch(tsgUtils.tableEvents.rowEdited, row);
 	}
@@ -160,7 +157,7 @@ class AbstractEditPopup extends AbstractEdit {
 	editValue(row, column, rootEvent){
 		super.editValue(row, column, rootEvent);
 		
-		let val = row[column.id];
+		let val = row[column.valueField];
 		this.val(val);
 		
 		let top = Math.max(10,rootEvent.pageY-45);
@@ -169,7 +166,8 @@ class AbstractEditPopup extends AbstractEdit {
 		this.$popup.css("top",top+"px");
 		this.$popup.css("left",left+"px");
 		
-		this.$popup.show();
+//		this.$popup.show();
+		this.$popup.css("display","flex");
 		this.visible = true;
 		
 		this.$input.focus()
@@ -198,7 +196,7 @@ class AbstractEditPopup extends AbstractEdit {
 	onOk(){
 	
 		let value = this.val();
-		this.row[this.column.id] = value; 
+		this.row[this.column.valueField] = value; 
 		this.grid.updateRow(this.row);
 		this.$popup.hide();
 		this.grid.dispatch(tsgUtils.tableEvents.rowEdited, this.row);
@@ -214,7 +212,8 @@ class TextEditPopup extends AbstractEditPopup {
 		super(grid);
 		this.$popup = $('#tsgTextEditPopup');
 		this.$input = this.$popup.find("input");
-		this.$button = this.$popup.find("span.edit-popup-button");
+//		this.$button = this.$popup.find("span.edit-popup-button");
+		this.$button = this.$popup.find("button");
 		
 		
 		this.$button.click(e => {
@@ -237,12 +236,10 @@ class DateEditPopup extends AbstractEditPopup {
 		super(grid);
 		this.$popup = $('#tsgDateEditPopup');
 		this.$input = this.$popup.find("input");
-		this.$button = this.$popup.find("span.edit-popup-button");
+//		this.$button = this.$popup.find("span.edit-popup-button");
+		this.$button = this.$popup.find("button");
 		
-		initDateEditor(this.$input, () => {
-//			alert('ok');
-//			this.onOk();
-		})
+		tsgDaterangepickerUtils.initDateEditor(this.$input)
 		
 		this.$input.keydown(e => {
 			if (e.keyCode==13){

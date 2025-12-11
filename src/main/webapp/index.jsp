@@ -31,7 +31,7 @@
 	
 </div>
 
-
+<%-- переменную demoFolders заполняет MainServletContextListener  --%>
 	<c:forEach var="folder" items="${demoFolders}" varStatus="loop">
 
 		<div class="well col-md-6">

@@ -113,6 +113,12 @@
 	background-image: url(../icons/rotate-left.png);
 }
 
+
+.acc-btn-calendar {
+	background-image: url(../icons/calendar.png);
+}
+
+
 .acc-btn-icon-text {
 	background-repeat: no-repeat;
 	background-position: 6px 6px;
@@ -192,6 +198,11 @@
 	padding: 5px;
 }
 
+
+/*Горизонтальная панель без рамок и промежутков*/
+.acc-button-panel-tight {
+	display: flex;
+}
 
 
 /*------ AccModalDialog - модальный диалог ------*/

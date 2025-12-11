@@ -7,29 +7,30 @@
 
 import { accordUtils } from './accord-utils.js';
 export {accordUtils};
+window.accordUtils = accordUtils;
 
 import {AccModalDialogEvents,AccModalDialog} from './modal-dialog.js';
 export {AccModalDialogEvents,AccModalDialog};
-
-//import {WaitPanel,waitPanel} from './wait-panel.js';
-//export {WaitPanel,waitPanel};
-import {showWaitPanel,hideWaitPanel} from './wait-panel.js';
-
-
-import {TabbedPanel} from './tabbed-panel.js';
-export {TabbedPanel};
-
-
-window.TabbedPanel = TabbedPanel;
-
-
-window.accordUtils = accordUtils;
-
 window.AccModalDialog = AccModalDialog;
 window.AccModalDialogEvents = AccModalDialogEvents;
 
+
+import {showWaitPanel,hideWaitPanel} from './wait-panel.js';
 window.showWaitPanel = showWaitPanel;
 window.hideWaitPanel = hideWaitPanel;
+
+import {TabbedPanel} from './tabbed-panel.js';
+export {TabbedPanel};
+window.TabbedPanel = TabbedPanel;
+
+import {tsgDaterangepickerUtils} from './daterangepicker-utils.js';
+export {tsgDaterangepickerUtils};
+window.tsgDaterangepickerUtils = tsgDaterangepickerUtils;
+
+
+
+
+
 
 
 

@@ -140,7 +140,21 @@ export class FiltersModel  extends AbstractModule {
 	 */
 	_initFilter(m){
 
-		let $filter = this.$filterContainer.find("select[name='"+m.id+"'], input[name='"+m.id+"'][type!=hidden]");
+		let $filter;
+		if (m.filterInput){
+			
+			if (typeof m.filterInput =="function"){
+				$filter = m.filterInput(m.id);
+			} else {
+				$filter = m.filterInput;
+			}
+			
+			$filter.remove().appendTo(this.$filterContainer);
+		} else {
+			$filter = this.$filterContainer.find("select[name='"+m.id+"'], input[name='"+m.id+"'][type!=hidden]");
+		}
+		
+		
 		
 		if ($filter.length==0){
 			$filter = this._createInput(m.id);

@@ -12,7 +12,7 @@ let scriptSrc = import.meta.url;
 let accordUtils = {
 	accordPath: scriptSrc.substring(0, scriptSrc.lastIndexOf('/js/') + 1)
 };
-
+window.accordUtils = accordUtils;
 
 /*
 let scriptSrc = import.meta.url;
@@ -191,6 +191,44 @@ accordUtils.formToJSON = function($form) {
 	
 	return json;
 }
+
+
+
+let decorInputOptionsDefault = {
+	addButton: false,
+	decorButtonClasses: "acc-btn-calendar",
+	placeButtonBefore: true,
+	buttonHandler: null
+}
+
+
+accordUtils.decorInput = function($input, options) {
+
+	options = $.extend({},decorInputOptionsDefault,options);	
+	
+	if (options.addButton){
+		
+		let buttonClasses = options.decorButtonClasses;
+		let $calButton = $(`<button type="button" class="acc-btn acc-btn-icon ${buttonClasses}"></button>`);
+		if (options.buttonHandler){
+			$calButton.click(options.buttonHandler);
+		}
+		
+		
+		$input.wrap( '<div class="acc-button-panel-tight"></div>' );
+		if (options.placeButtonBefore){
+			$input.before($calButton)
+		} else {
+			$input.after($calButton)
+		}
+		
+	}
+
+		
+}
+
+
+
 
 /*
 accordUtils.formToJSON = function($form) {

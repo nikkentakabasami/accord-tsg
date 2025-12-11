@@ -67,12 +67,15 @@ class TsgDataSource1 {
 		this.rows = new Array(rowCount);
 		for (let i = 0; i < rowCount; i++) {
 		
+			let dur = rand(30);
+			
 			let r = {
 				id: i,
 				section: this.sections[rand(this.sections.length)],
 				customer: this.customers[rand(this.customers.length)],
-				title: "Мой таск " + rand(100),
-				duration: rand(30)+" дней",
+				title: "Мой таск " + i*3,
+				durationInt: dur,
+				duration: dur+" дней",
 				percentComplete: rand(100,5),
 				effortDriven: (rand(10)<3),
 				odd: (i % 2 == 1)

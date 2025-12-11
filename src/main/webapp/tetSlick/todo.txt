@@ -4,6 +4,9 @@ accord demos
   util functions
   tabbed panel
 
+<input type="date" id="date" name="expiration">
+add to daterange demo
+
 
 accord functions
   fill select with options
@@ -19,6 +22,8 @@ boolean, int inputs
 tsg
 
 bundle module
+
+выводить ширины строк в консоль
 
 
 servlet rows

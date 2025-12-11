@@ -1,4 +1,8 @@
-/**    **/
+/**  
+ * Содержит различные вспомогательные функции и константы.
+ * Объект tsgUtils - центральный хаб для доступа к ним. 
+ *   
+ **/
 
 import {tableEvents} from './tet.slick.grid.events.js';
 import {matchTypes} from './tet.slick.grid.misc.js';
@@ -15,11 +19,14 @@ export let tsgUtils = {
 	mkSortColDesc: mkSortColDesc,
 	mkExpSortColDesc: mkExpSortColDesc,
 	nameFormatter: nameFormatter,
-//	defaultFormatter: defaultFormatter,
 	checkmarkFormatter: checkmarkFormatter,
 	getPosition: getPosition,
-	generateSelectFilter: generateSelectFilter,
-	loadFragment: loadFragment
+	loadFragment: loadFragment,
+	
+	generateSelect: generateSelect,
+	generateBooleanSelect: generateBooleanSelect
+	
+	
 }
 
 
@@ -118,24 +125,46 @@ function getPosition(e){
 }
 
 
-function generateSelectFilter(name, data, withNullOption) {
+/**
+ * Генерация элемента select с заданными опциями.
+ * data - массив с объектами типа {id: 1, name: 'my name'}. 
+ * Или массив строк, чисел...
+ * withNullOption - включать ли строку с пустым значением
+ */
+function generateSelect(name, data, withNullOption = true) {
 	
 	let optionsCode = withNullOption?'<option value="">-</option>':'';
 	
 	data.forEach(item=>{
-		optionsCode+=`<option value="${item.id}">${item.name}</option>`;
+		
+		if (typeof item=="object"){
+			optionsCode+=`<option value="${item.id}">${item.name}</option>`;
+		} else {
+		optionsCode+=`<option value="${item}">${item}</option>`;
+		}
+		
 	});
 	
-	$select = $("select[name='section']");
+	let $select = $(`select[name='${name}']`);
 	if ($select.length==0){
 		$select = $(`<select name="${name}"></select>`);
 	}
 	
-	$select.append(options);
+	$select.append(optionsCode);
 	return $select;	
 	
 }
 
+
+function generateBooleanSelect(name, withNullOption = true) {
+	let data = [
+		{id: "true",name: "Да"},
+		{id: "false",name: "Нет"},
+	];
+	return generateSelect(name,data,withNullOption);
+}
+
+window.tsgUtils = tsgUtils;
 
 /*
 export function fixSelectTextToVal(selector){

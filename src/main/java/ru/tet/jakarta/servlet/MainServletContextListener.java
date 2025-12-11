@@ -19,7 +19,8 @@ public class MainServletContextListener implements ServletContextListener {
 
 	private final static Logger logger = Logger.getLogger(MainServletContextListener.class.getName());
 	
-	final static String[] demoFoldersNames = {"bsdemos","html_demos","html_basics"};
+	//,"demoFolders"
+	final static String[] demoFoldersNames = {"bsdemos","html_demos","html_basics", "libs_demos"};
 	
 	List<DemoFolder> demoFolders;
 	

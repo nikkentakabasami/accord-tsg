@@ -13,7 +13,7 @@
 <link rel="stylesheet" href="../css/tet.slick.grid.css" type="text/css" />
 <link rel="stylesheet" href="tsgDemoStyles.css" />
 <script type="text/javascript" src="testDataSources.js"></script>
-<script type="module" src="tsgExample30.js"></script>
+<script type="module" src="tsgExample35.js"></script>
 <script>
   $(function() {
     let tp = new TabbedPanel("#tabbedPanel1");
@@ -25,8 +25,8 @@
 <body>
 	<div class="basePanel">
 		<div class="titlePanel">
-			<h2>Пример: Диалог настройки столбцов и контекстное меню</h2>
-			<a href="tsgExample30.js" target="source">Source code</a>
+			<h2>Пример: Кастомные фильтры</h2>
+			<a href="tsgExample35.js" target="source">Source code</a>
 
 		</div>
 
@@ -40,46 +40,66 @@
 
 			<div id="tab-1" class="tab-content active">
 				<pre class="acc-desc-panel">
-Добавлен диалог, позволяющий изменять порядок и видимость столбцов.
-Кнопка для его показа появилась в заголовке.
-Появились контекстные меню в сетке таблицы и на фильтрах.
+Задан кастомный фильтр для поля "section"(Раздел). Всё что для этого нужно: добавить на страницу скрытый div с id="filterContainer".
+И внутри него поместить поля ввода с именами, которые соответствуют column.id.
+
+Заданы опции выбора для поля id.
+
+сгенерирован и задан select в качестве фильтра для поля "customer"
 
 </pre>
 			</div>
 
 			<div id="tab-2" class="tab-content">
 				<pre class="acc-code-panel">
+
 var columns = [
-	mkColDesc("title","Заголовок",150),
+	tsgUtils.mkColDesc("id","id",50),
+	tsgUtils.mkColDesc("title","Заголовок",150),
 	{
 		id: "customer", 
-		valueField: "customer.name",
+		valueField: "customer.id",
+		captionField: "customer.name",
 		name: "Заказчик",
-		width: 150 
+		width: 150
 	},{
 		id: "section",
 		captionField: "section.name",
-		valueField: "section.id",		//задаём числовую фильтрацию по id
+		valueField: "section.id",
 		sortField: "section.id",
-		matchType: matchTypes.NUMBER,
+		matchType: tsgUtils.matchTypes.NUMBER,
 		name: "Раздел",
 		width: 150 
+	},{
+		id: "durationInt",
+		captionField: "duration",
+		sortField: "durationInt",
+		name: "Длительность",
+		width: 150 
 	},
-				
-				
-let options = {
-	showTitleHeader: true,
-	rowHeight: 30
 	...	
-	//Добавит элеметы фильтрации в заголовочную строку.
-	enableHeaderRowFilters: true,
+];
 
-	//Добавляет диалог, позволяющий изменять порядок и видимость столбцов.
-	withColumnDialog: true,
+	dataSource = new TsgDataSource1(100);
+	window.dataSource = dataSource;
 	
-	//Добавляет контекстные меню для показа в сетке таблицы и на фильтрах.
-	withGridMenu: true,
-};
+	myGrid = new TetSlickGrid("#myGrid", dataSource.rows, columns, options);
+	
+	let customerColumn = myGrid.model.columnsById["customer"];
+	customerColumn.filterInput = tsgUtils.generateSelect("customer",dataSource.customers);
+	
+	myGrid.init();
+
+
+&lt;div id="filterContainer" style="display: none;"&gt;
+	&lt;select name="section"&gt;
+		&lt;option value="" selected="selected"&gt;-&lt;/option&gt;
+		&lt;option value="0"&gt;Отдел №0&lt;/option&gt;
+		&lt;option value="1"&gt;Отдел №1&lt;/option&gt;
+	&lt;/select&gt;
+
+	&lt;input type="text" name="id" list="ids" /&gt;
+
 
 </pre>
 			</div>
@@ -107,7 +127,21 @@ let options = {
 				<option value="11">Отдел №11</option>
 				<option value="12">Отдел №12</option>
 				<option value="13">Отдел №13</option>
-			</select>
+			</select> 
+			
+			<input type="text" name="id" list="ids" />
+			<datalist id="ids">
+				<option>5</option>
+				<option>7</option>
+				<option>8</option>
+				<option>11</option>
+			</datalist>
+
+
+
+
+
+
 
 		</div>
 

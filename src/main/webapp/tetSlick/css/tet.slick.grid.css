@@ -313,6 +313,18 @@ body {
     width: 100%;
 } 
  
+ 
+ 
+/* кнопки-иконки из библиотеки accord на панели фильтрации */ 
+.slick-headerrow .acc-btn-icon {
+    background-position: 6px 4px;
+    min-height: 25px;
+}
+ 
+ 
+ 
+ 
+ 
 .slick-headerrow-column {
     padding: 2px;
 } 
