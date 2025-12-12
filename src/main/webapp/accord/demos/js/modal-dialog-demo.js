@@ -1,5 +1,5 @@
 
-import { AccModalDialog, AccModalDialogEvents,LoadModes } from '../../js/modal-dialog.js';
+import { AccModalDialog } from '../../js/modal-dialog.js';
 
 
 
@@ -29,12 +29,12 @@ $(document).ready(function() {
 			logMessage("dialog1 закрытие без сохранения.");
 		},
 		onInitiated: ()=>{
-			dialog1.show();
+//			dialog1.show();
 		},
-		fragmentLoadMode: LoadModes.FETCH
+		fragmentLoadMode: AccModalDialog.LoadModes.FETCH
 	});
 
-	dialog1.addEventListener(AccModalDialogEvents.onClose, e => {
+	dialog1.addEventListener(AccModalDialog.AccModalDialogEvents.onClose, e => {
 		console.log("dialog1 закрыт.");
 	});
 	
@@ -61,7 +61,7 @@ $(document).ready(function() {
 //		autosize: true,
 		
 	});
-	dialog2.show();
+//	dialog2.show();
 
 	
 	

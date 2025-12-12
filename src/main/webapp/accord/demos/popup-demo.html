@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8" />
+
+<!-- jquery 3.1 -->
+<script src="../../jquery31/js/jquery.js"></script>
+<script src="../../jquery31/js/jquery.bootpag.min.js"></script>
+<script src="../../jquery31/js/jquery.form-validator.min.js"></script>
+
+<!-- accord - мои вспомогательные компоненты, классы, утилиты -->
+<link rel="stylesheet" type="text/css" href="../css/accord.css">
+<script type="module" src="../js/accord-publish.js"></script>
+
+<link rel="stylesheet" type="text/css" href="css/demos.css">
+<script type="module" src="js/accord-popup-demo.js"></script>
+
+</head>
+<body class="acc-default-font">
+
+	<h3>Создание плавающих панелей.</h3>
+
+	<div class="acc-desc-panel">
+Классы "acc-popup" и "acc-popup-default" позволяют быстро создать всплывающее окно.
+
+</div>
+
+<div class="acc-code-panel">
+.acc-popup {
+	position: absolute;
+	display: none;
+	top: 200px;
+	left: 200px;
+}
+
+.acc-popup-default {
+	gap: 5px;
+    padding: 5px;
+	background-color: white;
+	border: 1px solid black;
+	border-radius: 4px;
+}
+
+
+</div>
+
+
+	<div class="acc-popup no-select acc-popup-default" style="top: 170px;left: 300px;display: flex;">
+			<div class="acc-centered-content">тестовый popup, содержащий acc-button-panel.</div>
+			<input type="text" />
+			<button type="button" class="acc-btn acc-btn-icon-text acc-btn-add">button1</button>
+	</div>
+
+
+
+
+
+
+
+
+	<template id="popupContent2">
+		<div class="acc-vert-button-panel">
+			<div class="acc-filler-panel acc-centered-content">
+				Панель с кнопками из template. Загружается опцией contentSelector.
+			</div>
+		
+		
+			<button type="button" class="acc-btn acc-btn-icon acc-btn-check"></button>
+			<button type="button" class="acc-btn acc-btn-icon acc-btn-add"></button>
+		</div>
+	
+	</template>
+
+</body>
+</html>

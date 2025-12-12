@@ -1,5 +1,5 @@
 
-import { AccModalDialog, AccModalDialogEvents,LoadModes } from '../../js/modal-dialog.js';
+import { AccModalDialog } from '../../js/modal-dialog.js';
 
 
 
@@ -21,7 +21,8 @@ $(document).ready(function() {
 	
 	dialog1 = new AccModalDialog({
 		title: "Диалог по умолчанию",
-		contentUrl: accordUtils.accordPath+"demos/contentFragment.html",
+		contentUrl: accordUtils.accordPath+"demos/misc/contentFragment.html",
+		fragmentLoadMode: AccModalDialog.LoadModes.FETCH,
 		autosize: true,
 		onOk: ()=>{
 			logMessage("dialog1 сохранён.");
@@ -32,10 +33,9 @@ $(document).ready(function() {
 		onInitiated: ()=>{
 			dialog1.show();
 		},
-		fragmentLoadMode: LoadModes.FETCH
 	});
 
-	dialog1.addEventListener(AccModalDialogEvents.onClose, e => {
+	dialog1.addEventListener(AccModalDialog.AccModalDialogEvents.onClose, e => {
 		console.log("dialog1 закрыт.");
 	});
 	

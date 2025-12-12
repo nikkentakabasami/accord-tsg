@@ -1,15 +1,12 @@
 
 
-export { AccModalDialogEvents, AccModalDialog, LoadModes };
+export { AccModalDialog };
 
 
 import { accordUtils } from './accord-utils.js';
+import { AccDrag } from './accord-drag.js';
 
 
-const LoadModes = Object.freeze({
-	XHR: 1,
-	FETCH: 2
-});
 
 
 
@@ -29,17 +26,27 @@ const accModelDialogDefaultOptions = {
 	centered: true,		//центрирует его по центру браузера
 	draggable: true,	//позволяет перетаскивать диалог за заголовок
 	id: null,			//id диалога. по умолчанию генерируется автоматом, но можно задать своё. Будет назначен на dom элемент: $dialog.attr("id");
-	fragmentLoadMode: LoadModes.XHR,
+	fragmentLoadMode: 1,
 	immediateInit: true
 
 
-
+	
 }
+
+
+
+/*
+const LoadModes = Object.freeze({
+	XHR: 1,
+	FETCH: 2
+});
 
 const AccModalDialogEvents = {
 	onInitiated: "onInitiated",
 	onClose: "onClose",
 };
+
+*/
 
 
 /**
@@ -60,6 +67,17 @@ const AccModalDialogEvents = {
  */
 class AccModalDialog extends EventTarget {
 
+	static AccModalDialogEvents	 = {
+		onInitiated: "onInitiated",
+		onClose: "onClose",
+	};
+	
+	static LoadModes = Object.freeze({
+		XHR: 1,
+		FETCH: 2
+	});
+	
+	
 
 	static counter = 0;
 
@@ -75,12 +93,7 @@ class AccModalDialog extends EventTarget {
 	$cancelButton;
 	$closeButton;
 
-	//поддержка перетаскивания
-	isDragging = false;
-	startX;
-	startY;
-	initialLeft;
-	initialTop;
+	accDrag;
 
 	options;
 
@@ -129,7 +142,7 @@ class AccModalDialog extends EventTarget {
 			
 		} else {
 			
-			if (this.options.fragmentLoadMode == LoadModes.XHR) {
+			if (this.options.fragmentLoadMode == AccModalDialog.LoadModes.XHR) {
 				this.loadHtmlFragmentXHR();
 //				this.#initAfterLoad();
 			} else {
@@ -142,7 +155,7 @@ class AccModalDialog extends EventTarget {
 		if (this.options.onInitiated) {
 			this.options.onInitiated();
 		}
-		this.dispatch(AccModalDialogEvents.onInitiated);
+		this.dispatch(AccModalDialog.AccModalDialogEvents.onInitiated);
 
 	}
 
@@ -218,7 +231,12 @@ class AccModalDialog extends EventTarget {
 		}
 
 		if (this.options.draggable) {
-			this.#makeDraggable();
+			
+			let options = {
+				panelSelector: this.$dialog,
+				handleElementSelector: this.$header
+			}
+			this.accDrag = new AccDrag(options);
 		}
 
 
@@ -236,55 +254,14 @@ class AccModalDialog extends EventTarget {
 	
 	
 	async loadHtmlFragmentFetch() {
-
 		this.$dialog = await accordUtils.loadHtmlFragmentFetch("fragments/modalDialog.html", null, true);		
-		
-		/*
-		try {
-			//fetch() возвращает промис, который можно ожидать с помощью await.
-			const response = await fetch(accordUtils.accordPath + "fragments/modalDialog.html");
-			const htmlContent = await response.text();
-
-			$(htmlContent).appendTo(document.body);
-		} catch(err) {
-			console.error("Ошибка загрузки:"+err);
-		}
-		this.$dialog = $("#accd0");
-		console.log("modalDialog.html loaded.");
-*/
 	}
 
 
 
 	loadHtmlFragmentXHR() {
-		
 		this.$dialog = accordUtils.loadHtmlFragmentXHR("fragments/modalDialog.html", null, true);		
-
-			/*		
-		let xhr = new XMLHttpRequest();
-		xhr.open("GET", accordUtils.accordPath + "fragments/modalDialog.html", false); // false для синхронного вызова
-		xhr.send();
-
-		if (xhr.status === 200) {
-			$(xhr.responseText).appendTo(document.body);
-			this.$dialog = $("#accd0");
-			console.log("modalDialog.html loaded.");
-		} else {
-			console.error("Ошибка загрузки");
-		}
-		*/
-		
 	}
-
-
-
-
-
-
-
-
-
-
 
 
 	show() {
@@ -306,57 +283,8 @@ class AccModalDialog extends EventTarget {
 
 	hide() {
 		this.$dialog.fadeOut();
-		this.dispatch(AccModalDialogEvents.onClose);
+		this.dispatch(AccModalDialog.AccModalDialogEvents.onClose);
 	}
-
-
-	//	dispatch(eventName, detail){
-	//	  this.dispatchEvent(new CustomEvent(eventName, { detail:detail }));
-	//	}
-
-
-
-
-
-
-	#makeDraggable() {
-
-
-		this.$header.on('mousedown', e => {
-			e.preventDefault();
-
-			this.isDragging = true;
-			this.startX = e.pageX;
-			this.startY = e.pageY;
-			this.initialLeft = parseInt(this.$dialog.css('left'), 10) || 0;
-			this.initialTop = parseInt(this.$dialog.css('top'), 10) || 0;
-		});
-
-
-		$(document).on('mouseup', e => {
-			this.isDragging = false;
-		});
-
-		$(document).on('mousemove', e => {
-			if (this.isDragging) {
-				var dx = e.pageX - this.startX;
-				var dy = e.pageY - this.startY;
-
-				let pos = {
-					left: this.initialLeft + dx,
-					top: this.initialTop + dy
-				};
-
-				if (pos.left > 0 && pos.top > 0) {
-					this.$dialog.css(pos);
-				}
-			}
-		});
-
-
-	}
-
-
 
 
 }

@@ -13,20 +13,23 @@
 <script type="module" src="../js/accord-publish.js"></script>
 
 <link rel="stylesheet" type="text/css" href="css/demos.css">
-<script type="module" src="js/wait-demo.js"></script>
+<script type="module" src="js/wait-panel-demo.js"></script>
 
 </head>
 <body class="acc-default-font">
 
 	<h2>Компонент waitPanel - панель ожидания</h2>
 
-	<a href="wait-demo.js" target="sources">Исходники</a>
+	<a href="js/wait-panel-demo.js" target="sources">Исходники</a>
 
-	<p>
-	  Панель можно показывать используя объект waitPanel, который можно импортировать из модуля wait-panel.js;<br>
-	   Либо через глобальные методы: showWaitPanel(), hideWaitPanel()
-	</p>
+	<div class="acc-desc-panel">
+Панель можно показывать используя методы showWaitPanel(), hideWaitPanel().
 
+Их можно либо импортировать:
+import {showWaitPanel,hideWaitPanel} from 'accord/js/accord-publish.js';
+
+Либо просто подключить к странице accord-publish.js, который делает их глобальными.
+	</div>
 
 	<div class="acc-button-panel">
 		<button id="b1" type="button" class="acc-btn">waitPanel.show()</button>

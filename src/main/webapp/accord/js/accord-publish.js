@@ -9,10 +9,10 @@ import { accordUtils } from './accord-utils.js';
 export {accordUtils};
 window.accordUtils = accordUtils;
 
-import {AccModalDialogEvents,AccModalDialog} from './modal-dialog.js';
-export {AccModalDialogEvents,AccModalDialog};
+import {AccModalDialog} from './modal-dialog.js';
+export {AccModalDialog};
 window.AccModalDialog = AccModalDialog;
-window.AccModalDialogEvents = AccModalDialogEvents;
+//window.AccModalDialogEvents = AccModalDialogEvents;
 
 
 import {showWaitPanel,hideWaitPanel} from './wait-panel.js';

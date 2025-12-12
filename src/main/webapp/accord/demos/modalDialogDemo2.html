@@ -10,13 +10,12 @@
 
 <!-- accord - мои вспомогательные компоненты, классы, утилиты -->
 <link rel="stylesheet" type="text/css" href="../css/accord.css">
+<link rel="stylesheet" type="text/css" href="../css/acc-form-elements.css">
 <script type="module" src="../js/accord-publish.js"></script>
 
 
 
-
 <link rel="stylesheet" type="text/css" href="css/demos.css">
-<link rel="stylesheet" type="text/css" href="../css/acc-form-elements1.css">
 <script type="module" src="js/modal-dialog-demo2.js"></script>
 
 
@@ -25,13 +24,24 @@
 <body>
 
 
-	<h2>Компонент AccModalDialog - модальный диалог</h2>
+	<h2>AccModalDialog - получение содержимого по ссылке</h2>
 
-	<a href="modal-dialog-demo2.js" target="sources">Исходники</a>
+	<a href="js/modal-dialog-demo2.js" target="sources">Исходники</a>
 
-	<div class="acc-button-pane acc-container">
-		<button id="b1" type="button">Показать диалог</button>
+	<div class="acc-desc-panel">
+Загрузка содержимого диалога из заданного файла: 
+
+	dialog1 = new AccModalDialog({
+		title: "Диалог по умолчанию",
+		contentUrl: accordUtils.accordPath+"demos/contentFragment.html",
+		fragmentLoadMode: LoadModes.FETCH,
+		autosize: true,
 	</div>
+
+	<div class="acc-button-panel">
+		<button id="b1" type="button" class="acc-btn">Показать диалог</button>
+	</div>
+
 
 
 	<textarea rows=20 cols=100 id="log1">

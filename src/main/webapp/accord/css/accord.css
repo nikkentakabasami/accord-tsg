@@ -1,10 +1,31 @@
 
 
+/* Приличный шрифт по умолчанию. Задаётся на body */
+.acc-default-font {
+	font-family: Helvetica, Arial, sans-serif;
+}
+
+
+
+.acc-popup {
+	position: absolute;
+	display: none;
+	top: 200px;
+	left: 200px;
+}
+
+.acc-popup-default {
+	gap: 5px;
+    padding: 5px;
+	background-color: white;
+	border: 1px solid black;
+	border-radius: 4px;
+}
+
 
 
 /* Панель с описанием  "<pre class="acc-desc-panel">"  */
 .acc-desc-panel {
-	font-family: Arial, sans-serif;
 	font-size: 14px;
 	padding: 10px;
 	border-radius: 4px;
@@ -22,7 +43,25 @@
 	border-radius: 4px;
 	border: 1px solid #ccc;
 	margin: 0px;
+	white-space: pre;
 }
+
+
+/* Панель со списком ссылок  */
+.acc-anchor-list {
+	font-size: 16px;
+	padding: 10px;
+	border-radius: 4px;
+	border: 1px solid #ccc;
+	background-color: WhiteSmoke;
+	margin: 0px;
+}
+
+.acc-anchor-list a {
+	display: block;
+	margin: 10px;
+}
+
 
 
 
@@ -34,12 +73,9 @@
 	-ms-user-select: none;
 }
 
-/* Приличный шрифт по умолчанию. Задаётся на body */
-.acc-default-font {
-	font-family: Arial, sans-serif;
-}
 
 /*------ WaitPanel - панель ожидания ------*/
+
 
 .loading-indicator {
 	position: absolute;
@@ -133,50 +169,6 @@
 }
 
 
-/*
-.topic-hot::before {
-  content: url("/shared-assets/images/examples/fire.png") / "On fire";
-  margin-right: 6px;
-}
-
-.btn2 {
-    background-image: url(../icons/check.png);
-    background-repeat: no-repeat;
-    background-position: 6px 4px;
-    padding-left: 30px;
-    min-height: 25px;
-}
-
-
-
-
-
------------------
-
-.acc-btn-add {
-	background-image: url(../icons/add.png);
-}
-
-.acc-btn-cross {
-	background-image: url(../icons/cross.png);
-}
-
-.acc-btn-check {
-	background-image: url(../icons/check.png);
-}
-
-.acc-btn-add, .acc-btn-cross, .acc-btn-check {
-	background-repeat: no-repeat;
-	background-position: 6px 6px;
-	padding-left: 30px;
-}
-
-.acc-btn-icon {
-	background-image: url(../icons/add.png);
-}
-
-
-*/
 
 /*------  Вертикальная панель с кнопками acc-btn ------*/
 .acc-vert-button-panel {
@@ -204,6 +196,22 @@
 	display: flex;
 }
 
+/* Филлерная панель для заполнения промежутков. Выравнивает содержимое по центру */
+.acc-filler-panel {
+	flex-grow: 1; 
+}
+
+/* Выравнивает содержимое по центру */
+.acc-centered-content {
+	display: flex; 
+	align-items: center; 
+	justify-content: center;
+}
+
+
+
+
+
 
 /*------ AccModalDialog - модальный диалог ------*/
 .acc-dialog {
@@ -217,7 +225,6 @@
 	border: 1px solid black;
 	border-radius: 4px;
 	display: none;
-	font-family: Helvetica, Arial, sans-serif;
 }
 
 .acc-dialog-title {

@@ -66,8 +66,3 @@ function hideWaitPanel(mess) {
 }
 
 
-
-$(document).ready(function() {
-});
-
-

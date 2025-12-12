@@ -10,12 +10,12 @@
 
 <!-- accord - мои вспомогательные компоненты, классы, утилиты -->
 <link rel="stylesheet" type="text/css" href="../css/accord.css">
+<link rel="stylesheet" type="text/css" href="../css/acc-form-elements.css">
 <script type="module" src="../js/accord-publish.js"></script>
 
 
 
 <link rel="stylesheet" type="text/css" href="css/demos.css">
-<link rel="stylesheet" type="text/css" href="../css/acc-form-elements1.css">
 
 
 
@@ -27,14 +27,33 @@
 
 	<h2>Компонент AccModalDialog - модальный диалог</h2>
 
-	<a href="modal-dialog-demo.js" target="sources">Исходники</a>
+	<a href="js/modal-dialog-demo.js" target="sources">Исходники</a>
+
+	<div class="acc-desc-panel">
+Модальные диалоги создаются классом AccModalDialog:
+	dialog3 = new AccModalDialog({
+		autosize: true,
+		contentSelector: "#dialogContent2"
+	});
+	
+	dialog3.show();
+	...
+	dialog3.hide();
+
+Содержимое задаётся css-селектором, либо через template:
+&lt;template id="dialogContent2"&gt;...
+Либо через обычный div.
+Либо текстом: опция "contentText".
+
+	</div>
+
 
 	<div class="acc-button-panel">
-		<button id="b1" type="button" class="acc-btn">Показать диалог по умолчанию</button>
+		<button id="b1" type="button" class="acc-btn">Показать диалог по умолчанию с заданным текстом</button>
 		<button id="b2" type="button" class="acc-btn">Показать диалог с заданным содержимым</button>
 		<button id="b3" type="button" class="acc-btn">Показать диалог с заданным содержимым из шаблона</button>
 		<button id="b4" type="button" class="acc-btn">Показать кастомный диалог</button>
-		<button id="b5" type="button" class="acc-btn">Скрыть диалоги</button>
+		<button id="b5" type="button" class="acc-btn">Скрыть все диалоги</button>
 	</div>
 
 

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8" />
+
+<!-- jquery 3.1 -->
+<script src="../../jquery31/js/jquery.js"></script>
+<script src="../../jquery31/js/jquery.bootpag.min.js"></script>
+<script src="../../jquery31/js/jquery.form-validator.min.js"></script>
+
+<!-- accord - мои вспомогательные компоненты, классы, утилиты -->
+<link rel="stylesheet" type="text/css" href="../css/accord.css">
+<script type="module" src="../js/accord-publish.js"></script>
+
+<link rel="stylesheet" type="text/css" href="css/demos.css">
+
+</head>
+<body class="acc-default-font">
+
+	<div class="acc-desc-panel">
+accord.css содержит разнообразные вспомогательные стили.
+Эта панель с классом "acc-desc-panel" используется для показа текстовых пояснений.
+Текст в ней преформатирован.
+</div>
+
+<div class="acc-code-panel">
+Панель с классом "acc-code-panel" используется для показа программного кода.
+</div>
+
+
+
+
+	<h4>acc-button-panel - Горизонтальная панель. иконки задаются через img</h4>
+
+	<div class="acc-button-panel">
+		<button type="button" class="acc-btn">Простая кнопка</button>
+		<button type="button" class="acc-btn">
+			<img src="../icons/check.png" />
+		</button>
+		<button type="button" class="acc-btn">
+			<img src="../icons/check.png" /><span>кнопка с img</span>
+		</button>
+	</div>
+
+
+	<h4>иконки задаются через background-image (посредством css-классов:acc-btn-add,acc-btn-cross...)</h4>
+
+	<div class="acc-button-panel">
+		<div class="acc-centered-content">My text input:</div>
+		<input type="text" />
+		<button type="button" class="acc-btn acc-btn-icon-text acc-btn-add">acc-btn-add</button>
+		<button type="button" class="acc-btn acc-btn-icon-text acc-btn-cross">acc-btn-cross</button>
+		<button type="button" class="acc-btn acc-btn-icon acc-btn-check"></button>
+		
+		<button type="button" class="acc-btn acc-btn-icon acc-btn-arrow-up"></button>
+		<button type="button" class="acc-btn acc-btn-icon acc-btn-arrow-down"></button>
+		<button type="button" class="acc-btn acc-btn-icon acc-btn-eye"></button>
+		<button type="button" class="acc-btn acc-btn-icon acc-btn-eye-crossed"></button>
+		<button type="button" class="acc-btn acc-btn-icon acc-btn-rotate-left"></button>
+		<button type="button" class="acc-btn acc-btn-icon acc-btn-calendar"></button>
+		<button type="button" class="acc-btn acc-btn-icon acc-btn-"></button>
+	</div>
+
+
+
+
+	<h4>acc-button-panel-tight - горизонтальная панель без оформления и отступов</h4>
+
+	<div class="acc-button-panel-tight">
+		<input type="text" />
+		<button type="button" class="acc-btn acc-btn-icon acc-btn-calendar"></button>
+		<div class="acc-filler-panel acc-centered-content">
+			filler panel
+		</div>
+		<button type="button" class="acc-btn acc-btn-icon acc-btn-check"></button>
+	</div>
+
+	<h4>acc-vert-button-panel - вертикальная панель</h4>
+
+	<div class="acc-button-panel">
+		<div class="acc-vert-button-panel">
+			<button type="button" class="acc-btn acc-btn-icon-text acc-btn-add">acc-btn-add</button>
+			<button type="button" class="acc-btn acc-btn-icon-text acc-btn-cross">acc-btn-cross</button>
+		</div>
+		<div class="acc-filler-panel acc-centered-content">
+			filler panel
+		</div>
+		
+		<div class="acc-vert-button-panel">
+			<button type="button" class="acc-btn acc-btn-icon acc-btn-check"></button>
+			<button type="button" class="acc-btn acc-btn-icon acc-btn-add"></button>
+		</div>
+	</div>
+
+
+	<!-- 
+		<button type="button" class="acc-btn"><span class="acc-btn-check"></span> </button>
+ -->
+
+
+	<div class="acc-button-panel acc-popup acc-popup-visible" style="top: 70px;left: 700px;">
+		<div class="acc-centered-content">test popup:</div>
+		<input type="text" />
+		<button type="button" class="acc-btn acc-btn-icon-text acc-btn-add">button1</button>
+	</div>
+
+
+
+
+
+
+
+</body>
+</html>
