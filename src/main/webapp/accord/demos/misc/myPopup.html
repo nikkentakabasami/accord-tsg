@@ -1,0 +1,17 @@
+<div class="acc-code-panel">
+Панель, загруженная из файла myPopup.html опцией panelUrl.
+
+	let scriptSrc = import.meta.url;
+	let demosUrl = scriptSrc.substring(0, scriptSrc.lastIndexOf('/js/') + 1)
+	
+	options = {
+		draggable: true,
+		//путь можно задать относительно библиотеки accord
+//		panelUrl: "demos/misc/myPopup.html",
+//		panelUrl: accordUtils.accordPath+"demos/misc/myPopup.html",
+
+		//либо относительно своего js-файла:
+		panelUrl: demosUrl+"misc/myPopup.html",
+	}	
+	let p4 = new AccPopup(options);
+</div>

@@ -20,6 +20,13 @@
 
 	<h3>Создание плавающих панелей.</h3>
 
+
+	<div class="acc-button-panel">
+		<button id="b1" type="button" class="acc-btn">Показать все панели</button>
+		<button id="b2" type="button" class="acc-btn">Скрыть все панели</button>
+	</div>
+
+
 	<div class="acc-desc-panel">
 Классы "acc-popup" и "acc-popup-default" позволяют быстро создать всплывающее окно.
 
@@ -45,8 +52,11 @@
 </div>
 
 
-	<div class="acc-popup no-select acc-popup-default" style="top: 170px;left: 300px;display: flex;">
-			<div class="acc-centered-content">тестовый popup, содержащий acc-button-panel.</div>
+	<div class="acc-popup no-select acc-popup-default" style="top: 120px;left: 100px;display: flex;">
+			<div class="acc-centered-content">
+			тестовый статичный popup, содержащий acc-button-panel.
+			<br>Просто пример использования стилей
+			</div>
 			<input type="text" />
 			<button type="button" class="acc-btn acc-btn-icon-text acc-btn-add">button1</button>
 	</div>
@@ -61,7 +71,7 @@
 	<template id="popupContent2">
 		<div class="acc-vert-button-panel">
 			<div class="acc-filler-panel acc-centered-content">
-				Панель с кнопками из template. Загружается опцией contentSelector.
+				p2 - Панель с кнопками из template. Загружается опцией contentSelector.
 			</div>
 		
 		
@@ -70,6 +80,15 @@
 		</div>
 	
 	</template>
+	
+	
+	<div class="acc-desc-panel" id="popupContent3" style="flex-grow: 1;">
+		p3 - Панель с сообщением.
+		Задана опцией panelSelector.
+	</div>
+	
+	
+	
 
 </body>
 </html>

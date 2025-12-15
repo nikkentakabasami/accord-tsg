@@ -41,7 +41,7 @@ export class ColumnResizeModel  extends AbstractModule {
 			return;
 		}
 		this.$headers = this.grid.view.$headers;
-		this.headersPos = tsgUtils.getPosition(this.grid.view.$headerScroller[0]).x;
+		this.headersPos = accordUtils.calcElementPosition(this.grid.view.$headerScroller[0]).x;
 		
 		this.#recalcSplitterPositions();
 		

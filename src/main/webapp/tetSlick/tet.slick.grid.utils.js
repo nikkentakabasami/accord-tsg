@@ -20,7 +20,7 @@ export let tsgUtils = {
 	mkExpSortColDesc: mkExpSortColDesc,
 	nameFormatter: nameFormatter,
 	checkmarkFormatter: checkmarkFormatter,
-	getPosition: getPosition,
+//	getPosition: getPosition,
 	loadFragment: loadFragment,
 	
 	generateSelect: generateSelect,
@@ -104,24 +104,6 @@ export function nameFormatter(rowNo, column, value, row) {
 
 function checkmarkFormatter(rowNo, column, value, row) {
   return value ? '<div class="tick-png"></div>' : '';
-}
-
-
-//вычисляет положение заданного тега в окне
-function getPosition(e){
-	var left = 0
-	var top  = 0
-
-	while (e.offsetParent){
-		left += e.offsetLeft
-		top  += e.offsetTop
-		e	 = e.offsetParent
-	}
-
-	left += e.offsetLeft
-	top  += e.offsetTop
-
-	return {x:left, y:top}
 }
 
 

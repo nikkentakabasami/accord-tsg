@@ -28,7 +28,8 @@ import {tsgDaterangepickerUtils} from './daterangepicker-utils.js';
 export {tsgDaterangepickerUtils};
 window.tsgDaterangepickerUtils = tsgDaterangepickerUtils;
 
-
+import { AccPopup } from './accord-popup.js';
+export {AccPopup};
 
 
 

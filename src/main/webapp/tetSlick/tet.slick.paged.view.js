@@ -105,7 +105,7 @@ export class TetSlickGridBasePagedView {
 		
 
 		//Фиксим положение таблицы - на случай, если разрешение небольшое
-		let pos = tsgUtils.getPosition($("div.grid-header").get(0));
+		let pos = accordUtils.calcElementPosition($("div.grid-header").get(0));
 		$(containerSelector).css("top",pos.y+40);
 		
 		

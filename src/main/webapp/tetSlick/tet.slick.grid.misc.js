@@ -238,46 +238,6 @@ export class AbstractModule {
 
 /*
 
-
-
-
-
-//вычисляет положение заданного тега в окне
-export function getPosition(e){
-	var left = 0
-	var top  = 0
-
-	while (e.offsetParent){
-		left += e.offsetLeft
-		top  += e.offsetTop
-		e	 = e.offsetParent
-	}
-
-	left += e.offsetLeft
-	top  += e.offsetTop
-
-	return {x:left, y:top}
-}
-
-
-
-
-
-
-
-let scriptSrc = import.meta.url;
-export let tetSlickRelativePath = scriptSrc.substring(0, scriptSrc.lastIndexOf('/') + 1);
-
-
-
-
-
-//загрузка в dom фрагментов из папки  fragments
-export function loadFragment(fragmentFileName, $target){
-	return accordUtils.loadHtmlFragmentXHR(tetSlickRelativePath+"fragments/"+fragmentFileName, $target, false);	
-}
-
-
 export function fixSelectTextToVal(selector){
 	
 	$(selector+" option").each(function() {
@@ -291,16 +251,6 @@ export function fixSelectTextToVal(selector){
 	});		
 	
 }
-
-
-
-
-$(document).ready(function() {
-
-
-
-});
-
 
 */
 

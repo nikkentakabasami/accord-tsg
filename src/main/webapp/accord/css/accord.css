@@ -12,6 +12,7 @@
 	display: none;
 	top: 200px;
 	left: 200px;
+	overflow: auto;
 }
 
 .acc-popup-default {

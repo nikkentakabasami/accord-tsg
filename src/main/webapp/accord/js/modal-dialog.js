@@ -143,10 +143,9 @@ class AccModalDialog extends EventTarget {
 		} else {
 			
 			if (this.options.fragmentLoadMode == AccModalDialog.LoadModes.XHR) {
-				this.loadHtmlFragmentXHR();
-//				this.#initAfterLoad();
+				this.$dialog = accordUtils.loadHtmlFragmentXHR("fragments/modalDialog.html", null, true);		
 			} else {
-				await this.loadHtmlFragmentFetch();
+				this.$dialog = await accordUtils.loadHtmlFragmentFetch("fragments/modalDialog.html", null, true);		
 			}
 		}
 		
@@ -253,15 +252,9 @@ class AccModalDialog extends EventTarget {
 	}
 	
 	
-	async loadHtmlFragmentFetch() {
-		this.$dialog = await accordUtils.loadHtmlFragmentFetch("fragments/modalDialog.html", null, true);		
-	}
 
 
 
-	loadHtmlFragmentXHR() {
-		this.$dialog = accordUtils.loadHtmlFragmentXHR("fragments/modalDialog.html", null, true);		
-	}
 
 
 	show() {

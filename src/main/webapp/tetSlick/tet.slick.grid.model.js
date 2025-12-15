@@ -149,7 +149,7 @@ export class TsgModel extends AbstractModule {
 		let viewportH = grid1.view.$viewport.height()
 		this.numVisibleRows = Math.ceil(viewportH / this.options.rowHeight);
 		
-		this.containerPosition = tsgUtils.getPosition(this.grid.view.$container[0]).x;
+		this.containerPosition = accordUtils.calcElementPosition(this.grid.view.$container[0]).x;
 		
 		this.recalcAfterScroll();
 	}
