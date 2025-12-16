@@ -72,6 +72,11 @@ class AccPopup {
 
     accDrag;
 
+	//признак видимости панели
+	visible = false;
+	showTimerId = null;
+	
+	
 
     constructor(options) {
 
@@ -93,26 +98,17 @@ class AccPopup {
 
     }
 
-	onOutsideClick = null;
-
-	isVisible(){
-		return this.$dialog.css("display")!='none';
-	}
-	
     async init() {
 
-		if (this.options.hideOnOutsideClick) {
-			let self = this;
-			this.onOutsideClick = function(e){
-				
-				if (self.isVisible() && !self.$dialog.is(e.target) && self.$dialog.has(e.target).length === 0) {
-					$(document).unbind("click", self.onOutsideClick);
-				    self.hide();
-				}
-			}		
-		}		
 		
-        //находим базовый элемент $dialog
+		if (this.options.hideOnOutsideClick) {
+			//скрываем панель при клике за её пределами
+			$(document).bind("click", (e) => {
+				if (this.visible && !this.$dialog.is(e.target) && this.$dialog.has(e.target).length===0) {
+					this.hide();
+				}
+			});
+		}
 
         //задана своя панель
         if (this.options.panelSelector) {
@@ -135,7 +131,6 @@ class AccPopup {
 
         } else {
             //создаём панель по умолчанию: не выделяемую, с рамкой и белым задником
-            //			this.$dialog = $('<div class="no-select acc-popup-default"></div>');
             this.$dialog = $('<div class="acc-popup-default"></div>');
         }
 
@@ -147,8 +142,6 @@ class AccPopup {
             });
 
         }
-        /*	
-        */
 
         this.$dialog.remove().appendTo(document.body);
         //		this.$dialog.addClass("acc-popup");
@@ -193,27 +186,9 @@ class AccPopup {
             this.accDrag = new AccDrag(options);
         }
 
-
-		/*
-        if (this.options.hideOnOutsideClick) {
-            $(document).click((e) => {
-                if (!this.$dialog.is(e.target) && this.$dialog.has(e.target).length === 0) {
-                    this.hide();
-                }
-            });
-        }
-		
-		onOutsideClick(e){
-			if (!this.$dialog.is(e.target) && this.$dialog.has(e.target).length === 0) {
-			    this.hide();
-			}
-		}
-		
-		*/
-
     }
 
-	
+
     showForElement($target, layout) {
         if (!$target.jquery) {
             $target = $($target);
@@ -242,7 +217,27 @@ class AccPopup {
     }
 
     show(x, y) {
-
+		
+		if (this.options.hideOnOutsideClick) {
+			this.visible = false;
+			
+			if (this.showTimerId){
+				clearTimeout(this.showTimerId);
+				this.showTimerId = null;
+			}
+			
+			//добавляем признак видимости с задержкой - ведь на внешние клики может быть назначен и показ этой панели
+		    this.showTimerId = setTimeout(() => {
+				this.visible = true;
+				this.showTimerId = null;
+		    }, 300);
+		} else {
+			this.visible = true;
+		}
+		
+		
+		
+		
         if (x) {
             if (typeof x == 'number') {
                 x = x + "px";
@@ -258,25 +253,23 @@ class AccPopup {
         }
 
         this.$dialog.css("display", "flex");
-
+		
         if (this.options.centered) {
             accordUtils.alignToCenter(this.$dialog);
         }
-		
-		if (this.options.hideOnOutsideClick) {
-			setTimeout(() => {
-				if (this.isVisible()){
-					$(document).bind("click",this.onOutsideClick);
-				}				
-		    }, 100);			
-		}
-		
+
+
 
     }
 
     hide() {
-//        this.$dialog.fadeOut();
-		this.$dialog.css("display", "none");
+        //        this.$dialog.fadeOut();
+        this.$dialog.css("display", "none");
+		this.visible = false;
+		if (this.showTimerId){
+			clearTimeout(this.showTimerId);
+			this.showTimerId = null;
+		}
     }
 
 

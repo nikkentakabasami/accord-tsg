@@ -7,15 +7,16 @@ let p1;
 
 
 
-
 $(function() {
 
+	
+	
 
   $("div.acc-desc-panel").click(e => {
 	p1.showForClickEvent(e);
   });
 
-  $("#fname1").click(e => {
+  $("#fname1").focus(e => {
 	p1.showForElement(e.target, AccPopup.Layouts.BOTTOM_RIGHT);
 
 	//		p1.showForElement(e.target);
@@ -32,6 +33,10 @@ $(function() {
   });
 
 
+  $("#select1").click(e => {
+	  p1.showForElement(e.target, AccPopup.Layouts.RIGHT);
+  });
+  
 
 
 
@@ -40,7 +45,7 @@ $(function() {
 	contentText: "p1 - Тестовая панель.",
 	draggable: true,	//позволяет перетаскивать диалог за заголовок
 	width: "300px",
-	hideOnOutsideClick: true
+	hideOnOutsideClick: true   //скрывает панель при клике за её пределами
   }
   let p1 = new AccPopup(options);
 
