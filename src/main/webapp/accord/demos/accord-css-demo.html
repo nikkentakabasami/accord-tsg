@@ -17,6 +17,9 @@
 </head>
 <body class="acc-default-font">
 
+<h3>accord.css - содержит разнообразные вспомогательные стили.</h3>
+
+
 	<div class="acc-desc-panel">
 accord.css содержит разнообразные вспомогательные стили.
 Эта панель с классом "acc-desc-panel" используется для показа текстовых пояснений.
@@ -45,26 +48,36 @@ accord.css содержит разнообразные вспомогатель�
 
 	<h4>иконки задаются через background-image (посредством css-классов:acc-btn-add,acc-btn-cross...)</h4>
 
-	<div class="acc-button-panel">
-		<div class="acc-centered-content">My text input:</div>
-		<input type="text" />
-		<button type="button" class="acc-btn acc-btn-icon-text acc-btn-add">acc-btn-add</button>
-		<button type="button" class="acc-btn acc-btn-icon-text acc-btn-cross">acc-btn-cross</button>
-		<button type="button" class="acc-btn acc-btn-icon acc-btn-check"></button>
-		
-		<button type="button" class="acc-btn acc-btn-icon acc-btn-arrow-up"></button>
-		<button type="button" class="acc-btn acc-btn-icon acc-btn-arrow-down"></button>
-		<button type="button" class="acc-btn acc-btn-icon acc-btn-eye"></button>
-		<button type="button" class="acc-btn acc-btn-icon acc-btn-eye-crossed"></button>
-		<button type="button" class="acc-btn acc-btn-icon acc-btn-rotate-left"></button>
-		<button type="button" class="acc-btn acc-btn-icon acc-btn-calendar"></button>
-		<button type="button" class="acc-btn acc-btn-icon acc-btn-"></button>
-	</div>
+  <div class="acc-button-panel">
+    <div class="acc-centered-content">My text input:</div>
+    <input type="text" />
+    <button type="button" class="acc-btn acc-btn-icon-text acc-btn-add">acc-btn-add</button>
+    <button type="button" class="acc-btn acc-btn-icon-text acc-btn-cross">acc-btn-cross</button>
+    <button type="button" class="acc-btn acc-btn-icon acc-btn-check"></button>
+
+    <div class="acc-tool-panel-select-wrapper acc-dropdown-triangle">
+      <select id="select" class="acc-tool-panel-select">
+        <option>Banana</option>
+        <option>Cherry</option>
+        <option>Lemon</option>
+      </select>
+    </div>
+
+
+
+    <button type="button" class="acc-btn acc-btn-icon acc-btn-arrow-up"></button>
+    <button type="button" class="acc-btn acc-btn-icon acc-btn-arrow-down"></button>
+    <button type="button" class="acc-btn acc-btn-icon acc-btn-eye"></button>
+    <button type="button" class="acc-btn acc-btn-icon acc-btn-eye-crossed"></button>
+    <button type="button" class="acc-btn acc-btn-icon acc-btn-rotate-left"></button>
+    <button type="button" class="acc-btn acc-btn-icon acc-btn-calendar"></button>
+    <button type="button" class="acc-btn acc-btn-icon acc-btn-"></button>
+  </div>
 
 
 
 
-	<h4>acc-button-panel-tight - горизонтальная панель без оформления и отступов</h4>
+  <h4>acc-button-panel-tight - горизонтальная панель без оформления и отступов</h4>
 
 	<div class="acc-button-panel-tight">
 		<input type="text" />
@@ -98,7 +111,7 @@ accord.css содержит разнообразные вспомогатель�
  -->
 
 
-	<div class="acc-button-panel acc-popup acc-popup-visible" style="top: 70px;left: 700px;">
+	<div class="acc-popup acc-popup-default" style="top: 70px;left: 700px;display: flex;">
 		<div class="acc-centered-content">test popup:</div>
 		<input type="text" />
 		<button type="button" class="acc-btn acc-btn-icon-text acc-btn-add">button1</button>

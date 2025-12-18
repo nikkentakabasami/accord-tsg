@@ -23,18 +23,27 @@
 <script type="module" src="js/daterangepicker-utils-demo.js"></script>
 <link rel="stylesheet" type="text/css" href="css/demos.css">
 
+<style>
 
+div.acc-code-panel {
+  margin-top: 20px;
+}
+
+</style>
 
 
 </head>
 <body class="acc-default-font">
 
-	<h2>библиотека daterangepicker.js - мои опции</h2>
+	<h2>библиотека daterangepicker.js - позволяет выбирать диапазон дат.</h2>
+
+  <h2>daterangepicker-utils-demo.js - содержит предзаданные опции и функции быстрой инициализации</h2>
+
 
 
 
 <p>
-Вид по умолчанию - выбор диапазона дат
+Вид по умолчанию (только задан локализация) - выбор диапазона дат
 </p>
 <input type="text" id="tf1" >
 
@@ -46,24 +55,47 @@
 <input type="text" id="tf2" >
 
 
-<p>
+<div class="acc-code-panel">
 С презаданными диапазонами, скрыть кнопки вроде "Применить" - записывать значение при выборе. Не скрывать при выборе
-</p>
+
+  tsgDaterangepickerUtils.initDateEditor($("#tf3"), {
+    dontHideOnSelect: true,
+    decorInput: true,
+    changeCallback: (val,$input)=>{
+      console.log('selected date:'+val);
+    }
+  });
+</div>
 
 <input type="text" id="tf3" >
 
 
-<p>
+<div class="acc-code-panel">
 Выбор диапазона
-</p>
 
+  tsgDaterangepickerUtils.initDateRangeEditor($("#tf4") , {
+      decorInput: true,
+      decorButtonClasses: "acc-btn-eye",
+      changeCallback: (val,$input)=>{
+        console.log('selected range:'+val);
+      }
+    });
+</div>
 <input type="text" id="tf4" >
 
 
-<p>
-Выбор даты
-</p>
 
+<div class="acc-code-panel">
+Выбор даты
+
+    tsgDaterangepickerUtils.initDateEditor($("#tf5"), {
+      decorInput: true,
+      autoApply: false,
+      changeCallback: (val,$input)=>{
+        console.log('selected date:'+val);
+      }
+    });
+</div>
 <input type="text" id="tf5" >
 
 

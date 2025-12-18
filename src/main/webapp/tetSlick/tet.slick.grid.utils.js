@@ -23,10 +23,6 @@ export let tsgUtils = {
 //	getPosition: getPosition,
 	loadFragment: loadFragment,
 	
-	generateSelect: generateSelect,
-	generateBooleanSelect: generateBooleanSelect
-	
-	
 }
 
 
@@ -107,44 +103,6 @@ function checkmarkFormatter(rowNo, column, value, row) {
 }
 
 
-/**
- * Генерация элемента select с заданными опциями.
- * data - массив с объектами типа {id: 1, name: 'my name'}. 
- * Или массив строк, чисел...
- * withNullOption - включать ли строку с пустым значением
- */
-function generateSelect(name, data, withNullOption = true) {
-	
-	let optionsCode = withNullOption?'<option value="">-</option>':'';
-	
-	data.forEach(item=>{
-		
-		if (typeof item=="object"){
-			optionsCode+=`<option value="${item.id}">${item.name}</option>`;
-		} else {
-		optionsCode+=`<option value="${item}">${item}</option>`;
-		}
-		
-	});
-	
-	let $select = $(`select[name='${name}']`);
-	if ($select.length==0){
-		$select = $(`<select name="${name}"></select>`);
-	}
-	
-	$select.append(optionsCode);
-	return $select;	
-	
-}
-
-
-function generateBooleanSelect(name, withNullOption = true) {
-	let data = [
-		{id: "true",name: "Да"},
-		{id: "false",name: "Нет"},
-	];
-	return generateSelect(name,data,withNullOption);
-}
 
 window.tsgUtils = tsgUtils;
 

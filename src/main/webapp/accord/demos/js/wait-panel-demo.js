@@ -1,6 +1,5 @@
 
-//import { waitPanel } from '../../../accord/js/wait-panel.js';
-import {showWaitPanel,hideWaitPanel} from '../../../accord/js/accord-publish.js';
+import {showWaitPanel,hideWaitPanel} from '../../../accord/js/accord-bundle.js';
 
 
 

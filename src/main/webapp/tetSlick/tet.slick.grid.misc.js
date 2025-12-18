@@ -213,8 +213,10 @@ export class AbstractModule {
 	_initiated = false;
 	
 	constructor(grid){
-		this.grid = grid;
-		grid._addModule(this);
+		if (grid){
+			this.grid = grid;
+			grid._addModule(this);
+		}
 	}
 	
 	/**

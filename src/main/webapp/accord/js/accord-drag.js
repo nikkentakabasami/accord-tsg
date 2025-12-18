@@ -65,6 +65,11 @@ class AccDrag {
 	#makeDraggable() {
 
 		this.$handleElement.on('mousedown', e => {
+			
+			if (!this.$handleElement.is(e.target)){
+				return;
+			}
+			
 			e.preventDefault();
 
 			this.isDragging = true;

@@ -4,6 +4,7 @@ import { TetSlickGrid, tsgUtils } from '../tet.slick.grid.js';
 
 import {MultiselectModule} from '../mtp/tet.slick.grid.multiselect.js';
 import {DateRangeModule} from '../mtp/tet.slick.grid.dateRange.js';
+//import {NumberRangeModule} from '../mtp/tet.slick.grid.numberRange.js';
 import {NumberRangeModule} from '../mtp/tet.slick.grid.numberRange.js';
 
 

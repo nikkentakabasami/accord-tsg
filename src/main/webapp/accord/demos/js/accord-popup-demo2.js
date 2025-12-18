@@ -1,6 +1,6 @@
 
 
-import { AccPopup, accordUtils } from '../../js/accord-publish.js';
+import { AccPopup, accordUtils } from '../../js/accord-bundle.js';
 
 
 let p1;

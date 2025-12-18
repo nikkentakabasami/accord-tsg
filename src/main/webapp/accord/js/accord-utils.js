@@ -24,14 +24,74 @@ let accordUtils = {
   formToJSON: formToJSON,
   decorInput: decorInput,
   calcElementPosition: calcElementPosition,
+  
+  generateSelect: generateSelect,
+  generateBooleanSelect: generateBooleanSelect,
+  fillSelect: fillSelect,
+  generateSelectOptions: generateSelectOptions,
+  
 
 };
 window.accordUtils = accordUtils;
 
-/*
-let scriptSrc = import.meta.url;
-accordUtils.accordPath = scriptSrc.substring(0, scriptSrc.lastIndexOf('/js/') + 1);
-*/
+
+
+
+/**
+ * Генерация элемента select с заданными опциями.
+ * data - массив с объектами типа {id: 1, name: 'my name'}. 
+ * Или массив строк, чисел...
+ * withNullOption - включать ли строку с пустым значением
+ */
+function generateSelect(name, data, withNullOption = true) {
+	
+	let $select = $(`select[name='${name}']`);
+	if ($select.length==0){
+		$select = $(`<select name="${name}"></select>`);
+	}
+	
+	fillSelect($select, data, withNullOption);
+	
+	return $select;	
+}
+
+function fillSelect($select, data, withNullOption = false) {
+	let optionsCode = generateSelectOptions(data, withNullOption); 
+	$select.append(optionsCode);
+	return $select;	
+}
+
+function generateSelectOptions(data, withNullOption = false) {
+	let optionsCode = withNullOption?'<option value="">-</option>':'';
+	
+	data.forEach(item=>{
+		
+		if (typeof item=="object"){
+			optionsCode+=`<option value="${item.id}">${item.name}</option>`;
+		} else {
+		optionsCode+=`<option value="${item}">${item}</option>`;
+		}
+		
+	});
+	
+	return optionsCode;
+}
+
+
+function generateBooleanSelect(name, withNullOption = true) {
+	let data = [
+		{id: "true",name: "Да"},
+		{id: "false",name: "Нет"},
+	];
+	return generateSelect(name,data,withNullOption);
+}
+
+
+
+
+
+
+
 
 
 
@@ -39,7 +99,6 @@ accordUtils.accordPath = scriptSrc.substring(0, scriptSrc.lastIndexOf('/js/') + 
  * Располагает панель с абсолютным позиционированием по центру браузера
  */
 
-//function alignToCenter ($panel) {
 function alignToCenter($panel) {
   let $g = $(window);
   $panel
@@ -211,7 +270,7 @@ function formToJSON($form) {
 
 
 let decorInputOptionsDefault = {
-  addButton: false,
+  addButton: true,
   decorButtonClasses: "acc-btn-calendar",
   placeButtonBefore: true,
   buttonHandler: null

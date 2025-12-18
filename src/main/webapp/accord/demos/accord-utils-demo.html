@@ -20,25 +20,83 @@
 </head>
 <body class="acc-default-font">
 
+  <h2>accordUtils - содержит разнообразные вспомогательные методы</h2>
+
+  <div class="acc-desc-panel">
+     accordUtils.accordPath = "<span id="accordPath"></span>"
+  
+  
+  </div>  
 
 
-	<p>
-	</p>
 
-	<h3>Добавление кнопки с иконкой в html</h3>
+	<h3>Добавление кнопки с иконкой через html</h3>
 
 	<div class="acc-button-panel-tight">
 		<input type="text"/>
 		<button type="button" class="acc-btn acc-btn-icon acc-btn-calendar"></button>
 	</div>
 
-	<h3>accordUtils.decorInput($input, options)</h3>
-	
-	<h4>Добавление кнопки с иконкой программно (все значения по умолчанию)</h4>
-			<input type="text" id="tf1"/>
+	<h3>accordUtils.decorInput($input, options); - Добавление кнопки с иконкой программно.</h3>
+  
+	<h4>все значения по умолчанию</h4>
+  <div class="acc-desc-panel">
+  accordUtils.decorInput($("#tf1"));
+  </div>  
+  
+  
+<input type="text" id="tf1"/>
 
 	<h4>Добавление кнопки с заданной иконкой в конец input</h4>
-			<input type="text" id="tf2"/>
+
+  <div class="acc-desc-panel">
+  accordUtils.decorInput($("#tf2"),{
+    addButton: true,
+    buttonClasses: "acc-btn-check",
+    placeButtonBefore: false,
+    buttonHandler: e=>{
+      alert("hello");
+    }
+  });
+    </div>  
+
+<input type="text" id="tf2"/>
+
+
+
+  <h4>accordUtils.loadHtmlFragmentXHR</h4>
+
+  <div class="acc-desc-panel">
+  Тестируем загрузку методом loadHtmlFragmentXHR(fragmentUrl, $target, relativeToAccord = false).
+  
+  accordUtils.loadHtmlFragmentXHR("demos/misc/testFragment.html","#testFragment",true);
+   </div>
+
+  <div id="testFragment1"></div>
+
+  <h4>accordUtils.loadHtmlFragmentFetch</h4>
+
+  <div class="acc-desc-panel">
+  Тестируем загрузку методом loadHtmlFragmentFetch(fragmentUrl, $target, relativeToAccord = false).
+  
+  accordUtils.loadHtmlFragmentFetch("demos/misc/testFragment.html","#testFragment2",true)
+  .then(result => {
+    console.log("loaded:",result);
+  });
+   </div>
+
+  <div id="testFragment2"></div>
+
+
+
+
+<div class="acc-popup-default no-select acc-popup" id="accpop1" style="width: 300px; display: flex;">
+Плавающая панель. <br>Центрируется при клике: <br>accordUtils.alignToCenter($accpop1);
+</div>
+
+
+
+
 
 
 	

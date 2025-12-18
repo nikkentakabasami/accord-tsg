@@ -1,6 +1,12 @@
 
-import {AbstractModule} from '../tet.slick.grid.misc.js';
-import {tsgUtils} from '../tet.slick.grid.utils.js';
+import { AbstractModule } from '../tet.slick.grid.misc.js';
+import { tsgUtils } from '../tet.slick.grid.utils.js';
+
+
+import { AccPopup, accordUtils } from '../../accord/js/accord-bundle.js';
+
+
+
 
 
 /**
@@ -10,135 +16,132 @@ import {tsgUtils} from '../tet.slick.grid.utils.js';
  * Для использования требуется подключить библиотеки moment.js и daterangepicker.js
  * 
  */
-export class NumberRangeModule  extends AbstractModule {
+export class NumberRangeModule extends AbstractModule {
 
-	constructor(grid){
-		super(grid);
-		
+  filterPopup;
 
-		
-		
-		loadNumberFilterDialog();
-		
-		this.grid.addEventListener(tsgUtils.tableEvents.beforeInitFilter, e => {
-			
-			let $filter = e.detail.$afe;
-			
-			//прикручиваем к инпутам с датой диалог для выбора даты
-			if (!$filter.is('input.number-input')){
-				return;
-			}
-			
-			initNumberFilter($filter, val => {
-				this.grid.filtersModel.applyMainFilter();
-			});
-		
-		});
+
+  constructor(grid) {
+	super(grid);
+
+	this.filterPopup = new FilterPopup();
+
+	if (this.grid) {
+	  this.grid.addEventListener(tsgUtils.tableEvents.beforeInitFilter, e => {
+
+		let $filter = e.detail.$afe;
+
+		//прикручиваем к инпутам с датой диалог для выбора даты
+		if ($filter.is('input.number-input')) {
+		  this.initNumberFilter($filter);
+		}
+	  });
 	}
-	
-	init(){
-		super.init();
-	}
-	
-}
+
+  }
+
+  init() {
+	super.init();
+  }
 
 
+  initNumberFilter($filter) {
 
-
-export function initNumberFilter($filter, setValueCallback){
-	
-	let $calIcon = $('<span class="input-group-addon glyphicon glyphicon-signal" style="color: #31708f;top:0px;"></span>');
-	$calIcon.click(e => {
-		$filter.trigger( "dblclick" );
+	accordUtils.decorInput($filter, {
+	  buttonClasses: "acc-btn-calendar",
+	  placeButtonBefore: true,
+	  buttonHandler: e => {
+		$filter.trigger("dblclick");
+	  }
 	});
-    $filter.wrap( '<div class="input-group"></div>' ).before($calIcon)
-	
+
 	$filter.dblclick(e => {
-
-		showNumberFilterDialog((val) => {
-			$filter.val(val);
-			if (setValueCallback){
-				setValueCallback(val);
-			}
-		});
-	});	
-	
-}
-
-export function loadNumberFilterDialog() {
-
-	$numberFilterDialog = tsgUtils.loadFragment("selectNumberFilterDialog.html");
-
-//	$numberFilterDialog = $("#numberFilterDialog");
-//	$numberFilterDialog.remove().appendTo("body");
-
-	$numberFilterDialog.find('input[name="numberFilterType"]').change(function() {
-
-		currentNumberFilterType = $numberFilterDialog.find('input[name="numberFilterType"]:checked').val();
-
-		$numberFilterDialog.find("#divNumber2").addClass('div-hidden');
-
-		if (currentNumberFilterType == "4") {
-			$numberFilterDialog.find("#divNumber2").removeClass('div-hidden');
+	  this.filterPopup.showForFilterInput($filter, AccPopup.Layouts.BOTTOM, val => {
+		if (this.grid) {
+		  this.grid.filtersModel.applyMainFilter();
 		}
-
-		//    alert(val);
+	  });
 	});
-
-
-	$numberFilterDialog.find("#clearNumberButton").click(function() {
-
-		$numberFilterDialog.modal("hide");
-		currentNumberFilterCallback("");
-
-	});
-
-
-	$("#selectNumberButton").click(function() {
-
-		var v1 = $("#filterNumber1").val();
-		var v2 = $("#filterNumber2").val();
-
-
-
-		if (currentNumberFilterType == "1") {
-			currentNumberFilterResult = v1;
-		} else if (currentNumberFilterType == "2") {
-			currentNumberFilterResult = ">" + v1;
-		} else if (currentNumberFilterType == "3") {
-			currentNumberFilterResult = "<" + v1;
-		} else if (currentNumberFilterType == "4") {
-			currentNumberFilterResult = v1 + ":" + v2;
-		}
-
-		currentNumberFilterResult = currentNumberFilterResult.trim();
-
-		if (!currentNumberFilterResult) {
-			this.grid.alert('Выберите значение!');
-			return;
-		}
-
-		$numberFilterDialog.modal("hide");
-
-		currentNumberFilterCallback(currentNumberFilterResult);
-
-	});
-
+  }
 
 }
 
 
-let $numberFilterDialog; 
+export class FilterPopup extends AccPopup {
 
-let currentNumberFilterType = "1";
-let currentNumberFilterResult;
+  $buttonOk;
+  $input1;
+  $input2;
+  $filterType;
 
-let currentNumberFilterCallback;
+  setValueCallback;
+  $filter;
 
-function showNumberFilterDialog(callback){
-  currentNumberFilterCallback = callback;
-  $numberFilterDialog.modal();
-  
+
+  constructor() {
+	super({
+	  //	panelSelector: "#tsgNumberFilterPopup",
+	  panelUrl: tsgUtils.tetSlickRelativePath + "fragments/selectNumberFilterDialog.html",
+	  draggable: false,
+	  hideOnOutsideClick: true
+	});
+
+	let $d = this.$dialog;
+
+	this.$buttonOk = $d.find("button.btn-ok");
+	this.$input1 = $d.find("input.val1");
+	this.$input2 = $d.find("input.val2");
+	this.$filterType = $d.find("select.filter-type");
+
+
+	this.$filterType.change(e => {
+	  this.$input1.select();
+	});
+
+	this.$dialog.on("keydown", event => {
+	  if (event.which == 13) {
+		this.$buttonOk.trigger("click");
+	  }
+	});
+
+	this.$buttonOk.click(e => {
+
+	  let ft = this.$filterType.val();
+	  let val1 = this.$input1.val();
+	  //	  console.log(ft);
+
+	  let val;
+	  if (ft == "range") {
+		let val2 = this.$input2.val();
+		val = val1 + ":" + val2;
+	  } else {
+		val = ft + val1;
+	  }
+	  this.$filter.val(val);
+	  this.hide();
+	  if (this.setValueCallback) {
+		this.setValueCallback(val);
+	  }
+
+	});
+
+  }
+
+
+  showForFilterInput($target, layout = Layouts.BOTTOM, setValueCallback = null) {
+	this.setValueCallback = setValueCallback;
+	this.$filter = $target;
+
+	super.showForElement($target, layout);
+	this.$input1.select();
+
+  }
+
+
 }
+
+
+
+
 
 

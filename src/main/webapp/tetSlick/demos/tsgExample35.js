@@ -52,7 +52,7 @@ var columns = [
 		id: "effortDriven", 
 		name: "Окончание",
 		width: 150,
-		filterInput: tsgUtils.generateBooleanSelect,
+		filterInput: accordUtils.generateBooleanSelect,
 		formatter: tsgUtils.checkmarkFormatter,
 	},
 	
@@ -94,7 +94,7 @@ $(function() {
 	myGrid = new TetSlickGrid("#myGrid", dataSource.rows, columns, options);
 	
 	let customerColumn = myGrid.model.columnsById["customer"];
-	customerColumn.filterInput = tsgUtils.generateSelect("customer",dataSource.customers);
+	customerColumn.filterInput = accordUtils.generateSelect("customer",dataSource.customers);
 	
 	
 	myGrid.init();

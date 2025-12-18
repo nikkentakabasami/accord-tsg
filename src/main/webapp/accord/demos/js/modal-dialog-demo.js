@@ -22,6 +22,7 @@ $(document).ready(function() {
 	dialog1 = new AccModalDialog({
 		title: "Диалог по умолчанию",
 		contentText: "Этот диалог показывается после инициализации.<br>Содержит заданный текст. <br> Диалог можно перетаскивать за заголовок",
+		immediateInit: false,
 		onOk: ()=>{
 			logMessage("dialog1 сохранён.");
 		},
@@ -38,14 +39,21 @@ $(document).ready(function() {
 		console.log("dialog1 закрыт.");
 	});
 	
+	
+	dialog1.init().then(()=>{
+//		dialog1.$dialog.keydown(function(e){
+//		    console.log(e.keyCode);
+//		});
+		$(document.body).keydown(function(e){
+			if (e.keyCode==27){
+				dialog1.hide();
+			}
+//		    console.log(e.keyCode);
+		});
+	});
+	
 		
 	/*
-	dialog1.addEventListener(AccModalDialogEvents.onInitiated, e => {
-		logMessage("dialog1 initiated.");
-
-
-
-	});
 	*/
 
 	dialog2 = new AccModalDialog({
@@ -77,6 +85,10 @@ $(document).ready(function() {
 		dialogSelector: "#myCustomDialog"
 	});
 
+	
+
+	
+	
 	/*
 */
 	
@@ -86,6 +98,7 @@ $(document).ready(function() {
 
 	$("#b1").click(e => {
 		dialog1.show();
+		
 	});
 	$("#b2").click(e => {
 		dialog2.show();

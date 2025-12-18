@@ -1,15 +1,12 @@
-accord demos
-  form styles
-  icons
-  util functions
-  tabbed panel
-
-<input type="date" id="date" name="expiration">
-add to daterange demo
 
 
-accord functions
-  fill select with options
+modal dialog
+  focusable
+  close on esc
+
+date, moment, month list
+
+
 
 popup menu - показывать вверх, если оно скрывается за границами окна
 
@@ -31,6 +28,8 @@ servlet rows
   
 фильтрация
   пустые/непустые значения
+
+!  вычислять фильтры-селекты автоматически.
 
 задать условия фильтрации программно, через опции
 

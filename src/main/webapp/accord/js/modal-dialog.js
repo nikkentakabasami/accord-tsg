@@ -114,7 +114,7 @@ class AccModalDialog extends EventTarget {
 	  this.id = this.options.id;
 	} else {
 	  AccModalDialog.counter++;
-	  this.id = "accd" + AccModalDialog.counter;
+	  this.id = "accDialog" + AccModalDialog.counter;
 	}
 
 	window[this.id] = this;

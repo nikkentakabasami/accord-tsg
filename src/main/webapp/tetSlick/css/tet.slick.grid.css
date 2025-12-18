@@ -5,13 +5,20 @@
 	box-sizing: border-box;
 }
 
+/*
 body {
 	font-family: Verdana, Arial, Helvetica, sans-serif;
 	font-size: 12px;
 	line-height: 1.8;
 }
+*/
 
 
+.tsc-grid {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	line-height: 1.8;
+}
 
 
 /* чтобы растягивались фильтры-мультиселекты  */
@@ -520,5 +527,19 @@ body {
 	float: right;
 	margin-right: 10px;
 	margin-top: 3px;	
+}
+
+
+#tsgNumberFilterPopup {
+	display: none;
+}
+
+
+#tsgNumberFilterPopup select {
+	width: 70px;
+}
+
+#tsgNumberFilterPopup input {
+	width: 50px;
 }
 

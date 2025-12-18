@@ -153,7 +153,10 @@ class AccPopup {
             this.$dialog.css("height", this.options.height);
         }
 
-        this.$dialog.attr("id", this.id);
+		if (!this.$dialog.attr("id")){
+			this.$dialog.attr("id", this.id);
+		}
+		
 
         //загружаем содержимое, если оно задано в виде текста
         if (this.options.contentText) {
@@ -189,7 +192,7 @@ class AccPopup {
     }
 
 
-    showForElement($target, layout) {
+    showForElement($target, layout = Layouts.BOTTOM) {
         if (!$target.jquery) {
             $target = $($target);
         }

@@ -27,7 +27,6 @@ class WaitPanel {
 		this.$waitPanel = $("<span class='loading-indicator'><label>Подождите</label></span>")
 			.appendTo(document.body);
 
-//		this.$waitContent = $('.loading-indicator label')
 		this.$waitContent = this.$waitPanel.find('label')
 		this.$waitPanel.bind("click", () => this.hide());
 	}
