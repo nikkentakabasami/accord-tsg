@@ -1,6 +1,6 @@
 
 
-import {tsgDaterangepickerUtils} from '../../js/daterangepicker-utils.js';
+import {AccDaterangepickerUtils} from '../../js/accord-bundle.js';
 
 
 
@@ -10,7 +10,7 @@ $(function() {
 	//	this.options = $.extend({}, tableDefaults, options);
 
 	let defaultOptions = {
-		locale: tsgDaterangepickerUtils.dateRangeLocale,
+		locale: AccDaterangepickerUtils.dateRangeLocale,
 	};
 
 
@@ -38,7 +38,7 @@ $(function() {
 
 
 
-	tsgDaterangepickerUtils.initDateEditor($("#tf3"), {
+	AccDaterangepickerUtils.initDateEditor($("#tf3"), {
 		dontHideOnSelect: true,
 		decorInput: true,
 		changeCallback: (val,$input)=>{
@@ -46,7 +46,7 @@ $(function() {
 		}
 	});
 	
-	tsgDaterangepickerUtils.initDateRangeEditor($("#tf4")	, {
+	AccDaterangepickerUtils.initDateRangeEditor($("#tf4")	, {
 			decorInput: true,
 			decorButtonClasses: "acc-btn-eye",
 			changeCallback: (val,$input)=>{
@@ -54,7 +54,7 @@ $(function() {
 			}
 		});
 
-		tsgDaterangepickerUtils.initDateEditor($("#tf5"), {
+		AccDaterangepickerUtils.initDateEditor($("#tf5"), {
 			decorInput: true,
 			autoApply: false,
 			changeCallback: (val,$input)=>{

@@ -10,6 +10,11 @@
 <link rel="stylesheet" type="text/css" href="../../accord/css/tabbed-panel.css">
 <script type="module" src="../../accord/js/accord-publish.js"></script>
 
+<script type="text/javascript" src="../../jquery31/js/moment.min.js"></script>
+<script type="text/javascript" src="../../jquery31/js/daterangepicker.js"></script>
+<link rel="stylesheet" type="text/css" href="../../jquery31/css/daterangepicker.css" />
+
+
 <link rel="stylesheet" href="../css/tet.slick.grid.css" type="text/css" />
 <link rel="stylesheet" href="tsgDemoStyles.css" />
 <script type="text/javascript" src="testDataSources.js"></script>
@@ -40,12 +45,52 @@
 
 			<div id="tab-1" class="tab-content active">
 				<pre class="acc-desc-panel">
-Задан кастомный фильтр для поля "section"(Раздел). Всё что для этого нужно: добавить на страницу скрытый div с id="filterContainer".
-И внутри него поместить поля ввода с именами, которые соответствуют column.id.
+Заданы кастомные фильтры для полей.
+Это можно сделать несколькими способами:
 
-Заданы опции выбора для поля id.
+1)Добавить на страницу скрытый div с id="filterContainer".
+И внутри него поместить поля ввода с именами, которые соответствуют column.id.        
 
-сгенерирован и задан select в качестве фильтра для поля "customer"
+Так добавлен выпадающий список для поля "section"(Раздел) и опции выбора для поля "id".
+
+2)Использовать опцию столбца "filterInput".
+В неё можно поместить jquery объект с элементом-фильтром.
+Либо функцию, генерирующую фильтр.
+
+Для столбца "Окончание" такой фильтр сгенерирован функцией generateBooleanSelect:
+{   id: "effortDriven", 
+    name: "Окончание",
+    width: 150,
+    filterInput: accordUtils.generateBooleanSelect,
+    formatter: tsgUtils.checkmarkFormatter },
+
+Для столбца "customer" мы генерируем select на основе массива объектов функцией generateSelect:
+
+  let customerColumn = myGrid.model.columnsById["customer"];
+  customerColumn.filterInput = accordUtils.generateSelect("customer",dataSource.customers);
+
+3)Использовать дополнительные модули для декорирования фильтров.
+
+Для выбора диапазона дат используется модуль DateRangeModule:
+
+let dm = new DateRangeModule(myGrid);
+
+Теперь для фильтров нужно добавить классы: "date-input"(выбор диапазона дат), "date-single-input"(выбор одной даты)
+&lt;input name="start" class="date-input" /&gt; 
+&lt;input name="finish" class="date-single-input" /&gt; 
+
+Для выбора чисел используется модуль NumberRangeModule:
+
+let nm = new NumberRangeModule(myGrid);
+
+Для фильтров нужно добавить класс: "number-input"
+
+&lt;input name="percentComplete" class="number-input" /&gt; 
+
+
+
+
+
 
 </pre>
 			</div>
@@ -54,30 +99,28 @@
 				<pre class="acc-code-panel">
 
 var columns = [
-	tsgUtils.mkColDesc("id","id",50),
-	tsgUtils.mkColDesc("title","Заголовок",150),
-	{
-		id: "customer", 
-		valueField: "customer.id",
-		captionField: "customer.name",
-		name: "Заказчик",
-		width: 150
-	},{
-		id: "section",
-		captionField: "section.name",
-		valueField: "section.id",
-		sortField: "section.id",
-		matchType: tsgUtils.matchTypes.NUMBER,
-		name: "Раздел",
-		width: 150 
-	},{
-		id: "durationInt",
-		captionField: "duration",
-		sortField: "durationInt",
-		name: "Длительность",
-		width: 150 
-	},
-	...	
+  {
+	id: "customer",
+	valueField: "customer.id",
+	captionField: "customer.name",
+	name: "Заказчик",
+	width: 150
+  }, {
+	id: "section",
+	captionField: "section.name",
+	valueField: "section.id",
+	sortField: "section.id",
+	matchType: tsgUtils.matchTypes.NUMBER,
+	name: "Раздел",
+	width: 150
+  }, {
+	id: "effortDriven",
+	name: "Окончание",
+	width: 150,
+	filterInput: accordUtils.generateBooleanSelect,
+	formatter: tsgUtils.checkmarkFormatter,
+  },
+
 ];
 
 	dataSource = new TsgDataSource1(100);
@@ -86,7 +129,8 @@ var columns = [
 	myGrid = new TetSlickGrid("#myGrid", dataSource.rows, columns, options);
 	
 	let customerColumn = myGrid.model.columnsById["customer"];
-	customerColumn.filterInput = tsgUtils.generateSelect("customer",dataSource.customers);
+	customerColumn.filterInput = accordUtils.generateSelect("customer",dataSource.customers);
+	
 	
 	myGrid.init();
 
@@ -137,6 +181,9 @@ var columns = [
 				<option>11</option>
 			</datalist>
 
+          <input name="start" class="date-input" /> 
+          <input name="finish" class="date-single-input" /> 
+          <input name="percentComplete" class="number-input" /> 
 
 
 

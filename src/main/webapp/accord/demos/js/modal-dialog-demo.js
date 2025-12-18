@@ -1,5 +1,5 @@
 
-import { AccModalDialog } from '../../js/modal-dialog.js';
+import { AccModalDialog } from '../../js/accord-bundle.js';
 
 
 
@@ -23,6 +23,7 @@ $(document).ready(function() {
 		title: "Диалог по умолчанию",
 		contentText: "Этот диалог показывается после инициализации.<br>Содержит заданный текст. <br> Диалог можно перетаскивать за заголовок",
 		immediateInit: false,
+		closeOnEsc: true,
 		onOk: ()=>{
 			logMessage("dialog1 сохранён.");
 		},
@@ -41,15 +42,7 @@ $(document).ready(function() {
 	
 	
 	dialog1.init().then(()=>{
-//		dialog1.$dialog.keydown(function(e){
-//		    console.log(e.keyCode);
-//		});
-		$(document.body).keydown(function(e){
-			if (e.keyCode==27){
-				dialog1.hide();
-			}
-//		    console.log(e.keyCode);
-		});
+		console.log("dialog1 инициализирован.");
 	});
 	
 		

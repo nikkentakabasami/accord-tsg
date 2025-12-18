@@ -1,6 +1,6 @@
 
 
-import { TetSlickGrid, tsgUtils } from '../tet.slick.grid.js';
+import { tsgUtils, TetSlickGrid, accordUtils } from '../tet.slick.grid-bundle.js';
 import {TsgDataSource1} from './tsgDataSource1.js'
 
 

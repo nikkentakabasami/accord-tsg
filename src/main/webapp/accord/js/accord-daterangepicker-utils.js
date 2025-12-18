@@ -12,7 +12,7 @@ import { accordUtils } from './accord-utils.js';
 let dateRangeFormat = "DD.MM.YYYY";
 
 
-export let tsgDaterangepickerUtils = {
+export let AccDaterangepickerUtils = {
 	dateRangeFormat: dateRangeFormat,
 	dateRangeLocale: {
 		"format": dateRangeFormat,
@@ -79,7 +79,7 @@ export let tsgDaterangepickerUtils = {
 
 }
 
-window.tsgDaterangepickerUtils = tsgDaterangepickerUtils;
+window.AccDaterangepickerUtils = AccDaterangepickerUtils;
 
 
 
@@ -123,7 +123,7 @@ function initDateEditor($input, addOptions) {
 		autoUpdateInput: true,
 		autoApply: true,
 		autoUpdateInput: false,
-		locale: tsgDaterangepickerUtils.dateRangeLocale,
+		locale: AccDaterangepickerUtils.dateRangeLocale,
 		ranges: ranges,
 		alwaysShowCalendars: true
 //		drops: "up"
@@ -215,7 +215,7 @@ function initDateRangeEditor($input, addOptions) {
 		alwaysShowCalendars: true,
 		// minYear: 2005,
 		// maxYear: currYear,
-		locale: tsgDaterangepickerUtils.dateRangeLocale,
+		locale: AccDaterangepickerUtils.dateRangeLocale,
 		ranges: ranges,
 		minDate: minDate,
 		maxDate: maxDate,

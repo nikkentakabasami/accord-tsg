@@ -24,7 +24,7 @@ export class DateRangeModule  extends AbstractModule {
 			//прикручиваем к инпутам с датой диалог для выбора даты
 			if ($filter.is('input.date-input')){
 				
-				tsgDaterangepickerUtils.initDateRangeEditor($filter	, {
+				AccDaterangepickerUtils.initDateRangeEditor($filter	, {
 						decorInput: true,
 						decorButtonClasses: "acc-btn-calendar",
 						drops: "up",
@@ -40,7 +40,7 @@ export class DateRangeModule  extends AbstractModule {
 				return;
 			} else if ($filter.is('input.date-single-input')){
 				
-				tsgDaterangepickerUtils.initDateEditor($filter	, {
+				AccDaterangepickerUtils.initDateEditor($filter	, {
 						decorInput: true,
 						decorButtonClasses: "acc-btn-calendar",
 						autoApply: false,

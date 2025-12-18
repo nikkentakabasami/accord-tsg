@@ -20,7 +20,7 @@ public class MainServletContextListener implements ServletContextListener {
 	private final static Logger logger = Logger.getLogger(MainServletContextListener.class.getName());
 	
 	//,"demoFolders"
-	final static String[] demoFoldersNames = {"bsdemos","html_demos","html_basics", "libs_demos"};
+	final static String[] demoFoldersNames = {"bsdemos","html_demos","html_basics", "libs_demos", "js_demos"};
 	
 	List<DemoFolder> demoFolders;
 	

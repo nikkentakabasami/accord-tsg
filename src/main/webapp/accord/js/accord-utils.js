@@ -30,9 +30,46 @@ let accordUtils = {
   fillSelect: fillSelect,
   generateSelectOptions: generateSelectOptions,
   
+  random: random,
+  randomDate: randomDate,
+  formatDate: formatDate,
+  parseDate: parseDate,
 
 };
 window.accordUtils = accordUtils;
+
+
+//возвращает случайное целое число в заданном диапазоне
+// пример: random(5)
+function random(max, min = 0) {
+	return Math.floor(Math.random() * (max - min)) + min;
+}
+
+function randomDate(minYear = 2020, maxYear=2025){
+	let yearDiapazon = maxYear - minYear;
+	return new Date(minYear+random(yearDiapazon), random(13), random(30));
+}
+
+
+
+function formatDate(date) {
+    var d = date.getDate();
+    var m = date.getMonth() + 1;
+    var y = date.getFullYear();
+    return (d <= 9 ? '0' + d : d) + '.' + (m<=9 ? '0' + m : m) + '.' + y;
+}
+
+function parseDate(dateStr) {
+	
+	var d=dateStr.substring(0,2);
+	var m=dateStr.substring(3,5);
+	var y=dateStr.substring(6,10);
+	m--;
+	var c = new Date(y, m, d, 1, 1); 
+	return c;	
+}
+
+
 
 
 
@@ -41,7 +78,8 @@ window.accordUtils = accordUtils;
  * Генерация элемента select с заданными опциями.
  * data - массив с объектами типа {id: 1, name: 'my name'}. 
  * Или массив строк, чисел...
- * withNullOption - включать ли строку с пустым значением
+ * withNullOption - включать ли строку с пустым значением.
+ * Возвращает jquery объект $select.
  */
 function generateSelect(name, data, withNullOption = true) {
 	

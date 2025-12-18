@@ -5,10 +5,10 @@
 
 
 export { accordUtils } from './accord-utils.js';
-export {AccModalDialog} from './modal-dialog.js';
-export {showWaitPanel,hideWaitPanel} from './wait-panel.js';
-export {TabbedPanel} from './tabbed-panel.js';
-export {tsgDaterangepickerUtils} from './daterangepicker-utils.js';
+export {AccModalDialog} from './accord-modal-dialog.js';
+export {showWaitPanel,hideWaitPanel} from './accord-wait-panel.js';
+export {TabbedPanel} from './accord-tabbed-panel.js';
+export {AccDaterangepickerUtils} from './accord-daterangepicker-utils.js';
 export { AccPopup } from './accord-popup.js';
 
 

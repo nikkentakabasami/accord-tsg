@@ -12,7 +12,7 @@ import {ColumnOrderDialogModel} from './tet.slick.grid.column.dialog.js';
 import {GridMenuModel1} from './tet.slick.grid.menu.js';
 
 import {tsgUtils} from './tet.slick.grid.utils.js'
-export {tsgUtils};
+//export {tsgUtils};
 
 import { GetRequestPageDataLoader, LocalDataLoader } from './tet.slick.grid.loader.js';
 

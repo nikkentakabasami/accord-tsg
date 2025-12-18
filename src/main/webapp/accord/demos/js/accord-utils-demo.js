@@ -24,7 +24,6 @@ $(function(){
 		accordUtils.alignToCenter($accpop1);
 	});
 	
-	$("#accordPath").text(accordUtils.accordPath);
 	
 	
 	accordUtils.loadHtmlFragmentXHR("demos/misc/testFragment.html","#testFragment1",true);
@@ -33,7 +32,22 @@ $(function(){
 	.then(result => {
 		console.log("loaded:",result);
 	});
+
 	
+	
+	$("#accordPath").text(accordUtils.accordPath);
+	
+	$("#sp1").text(accordUtils.random(10));
+	$("#sp2").text(accordUtils.randomDate());
+	
+	let today= new Date();
+	$("#sp3").text(accordUtils.formatDate(today));
+	$("#sp4").text(accordUtils.parseDate("05.05.2025"));
+	
+	/*
+	$("#sp4").text(accordUtils.);
+	$("#sp5").text(accordUtils.);
+		*/
 	
 	
 });

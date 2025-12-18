@@ -1,9 +1,4 @@
-
-import {AbstractModule} from './tet.slick.grid.misc.js';
-
-//import {initDateEditor} from './mtp/tet.slick.grid.dateRange.js';
-
-import {tsgUtils} from './tet.slick.grid.utils.js';
+import { AbstractModule, tsgUtils, TetSlickGrid } from './tet.slick.grid-bundle.js';
 
 
 
@@ -239,7 +234,7 @@ class DateEditPopup extends AbstractEditPopup {
 //		this.$button = this.$popup.find("span.edit-popup-button");
 		this.$button = this.$popup.find("button");
 		
-		tsgDaterangepickerUtils.initDateEditor(this.$input)
+		AccDaterangepickerUtils.initDateEditor(this.$input)
 		
 		this.$input.keydown(e => {
 			if (e.keyCode==13){

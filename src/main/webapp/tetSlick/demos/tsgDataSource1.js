@@ -1,29 +1,7 @@
 
+import {accordUtils } from '../tet.slick.grid-bundle.js';
 
 export { TsgDataSource1 };
-
-//let dataSource1 = new TsgDataSource();
-
-
-
-
-
-function rand(max, min = 0) {
-	return Math.floor(Math.random() * (max - min)) + min;
-}
-
-function makeRandomDate(){
-	return new Date(2020+rand(5), rand(13), rand(30));
-}
-
-
-
-function formatDate(date) {
-    var d = date.getDate();
-    var m = date.getMonth() + 1;
-    var y = date.getFullYear();
-    return (d <= 9 ? '0' + d : d) + '.' + (m<=9 ? '0' + m : m) + '.' + y;
-}
 
 
 class TsgDataSource1 {
@@ -51,7 +29,7 @@ class TsgDataSource1 {
 
 		for (let i = 0; i < 14; i++) {
 
-//			let r = rand(100);
+//			let r = accordUtils.random(100);
 
 			let section = {
 				id: i,
@@ -67,28 +45,28 @@ class TsgDataSource1 {
 		this.rows = new Array(rowCount);
 		for (let i = 0; i < rowCount; i++) {
 		
-			let dur = rand(30);
+			let dur = accordUtils.random(30);
 			
 			let r = {
 				id: i,
-				section: this.sections[rand(this.sections.length)],
-				customer: this.customers[rand(this.customers.length)],
+				section: this.sections[accordUtils.random(this.sections.length)],
+				customer: this.customers[accordUtils.random(this.customers.length)],
 				title: "Мой таск " + i*3,
 				durationInt: dur,
 				duration: dur+" дней",
-				percentComplete: rand(100,5),
-				effortDriven: (rand(10)<3),
+				percentComplete: accordUtils.random(100,5),
+				effortDriven: (accordUtils.random(10)<3),
 				odd: (i % 2 == 1)
 			};
 			this.rows[i] = r;
 			
-			let d1 = makeRandomDate();
+			let d1 = accordUtils.randomDate();
 			r.start = d1.getTime();
-			r.startStr = formatDate(d1);
+			r.startStr = accordUtils.formatDate(d1);
 			
-			d1.setDate(d1.getDate() + rand(100));
+			d1.setDate(d1.getDate() + accordUtils.random(100));
 			r.finish = d1.getTime();
-			r.finishStr = formatDate(d1);
+			r.finishStr = accordUtils.formatDate(d1);
 		}
 
 

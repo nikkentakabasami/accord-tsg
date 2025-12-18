@@ -1,5 +1,5 @@
 
-import { AccModalDialog } from '../../js/modal-dialog.js';
+import { AccModalDialog } from '../../js/accord-bundle.js';
 
 
 

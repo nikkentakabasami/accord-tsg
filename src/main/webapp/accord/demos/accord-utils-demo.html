@@ -23,33 +23,37 @@
   <h2>accordUtils - содержит разнообразные вспомогательные методы</h2>
 
   <div class="acc-desc-panel">
+  
+  
      accordUtils.accordPath = "<span id="accordPath"></span>"
   
+     accordUtils.random(10) = "<span id="sp1"></span>"
+     accordUtils.randomDate() = "<span id="sp2"></span>"
+     accordUtils.formatDate(today) = "<span id="sp3"></span>"
+     accordUtils.parseDate("05.05.2025") = "<span id="sp4"></span>"
+     <!-- 
+     accordUtils. = "<span id="sp5"></span>"
+     accordUtils. = "<span id="sp6"></span>"
+      -->
   
   </div>  
 
 
 
-	<h3>Добавление кнопки с иконкой через html</h3>
-
-	<div class="acc-button-panel-tight">
-		<input type="text"/>
-		<button type="button" class="acc-btn acc-btn-icon acc-btn-calendar"></button>
-	</div>
 
 	<h3>accordUtils.decorInput($input, options); - Добавление кнопки с иконкой программно.</h3>
   
-	<h4>все значения по умолчанию</h4>
   <div class="acc-desc-panel">
+  все значения по умолчанию:
   accordUtils.decorInput($("#tf1"));
   </div>  
   
   
 <input type="text" id="tf1"/>
 
-	<h4>Добавление кнопки с заданной иконкой в конец input</h4>
 
   <div class="acc-desc-panel">
+Добавление кнопки с заданной иконкой в конец input:  
   accordUtils.decorInput($("#tf2"),{
     addButton: true,
     buttonClasses: "acc-btn-check",
@@ -90,11 +94,18 @@
 
 
 
-<div class="acc-popup-default no-select acc-popup" id="accpop1" style="width: 300px; display: flex;">
+<div class="acc-popup-default no-select acc-popup" id="accpop1" style="width: 300px;left: 700px; display: flex;">
 Плавающая панель. <br>Центрируется при клике: <br>accordUtils.alignToCenter($accpop1);
 </div>
 
 
+
+  <h3></h3>
+
+  <div class="acc-desc-panel">
+
+
+   </div>
 
 
 

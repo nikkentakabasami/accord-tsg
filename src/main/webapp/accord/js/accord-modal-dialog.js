@@ -27,7 +27,8 @@ const accModelDialogDefaultOptions = {
   draggable: true,	//позволяет перетаскивать диалог за заголовок
   id: null,			//id диалога. по умолчанию генерируется автоматом, но можно задать своё. Будет назначен на dom элемент: $dialog.attr("id");
   fragmentLoadMode: 1,
-  immediateInit: true
+  immediateInit: true,
+  closeOnEsc: false	//закрывать диалог при нажатии на 'Escape'
 
 
 
@@ -150,6 +151,17 @@ class AccModalDialog extends EventTarget {
 	}
 
 	this.#initAfterLoad();
+
+
+	if (this.options.closeOnEsc) {
+	  $(document.body).keydown(event => {
+//		console.log(event.key);
+		if (event.keyCode == 27) {
+		  this.hide();
+		}
+	  });
+	}
+
 
 	if (this.options.onInitiated) {
 	  this.options.onInitiated();
