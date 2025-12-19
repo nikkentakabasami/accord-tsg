@@ -53,22 +53,20 @@ function randomDate(minYear = 2020, maxYear=2025){
 
 
 function formatDate(date) {
-    var d = date.getDate();
-    var m = date.getMonth() + 1;
-    var y = date.getFullYear();
-    return (d <= 9 ? '0' + d : d) + '.' + (m<=9 ? '0' + m : m) + '.' + y;
+  let d = date.getDate();
+  let m = date.getMonth() + 1;
+  let y = date.getFullYear();
+  return (d <= 9 ? '0' + d : d) + '.' + (m<=9 ? '0' + m : m) + '.' + y;
 }
 
 function parseDate(dateStr) {
-	
-	var d=dateStr.substring(0,2);
-	var m=dateStr.substring(3,5);
-	var y=dateStr.substring(6,10);
-	m--;
-	var c = new Date(y, m, d, 1, 1); 
-	return c;	
+  let d=dateStr.substring(0,2);
+  let m=dateStr.substring(3,5);
+  let y=dateStr.substring(6,10);
+  m--;
+  let c = new Date(y, m, d, 1, 1); 
+  return c;  
 }
-
 
 
 

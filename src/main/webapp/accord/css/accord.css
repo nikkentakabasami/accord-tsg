@@ -314,3 +314,36 @@
     padding: 5px;
 }
 
+
+/*  
+form-4cols - расположение элементов в 4 столбца  
+form-2cols - в 2 столбца
+Просто быстрый способ организовать сетку.
+*/
+
+.acc-2cols {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	column-gap: 10px;
+  	grid-row-gap: 10px;  
+}
+
+.acc-2cols > .acc-row {
+  grid-column: 1 / 3;
+}
+
+
+.acc-4cols {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-column-gap: 10px;
+  grid-row-gap: 10px;  
+}
+
+/* элемент шириной в 4 столбца */
+.acc-4cols > .acc-row {
+  grid-column: 1 / 5;
+}
+
+
+

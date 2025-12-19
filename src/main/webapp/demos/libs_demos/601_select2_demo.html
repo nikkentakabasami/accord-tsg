@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>demo</title>
+
+<script src="../../jquery31/js/jquery.js"></script>
+
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+<link rel="stylesheet" type="text/css" href="../../accord/css/accord.css">
+<link rel="stylesheet" type="text/css" href="../../accord/css/acc-form-elements.css">
+
+
+<script src="../js/601-demo.js"></script>
+
+
+</head>
+<body>
+
+  <h2>библиотека select2</h2>
+
+      <div id="form4" class="form-panel acc-2cols acc-form-style1" style="grid-template-columns: 200px 1fr;">
+      
+        <label>Simple select</label>
+        <select id="select1">
+          <option value="">-</option>
+          <option value="1">Banana</option>
+          <option value="2">Cherry</option>
+          <option value="3">Lemon</option>
+        </select>
+        
+        <label>Select2 by default</label>
+        <select id="select2">
+          <option value="">-</option>
+          <option value="1">Banana</option>
+          <option value="2">Cherry</option>
+          <option value="3">Lemon</option>
+        </select>
+
+        <label>Select5 - bugged layout</label>
+        <select id="select5">
+        </select>
+        
+      
+      </div>
+
+
+<!-- 
+        <select id="select4">
+ -->
+
+      <div id="form4" class="form-panel acc-2cols" style="grid-template-columns: 200px 1fr;">
+
+
+        <label>Select3 - loads options from data</label>
+        <select id="select3">
+        </select>
+
+
+        <label>Select4 - multiselect</label>
+        <select id="select4" multiple="multiple" >
+          <option value="1">Banana</option>
+          <option value="2">Cherry</option>
+          <option value="3">Lemon</option>
+          <option value="4">Sugar</option>
+          <option value="5">Apple</option>
+        </select>
+
+
+
+      </div>
+
+
+
+
+
+</body>
+</html>

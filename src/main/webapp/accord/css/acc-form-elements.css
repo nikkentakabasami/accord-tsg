@@ -13,19 +13,23 @@
 	font-family: "Josefin Sans", sans-serif;
 }
 
-.form-group select {
+
+/* класс acc-form-style1 придаёт элементам ввода приличный вид */
+
+
+.acc-form-style1 select {
 	appearance: none;
 	width: 100%;
 	height: 100%;
 }
 
-.form-group .select-wrapper {
+.acc-form-style1 .select-wrapper {
 	position: relative;
 	width: 100%;
 	max-width: 300px;
 }
 
-.form-group .select-wrapper::after {
+.acc-form-style1 .select-wrapper::after {
 	content: "▼";
 	font-size: 1rem;
 	top: 3px;
@@ -33,8 +37,8 @@
 	position: absolute;
 }
 
-.form-group>button, .form-group>label, .form-group>input, .form-group select,
-	.form-group>progress, .form-group>meter {
+.acc-form-style1 button, .acc-form-style1 label, .acc-form-style1 input, .acc-form-style1 select,
+	.acc-form-style1 progress, .acc-form-style1 meter {
 	display: block;
 	font-family: inherit;
 	font-size: 100%;
@@ -46,17 +50,29 @@
 	height: 30px;
 }
 
-.form-group input[type="text"], .form-group input[type="number"], .form-group input[type="date"] {
+.acc-form-element-style1 {
+	display: block;
+	font-family: inherit;
+	font-size: 100%;
+	margin: 0;
+	box-sizing: border-box;
+	width: 100%;
+	max-width: 300px;
+	padding: 5px;
+	height: 30px;
+}
+
+.acc-form-style1 input[type="text"], .acc-form-style1 input[type="number"], .acc-form-style1 input[type="date"] {
 	box-shadow: inset 1px 1px 3px #cccccc;
 	border-radius: 5px;
 }
 
-.form-group label {
+.acc-form-style1 label {
 	font-weight: 700;
 	margin-bottom: 5px;
 }
 
-.form-button {
+.acc-form-style1 .form-button {
 	margin: 0 auto;
     font-size: 100%;
     width: 100%;
@@ -67,8 +83,3 @@
 
 
 
-.t3-two-col {
-	grid-template-columns: 1fr 1fr;
-	display: grid;
-	column-gap: 10px;
-}

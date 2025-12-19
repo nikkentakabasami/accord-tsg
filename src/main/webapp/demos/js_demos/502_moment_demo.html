@@ -16,7 +16,7 @@
 <script type="module" src="../../accord/js/accord-publish.js"></script>
 
 
-<script src="../js/501-demo.js"></script>
+<script src="../js/502-demo.js"></script>
 
 
 
@@ -27,17 +27,19 @@
 <div style="display: flex; flex-direction: column;gap: 10px;">
 
         <pre class="acc-code-panel">
-  let d1= new Date();
-  let d2 = new Date(2014, 11, 31, 12, 30, 0);
-  let d3 = new Date(2011, 0, 1, 0, 0, 0, 0);  // 1 января 2011, 00:00:00  (январь - нулевой месяц)
-  let d4 = new Date(2011, 0, 1);    // то же самое
-  let d5 = new Date(1241777298123); //milliseconds since 1970/01/01
-  let d6 = new Date("May 21, 1958 10:15 AM");
-  let d7 = new Date(2013, 0, 32);   // 1 февраля 2013!
-
-  //копирование
-  let copyDate1 = new Date(d1);
-  let copyDate2 = new Date(d1.getTime());
+  let m = moment();				//текущее время
+	
+  //задание даты строкой в формате ISO 8601
+  let m1 = moment("2013-02-08");
+  let m2 = moment("2013-02");
+  let m3 = moment("2013-039");
+  let m4 = moment("20130208");  //full date
+  let m5 = moment("201303");    //year+month
+  let m6 = moment("2013");
+  let m7 = moment("2013-02-08 09:30");
+  let m8 = moment("2013-02-08 09:30:26");
+  let m9 = moment("2013-02-08 09:30:26.123");
+	
   
   
 </pre>
