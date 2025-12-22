@@ -6,6 +6,10 @@ export { TsgDataSource1 };
 
 class TsgDataSource1 {
 
+	fruitsList=["Apple","Banana","Blackberry","Blueberry","Cherry","Cranberry","Grapes","Kiwi","Mango","Orange","Peach","Pear","Pineapple","Raspberry","Strawberry","Watermelon"];
+	
+	fruits = [];
+	
 	customers = [
 		{ id: 1568, name: "Yamada Taro" },
 		{ id: 2599, name: "Ivanov Ivan" },
@@ -25,8 +29,17 @@ class TsgDataSource1 {
 
 	rows = null;
 
+	
+	
+	
 	constructor(rowCount) {
 
+		
+		this.fruitsList.forEach((f,ind)=>{
+			this.fruits.push({ id: ind+1, name: f });
+		})
+		
+		
 		for (let i = 0; i < 14; i++) {
 
 //			let r = accordUtils.random(100);
@@ -56,6 +69,7 @@ class TsgDataSource1 {
 				duration: dur+" дней",
 				percentComplete: accordUtils.random(100,5),
 				effortDriven: (accordUtils.random(10)<3),
+				fruit: this.fruits[accordUtils.random(this.fruits.length)],
 				odd: (i % 2 == 1)
 			};
 			this.rows[i] = r;

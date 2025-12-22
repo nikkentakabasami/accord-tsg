@@ -543,3 +543,15 @@ body {
 	width: 50px;
 }
 
+
+.multi-select .multi-select-options {
+  width: 300px;
+  position: fixed;
+}
+
+.multi-select {
+  --input-min-height: 20px;
+  --spacing-medium: 5px;
+  --spacing-large: 5px;
+  
+}

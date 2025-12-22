@@ -241,15 +241,21 @@ export class FiltersModel  extends AbstractModule {
 		
 		for (let columnId in this.$actualFilterElements) {
 			
-//			let $afe = this.$actualFilterElements[columnId];
+			let $afe = this.$actualFilterElements[columnId];
 			let $f = this.$filters[columnId];
 			
-			let filterVal = $f.val();
+			let filterVal = $afe.data("filterValue");
+			if (!filterVal){
+				filterVal = $f.val();
+			}
 			
-//			if (Array.isArray(filterVal)){
-//				filterVal = filterVal.join(',');
-//			}
+			if (Array.isArray(filterVal)){
+				filterVal = filterVal.join(',');
+			}
 			
+			if (!filterVal){
+				continue;
+			}
 			if (filterVal.trim){
 				filterVal = filterVal.trim();
 			}

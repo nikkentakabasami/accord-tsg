@@ -3,14 +3,7 @@
 import { TsgDataSource1 } from './tsgDataSource1.js'
 import { tsgUtils, TetSlickGrid, accordUtils, DateRangeModule, NumberRangeModule } from '../tet.slick.grid-bundle.js';
 
-//import { accordUtils } from '../../accord/js/accord-bundle.js'
-//import {MultiselectModule} from '../mtp/tet.slick.grid.multiselect.js';
-//import {DateRangeModule} from '../mtp/tet.slick.grid.dateRange.js';
-//import {NumberRangeModule} from '../mtp/tet.slick.grid.numberRange.js';
-
-
-
-
+import {initMultiselect,MultiselectModule} from '../mtp/tet.slick.grid.multiselect2.js';
 
 let myGrid;
 let dataSource;
@@ -105,11 +98,13 @@ $(function() {
   myGrid = new TetSlickGrid("#myGrid", dataSource.rows, columns, options);
 
   let customerColumn = myGrid.model.columnsById["customer"];
-  customerColumn.filterInput = accordUtils.generateSelect("customer", dataSource.customers);
-
+  customerColumn.filterInput = accordUtils.generateSelect("customer", dataSource.customers, false, true);
+//  customerColumn.filterInput.attr("multiple","multiple");
+  
   let fruitColumn = myGrid.model.columnsById["fruit"];
-  fruitColumn.filterInput = accordUtils.generateSelect("fruit", dataSource.fruits);
+  fruitColumn.filterInput = accordUtils.generateSelect("fruit", dataSource.fruits, true);
 
+  //multiple="multiple"
 
   //Дополнительный модуль.
   //Инициализирует поля фильтрации для ввода даты.
@@ -128,7 +123,7 @@ $(function() {
   //селекты должны иметь атрибут multiple!
   //Например:
   //<select id="section" name="section" multiple="multiple"></select>
-  //  let mm = new MultiselectModule(myGrid);
+  let mm = new MultiselectModule(myGrid);
 
 
 

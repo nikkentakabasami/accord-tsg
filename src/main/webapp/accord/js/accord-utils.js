@@ -79,13 +79,17 @@ function parseDate(dateStr) {
  * withNullOption - включать ли строку с пустым значением.
  * Возвращает jquery объект $select.
  */
-function generateSelect(name, data, withNullOption = true) {
+function generateSelect(name, data, withNullOption = true, multi = false) {
 	
 	let $select = $(`select[name='${name}']`);
 	if ($select.length==0){
 		$select = $(`<select name="${name}"></select>`);
 	}
-	
+
+	if (multi){
+		$select.attr("multiple","multiple");
+	}
+		
 	fillSelect($select, data, withNullOption);
 	
 	return $select;	

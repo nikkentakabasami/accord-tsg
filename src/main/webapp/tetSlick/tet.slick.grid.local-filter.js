@@ -61,6 +61,12 @@ export class LocalFilter {
 					return;
 				}
 				
+				if (Array.isArray(filterVal) && filterVal.length==0){
+					return;
+				}
+				
+				
+				
 				if (col.matchType==tsgUtils.matchTypes.AUTO_CALC){
 					
 					if (firstRow){
@@ -236,12 +242,30 @@ function matchBooleanFunction(filterVal, val){
 	return String(val) == filterVal;
 }
 
+function matchMultiNumberFunction(filterVal, val){
+//	if (filterVal.length==0){
+//		return true;
+//	}
+//	return filterVal.map(v=>parseInt(v)).indexOf(val)>=0;
+	return filterVal.indexOf(val)>=0;
+}
+
 	
 function calcMatchNumberFunction(filterVal){
 	
 	let result;
+
 	
-	if (filterVal.startsWith(">=")){
+	if (filterVal.indexOf(",")>=0){
+//		let arr = filterVal.split(",").map(v=>parseInt(v));
+		let arr = filterVal.split(",");
+		result = (filterVal, val) => {
+			return arr.indexOf(val)>=0;
+		}
+		
+	} else if (Array.isArray(filterVal)){
+		result = matchMultiNumberFunction;
+	} else if (filterVal.startsWith(">=")){
 		let fvi = filterVal.substring(2);
 		result = (filterVal, val) => {
 			return val>=fvi;

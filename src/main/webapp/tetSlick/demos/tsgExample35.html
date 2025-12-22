@@ -53,13 +53,17 @@
 
 Так добавлен выпадающий список для поля "section"(Раздел) и опции выбора для поля "id".
 
+
+Для поля id мы задали своё текстовое поле ввода с вариантами выбора (через атрибут list)
+
+
 2)Использовать опцию столбца "filterInput".
 В неё можно поместить jquery объект с элементом-фильтром.
 Либо функцию, генерирующую фильтр.
 
-Для столбца "Окончание" такой фильтр сгенерирован функцией generateBooleanSelect:
+Для столбца "Выполнено" такой фильтр сгенерирован функцией generateBooleanSelect:
 {   id: "effortDriven", 
-    name: "Окончание",
+    name: "Выполнено",
     width: 150,
     filterInput: accordUtils.generateBooleanSelect,
     formatter: tsgUtils.checkmarkFormatter },

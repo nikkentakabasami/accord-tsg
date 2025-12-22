@@ -12,9 +12,12 @@
 <script type="module" src="../../accord/js/accord-publish.js"></script>
 
 
+<script type="text/javascript" src="../../misc-libs/MultiSelect.js"></script>
+<link href="../../misc-libs/MultiSelect.css" rel="stylesheet" type="text/css">
+
+
 <link rel="stylesheet" href="../css/tet.slick.grid.css" type="text/css" />
 <link rel="stylesheet" href="tsgDemoStyles.css" />
-<script type="text/javascript" src="testDataSources.js"></script>
 <script type="module" src="tsg-filter-decorator-demo.js"></script>
 <script>
     $(function() {
@@ -23,6 +26,13 @@
 </script>
 
 <style>
+
+.multi-select {
+  --input-min-height: 20px;
+  --spacing-medium: 5px;
+  --spacing-large: 5px;
+  
+}
 
 div.acc-button-panel-tight input {
   flex-grow: 1;
@@ -69,14 +79,8 @@ div.acc-button-panel-tight input {
       <h3>simple form</h3>
 
       <div class="form-group">
-        <label for="select">Select box:</label>
-        <div class="select-wrapper">
-          <select id="select" name="select">
-            <option>Banana</option>
-            <option>Cherry</option>
-            <option>Lemon</option>
+          <select id="select1" name="select1">
           </select>
-        </div>
       </div>
 
       <div class="form-group">

@@ -44,7 +44,7 @@ export class MultiselectModule  extends AbstractModule {
 				$hiddenInput.remove();
 			}
 			
-			initMultiselect($filter, null, initalVals, () => {
+			initMultiselect($filter, null, initalVals, val => {
 				this.grid.filtersModel.applyMainFilter();
 			});
 			return;
