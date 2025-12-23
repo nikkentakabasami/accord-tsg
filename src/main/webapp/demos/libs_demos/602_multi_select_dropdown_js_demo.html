@@ -5,16 +5,23 @@
 <meta name="viewport" content="width=device-width,minimum-scale=1">
 <title>Multi Select JS</title>
 
+<link rel="stylesheet" type="text/css" href="../../accord/css/accord.css">
+<script src="../../jquery31/js/jquery.js"></script>
+
 <script type="text/javascript" src="../../misc-libs/MultiSelect.js"></script>
 <link href="../../misc-libs/MultiSelect.css" rel="stylesheet" type="text/css">
 
-<script src="../../jquery31/js/jquery.js"></script>
 <script src="../js/602-demo.js"></script>
 <link href="../css/demo602.css" rel="stylesheet" type="text/css">
 
 
+
 </head>
 <body>
+
+
+<div class="acc-2cols">
+
   <form>
 
     <h1>Multi Select Dropdown</h1>
@@ -41,15 +48,37 @@
 
     <label for="cars">Car Manufacturers</label>
     <select id="cars" name="cars" multiple>
-      <option value="Audi">Audi</option>
-      <option value="BMW">BMW</option>
-      <option value="Chevrolet">Chevrolet</option>
+      <option value="1">Audi tm</option>
+      <option value="2">BMW tm</option>
+      <option value="3">Chevrolet tm</option>
     </select>
 
     <label for="select3">Dynamic Select</label>
     <select id="select3" name="dynamic"></select>
 
   </form>
+
+  <textarea rows="20" cols="100" id="log1"></textarea>
+
+
+</div>
+
+
+  <div class="acc-button-panel">
+    <button id="b2" type="button" class="acc-btn">createMultiSelects()</button>
+    <button id="b1" type="button" class="acc-btn">setValues(values) - выбор значений</button>
+    <button id="b3" type="button" class="acc-btn">destroy()</button>
+    
+    <button id="b4" type="button" class="acc-btn">clear()</button>
+    <button id="b5" type="button" class="acc-btn">set new data</button>
+    <button id="b6" type="button" class="acc-btn">selectedValues()</button>
+    <button id="b7" type="button" class="acc-btn"></button>
+    <button id="b8" type="button" class="acc-btn"></button>
+    
+    
+  </div>
+
+
 
 
 

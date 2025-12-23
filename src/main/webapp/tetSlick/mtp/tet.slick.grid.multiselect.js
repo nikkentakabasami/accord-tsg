@@ -51,6 +51,7 @@ export class MultiselectModule  extends AbstractModule {
 			
 		});
 		
+		//перехватывает событие onFilterSetValue и задаёт значение в фильтр сам.
 		this.grid.addEventListener(tsgUtils.tableEvents.onFilterSetValue, e => {
 			
 			if (e.detail.handled){

@@ -33,7 +33,7 @@ export class MultiselectModule  extends AbstractModule {
 				return;
 			} 
 		
-			this.multiselects[e.detail.column.name] = $filter;
+//			this.multiselects[e.detail.column.name] = $filter;
 		
 			let filterName = $filter.attr('name');
 			
@@ -47,35 +47,38 @@ export class MultiselectModule  extends AbstractModule {
 				$hiddenInput.remove();
 			}
 			
-			initMultiselect($filter, null, initalVals, () => {
+			let ms = new SlickGridMultiSelect($filter, null, initalVals, () => {
 				this.grid.filtersModel.applyMainFilter();
 			});
+			
+//			e.detail.column.ms = ms;
+			this.multiselects[e.detail.column.id] = ms;
+			
+			
+//			initMultiselect($filter, null, initalVals, () => {
+//				this.grid.filtersModel.applyMainFilter();
+//			});
 			return;
 			
 		});
 
-		/*		
 		this.grid.addEventListener(tsgUtils.tableEvents.onFilterSetValue, e => {
 			
 			if (e.detail.handled){
 				return;
 			}
 			
-			let $filter = e.detail.$filter;
-			let val = e.detail.filterValue;
-		
-			if ($filter.attr('multiple')!='multiple'){
+			let ms = this.multiselects[e.detail.filterName]
+			if (!ms){
 				return;
 			}
-				
-			$filter.multiselect('deselectAll', false);
-			$filter.multiselect('select', [e.detail.filterValue]);
+			let val = e.detail.filterValue;
+
+			ms.setValues(val);
 			
 			e.detail.handled = true;
-
 						
 		});	
-		*/
 		
 		
 		
@@ -90,6 +93,132 @@ export class MultiselectModule  extends AbstractModule {
 
 
 
+
+
+class SlickGridMultiSelect {
+	
+	currFilterVal = null;
+	id; 
+	multiSelect;
+		
+	$options = null;
+	$element = null;
+	//высота преобразованного элемента ввода
+	topShift = 0;
+		
+	
+	
+	refreshElements(){
+		this.$element = $(this.multiSelect.element);
+		this.$options = this.$element.find(".multi-select-options");
+		this.topShift =   this.$element.outerHeight();
+	}
+	
+	
+	setValues(val){
+		
+		if (!val){
+			this.multiSelect.clear();
+			this.refreshElements();
+			return;
+		}
+		
+		if (typeof val === 'number') {
+			val = [String(val)];
+		} else if (typeof val === 'string') {
+			val = val.split(',');
+		}
+		this.multiSelect.setValues(val);
+		this.refreshElements();
+		
+	}
+	
+	constructor($filter, data, valueToSelect, setValueCallback){
+	
+
+		this.id = $filter.attr("id"); 
+		
+		let options = {
+			search: false,
+			selectAll: true,
+			listAll: false,   //показывать выбранные значения в select. default: true
+			placeholder: '-',
+			onDropdownShow: val => {
+				
+				
+				multiSelect_customer1.element
+				
+				let pos = accordUtils.calcElementPosition(this.$element);			
+				
+				this.$options.css("left",pos.x+"px");
+				this.$options.css("top",(pos.y+this.topShift)+"px");
+				this.currFilterVal = val.join(",")			
+			},
+			onDropdownHide: val => {
+				console.log("onDropdownHide",val);
+				
+				let newVal = val.join(",")
+				this.$element.data("filterValue",newVal);
+				
+				if (this.currFilterVal!=newVal && setValueCallback){
+					setValueCallback(newVal);
+				}
+			},
+			
+		}	
+		
+		if (data){
+			
+			data.forEach(item=>{
+				if (item.id){
+					item.value = item.id;
+				}
+				if (item.name){
+					item.text = item.name;
+				}
+				
+				if (valueToSelect){
+					
+					if (Array.isArray(valueToSelect)){
+						if (valueToSelect.indexOf(item.value)>=0){
+							item.selected = true;
+						}
+					} else if (valueToSelect==item.value){
+						item.selected = true;
+					}
+				}
+			});
+			options.data = data;
+		}
+
+		
+	  this.multiSelect = new MultiSelect($filter[0], options);
+		
+	  window["multiSelect_"+this.id] = this; 
+	  
+	  //второй способ выбора
+	//  ms.setValues(valueToSelect)
+
+	this.refreshElements();
+	
+		  
+//	  this.$element = $("div#"+this.id);
+//	  this.$options = this.$element.find(".multi-select-options");
+
+	  
+		  		
+		
+		
+	}
+	
+	
+	
+}
+
+
+
+
+/*
 export function initMultiselect($filter, data, valueToSelect, setValueCallback){
 
 	let currFilterVal = null;
@@ -170,12 +299,24 @@ export function initMultiselect($filter, data, valueToSelect, setValueCallback){
 	
   const ms = new MultiSelect($filter[0], options);
 	
+  //второй способ выбора
+//  ms.setValues(valueToSelect)
   
   $newFilter = $("#"+id);
   $options = $newFilter.find(".multi-select-options");
   
   topShift =   $newFilter.outerHeight();
+
   
+  
+  
+  
+  
+  
+  
+  
+  
+    
   return ms;
   
 //  $options = $("#"+id+" .multi-select-options");
@@ -183,7 +324,7 @@ export function initMultiselect($filter, data, valueToSelect, setValueCallback){
   
 }
 
-
+*/
 
 
 

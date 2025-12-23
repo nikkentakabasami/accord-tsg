@@ -18,9 +18,13 @@ boolean, int inputs
 ---------------
 tsg
 
-bundle module
 
-выводить ширины строк в консоль
+indexOf - replace with - includes
+
+
+
+
+
 
 
 servlet rows

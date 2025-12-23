@@ -3,7 +3,7 @@
 import { TsgDataSource1 } from './tsgDataSource1.js'
 import { tsgUtils, TetSlickGrid, accordUtils, DateRangeModule, NumberRangeModule } from '../tet.slick.grid-bundle.js';
 
-import {initMultiselect,MultiselectModule} from '../mtp/tet.slick.grid.multiselect2.js';
+import {MultiselectModule} from '../mtp/tet.slick.grid.multiselect2.js';
 
 let myGrid;
 let dataSource;

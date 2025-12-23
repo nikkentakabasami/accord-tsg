@@ -33,13 +33,9 @@ export class FiltersModel  extends AbstractModule {
 		super(grid);
 		
 		this.grid.addEventListener(tsgUtils.tableEvents.sortChanged, e => {
-			
 			this.grid.dataLoader.updateFilter(resp => {
 				this.applyMainFilter();
-//				this.grid.refresh(true);
 			})
-			
-			
 		});
 		
 		if (this.grid.model.options.enableHeaderRowFilters) {
@@ -349,6 +345,12 @@ export class FiltersModel  extends AbstractModule {
 	fixFilterValue(columnId, fieldValue){
 		
 		let $filterInput = this.$filters[columnId];
+	
+		//поле ввода обработано	
+		if ($filterInput.parent().length==0){
+			return fieldValue;
+		}
+		
 		if ($filterInput.is("select")){
 			let $option = $filterInput.find("option:contains('"+fieldValue+"')");
 			if ($option.length>0){
