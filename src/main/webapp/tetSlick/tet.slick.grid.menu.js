@@ -190,7 +190,9 @@ export class GridMenuModel1  extends AbstractModule {
 			let row = this.currentRow;
 
 			let filtersModel = this.grid.filtersModel
-		
+			let filter = filtersModel.filters[this.currentColumn.id];
+			
+			
 			//копировать содержимое ячейки в буфер обмена
 			if (itemId=="cbv"){
 				if (!row){
@@ -210,22 +212,15 @@ export class GridMenuModel1  extends AbstractModule {
 				
 //				let fieldValue = row[this.currentColumn.id];
 				let fieldValue = this.grid.model.extractRowCellValue(row, this.currentColumn);
-				
-				fieldValue = filtersModel.fixFilterValue(this.currentColumn.id, fieldValue, true)
-				
-				 this.grid.filtersModel.setFilterValueForField(this.currentColumn.id, fieldValue, true);
-				
+				 filter.setFilterVal(fieldValue, true);
+			
 
 			} else if (itemId=="empty"){
-				let fieldValue = filtersModel.fixFilterValue(this.currentColumn.id, "-1")
-				filtersModel.setFilterValueForField(this.currentColumn.id, fieldValue, true);
+				filter.setFilterVal("-1", true);
 			} else if (itemId=="not-empty"){
-				let fieldValue = filtersModel.fixFilterValue(this.currentColumn.id, "-2")
-				filtersModel.setFilterValueForField(this.currentColumn.id, fieldValue, true);
-				
+				filter.setFilterVal("-2", true);
 			} else if (itemId=="all"){
-				 filtersModel.setFilterValueForField(this.currentColumn.id, "", true);
-				
+				filter.clear(true);
 			}
 		
 		

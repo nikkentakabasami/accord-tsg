@@ -18,10 +18,10 @@ boolean, int inputs
 ---------------
 tsg
 
-
+hidden fields - брать оттуда изначальные значения
 indexOf - replace with - includes
 
-
+пустые/непустые значения в фильтрах
 
 
 

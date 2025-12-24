@@ -101,21 +101,21 @@ $(function() {
   customerColumn.filterInput = accordUtils.generateSelect("customer", dataSource.customers, false, true);
 //  customerColumn.filterInput.attr("multiple","multiple");
   
-  let fruitColumn = myGrid.model.columnsById["fruit"];
-  fruitColumn.filterInput = accordUtils.generateSelect("fruit", dataSource.fruits, true);
+//  let fruitColumn = myGrid.model.columnsById["fruit"];
+//  fruitColumn.filterInput = accordUtils.generateSelect("fruit", dataSource.fruits, true);
 
   //multiple="multiple"
 
   //Дополнительный модуль.
   //Инициализирует поля фильтрации для ввода даты.
   //На них должен быть назначен класс .date-input.
-  let dm = new DateRangeModule(myGrid);
+//  let dm = new DateRangeModule(myGrid);
 
 
   //Дополнительный модуль.
   //Инициализирует поля фильтрации для ввода чисел.
   //На них должен быть назначен класс .number-input.
-  let nm = new NumberRangeModule(myGrid);
+//  let nm = new NumberRangeModule(myGrid);
 
 
   //Инициализирует мультиселекты в полях фильтрации.
