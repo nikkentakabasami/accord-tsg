@@ -18,7 +18,7 @@ export class Filter {
 
   initiated = false;
   
-  initalValue;
+  initalValue = null;
 
   constructor(grid, column, $filter) {
 	
@@ -26,6 +26,11 @@ export class Filter {
 		this.columnId = column;
 	} else {
 		this.columnId = column.id;
+		if (column.initalFilterValue){
+			this.initalValue = column.initalFilterValue;
+		}
+		
+		
 	}
 	
 	
@@ -41,21 +46,19 @@ export class Filter {
   //инициализация после помещения в строку фильтрации
   init() {
 	this.initiated = true;
-
-	this.initalValue = null;
+	
 	if (this.grid) {
-	  let $hiddenInput = this.grid.filtersModel.$filterContainer.find("input[name='" + this.columnId + "']");
+		
+	  let $hiddenInput = this.grid.filtersModel.$filterContainer.find("input[type='hidden'][name='" + this.columnId + "']");
 	  if ($hiddenInput.length > 0) {
 		this.initalValue = $hiddenInput.val();
 		$hiddenInput.remove();
-		
-		if (this.initalValue && this.$filter.is("input")){
-			this.setFilterVal(this.initalValue);
-		}
-		
 	  }
 	}
 	
+	if (this.initalValue && this.$filter.is("input")){
+		this.setFilterVal(this.initalValue);
+	}
 	
 	
   }

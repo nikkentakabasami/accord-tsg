@@ -30,6 +30,7 @@ var columns = [
 	captionField: "duration",
 	sortField: "durationInt",
 	name: "Длительность",
+	initalFilterValue: "24",
 	width: 150
 	},
 	tsgUtils.mkColDesc("percentComplete", "% Завершения", 150),
@@ -110,7 +111,7 @@ $(function() {
   let fruitColumn = myGrid.model.columnsById["fruit"];
   
   //Выбираем банан
-  fruitColumn.filterInput = accordUtils.generateSelect("fruit", dataSource.fruits, false,false,2);
+  fruitColumn.filterInput = accordUtils.generateSelect("fruit", dataSource.fruits, true,false,2);
 
   //Инициализирует мультиселекты в полях фильтрации.
   //Для использования требуется подключить библиотеки bootstrap 3 и bootstrap-multiselect
