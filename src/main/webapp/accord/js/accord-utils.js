@@ -332,11 +332,14 @@ function decorInput($input, options) {
 
     $input.wrap('<div class="acc-button-panel-tight"></div>');
     if (options.placeButtonBefore) {
+	  //вставляем кнопку перед $input
       $input.before($calButton)
     } else {
       $input.after($calButton)
     }
 
+	return $input.parent();
+	
   }
 
 

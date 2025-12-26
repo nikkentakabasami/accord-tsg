@@ -551,7 +551,9 @@ body {
 
 .multi-select {
   --input-min-height: 20px;
-  --spacing-medium: 5px;
+  --spacing-medium: 3px;
   --spacing-large: 5px;
+
+  --spacing-smaller: 0px;
   
 }

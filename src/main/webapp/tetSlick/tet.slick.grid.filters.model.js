@@ -124,14 +124,6 @@ export class FiltersModel  extends AbstractModule {
 		  }
 		}		
 		
-		/*
-		if ($filter.is('select')){
-			filterObject = new SelectFilter(this.grid, column,$filter);
-		} else {
-			filterObject = new Filter(this.grid, column,$filter);
-		}
-		*/
-		
 		filterObject.addChangeListener(	event => {
 			this.applyMainFilter();
 	    });

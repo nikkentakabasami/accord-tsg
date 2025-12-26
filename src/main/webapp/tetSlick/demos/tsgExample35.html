@@ -61,19 +61,26 @@
 В неё можно поместить jquery объект с элементом-фильтром.
 Либо функцию, генерирующую фильтр.
 
-Для столбца "Выполнено" такой фильтр сгенерирован функцией generateBooleanSelect:
+accordUtils содержит функции для генерации элемента select на основе массива данных.
+
+
+Для столбца "Выполнено" такой фильтр сгенерирован функцией accordUtils.generateBooleanSelect:
 {   id: "effortDriven", 
     name: "Выполнено",
     width: 150,
     filterInput: accordUtils.generateBooleanSelect,
     formatter: tsgUtils.checkmarkFormatter },
 
-Для столбца "customer" мы генерируем select на основе массива объектов функцией generateSelect:
+Для столбца "customer" мы генерируем select на основе массива объектов функцией accordUtils.generateSelect:
 
   let customerColumn = myGrid.model.columnsById["customer"];
   customerColumn.filterInput = accordUtils.generateSelect("customer",dataSource.customers);
 
 3)Использовать дополнительные модули для декорирования фильтров.
+
+Часто бывает необходимо обработать стандартые элементы фильтрации, чтобы добавить им функционал через сторонние библиотеки.
+Подобным занимаются дополнительные модули:
+
 
 Для выбора диапазона дат используется модуль DateRangeModule:
 

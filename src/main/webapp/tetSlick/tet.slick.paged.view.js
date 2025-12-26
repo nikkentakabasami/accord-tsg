@@ -8,7 +8,7 @@ import {GridMenuModel1} from './tet.slick.grid.menu.js';
 import {ColumnOrderDialogModel} from './tet.slick.grid.column.dialog.js';
 import {v2Mode} from './mtp/tet.slick.mtp.js';
 
-import {MultiselectModule,initMultiselect} from './tet.slick.grid.multiselect.js';
+import {MultiselectModule,initMultiselect} from './mtp/tet.slick.grid.multiselect-bs.js';
 import {DateRangeModule} from './mtp/tet.slick.grid.dateRange.js';
 import {NumberRangeModule} from './mtp/tet.slick.grid.numberRange.js';
 import {tsgUtils} from './tet.slick.grid.utils.js';

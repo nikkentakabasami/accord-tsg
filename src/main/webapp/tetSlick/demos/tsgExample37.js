@@ -3,7 +3,7 @@
 import { TsgDataSource1 } from './tsgDataSource1.js'
 import { tsgUtils, TetSlickGrid, accordUtils, DateRangeModule, NumberRangeModule } from '../tet.slick.grid-bundle.js';
 
-
+import {BSMultiselectModule} from '../mtp/tet.slick.grid.multiselect-bs.js';
 
 let myGrid;
 let dataSource;
@@ -30,22 +30,6 @@ var columns = [
 	captionField: "duration",
 	sortField: "durationInt",
 	name: "Длительность",
-	width: 150
-  },
-  tsgUtils.mkColDesc("percentComplete", "% Завершения", 150),
-  {
-	id: "start",
-	captionField: "startStr",
-	valueField: "startStr",
-	sortField: "start",
-	name: "Начало",
-	width: 150
-  }, {
-	id: "finish",
-	captionField: "finishStr",
-	valueField: "finishStr",
-	sortField: "finish",
-	name: "Окончание",
 	width: 150
 	}, {
 	id: "fruit",
@@ -98,22 +82,24 @@ $(function() {
   myGrid = new TetSlickGrid("#myGrid", dataSource.rows, columns, options);
 
   let customerColumn = myGrid.model.columnsById["customer"];
-  customerColumn.filterInput = accordUtils.generateSelect("customer", dataSource.customers);
-
+  customerColumn.filterInput = accordUtils.generateSelect("customer", dataSource.customers, false, true);
+//  customerColumn.filterInput.attr("multiple","multiple");
+  
   let fruitColumn = myGrid.model.columnsById["fruit"];
-  fruitColumn.filterInput = accordUtils.generateSelect("fruit", dataSource.fruits);
+  fruitColumn.filterInput = accordUtils.generateSelect("fruit", dataSource.fruits, false,true);
 
+  //multiple="multiple"
 
   //Дополнительный модуль.
   //Инициализирует поля фильтрации для ввода даты.
   //На них должен быть назначен класс .date-input.
-  let dm = new DateRangeModule(myGrid);
+//  let dm = new DateRangeModule(myGrid);
 
 
   //Дополнительный модуль.
   //Инициализирует поля фильтрации для ввода чисел.
   //На них должен быть назначен класс .number-input.
-  let nm = new NumberRangeModule(myGrid);
+//  let nm = new NumberRangeModule(myGrid);
 
 
   //Инициализирует мультиселекты в полях фильтрации.
@@ -121,7 +107,7 @@ $(function() {
   //селекты должны иметь атрибут multiple!
   //Например:
   //<select id="section" name="section" multiple="multiple"></select>
-  //  let mm = new MultiselectModule(myGrid);
+  let mm = new BSMultiselectModule(myGrid);
 
 
 

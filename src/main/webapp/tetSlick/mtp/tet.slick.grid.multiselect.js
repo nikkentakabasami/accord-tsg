@@ -1,177 +1,180 @@
 
-import {AbstractModule} from '../tet.slick.grid.misc.js';
-import {tsgUtils} from '../tet.slick.grid.utils.js';
+import { AbstractModule, Filter } from '../tet.slick.grid-bundle.js';
 
 
 /**
  * Инициализирует мультиселекты в полях фильтрации.
- * Для использования требуется подключить библиотеки bootstrap 3 и bootstrap-multiselect
- * селекты должны иметь атрибут multiple!
- * Например:
- * <select id="section" name="section" multiple="multiple"></select>
+ * Для использования требуется подключить библиотеку Multi Select Dropdown JS (multi-select-dropdown-js).
+ * См. 602_multi_select_dropdown_js_demo.html
+ * 
+ * Демо:
+ * tsgFilterDecoratorDemo.html
+ * 
+ * Библиотеку я вручную изменил, добавив события onDropdownShow, onDropdownShow!!!
+ * 
  * 
  */
-export class MultiselectModule  extends AbstractModule {
-	
-	//map с инициализированными мультиселектами
-	multiselects = {};
-	
-	
-	constructor(grid){
-		super(grid);
-		
-		this.grid.addEventListener(tsgUtils.tableEvents.beforeInitFilter, e => {
-			
-			let $filter = e.detail.$afe;
-			
-			//Инициализация мультиселектов
-			if (!$filter.is('select') || !$filter.attr('multiple')){
-				return;
-			} 
-		
-			this.multiselects[e.detail.column.name] = $filter;
-		
-			let filterName = $filter.attr('name');
-			
-			//получение начальных значений из скрытых инпутов (они имеют то же id что и селекты)
-			let initalVals = null;
-//			let $hiddenInput = this.grid.filtersModel.$filterContainer.find("input#"+filterName);
-			let $hiddenInput = this.grid.filtersModel.$filterContainer.find("input[name='"+filterName+"']");
-			
-			if ($hiddenInput.length>0){
-				initalVals = $hiddenInput.val();
-				initalVals = initalVals.split(',');
-				$hiddenInput.remove();
-			}
-			
-			initMultiselect($filter, null, initalVals, val => {
-				this.grid.filtersModel.applyMainFilter();
-			});
-			return;
-			
-		});
-		
-		//перехватывает событие onFilterSetValue и задаёт значение в фильтр сам.
-		this.grid.addEventListener(tsgUtils.tableEvents.onFilterSetValue, e => {
-			
-			if (e.detail.handled){
-				return;
-			}
-			
-			let $filter = e.detail.$filter;
-			let val = e.detail.filterValue;
-		
-			//Если пэс очищается, но при этом стоит опция enplantAlwaysSelected - выбираем все значения
-			if ($filter.attr('multiple')!='multiple'){
-				return;
-			}
-				
-			$filter.multiselect('deselectAll', false);
-			$filter.multiselect('select', [e.detail.filterValue]);
-//			if (val){
-//			}
-			
-			e.detail.handled = true;
-			
-			/*
-			if (this.enplantAlwaysSelected && filterName=="enplantName" && filterValue=="") {
-				$filterInput.multiselect('selectAll', false);
-				$filterInput.multiselect('updateButtonText');
-			}
-			*/
-		});	
-		
-		
-		
-	}
-	
-	init(){
-		super.init();
-	}
-	
-	
+export class MultiselectModule extends AbstractModule {
+
+  constructor(grid) {
+	super(grid);
+
+	this.grid.filtersModel.addFilterFactory(filterFactoryMultiselect);
+
+  }
+
+}
+
+function filterFactoryMultiselect(grid, column, $filter) {
+
+  if ($filter.is('select') && $filter.attr('multiple')) {
+	return new MultiSelectFilter(grid, column, $filter);
+  }
+  return null;
+
 }
 
 
 
-export function initMultiselect($filter, data, valueToSelect, setValueCallback){
 
-	let currFilterVal = null;
 
-	//сносим лишний обработчик
-	$filter.unbind("change");
+export class MultiSelectFilter extends Filter {
 
-	$filter.multiselect({
-		numberDisplayed: 1,
-		buttonText: multiselectButtonText,
-		maxHeight: 500,
-		onDropdownShow: event => {
-			currFilterVal = JSON.stringify($filter.val());
-			
-			let $menu = $filter.parent().find("ul.multiselect-container");
-			let rect = $filter.parent().parent()[0].getBoundingClientRect();
-			
-			$menu.css("position","fixed");
-			$menu.css("left",rect.left);
-			$menu.css("top",rect.top+40);
+  currFilterVal = null;
+  multiSelect;
 
-		},
-		onDropdownHide: event => {
-		
-			let $menu = $filter.parent().find("ul.multiselect-container");
-			$menu.css("position","absolute");
-			$menu.css("left",null);
-			$menu.css("top",null);
-			
-			if (JSON.stringify($filter.val())!=currFilterVal){
-				
-				if (setValueCallback){
-					setValueCallback();
-				}
-			}
-		},                
+  $options = null;
 
-		optionClass: element => {
-		
-			if ($(element).hasClass('cssDeleted')){
-				return 'cssDeleted';
-			}
-			return '';
+  //высота преобразованного элемента ввода
+  topShift = 0;
+
+  changeListeners = [];
+
+  data;
+
+  constructor(grid, column, $filter, data) {
+	super(grid, column, $filter);
+	this.data = data;
+
+  }
+
+
+  addChangeListener(l) {
+	this.changeListeners.push(l);
+  }
+
+
+  init() {
+	super.init();
+
+
+	//получение начальных значений из скрытых инпутов
+	let initalVals = null;
+
+	if (this.grid) {
+	  let $hiddenInput = this.grid.filtersModel.$filterContainer.find("input[name='" + this.columnId + "']");
+	  if ($hiddenInput.length > 0) {
+		initalVals = $hiddenInput.val();
+		initalVals = initalVals.split(',');
+		$hiddenInput.remove();
+	  }
+	}
+
+	let options = {
+	  search: false,
+	  selectAll: true,
+	  listAll: false,   //показывать выбранные значения в select. default: true
+	  placeholder: '-',
+	  onDropdownShow: val => {
+		let pos = accordUtils.calcElementPosition(this.$element);
+
+		this.$options.css("left", pos.x + "px");
+		this.$options.css("top", (pos.y + this.topShift) + "px");
+		this.currFilterVal = val.join(",")
+	  },
+	  onDropdownHide: val => {
+		let newVal = val.join(",")
+		this.$element.data("filterValue", newVal);
+
+		if (this.currFilterVal != newVal) {
+		  for (let l of this.changeListeners) {
+			l(newVal);
+		  }
 		}
-	});
-	
-	
-	if (data){
-		$filter.multiselect('dataprovider', data);
+	  },
+
 	}
 
-	//выбираем заданное значение
-	if (valueToSelect){
-		let vals;		
-		if (typeof valueToSelect == 'string'){
-			vals = valsString.split(',');
-		} else {
-			vals = valueToSelect;
+	if (this.data) {
+
+	  this.data.forEach(item => {
+		if (item.id) {
+		  item.value = item.id;
 		}
-		$filter.multiselect('select', vals);
+		if (item.name) {
+		  item.text = item.name;
+		}
+
+		if (initalVals) {
+		  if (initalVals.includes(item.value)) {
+			item.selected = true;
+		  }
+
+		}
+	  });
+	  options.data = this.data;
+	}
+
+
+	this.multiSelect = new MultiSelect(this.$filter[0], options);
+
+	window["multiSelect_" + this.columnId] = this;
+
+	//второй способ выбора
+	//  ms.setValues(valueToSelect)
+
+	this.refreshElements();
+
+  }
+
+  refreshElements() {
+	this.$element = $(this.multiSelect.element);
+	this.$options = this.$element.find(".multi-select-options");
+	this.topShift = this.$element.outerHeight();
+  }
+
+
+
+  setFilterVal(val, apply = false) {
+
+	if (!val) {
+		val = [];
+	} else if (typeof val === 'number') {
+	  val = [String(val)];
+	} else if (typeof val === 'string') {
+	  val = val.split(',');
+	}
+
+	this.multiSelect.setValues(val);
+	this.refreshElements();
+
+	if (apply) {
+	  this.apply();
 	}
 	
+
+
+  }
+
+
+  getFilterVal() {
+	let r = this.multiSelect.selectedValues;
+	return r.join(",");
+	//  return this.$filter.val().trim();
+  }
+
+
 }
-
-
-export function multiselectButtonText(options) {
-	if (options.length == 0) {
-		return '-';
-	}
-	else if (options.length > 1) {
-		return 'выбрано '+options.length;
-	}
-	else {
-		return options[0].label;
-	}
-}
-
-
 
 
 

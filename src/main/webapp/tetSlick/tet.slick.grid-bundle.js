@@ -20,8 +20,9 @@ export { ColumnOrderDialogModel } from './tet.slick.grid.column.dialog.js';
 export { GridMenuModel1 } from './tet.slick.grid.menu.js';
 export { GetRequestPageDataLoader, LocalDataLoader } from './tet.slick.grid.loader.js';
 export { LocalFilter } from './tet.slick.grid.local-filter.js';
-//import {MultiselectModule,initMultiselect} from './tet.slick.grid.multiselect.js';
+export {MultiselectModule,MultiSelectFilter} from './mtp/tet.slick.grid.multiselect.js';
 export { DateRangeModule } from './mtp/tet.slick.grid.dateRange.js';
 export { NumberRangeModule } from './mtp/tet.slick.grid.numberRange.js';
 export { accordUtils, AccDaterangepickerUtils, AccModalDialog, showWaitPanel, hideWaitPanel, TabbedPanel, AccPopup } from '../accord/js/accord-bundle.js';
+export { Filter,SelectFilter } from './tet.slick.grid.filters.js';
 

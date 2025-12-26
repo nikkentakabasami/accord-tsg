@@ -2,7 +2,7 @@
 
 import { tsgUtils, TetSlickGrid, accordUtils, DateRangeModule, NumberRangeModule } from '../tet.slick.grid-bundle.js';
 
-import {MultiselectModule} from '../mtp/tet.slick.grid.multiselect.js';
+import {MultiselectModule} from '../mtp/tet.slick.grid.multiselect-bs.js';
 
 
 var columns = [

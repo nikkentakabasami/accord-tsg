@@ -2,7 +2,7 @@
 
 import {NumberRangeModule} from '../mtp/tet.slick.grid.numberRange.js';
 
-import {MultiSelectFilter} from '../mtp/tet.slick.grid.multiselect2.js';
+import {MultiSelectFilter} from '../mtp/tet.slick.grid.multiselect.js';
 
 import {TsgDataSource1} from './tsgDataSource1.js'
 

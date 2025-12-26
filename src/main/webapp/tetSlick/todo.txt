@@ -18,12 +18,17 @@ boolean, int inputs
 ---------------
 tsg
 
+
+initalVals for filter - demo, test
+
+data filter
+
 hidden fields - брать оттуда изначальные значения
 indexOf - replace with - includes
 
 пустые/непустые значения в фильтрах
 
-
+пока-скрытие столбцов сносит декорации
 
 
 

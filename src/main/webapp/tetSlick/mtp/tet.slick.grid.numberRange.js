@@ -1,12 +1,8 @@
 
 import { AbstractModule } from '../tet.slick.grid.misc.js';
 import { tsgUtils } from '../tet.slick.grid.utils.js';
-
-
 import { AccPopup, accordUtils } from '../../accord/js/accord-bundle.js';
-
-
-
+import { Filter } from '../tet.slick.grid.filters.js';
 
 
 /**
@@ -18,48 +14,47 @@ import { AccPopup, accordUtils } from '../../accord/js/accord-bundle.js';
  */
 export class NumberRangeModule extends AbstractModule {
 
-  filterPopup;
-
-
   constructor(grid) {
 	super(grid);
 
-	this.filterPopup = new FilterPopup();
-
 	if (this.grid) {
-	  this.grid.addEventListener(tsgUtils.tableEvents.beforeInitFilter, e => {
-
-		let $filter = e.detail.$afe;
-
-		//прикручиваем к инпутам с датой диалог для выбора даты
-		if ($filter.is('input.number-input')) {
-		  this.initNumberFilter($filter);
-		}
-	  });
+	  this.grid.filtersModel.addFilterFactory(filterFactoryNumberRange);
 	}
+  }
+}
 
+
+function filterFactoryNumberRange(grid, column, $filter) {
+  if ($filter.is('input.number-input')) {
+	return new NumberRangeFilter(grid, column, $filter);
+  }
+  return null;
+}
+
+
+export class NumberRangeFilter extends Filter {
+
+  static filterPopup;
+
+  constructor(grid, column, $filter) {
+	super(grid, column, $filter);
+	NumberRangeFilter.filterPopup = new FilterPopup();
   }
 
   init() {
 	super.init();
-  }
 
-
-  initNumberFilter($filter) {
-
-	accordUtils.decorInput($filter, {
+	this.$element = accordUtils.decorInput(this.$filter, {
 	  buttonClasses: "acc-btn-calendar",
 	  placeButtonBefore: true,
 	  buttonHandler: e => {
-		$filter.trigger("dblclick");
+		this.$filter.trigger("dblclick");
 	  }
 	});
 
-	$filter.dblclick(e => {
-	  this.filterPopup.showForFilterInput($filter, AccPopup.Layouts.BOTTOM, val => {
-		if (this.grid) {
-		  this.grid.filtersModel.applyMainFilter();
-		}
+	this.$filter.dblclick(e => {
+	  NumberRangeFilter.filterPopup.showForFilterInput(this.$filter, AccPopup.Layouts.BOTTOM, val => {
+		this.apply();
 	  });
 	});
   }
@@ -76,7 +71,6 @@ export class FilterPopup extends AccPopup {
 
   setValueCallback;
   $filter;
-
 
   constructor() {
 	super({
@@ -127,7 +121,6 @@ export class FilterPopup extends AccPopup {
 
   }
 
-
   showForFilterInput($target, layout = Layouts.BOTTOM, setValueCallback = null) {
 	this.setValueCallback = setValueCallback;
 	this.$filter = $target;
@@ -136,12 +129,5 @@ export class FilterPopup extends AccPopup {
 	this.$input1.select();
 
   }
-
-
 }
-
-
-
-
-
 

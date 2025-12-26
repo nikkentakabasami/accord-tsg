@@ -42,15 +42,9 @@ export class Filter {
 
   }
 
-  //очищает значение
   clear(apply = false) {
-	this.$filter.val("");
-	if (apply) {
-	  this.apply();
-	}
+	  this.setFilterVal(null,apply);
   }
-
-
 
   //получение значения фильтра	
   getFilterVal() {
@@ -58,6 +52,7 @@ export class Filter {
   }
 
 
+  //задание значения. Возвращает значение в строковом, откорректированном виде	
   setFilterVal(val, apply = false) {
 	if (!val) {
 	  val = "";
@@ -80,11 +75,14 @@ export class Filter {
 	  this.apply();
 	}
 
+	return val;
 
   }
 
   apply() {
-	this.grid.filtersModel.applyMainFilter();
+	if (this.grid){
+		this.grid.filtersModel.applyMainFilter();
+	}
   }
 
 

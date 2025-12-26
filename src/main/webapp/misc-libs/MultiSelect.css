@@ -189,7 +189,6 @@
   align-items: center;
   border-radius: var(--border-radius);
   cursor: pointer;
-  display: flex;
   align-items: center;
   width: 100%;
   font-size: var(--font-size-larger);
