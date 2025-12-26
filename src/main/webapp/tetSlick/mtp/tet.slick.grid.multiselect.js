@@ -67,7 +67,7 @@ export class MultiSelectFilter extends Filter {
   init() {
 	super.init();
 
-
+/*
 	//получение начальных значений из скрытых инпутов
 	let initalVals = null;
 
@@ -79,6 +79,7 @@ export class MultiSelectFilter extends Filter {
 		$hiddenInput.remove();
 	  }
 	}
+	*/
 
 	let options = {
 	  search: false,
@@ -107,6 +108,11 @@ export class MultiSelectFilter extends Filter {
 
 	if (this.data) {
 
+		let initalVals = null;
+		if (this.initalValue){
+			initalVals = this.initalValue.split(',');
+		}
+		
 	  this.data.forEach(item => {
 		if (item.id) {
 		  item.value = item.id;
@@ -127,14 +133,17 @@ export class MultiSelectFilter extends Filter {
 
 
 	this.multiSelect = new MultiSelect(this.$filter[0], options);
+	this.refreshElements();
 
 	window["multiSelect_" + this.columnId] = this;
 
-	//второй способ выбора
-	//  ms.setValues(valueToSelect)
 
-	this.refreshElements();
-
+	//задание начальных значений
+	if (!this.data && this.initalValue) {
+		this.setFilterVal(this.initalValue);
+	}	
+	
+	
   }
 
   refreshElements() {

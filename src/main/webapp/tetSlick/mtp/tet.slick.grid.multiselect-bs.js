@@ -73,17 +73,6 @@ export class BSMultiSelectFilter extends Filter {
 	super.init();
 
 
-	//получение начальных значений из скрытых инпутов
-	let initalVals = null;
-
-	if (this.grid) {
-	  let $hiddenInput = this.grid.filtersModel.$filterContainer.find("input[name='" + this.columnId + "']");
-	  if ($hiddenInput.length > 0) {
-		initalVals = $hiddenInput.val();
-		initalVals = initalVals.split(',');
-		$hiddenInput.remove();
-	  }
-	}
 
 
 
@@ -137,11 +126,11 @@ export class BSMultiSelectFilter extends Filter {
 	  this.$filter.multiselect('dataprovider', this.data);
 	}
 
-	//выбираем заданное значение
-	if (initalVals) {
-	  setFilterVal(initalVals);
-	}
-
+	//задание начальных значений
+	if (this.initalValue) {
+		this.setFilterVal(this.initalValue);
+	}	
+	
 	window["multiSelect_" + this.columnId] = this;
 
 	this.refreshElements();

@@ -52,7 +52,7 @@
 <body>
 	<div class="basePanel">
 		<div class="titlePanel">
-			<h2>Пример: Мультиселект</h2>
+			<h2>Пример: Bootstrap Мультиселект</h2>
 			<a href="tsgExample37.js" target="source">Source code</a>
 
 		</div>
@@ -67,8 +67,7 @@
 
 			<div id="tab-1" class="tab-content active">
 				<pre class="acc-desc-panel">
-
-В этом примере демонстрируется использование модуля MultiselectModule, который используя библиотеку bootstrap-multiselect
+В этом примере демонстрируется использование модуля BSMultiselectModule, который используя библиотеку bootstrap-multiselect
 
 позволяет использовать выпадающие списки множественного выбора.
 
@@ -79,6 +78,11 @@
 
 
 В данном случае select-ы генерируются функцией generateSelect, после чего задаются на столбцы через опцию filterInput.
+</pre>
+			</div>
+
+			<div id="tab-2" class="tab-content">
+				<pre class="acc-code-panel">
 
   let customerColumn = myGrid.model.columnsById["customer"];
   customerColumn.filterInput = accordUtils.generateSelect("customer", dataSource.customers, false, true);
@@ -87,13 +91,7 @@
   fruitColumn.filterInput = accordUtils.generateSelect("fruit", dataSource.fruits, false,true);
 
 
-
-</pre>
-			</div>
-
-			<div id="tab-2" class="tab-content">
-				<pre class="acc-code-panel">
-
+  let mm = new BSMultiselectModule(myGrid);
 </pre>
 			</div>
 

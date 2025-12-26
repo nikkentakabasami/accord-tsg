@@ -79,7 +79,7 @@ function parseDate(dateStr) {
  * withNullOption - включать ли строку с пустым значением.
  * Возвращает jquery объект $select.
  */
-function generateSelect(name, data, withNullOption = true, multi = false) {
+function generateSelect(name, data, withNullOption = true, multi = false, selectedValue = null) {
 	
 	let $select = $(`select[name='${name}']`);
 	if ($select.length==0){
@@ -90,28 +90,32 @@ function generateSelect(name, data, withNullOption = true, multi = false) {
 		$select.attr("multiple","multiple");
 	}
 		
-	fillSelect($select, data, withNullOption);
+	fillSelect($select, data, withNullOption,selectedValue);
 	
 	return $select;	
 }
 
-function fillSelect($select, data, withNullOption = false) {
-	let optionsCode = generateSelectOptions(data, withNullOption); 
+function fillSelect($select, data, withNullOption = false, selectedValue = null) {
+	let optionsCode = generateSelectOptions(data, withNullOption,selectedValue); 
 	$select.append(optionsCode);
 	return $select;	
 }
 
-function generateSelectOptions(data, withNullOption = false) {
+function generateSelectOptions(data, withNullOption = false, selectedValue = null) {
 	let optionsCode = withNullOption?'<option value="">-</option>':'';
 	
 	data.forEach(item=>{
-		
+		let id = item;
+		let name = item;
 		if (typeof item=="object"){
-			optionsCode+=`<option value="${item.id}">${item.name}</option>`;
-		} else {
-		optionsCode+=`<option value="${item}">${item}</option>`;
+			id = item.id;
+			name = item.name;
 		}
-		
+		let selectedAttr = '';
+		if (selectedValue && id==selectedValue){
+			selectedAttr = ' selected="selected"';
+		}
+		optionsCode+=`<option value="${id}"${selectedAttr}>${name}</option>`;
 	});
 	
 	return optionsCode;

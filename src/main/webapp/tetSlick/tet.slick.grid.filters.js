@@ -17,6 +17,8 @@ export class Filter {
   $element;
 
   initiated = false;
+  
+  initalValue;
 
   constructor(grid, column, $filter) {
 	
@@ -40,6 +42,22 @@ export class Filter {
   init() {
 	this.initiated = true;
 
+	this.initalValue = null;
+	if (this.grid) {
+	  let $hiddenInput = this.grid.filtersModel.$filterContainer.find("input[name='" + this.columnId + "']");
+	  if ($hiddenInput.length > 0) {
+		this.initalValue = $hiddenInput.val();
+		$hiddenInput.remove();
+		
+		if (this.initalValue && this.$filter.is("input")){
+			this.setFilterVal(this.initalValue);
+		}
+		
+	  }
+	}
+	
+	
+	
   }
 
   clear(apply = false) {
