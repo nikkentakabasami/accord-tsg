@@ -7,14 +7,29 @@
 import {tableEvents} from './tet.slick.grid.events.js';
 import {matchTypes} from './tet.slick.grid.misc.js';
 
+import { Filter,SelectFilter } from './tet.slick.grid.filters.js';
+import {MultiselectModule,MultiSelectFilter} from './mtp/tet.slick.grid.multiselect.js';
+import {BSMultiselectModule,BSMultiSelectFilter} from './mtp/tet.slick.grid.multiselect-bs.js';
+
 
 let scriptSrc = import.meta.url;
+
+
+//Классы фильтров. Вспомогательные список.
+//Могут задаваться в column.filterClass
+const filterClasses = Object.freeze({
+	Filter: Filter,
+	SelectFilter: SelectFilter,
+	MultiSelectFilter: MultiSelectFilter,
+	BSMultiSelectFilter: BSMultiSelectFilter
+});	
 
 
 export let tsgUtils = {
 	tableEvents: tableEvents,
 	tetSlickRelativePath: scriptSrc.substring(0, scriptSrc.lastIndexOf('/') + 1),
 	matchTypes: matchTypes,
+	filterClasses: filterClasses,
 	mkColDesc: mkColDesc,
 	mkSortColDesc: mkSortColDesc,
 	mkExpSortColDesc: mkExpSortColDesc,

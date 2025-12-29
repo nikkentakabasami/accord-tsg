@@ -25,10 +25,10 @@ export class MultiselectModule extends AbstractModule {
 
 }
 
-function filterFactoryMultiselect(grid, column, $filter) {
+function filterFactoryMultiselect(grid, column, $filter, data) {
 
   if ($filter.is('select') && $filter.attr('multiple')) {
-	return new MultiSelectFilter(grid, column, $filter);
+	return new MultiSelectFilter(grid, column, $filter, data);
   }
   return null;
 
@@ -53,8 +53,7 @@ export class MultiSelectFilter extends Filter {
   data;
 
   constructor(grid, column, $filter, data) {
-	super(grid, column, $filter);
-	this.data = data;
+	super(grid, column, $filter, data);
 
   }
 

@@ -19,6 +19,10 @@ boolean, int inputs
 tsg
 
 
+multiselect
+  setOptions(data = null){
+
+
 initalVals for filter - demo, test
 
 data filter

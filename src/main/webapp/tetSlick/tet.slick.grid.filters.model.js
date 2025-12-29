@@ -7,13 +7,17 @@ import {Filter,SelectFilter} from './tet.slick.grid.filters.js';
 
 
 
-function filterFactory1(grid, column,$filter){
+function filterFactory1(grid, column,$filter,data){
 	
 	let filterObject;
-	if ($filter.is('select')){
-		filterObject = new SelectFilter(grid, column,$filter);
+	
+	//класс фильтра задан напрямую - создаём фильтр конструктором
+	if (column.filterClass){
+		filterObject = new column.filterClass(grid, column, $filter, column.filterData);
+	} else if ($filter.is('select')){
+		filterObject = new SelectFilter(grid, column,$filter,data);
 	} else {
-		filterObject = new Filter(grid, column,$filter);
+		filterObject = new Filter(grid, column,$filter,data);
 	}
 	
 	return filterObject;
@@ -106,24 +110,23 @@ export class FiltersModel  extends AbstractModule {
 		
 		//правим id чтобы не было дублей
 		$filter.attr("id",column.id+this.grid.id);
-		$filter.addClass("grid-filter-input").attr('autocomplete', 'off');
-		
-		/*
-		this.filterFactories.some(factory=>{
-			filterObject = factory(this.grid, column,$filter);
-			return filterObject!=null;
-		});
-		*/
+//		$filter.addClass("grid-filter-input").attr('autocomplete', 'off');
 
-		//по порядку пытяется создать фильтры разными фабриками		
+		
+		//создаём объект-фильтр
 		let filterObject;
+		
+		//по порядку проходим по зарегистрированным фабрикам фильров, пытаясь создать его для текущего столбца		
 		for (let factory of this.filterFactories) {
-		  filterObject = factory(this.grid, column, $filter);
+		  filterObject = factory(this.grid, column, $filter, column.filterData);
 		  if (filterObject != null) {
 		    break;
 		  }
 		}		
+
+		filterObject.$element.addClass("grid-filter-input").attr('autocomplete', 'off');
 		
+				
 		filterObject.addChangeListener(	event => {
 			this.applyMainFilter();
 	    });

@@ -1,3 +1,4 @@
+import { accordUtils } from "./tet.slick.grid-bundle.js";
 
 
 
@@ -20,7 +21,20 @@ export class Filter {
   
   initalValue = null;
 
-  constructor(grid, column, $filter) {
+  //возможные значения фильтра
+  //используются для генерации select.options
+  //ключ: id
+  //значение: name
+  data;
+  
+  $datalist;
+  
+  constructor(grid, column, $filter, data = null) {
+	
+	this.grid = grid;
+	this.$filter = $filter;
+	this.$element = $filter;
+	this.data = data;
 	
 	if (typeof column === 'string') {
 		this.columnId = column;
@@ -33,10 +47,6 @@ export class Filter {
 		
 	}
 	
-	
-	this.grid = grid;
-	this.$filter = $filter;
-	this.$element = $filter;
   }
 
   addChangeListener(l) {
@@ -55,21 +65,50 @@ export class Filter {
 		$hiddenInput.remove();
 	  }
 	}
+
 	
-	if (this.initalValue && this.$filter.is("input")){
-		this.setFilterVal(this.initalValue);
+	if (this.$filter.is("input")){
+
+		this.setOptions();
+				
+		if (this.initalValue){
+			this.setFilterVal(this.initalValue);
+		}
+		
 	}
-	
 	
   }
 
+  //Задание возможных вариантов выбора (через datalist)
+  setOptions(data = null){
+	
+	if (!data){
+		data = this.data;
+	}
+	if (!data){
+		return;
+	}
+	
+	if (data){
+		let dlId = this.columnId+"_datalist";
+		this.$datalist = accordUtils.generateDatalist(dlId,data);
+		this.$datalist.remove().appendTo(grid1.filtersModel.$form);
+		this.$filter.attr("list",dlId);
+	}
+	
+  }
+  
   clear(apply = false) {
 	  this.setFilterVal(null,apply);
   }
 
   //получение значения фильтра	
   getFilterVal() {
-	return this.$filter.val().trim();
+	let r = this.$filter.val();
+	if (typeof r === 'string'){
+		r = r.trim();
+	}
+	return r;
   }
 
 
@@ -114,9 +153,21 @@ export class Filter {
 
 export class SelectFilter extends Filter {
 
-  constructor(grid, column, $filter) {
-	super(grid, column, $filter);
-
+  constructor(grid, column, $filter, data = null) {
+	super(grid, column, $filter, data);
+	
+	if (this.$filter.is('input')){
+		
+		let $select = accordUtils.generateSelect(this.columnId, null, true, false, this.initalValue);
+		
+//		$select.after(this.$filter);
+//		this.$filter.remove();
+		
+//		this.$filter = accordUtils.generateSelect(this.columnId, data, true, false, this.initalValue);
+		this.$filter = $select;
+		this.$element = $select;
+	}
+	
   }
 
 
@@ -145,5 +196,33 @@ export class SelectFilter extends Filter {
 	}
   }
 
+  init() {
+    super.init();
+	
+	this.setOptions();
+	if (this.initalValue){
+		this.setFilterVal(this.initalValue);
+	}
+	
+  }
+  
+  //Задание options
+  setOptions(data = null){
+
+	  if (!data){
+	  	data = this.data;
+	  }
+	  if (!data){
+	  	return;
+	  }
+	
+	  if (data){
+		this.$filter.empty();
+	  	accordUtils.fillSelect(this.$filter,data,true);
+	  }
+
+  }  
+  
+  
 }
 

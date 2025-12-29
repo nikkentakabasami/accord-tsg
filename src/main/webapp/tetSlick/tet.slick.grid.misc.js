@@ -184,6 +184,16 @@ export const columnDefaults = {
 	//по умолчанию эти поля ищутся в div#filterContainer. И создаются автоматом, если они не найдены. 
 	//Можно сгенерировать такой input кастомной функцией.
 
+	filterData: null,
+	//Возможные варианты значений для фильтров
+	//Обычно задаются для select и multiselect - на их основе будут сгенерированы options.
+	//Но можно задать и на текстовые инпуты (они будут заданы через атрибут list)
+	
+	filterClass: null, 
+	//класс, обслуживающий фильтр. Определяется автоматически с помощью модулей.
+	//Но его можно и задать напрямую, переопределив обычные алгоритмы. 
+	//см. tsgUtils.filterClasses
+	
 	//Начальное значение для фильтра
 	initalFilterValue: null,
 	
@@ -192,7 +202,7 @@ export const columnDefaults = {
 	
 	matchFunction: null
 	//кастомная функция фильтрации по данному полю
-	//Пример функции: function matchNumberFunction(filterVal, val){ return val == parseInt(filterVal);}
+	//Пример функции: function matchNumberFunction(filterVal, val){ return parseInt(val) == filterVal;}
 	
 };
 

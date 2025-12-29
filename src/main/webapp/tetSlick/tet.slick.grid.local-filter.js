@@ -235,7 +235,7 @@ function matchEqualFunction(filterVal, val){
 }
 
 function matchNumberFunction(filterVal, val){
-	return val == parseInt(filterVal);
+	return parseInt(val) == filterVal;
 }
 
 function matchBooleanFunction(filterVal, val){

@@ -29,6 +29,7 @@ let accordUtils = {
   generateBooleanSelect: generateBooleanSelect,
   fillSelect: fillSelect,
   generateSelectOptions: generateSelectOptions,
+  generateDatalist: generateDatalist,
   
   random: random,
   randomDate: randomDate,
@@ -103,6 +104,9 @@ function fillSelect($select, data, withNullOption = false, selectedValue = null)
 
 function generateSelectOptions(data, withNullOption = false, selectedValue = null) {
 	let optionsCode = withNullOption?'<option value="">-</option>':'';
+	if (!data){
+		return optionsCode;
+	}
 	
 	data.forEach(item=>{
 		let id = item;
@@ -131,7 +135,15 @@ function generateBooleanSelect(name, withNullOption = true) {
 }
 
 
-
+function generateDatalist(id, data) {
+	
+	let $select = $(`datalist[id='${id}']`);
+	if ($select.length==0){
+		$select = $(`<datalist id="${id}"></select>`);
+	}
+	fillSelect($select, data);
+	return $select;	
+}
 
 
 
