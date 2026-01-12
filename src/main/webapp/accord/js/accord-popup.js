@@ -19,6 +19,7 @@ let Layouts = Object.freeze({
     BOTTOM_RIGHT: 4,
 });
 
+let fullScreenPadding = "10px";
 
 
 const accPopupDefaultOptions = {
@@ -27,15 +28,22 @@ const accPopupDefaultOptions = {
     panelUrl: null,		//путь к содержимому
     contentSelector: null,	//содержимое панели (сама панель при этом будет создана автоматом)
     contentText: null,		//содержимое в виде текста
+	contentTextUrl: null,	//содержимое в виде текста
     panelExtraClasses: "no-select acc-popup",	//дополнительные классы, которые будут заданы на панель
     draggable: false,	//позволяет перетаскивать диалог за заголовок
     id: null,			//id диалога. по умолчанию генерируется автоматом, но можно задать своё. Будет назначен на dom элемент: $dialog.attr("id");
     fragmentLoadMode: LoadModes.XHR,
     centered: false,		//центрирует его по центру браузера
     immediateInit: true,
+
+	cssClass: null,
+		
     width: null,
     height: null,
-    hideOnOutsideClick: false	//скрывает панель при клике за её пределами
+	fullScreen: false,	//растягивает панель на всё окно	
+	
+    hideOnOutsideClick: false,	//скрывает панель при клике за её пределами
+	hideOnClick: false	//скрывает панель при клике
 
 
 }
@@ -110,6 +118,7 @@ class AccPopup {
 			});
 		}
 
+		
         //задана своя панель
         if (this.options.panelSelector) {
             this.$dialog = $(this.options.panelSelector);
@@ -146,12 +155,34 @@ class AccPopup {
         this.$dialog.remove().appendTo(document.body);
         //		this.$dialog.addClass("acc-popup");
 
-        if (this.options.width) {
-            this.$dialog.css("width", this.options.width);
-        }
-        if (this.options.height) {
-            this.$dialog.css("height", this.options.height);
-        }
+		
+		if (this.options.hideOnClick) {
+			//скрываем панель при клике за её пределами
+			this.$dialog.bind("click", (e) => {
+				this.hide();
+			});
+		}
+		
+		if (this.options.cssClass) {
+			this.$dialog.addClass(this.options.cssClass);
+		}
+		
+		
+		
+		if (this.options.fullScreen) {
+		    this.$dialog.css("top", fullScreenPadding);
+			this.$dialog.css("left", fullScreenPadding);
+			this.$dialog.css("right", fullScreenPadding);
+			this.$dialog.css("bottom", fullScreenPadding);
+		} else {
+			if (this.options.width) {
+			    this.$dialog.css("width", this.options.width);
+			}
+			if (this.options.height) {
+			    this.$dialog.css("height", this.options.height);
+			}
+		}
+		
 
 		if (!this.$dialog.attr("id")){
 			this.$dialog.attr("id", this.id);
@@ -176,7 +207,20 @@ class AccPopup {
                 console.log('not found element ' + this.options.contentSelector);
             }
 
-        }
+        } else if (this.options.contentTextUrl) {
+			
+			let resultText = await $.ajax({
+				type: 'GET',
+				url: this.options.contentTextUrl,
+			});
+						
+			resultText = "<pre>"+resultText+"</pre>";
+			
+			this.$dialog.html(resultText);
+		}
+		
+		
+		
 
         //делаем панель перетаскиваемой
         if (this.options.draggable) {

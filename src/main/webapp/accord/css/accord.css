@@ -38,7 +38,6 @@
 
 /* Панель с описанием программным кодом  "<pre class="acc-code-panel">"  */
 .acc-code-panel {
-	flex: 1;
 	background-color: #f0f0f0;
 	padding: 2px;
 	border-radius: 4px;

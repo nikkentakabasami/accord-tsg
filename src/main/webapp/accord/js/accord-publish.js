@@ -13,3 +13,5 @@ window.hideWaitPanel = hideWaitPanel;
 window.TabbedPanel = TabbedPanel;
 window.AccDaterangepickerUtils = AccDaterangepickerUtils;
 
+window.AccPopup = AccPopup;
+

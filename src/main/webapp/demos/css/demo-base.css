@@ -1,0 +1,88 @@
+/* разнообразные стили для демок  */
+
+
+.titlePanel {
+	display: flex;
+	gap: 10px;
+}
+
+.titlePanel h2 {
+	flex: 1;
+	margin: 0px;
+}
+
+.titlePanel a {
+	flex-grow: 0;
+	padding: 4px 2px;
+}
+
+
+#tabbedPanel1 {
+    height: 200px;
+}
+
+.basePanel {
+    position: absolute;
+    top: 9px;
+    left: 9px;
+    right: 9px;
+    bottom: 9px;
+    display: flex;
+    
+    flex-direction: column;
+    gap: 5px;
+}
+
+.workPanel {
+    flex-grow: 1;
+    display: flex;
+	border: 1px solid LightGray;
+	border-radius: 4px;
+}
+
+.workPanel .p1 {
+    flex-grow: 1;
+	border: 1px solid LightGray;
+	border-radius: 4px;
+}
+.workPanel .p2 {
+    flex-basis: 300px;
+}
+
+.auxPanel {
+    flex-basis: 200px;
+    display: flex;
+}
+
+.auxPanel .p1 {
+    flex-grow: 1;
+}
+.auxPanel .p2 {
+    flex-basis: 300px;
+}
+
+
+.fullSize {
+	width: 100%;
+	height: 100%;
+}
+
+
+.help-panel {
+	background-color: whitesmoke;
+}
+
+
+
+.red-border {
+	border: 1px solid red;
+}
+
+.blue-border {
+	border: 1px solid blue;
+}
+
+.green-border {
+	border: 1px solid green;
+}
+
