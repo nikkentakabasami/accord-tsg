@@ -1,0 +1,21 @@
+
+
+.splitter-panel {
+    display: flex;
+    width: 100%;
+}
+
+
+.splitter-panel .sp-left {
+    width: 50%;
+}
+
+.splitter-panel .sp-right {
+    flex-grow: 1;
+}
+
+.splitter-panel .sp-resizer {
+    width: 10px;
+    cursor: ew-resize;
+}
+

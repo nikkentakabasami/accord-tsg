@@ -19,15 +19,23 @@
 
 <script type="module" src="js/tabbed-panel-demo.js"></script>
 
+<style>
 
+#myTabbedPanel1 {
+  width: 500px;
+    height: 300px;
+}
+
+
+</style>
 
 
 </head>
 <body class="acc-default-font">
 
-	<h2>Панель с закладками</h2>
+	<h2>Панель с закладками1</h2>
 
-	<div id="myTabbedPanel1" class="tabbed-panel">
+	<div id="myTabbedPanel1" class="tabbed-panel" style="width: 100%;">
 
 		<div class="tab-container">
 			<button class="tab active" data-tab="1">Закладка 1</button>
@@ -53,6 +61,33 @@
 
 	</div>
 
+
+  <h2>Панель с закладками2</h2>
+
+  <div id="myTabbedPanel2" style="width: 100%;">
+
+    <div class="tab-container">
+      <button>Закладка 1</button>
+      <button>Закладка 2</button>
+      <button>Закладка 3</button>
+    </div>
+
+    <div class="tab-content">
+      <h3>Содержимое закладки 1</h3>
+      <p>Это содержимое для первой закладки.</p>
+    </div>
+
+    <div class="tab-content">
+      <h3>Содержимое закладки 2</h3>
+      <p>Это содержимое для второй закладки.</p>
+    </div>
+
+    <div class="tab-content">
+      <h3>Содержимое закладки 3</h3>
+      <p>Это содержимое для третьей закладки.</p>
+    </div>
+
+  </div>
 
 
 

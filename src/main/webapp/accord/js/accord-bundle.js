@@ -11,6 +11,7 @@ export {TabbedPanel} from './accord-tabbed-panel.js';
 export {AccDaterangepickerUtils} from './accord-daterangepicker-utils.js';
 export { AccPopup } from './accord-popup.js';
 
+export { AccSplitter } from './accord-splitter.js';
 
 
 

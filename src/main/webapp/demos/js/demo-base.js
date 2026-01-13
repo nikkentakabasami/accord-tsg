@@ -54,8 +54,17 @@ function showMainJs(){
 }
 
 
-
+let $log1;
+let $logPanel;
 function logMessage(mess) {
+	
+	$log1.append(mess+"<br>");
+
+	//scroll to bottom	
+	var h = $logPanel.prop('scrollHeight');
+	$logPanel.scrollTop(h);	
+	
+	/*
 	$('#log1').val(function(i, oldVal) {
 		if (oldVal){
 			return oldVal + "\n" + mess;
@@ -64,6 +73,7 @@ function logMessage(mess) {
 		}
 		
 	});
+	*/
 
 }
 
@@ -73,11 +83,21 @@ let $hideAuxButton;
 $(function() {
 	
 	$hideAuxButton = $("#hideAuxButton"); 
+	$log1 = $('#log1');
+	$logPanel = $('.logPanel');
 	
 	logMessage("Запуск");
 	
 	fixSrcRef();
 	
+	
+	new AccSplitter({
+		panelSelector: ".auxPanel",
+		startLeftPanelWidth: 600
+	});
+	
+	
+	//показывать исходники при нажатии на ссылку
 	$(".titlePanel a").click(e=>{
 		e.preventDefault();
 		showMainJs();

@@ -49,17 +49,31 @@
     flex-basis: 300px;
 }
 
+/*
 .auxPanel {
-    flex-basis: 200px;
+    height: 200px;
+    display: flex;
+    gap: 5px;
+}
+
+.auxPanel .tabbed-panel {
+    flex-grow: 1;
+}
+.auxPanel .logPanel {
+    flex-basis: 300px;
+    overflow: scroll;
+}
+*/
+.auxPanel {
+    height: 200px;
     display: flex;
 }
 
-.auxPanel .p1 {
+.auxPanel .logPanel {
     flex-grow: 1;
+	overflow: scroll;
 }
-.auxPanel .p2 {
-    flex-basis: 300px;
-}
+
 
 
 .fullSize {
@@ -73,6 +87,10 @@
 }
 
 
+.gray-border {
+	border: 1px solid LightGray;
+	border-radius: 4px;
+}
 
 .red-border {
 	border: 1px solid red;

@@ -46,6 +46,11 @@
 	white-space: pre;
 }
 
+.acc-simple-panel {
+	padding: 5px;
+	border: 1px solid LightGray;
+	border-radius: 4px;
+}
 
 /* Панель со списком ссылок  */
 .acc-anchor-list {
@@ -277,6 +282,29 @@
 	background-image: url('../icons/cross.png');
 	background-repeat: no-repeat;
 }
+
+
+/*------ AccSplitter ------*/
+
+.acc-splitter-panel {
+    display: flex;
+    width: 100%;
+}
+
+
+.acc-splitter-panel .acc-sp-left {
+    width: 50%;
+}
+
+.acc-splitter-panel .acc-sp-right {
+    flex-grow: 1;
+}
+
+.acc-splitter-panel .acc-sp-resizer {
+    width: 10px;
+    cursor: ew-resize;
+}
+
 
 
 /* select - для показа в инструментальной панели  */

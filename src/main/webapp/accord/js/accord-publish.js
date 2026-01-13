@@ -4,7 +4,7 @@
  */
 
 
-import { accordUtils,AccModalDialog,showWaitPanel,hideWaitPanel,TabbedPanel,AccDaterangepickerUtils,AccPopup } from './accord-bundle.js';
+import { accordUtils,AccModalDialog,showWaitPanel,hideWaitPanel,TabbedPanel,AccDaterangepickerUtils,AccPopup,AccSplitter } from './accord-bundle.js';
 
 window.accordUtils = accordUtils;
 window.AccModalDialog = AccModalDialog;
@@ -14,4 +14,5 @@ window.TabbedPanel = TabbedPanel;
 window.AccDaterangepickerUtils = AccDaterangepickerUtils;
 
 window.AccPopup = AccPopup;
+window.AccSplitter = AccSplitter;
 

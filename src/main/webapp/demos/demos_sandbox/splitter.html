@@ -6,12 +6,12 @@
 <link rel="stylesheet" type="text/css" href="../../accord/css/accord.css">
 <link rel="stylesheet" type="text/css" href="../../accord/css/tabbed-panel.css">
 <link rel="stylesheet" type="text/css" href="../css/demo-base.css">
-<link rel="stylesheet" type="text/css" href="../css/demo000.css">
+<link rel="stylesheet" type="text/css" href="../css/demo901.css">
 
 <script src="../../jquery31/js/jquery.js"></script>
 <script type="module" src="../../accord/js/accord-publish.js"></script>
 <script src="../js/demo-base.js"></script>
-<script src="../js/000-demo.js"></script>
+<script src="../js/901-demo.js"></script>
 
 </head>
 <body class="acc-default-font">
@@ -19,26 +19,27 @@
   <div class="basePanel">
 
     <div class="titlePanel">
-      <h2>template_title</h2>
+      <h2>тестовый splitter - изменение размера вручную</h2>
       <button id="hideAuxButton" type="button" class="acc-btn">Скрыть описание</button>
       <a href="#" target="source">Исходники</a>
     </div>
 
     <div class="auxPanel">
-      <div id="tabbedPanel1">
+      <div id="tabbedPanel1" class="tabbed-panel">
 
         <div class="tab-container">
-          <button>Описание</button>
-          <button>Ключевой код</button>
+          <button class="tab active" data-tab="1">Описание</button>
+          <button class="tab" data-tab="2">Ключевой код</button>
+          <div class="tab-filler"></div>
         </div>
 
-        <div class="tab-content">
+        <div id="tab-1" class="tab-content active">
           <pre class="acc-desc-panel">
   описание
 </pre>
         </div>
 
-        <div class="tab-content">
+        <div id="tab-2" class="tab-content">
           <pre class="acc-code-panel">
   код
 </pre>
@@ -63,8 +64,14 @@
     <!--               work panel                -->
 
     <div class="workPanel">
-    
-    
+
+      <div class="splitter-panel">
+        <div class="sp-left acc-simple-panel">Left Panel</div>
+        <div class="sp-resizer"></div>
+        <div class="sp-right acc-simple-panel">Right Panel</div>
+
+      </div>
+
     </div>
 
 
