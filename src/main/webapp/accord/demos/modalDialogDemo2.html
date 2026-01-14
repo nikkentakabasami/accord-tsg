@@ -5,52 +5,81 @@
 
 <!-- jquery 3.1 -->
 <script src="../../jquery31/js/jquery.js"></script>
-<script src="../../jquery31/js/jquery.bootpag.min.js"></script>
-<script src="../../jquery31/js/jquery.form-validator.min.js"></script>
 
 <!-- accord - мои вспомогательные компоненты, классы, утилиты -->
 <link rel="stylesheet" type="text/css" href="../css/accord.css">
-<link rel="stylesheet" type="text/css" href="../css/acc-form-elements.css">
+<link rel="stylesheet" type="text/css" href="../css/tabbed-panel.css">
+
+<link rel="stylesheet" type="text/css" href="../css/demo-base.css">
+<script src="../js/demo-base.js"></script>
+
 <script type="module" src="../js/accord-publish.js"></script>
-
-
-
-<link rel="stylesheet" type="text/css" href="css/demos.css">
-<script type="module" src="js/modal-dialog-demo2.js"></script>
-
+<script type="module" src="js/modal-dialog2-demo.js"></script>
 
 
 </head>
-<body>
 
+<body class="acc-default-font">
 
-	<h2>AccModalDialog - получение содержимого по ссылке</h2>
+  <div class="basePanel">
 
-	<a href="js/modal-dialog-demo2.js" target="sources">Исходники</a>
+    <div class="titlePanel">
+      <h2>AccModalDialog - получение содержимого по ссылке</h2>
+    </div>
 
-	<div class="acc-desc-panel">
+    <div class="auxPanel">
+      <div id="tabbedPanel1">
+
+        <div class="tab-container">
+          <button>Описание</button>
+          <button>Ключевой код</button>
+        </div>
+
+        <div class="tab-content">
+          <pre class="acc-desc-panel">
 Загрузка содержимого диалога из заданного файла: 
 
-	dialog1 = new AccModalDialog({
-		title: "Диалог по умолчанию",
-		contentUrl: accordUtils.accordPath+"demos/contentFragment.html",
-		fragmentLoadMode: LoadModes.FETCH,
-		autosize: true,
-	</div>
+  dialog1 = new AccModalDialog({
+    title: "Диалог по умолчанию",
+    contentUrl: accordUtils.accordPath+"demos/contentFragment.html",
+    fragmentLoadMode: LoadModes.FETCH,
+    autosize: true,
+</pre>
+        </div>
 
-	<div class="acc-button-panel">
-		<button id="b1" type="button" class="acc-btn">Показать диалог</button>
-	</div>
+        <div class="tab-content">
+          <pre class="acc-code-panel">
+  код
+</pre>
+        </div>
+
+      </div>
+
+      <div class="logPanel gray-border">
+        <div id="log1"></div>
+      </div>
+
+    </div>
+
+
+    <!--               button panel                -->
+
+  <div class="acc-button-panel">
+    <button id="b1" type="button" class="acc-btn">Показать диалог</button>
+  </div>
+
+    <!--               work panel                -->
+
+    <div class="workPanel">
+    
+    
+    </div>
 
 
 
-	<textarea rows=20 cols=100 id="log1">
-</textarea>
-
-
-
-
+  </div>
 
 
 </body>
 </html>
+

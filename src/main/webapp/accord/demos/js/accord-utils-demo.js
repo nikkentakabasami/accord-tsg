@@ -4,50 +4,64 @@ import { accordUtils } from '../../js/accord-bundle.js';
 
 
 $(function(){
-	
-	//декорирует input, добавляя к нему кнопку (впереди или позади) с заданной иконкой.
-	accordUtils.decorInput($("#tf1"));
-	
-	accordUtils.decorInput($("#tf2"),{
-		addButton: true,
-		buttonClasses: "acc-btn-check",
-		placeButtonBefore: false,
-		buttonHandler: e=>{
-			alert("hello");
-		}
-	});
-	
-	
-	let $accpop1 = $("#accpop1"); 
-	
-	$accpop1.click(e=>{
-		accordUtils.alignToCenter($accpop1);
-	});
-	
-	
-	
-	accordUtils.loadHtmlFragmentXHR("demos/misc/testFragment.html","#testFragment1",true);
-	
-	accordUtils.loadHtmlFragmentFetch("demos/misc/testFragment.html","#testFragment2",true)
-	.then(result => {
-		console.log("loaded:",result);
-	});
 
 	
+	$("#b1").click(e=>{
+		
+		//декорирует input, добавляя к нему кнопку (впереди или позади) с заданной иконкой.
+		accordUtils.decorInput($("#tf1"));
+		
+		accordUtils.decorInput($("#tf2"),{
+			addButton: true,
+			buttonClasses: "acc-btn-check",
+			placeButtonBefore: false,
+			buttonHandler: e=>{
+				alert("hello");
+			}
+		});
+		
+	});
 	
-	$("#accordPath").text(accordUtils.accordPath);
+	$("#b2").click(e=>{
+		accordUtils.loadHtmlFragmentXHR("demos/misc/testFragment.html","#testFragment1",true);
+		logMessage("loadHtmlFragmentXHR finished");
+	});
 	
-	$("#sp1").text(accordUtils.random(10));
-	$("#sp2").text(accordUtils.randomDate());
+	$("#b3").click(e=>{
+		accordUtils.loadHtmlFragmentFetch("demos/misc/testFragment.html","#testFragment2",true)
+		.then(result => {
+			logMessage("loadHtmlFragmentFetch finished");
+		});
+	});
+		
+	let $myPopup = $("#myPopup"); 
+	$("#b4").click(e=>{
+		$myPopup.css("display","flex");
+	});
 	
-	let today= new Date();
-	$("#sp3").text(accordUtils.formatDate(today));
-	$("#sp4").text(accordUtils.parseDate("05.05.2025"));
+	$myPopup.click(e=>{
+		accordUtils.alignToCenter($myPopup);
+	});
+
+	$("#b5").click(e=>{
+		
+		clearLog();
+		let today= new Date();
+		
+		logMessage("accordUtils.accordPath="+accordUtils.accordPath);
+		
+		logMessage("accordUtils.random(10)="+accordUtils.random(10));
+		logMessage("accordUtils.randomDate()="+accordUtils.randomDate());
+		logMessage("accordUtils.formatDate(today)="+accordUtils.formatDate(today));
+		logMessage('accordUtils.parseDate("05.05.2025")='+accordUtils.parseDate("05.05.2025"));
+		
+	});
 	
-	/*
-	$("#sp4").text(accordUtils.);
-	$("#sp5").text(accordUtils.);
-		*/
+	
+	
+	
+	
+	
 	
 	
 });

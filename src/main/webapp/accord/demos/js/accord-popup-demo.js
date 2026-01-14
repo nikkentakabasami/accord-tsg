@@ -44,7 +44,8 @@ $(function(){
 	options = {
 		draggable: true,
 		contentSelector: "#popupContent2",
-		width: "300px"
+		width: "300px",
+		handleElementSelector: ".acc-filler-panel"
 	}	
 	let p2 = new AccPopup(options);
 	
@@ -64,7 +65,7 @@ $(function(){
 	
 	
 	options = {
-		draggable: false,
+		draggable: true,
 		panelExtraClasses: "acc-popup",
 		width: "450px",
 		height: "300px",
@@ -86,12 +87,20 @@ $(function(){
 	
 	$("#b1").click(e=>{
 		p1.show();
-		p2.show(100,200);
-		p3.show(400,200);	
-		p4.show(10,400);	
 	});
-
 	$("#b2").click(e=>{
+	p2.show(400,200);
+	});
+	$("#b3").click(e=>{
+	p3.show(500,300);	
+	});
+	$("#b4").click(e=>{
+	p4.show(10,400);	
+	});
+	
+	
+	
+	$("#b10").click(e=>{
 		p1.hide();
 		p2.hide();
 		p3.hide();

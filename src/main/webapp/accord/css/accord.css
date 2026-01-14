@@ -6,7 +6,7 @@
 }
 
 
-
+/* Стиль плавающих панелей (подсказки, диалоги) */
 .acc-popup {
 	position: absolute;
 	display: none;
@@ -15,6 +15,7 @@
 	overflow: auto;
 }
 
+/* Оформление плавающих панелей по умолчанию: рамка, белый фон */
 .acc-popup-default {
 	gap: 5px;
     padding: 5px;
@@ -43,7 +44,7 @@
 	border-radius: 4px;
 	border: 1px solid #ccc;
 	margin: 0px;
-	white-space: pre;
+	white-space: pre-wrap;
 }
 
 .acc-simple-panel {
@@ -343,8 +344,8 @@
 
 
 /*  
-form-4cols - расположение элементов в 4 столбца  
-form-2cols - в 2 столбца
+acc-4cols - расположение элементов в 4 столбца  
+acc-2cols - в 2 столбца
 Просто быстрый способ организовать сетку.
 */
 

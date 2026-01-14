@@ -34,6 +34,32 @@ function fixSrcRef(){
 }
 
 
+/*
+<div class="titlePanel">
+  <h2>AccModalDialog - получение содержимого по ссылке</h2>
+  <button id="hideAuxButton" type="button" class="acc-btn">Скрыть описание</button>
+  <a href="#" target="source">Исходники</a>
+</div>
+
+*/
+
+function addTitlePanelButtons(){
+	
+	let $tp = $(".titlePanel");
+	
+	if (!$tp.children("#hideAuxButton").length){
+		$tp.append('<button id="hideAuxButton" type="button" class="acc-btn">Скрыть описание</button>');
+	}
+
+	if (!$tp.children("a").length){
+		$tp.append('<a href="#" target="source">Исходники</a>');
+	}		
+	
+	
+	
+}
+
+
 function showMainJs(){
 	
 	let  options = {
@@ -56,6 +82,10 @@ function showMainJs(){
 
 let $log1;
 let $logPanel;
+function clearLog() {
+	$log1.text("");
+}
+
 function logMessage(mess) {
 	
 	$log1.append(mess+"<br>");
@@ -82,14 +112,15 @@ let $hideAuxButton;
 
 $(function() {
 	
-	$hideAuxButton = $("#hideAuxButton"); 
 	$log1 = $('#log1');
 	$logPanel = $('.logPanel');
 	
 	logMessage("Запуск");
 	
+	addTitlePanelButtons();
 	fixSrcRef();
 	
+	$hideAuxButton = $("#hideAuxButton"); 
 	
 	new AccSplitter({
 		panelSelector: ".auxPanel",

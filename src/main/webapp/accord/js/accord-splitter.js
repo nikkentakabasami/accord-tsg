@@ -50,8 +50,8 @@ class AccSplitter {
         if (this.options.id) {
             this.id = this.options.id;
         } else {
-            AccPopup.counter++;
-            this.id = "accpop" + AccPopup.counter;
+            AccSplitter.counter++;
+            this.id = "accsp" + AccSplitter.counter;
         }
 
         window[this.id] = this;

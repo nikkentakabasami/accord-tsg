@@ -5,6 +5,7 @@
 
 <!-- jquery 3.1 -->
 <script src="../../jquery31/js/jquery.js"></script>
+
 <script type="text/javascript" src="../../jquery31/js/moment.min.js"></script>
 <script type="text/javascript" src="../../jquery31/js/daterangepicker.js"></script>
 <link rel="stylesheet" type="text/css" href="../../jquery31/css/daterangepicker.css" />
@@ -12,20 +13,17 @@
 
 <!-- accord - мои вспомогательные компоненты, классы, утилиты -->
 <link rel="stylesheet" type="text/css" href="../css/accord.css">
+<link rel="stylesheet" type="text/css" href="../css/tabbed-panel.css">
 <script type="module" src="../js/accord-publish.js"></script>
 
-
-<!-- 
-<script type="module" src="js/accord-utils-demo.js"></script>
-<script type="module" src="../js/daterangepicker-utils.js"></script>
- -->
+<link rel="stylesheet" type="text/css" href="../css/demo-base.css">
+<script src="../js/demo-base.js"></script>
 
 <script type="module" src="js/daterangepicker-utils-demo.js"></script>
-<link rel="stylesheet" type="text/css" href="css/demos.css">
 
 <style>
 
-div.acc-code-panel {
+.workPanel .acc-code-panel {
   margin-top: 20px;
 }
 
@@ -33,14 +31,62 @@ div.acc-code-panel {
 
 
 </head>
+
 <body class="acc-default-font">
 
-	<h2>библиотека daterangepicker.js - позволяет выбирать диапазон дат.</h2>
+  <div class="basePanel">
 
-  <h2>daterangepicker-utils-demo.js - содержит предзаданные опции и функции быстрой инициализации</h2>
+    <div class="titlePanel">
+      <h2>daterangepicker, </h2>
+    </div>
+
+    <div class="auxPanel">
+      <div id="tabbedPanel1">
+
+        <div class="tab-container">
+          <button>Описание</button>
+          <button>Ключевой код</button>
+        </div>
+
+        <div class="tab-content">
+          <pre class="acc-desc-panel">
+  шаблон для создания новых демок
+</pre>
+        </div>
+
+        <div class="tab-content">
+          <pre class="acc-code-panel">
+  код
+</pre>
+        </div>
+
+      </div>
+
+      <div class="logPanel gray-border">
+        <div id="log1"></div>
+      </div>
+
+    </div>
 
 
+    <!--               button panel                -->
 
+    <div class="acc-button-panel">
+      <button id="b1" type="button" class="acc-btn">кнопка1</button>
+      <button id="b2" type="button" class="acc-btn">кнопка2</button>
+    </div>
+
+    <!--               work panel                -->
+
+    <div class="workPanel">
+    
+    
+    
+    
+    
+    
+    
+    
 
 <p>
 Вид по умолчанию (только задан локализация) - выбор диапазона дат
@@ -97,9 +143,23 @@ div.acc-code-panel {
     });
 </div>
 <input type="text" id="tf5" >
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    </div>
 
 
+
+  </div>
 
 
 </body>
 </html>
+

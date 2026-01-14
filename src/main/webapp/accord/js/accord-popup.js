@@ -31,6 +31,8 @@ const accPopupDefaultOptions = {
 	contentTextUrl: null,	//содержимое в виде текста
     panelExtraClasses: "no-select acc-popup",	//дополнительные классы, которые будут заданы на панель
     draggable: false,	//позволяет перетаскивать диалог за заголовок
+	handleElementSelector: null,  //за какой элемент перетаскивать диалог (default $dialog)
+	
     id: null,			//id диалога. по умолчанию генерируется автоматом, но можно задать своё. Будет назначен на dom элемент: $dialog.attr("id");
     fragmentLoadMode: LoadModes.XHR,
     centered: false,		//центрирует его по центру браузера
@@ -212,10 +214,10 @@ class AccPopup {
 			let resultText = await $.ajax({
 				type: 'GET',
 				url: this.options.contentTextUrl,
+				dataType: 'text'
 			});
 						
 			resultText = "<pre>"+resultText+"</pre>";
-			
 			this.$dialog.html(resultText);
 		}
 		
@@ -225,9 +227,15 @@ class AccPopup {
         //делаем панель перетаскиваемой
         if (this.options.draggable) {
 
+			
+			let handleElementSelector = this.options.handleElementSelector;
+			if (!handleElementSelector){
+				handleElementSelector = this.$dialog;
+			}
+			
             let options = {
                 panelSelector: this.$dialog,
-                handleElementSelector: this.$dialog
+                handleElementSelector: handleElementSelector
             }
 
             this.accDrag = new AccDrag(options);

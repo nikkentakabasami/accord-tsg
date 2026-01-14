@@ -5,39 +5,74 @@
 
 <!-- jquery 3.1 -->
 <script src="../../jquery31/js/jquery.js"></script>
-<script src="../../jquery31/js/jquery.bootpag.min.js"></script>
-<script src="../../jquery31/js/jquery.form-validator.min.js"></script>
 
 <!-- accord - мои вспомогательные компоненты, классы, утилиты -->
 <link rel="stylesheet" type="text/css" href="../css/accord.css">
 <link rel="stylesheet" type="text/css" href="../css/acc-form-elements.css">
+<link rel="stylesheet" type="text/css" href="../css/tabbed-panel.css">
 <script type="module" src="../js/accord-publish.js"></script>
 
 
-<link rel="stylesheet" type="text/css" href="css/demos.css">
+
+<link rel="stylesheet" type="text/css" href="../css/demo-base.css">
+<script src="../js/demo-base.js"></script>
+
+
 <script type="module" src="js/accord-popup-demo2.js"></script>
 
+
 </head>
+
 <body class="acc-default-font">
 
-  <h3>Показ плавающей панели рядом с заданным элементом</h3>
-  <a href="js/accord-popup-demo2.js" target="sources">Исходники</a>
+  <div class="basePanel">
+
+    <div class="titlePanel">
+    <h2>Показ плавающей панели рядом с заданным элементом</h2>
+    </div>
+
+    <div class="auxPanel">
+      <div id="tabbedPanel1">
+
+        <div class="tab-container">
+          <button>Описание</button>
+          <button>Ключевой код</button>
+        </div>
+
+        <div class="tab-content">
+          <pre class="acc-desc-panel">
+  панель показывается при клике на элементы ввода. 
+  и скрывается при клике за её пределами.
+</pre>
+        </div>
+
+        <div class="tab-content">
+          <pre class="acc-code-panel">
+  код
+</pre>
+        </div>
+
+      </div>
+
+      <div class="logPanel gray-border">
+        <div id="log1"></div>
+      </div>
+
+    </div>
+
+
+    <!--               button panel                -->
 
   <div class="acc-button-panel">
     <button id="b1" type="button" class="acc-btn">Показать все панели</button>
     <button id="b2" type="button" class="acc-btn">Скрыть все панели</button>
   </div>
 
+    <!--               work panel                -->
 
-  <div class="acc-desc-panel">
-  панель показывается при клике на элементы ввода. 
-  и скрывается при клике за её пределами.
-  </div>
-
-  <div class="acc-code-panel"></div>
-
-
-
+    <div class="workPanel">
+    
+    
   <div class="form-panel">
     <form>
 
@@ -64,13 +99,16 @@
 
     </form>
 
+  </div>    
+    
+    
+    </div>
+
+
+
   </div>
-
-
-
-
-
 
 
 </body>
 </html>
+

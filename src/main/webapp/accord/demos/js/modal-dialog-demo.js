@@ -9,13 +9,6 @@ let dialog3;
 let dialog4;
 
 
-function logMessage(mess) {
-	$('#log1').val(function(i, oldVal) {
-		return oldVal + "\n" + mess;
-	});
-
-}
-
 
 $(document).ready(function() {
 

@@ -5,124 +5,110 @@
 
 <!-- jquery 3.1 -->
 <script src="../../jquery31/js/jquery.js"></script>
-<script src="../../jquery31/js/jquery.bootpag.min.js"></script>
-<script src="../../jquery31/js/jquery.form-validator.min.js"></script>
 
 <!-- accord - мои вспомогательные компоненты, классы, утилиты -->
 <link rel="stylesheet" type="text/css" href="../css/accord.css">
-<script type="module" src="../js/accord-utils.js"></script>
+<link rel="stylesheet" type="text/css" href="../css/tabbed-panel.css">
+<script type="module" src="../js/accord-publish.js"></script>
 
-<link rel="stylesheet" type="text/css" href="css/demos.css">
+<link rel="stylesheet" type="text/css" href="../css/demo-base.css">
+<script src="../js/demo-base.js"></script>
+
 
 <script type="module" src="js/accord-utils-demo.js"></script>
 
 
 </head>
+
 <body class="acc-default-font">
 
-  <h2>accordUtils - содержит разнообразные вспомогательные методы</h2>
+  <div class="basePanel">
 
-  <div class="acc-desc-panel">
-  
-  
-     accordUtils.accordPath = "<span id="accordPath"></span>"
-  
-     accordUtils.random(10) = "<span id="sp1"></span>"
-     accordUtils.randomDate() = "<span id="sp2"></span>"
-     accordUtils.formatDate(today) = "<span id="sp3"></span>"
-     accordUtils.parseDate("05.05.2025") = "<span id="sp4"></span>"
-     <!-- 
-     accordUtils. = "<span id="sp5"></span>"
-     accordUtils. = "<span id="sp6"></span>"
-      -->
-  
-  </div>  
+    <div class="titlePanel">
+      <h2>accordUtils - содержит разнообразные вспомогательные методы</h2>
+    </div>
 
+    <div class="auxPanel">
+      <div id="tabbedPanel1">
 
+        <div class="tab-container">
+          <button>Описание</button>
+          <button>Ключевой код</button>
+        </div>
 
+        <div class="tab-content">
+          <pre class="acc-desc-panel">
+  шаблон для создания новых демок
+</pre>
+        </div>
 
-	<h3>accordUtils.decorInput($input, options); - Добавление кнопки с иконкой программно.</h3>
-  
-  <div class="acc-desc-panel">
-  все значения по умолчанию:
-  accordUtils.decorInput($("#tf1"));
-  </div>  
-  
-  
-<input type="text" id="tf1"/>
+        <div class="tab-content">
+          <pre class="acc-code-panel">
+//загрузка html-фрагментов в заданный контейнер
+accordUtils.loadHtmlFragmentXHR("demos/misc/testFragment.html","#testFragment1",true);
 
-
-  <div class="acc-desc-panel">
-Добавление кнопки с заданной иконкой в конец input:  
-  accordUtils.decorInput($("#tf2"),{
-    addButton: true,
-    buttonClasses: "acc-btn-check",
-    placeButtonBefore: false,
-    buttonHandler: e=>{
-      alert("hello");
-    }
-  });
-    </div>  
-
-<input type="text" id="tf2"/>
+accordUtils.loadHtmlFragmentFetch("demos/misc/testFragment.html","#testFragment2",true)
+.then(result => {
+  logMessage("loadHtmlFragmentFetch finished");
+});
 
 
+</pre>
+        </div>
 
-  <h4>accordUtils.loadHtmlFragmentXHR</h4>
+      </div>
 
-  <div class="acc-desc-panel">
-  Тестируем загрузку методом loadHtmlFragmentXHR(fragmentUrl, $target, relativeToAccord = false).
-  
-  accordUtils.loadHtmlFragmentXHR("demos/misc/testFragment.html","#testFragment",true);
-   </div>
+      <div class="logPanel gray-border">
+        <div id="log1"></div>
+      </div>
 
-  <div id="testFragment1"></div>
-
-  <h4>accordUtils.loadHtmlFragmentFetch</h4>
-
-  <div class="acc-desc-panel">
-  Тестируем загрузку методом loadHtmlFragmentFetch(fragmentUrl, $target, relativeToAccord = false).
-  
-  accordUtils.loadHtmlFragmentFetch("demos/misc/testFragment.html","#testFragment2",true)
-  .then(result => {
-    console.log("loaded:",result);
-  });
-   </div>
-
-  <div id="testFragment2"></div>
+    </div>
 
 
+    <!--               button panel                -->
+
+    <div class="acc-button-panel">
+      <button id="b1" type="button" class="acc-btn">accordUtils.decorInput</button>
+      <button id="b2" type="button" class="acc-btn">accordUtils.loadHtmlFragmentXHR</button>
+      <button id="b3" type="button" class="acc-btn">accordUtils.loadHtmlFragmentFetch</button>
+      <button id="b4" type="button" class="acc-btn">show popup</button>
+      <button id="b5" type="button" class="acc-btn">log misc utils methods</button>
+    </div>
+
+    <!--               work panel                -->
+
+    <div class="workPanel">
+
+      <h3>accordUtils.decorInput($input, options); - Добавление кнопки с иконкой программно.</h3>
+      <input type="text" id="tf1" /> 
+      <br>      
+      <input type="text" id="tf2" />
 
 
-<div class="acc-popup-default no-select acc-popup" id="accpop1" style="width: 300px;left: 700px; display: flex;">
-Плавающая панель. <br>Центрируется при клике: <br>accordUtils.alignToCenter($accpop1);
-</div>
+      <h4>accordUtils.loadHtmlFragmentXHR</h4>
+      <div id="testFragment1"></div>
 
+      <h4>accordUtils.loadHtmlFragmentFetch</h4>
+      <div id="testFragment2"></div>
 
-
-  <h3></h3>
-
-  <div class="acc-desc-panel">
-
-
-   </div>
+      <div class="acc-popup-default no-select acc-popup" id="myPopup">
+        Плавающая панель.
+        <br>
+        Центрируется при клике:
+        <br>
+        accordUtils.alignToCenter($accpop1);
+      </div>
 
 
 
 
-	
-
-
-<!-- 
-		<button type="button" class="acc-btn"><span class="acc-btn-check"></span> </button>
- -->
+    </div>
 
 
 
-
-
-
+  </div>
 
 
 </body>
 </html>
+

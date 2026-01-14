@@ -7,11 +7,15 @@ let splitterPanel1;
 
 $(()=>{
 	
+	$("#b1").click(e=>{
+		
+		splitterPanel1 = new AccSplitter(	{
+			panelSelector: "#mySplitPanel1",
+			startLeftPanelWidth: 300
+		});
+		
+	});	
 	
-	splitterPanel1 = new AccSplitter(	{
-		panelSelector: "#mySplitPanel1",
-		startLeftPanelWidth: 300
-	});
 	
 	
 	

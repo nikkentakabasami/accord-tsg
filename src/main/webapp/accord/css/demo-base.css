@@ -35,7 +35,6 @@
 
 .workPanel {
     flex-grow: 1;
-    display: flex;
 	border: 1px solid LightGray;
 	border-radius: 4px;
 }
@@ -49,21 +48,6 @@
     flex-basis: 300px;
 }
 
-/*
-.auxPanel {
-    height: 200px;
-    display: flex;
-    gap: 5px;
-}
-
-.auxPanel .tabbed-panel {
-    flex-grow: 1;
-}
-.auxPanel .logPanel {
-    flex-basis: 300px;
-    overflow: scroll;
-}
-*/
 .auxPanel {
     height: 200px;
     display: flex;

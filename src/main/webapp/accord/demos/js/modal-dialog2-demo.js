@@ -6,17 +6,7 @@ import { AccModalDialog } from '../../js/accord-bundle.js';
 let dialog1;
 
 
-function logMessage(mess) {
-  $('#log1').val(function(i, oldVal) {
-    return oldVal + "\n" + mess;
-  });
-
-}
-
-
 $(document).ready(function() {
-
-
 
 
   dialog1 = new AccModalDialog({
