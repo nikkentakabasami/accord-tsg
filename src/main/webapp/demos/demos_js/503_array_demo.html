@@ -11,11 +11,14 @@
 <link rel="stylesheet" type="text/css" href="../../accord/css/demo-base.css">
 <script src="../../accord/js/demo-base.js"></script>
 
-<link rel="stylesheet" type="text/css" href="../css/demo000.css">
 
 <script type="module" src="../../accord/js/accord-publish.js"></script>
 
-<script src="../js/000-demo.js"></script>
+<style>
+#log1 {
+  white-space: pre-wrap;
+}
+</style>
 
 </head>
 <body class="acc-default-font">
@@ -23,7 +26,7 @@
   <div class="basePanel">
 
     <div class="titlePanel">
-      <h2>template_for_js_demos</h2>
+      <h2>массивы</h2>
     </div>
 
     <div class="auxPanel">
@@ -39,23 +42,39 @@
         </div>
         <div class="tab-content">
           <pre class="acc-code-panel">
-  код
+  a.arr0 = [];
+  a.arr1 = new Array();
+  a.arr2 = new Array(6);
+  a.arr3 = new Array(5, 2, 7, 77 );
+  a.arr4 = new Array("Wind","Rain","Fire")
+  a.arr5 = ["Яблоко", "Апельсин", "Слива", "Груша","Финик","Вишня"];
+  a.arr6 = [0, ...a.arr3, 2, ...a.arr4];
+  a.arr7 = a.arr3.concat(2,3);
+  a.arr8 = a.arr3.concat(a.arr4);
 </pre>
         </div>
       </div>
     </div>
 
-    <!--               button panel                -->
-
     <div class="acc-button-panel">
-      <button id="b1" type="button" class="acc-btn">кнопка1</button>
-      <button id="b2" type="button" class="acc-btn">кнопка2</button>
+      <button id="b1" type="button" class="acc-btn">Показать массивы</button>
+      <button id="b2" type="button" class="acc-btn">Итерация по arr5</button>
+      <button id="b4" type="button" class="acc-btn">Изменение массива</button>
+      <button id="b3" type="button" class="acc-btn">Преобразование массива</button>
+      <button id="b5" type="button" class="acc-btn">Анализ массива</button>
     </div>
 
     <div class="workPanel logPanel">
         <div id="log1"></div>
     </div>
+
+
+
   </div>
 
+
 </body>
+
+<script src="../js/503-demo.js"></script>
+
 </html>

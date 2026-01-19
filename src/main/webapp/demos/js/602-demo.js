@@ -50,123 +50,118 @@ let select3Data2 = [
 ];
 
 
-function logMessage(mess) {
-	$('#log1').val(function(i, oldVal) {
-		return oldVal + "\n" + mess;
-	});
-
-}
-
-function destroyMultiSelects(){
-	select1.destroy();
-	select2.destroy();
-	select3.destroy();
-	
-}
 
 
-function createMultiSelects(){
-	
-	  select1 = new MultiSelect("#fruits", {
-		placeholder: 'Select fruits',
 
-		//сколько записей разрешено выбрать
-		min: 2,
-		max: 6,
 
-		disabled: false,  //default: false
-		search: false,	//default: true
-		selectAll: true,  //default: true
-		listAll: true,  //default: true
-		//	closeListOnItemSelect: false,
+function createMultiSelects() {
 
-		//	search: true,  // Enable the search box
-		//	selectAll: true,  // Add a select all option
-	  });
-	  select2 = new MultiSelect("#cars", {
+  select1 = new MultiSelect("#fruits", {
+	placeholder: 'Select fruits',
 
-		//размеры select
-		width: "300px",
-		height: "50px",
-		placeholder: 'Select car manufacturers',
+	//сколько записей разрешено выбрать
+	min: 2,
+	max: 6,
 
-	  });
+	disabled: false,  //default: false
+	search: false,	//default: true
+	selectAll: true,  //default: true
+	listAll: true,  //default: true
+	//	closeListOnItemSelect: false,
 
-	  select3 = new MultiSelect('#select3', {
-		data: select3Data,
-		disabled: false,  //default: false
-		search: false,	//Enable the search box. default: true
-		selectAll: true,  //Add a select all option. default: true
-		listAll: false,  //показывать выбранные значения в select. default: true
-		//	closeListOnItemSelect: false,
-		placeholder: 'Select an option',
-		//сколько записей разрешено выбрать
+	//	search: true,  // Enable the search box
+	//	selectAll: true,  // Add a select all option
+  });
+  select2 = new MultiSelect("#cars", {
+	width: "300px",
+	height: "50px",
+	placeholder: 'Select car manufacturers',
+  });
+
+  select3 = new MultiSelect('#select3', {
+	data: select3Data,
+	disabled: false,  //default: false
+	search: false,	//Enable the search box. default: true
+	selectAll: true,  //Add a select all option. default: true
+	listAll: false,  //показывать выбранные значения в select. default: true
+	//	closeListOnItemSelect: false,
+	placeholder: 'Select an option',
+	//сколько записей разрешено выбрать
 	//	max: 4,
 	//	min: 1,
-		onChange: function(value, text, element) {
-		  console.log('Change:', value);
-		  // console.log(dynamicSelect.selectedItems);
-		},
-		onSelect: function(value, text, element) {
-		  console.log('Selected:', value);
-		},
-		onUnselect: function(value, text, element) {
-		  console.log('Unselected:', value);
-		}
-	  });
-	
+	onChange: function(value, text, element) {
+	  console.log('Change:', value);
+	  // console.log(dynamicSelect.selectedItems);
+	},
+	onSelect: function(value, text, element) {
+	  console.log('Selected:', value);
+	},
+	onUnselect: function(value, text, element) {
+	  console.log('Unselected:', value);
+	}
+  });
+
 }
 
 
 
 $(() => {
 
+  let $p2Buttons = $("#p2 button");
 
+  $p2Buttons.prop("disabled", true);
 
-
-
-  
-  $("#b1").click(e=>{
-	select1.setValues(["Apple","Blueberry"]);
-	select2.setValues(["1","3"]);
-	select3.setValues(["opt3","opt4"]);
-  });
-
-  $("#b2").click(e=>{
+  $("#b2").click(e => {
 	createMultiSelects();
-  });
-  
-  $("#b3").click(e=>{
-	destroyMultiSelects();
+	$p2Buttons.prop("disabled", false);
   });
 
-  $("#b4").click(e=>{
+  $("#b3").click(e => {
+	select1.destroy();
+	select2.destroy();
+	select3.destroy();
+	$p2Buttons.prop("disabled", true);
+  });
+
+
+
+
+  $("#b1").click(e => {
+	select1.setValues(["Apple", "Blueberry"]);
+	select2.setValues(["1", "3"]);
+	select3.setValues(["opt3", "opt4"]);
+  });
+
+
+  $("#b4").click(e => {
 	select1.clear();
 	select2.clear();
 	select3.clear();
   });
-  $("#b5").click(e=>{
+  $("#b5").click(e => {
 	//задаём совершенно другие данные
 	select3.options.data = select3Data2;
 	select3.refresh();
   });
-  
-  
-  $("#b6").click(e=>{
+
+
+  $("#b6").click(e => {
+	clearLog();
+	logMessage("select1:"+select1.selectedValues);
+	logMessage("select2:"+select2.selectedValues);
+	logMessage("select3:"+select3.selectedValues);
 	
-	let vals = select1.selectedValues;
-	logMessage(vals);
-	
-  });
-  
-  $("#b7").click(e=>{
 	
   });
-  
-  $("#b8").click(e=>{
+
+  $("#b7").click(e => {
+
   });
-  
-  
+
+  $("#b8").click(e => {
+  });
+
+
 
 });
 

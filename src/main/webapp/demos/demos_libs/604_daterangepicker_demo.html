@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8" />
+
+<script src="../../jquery31/js/jquery.js"></script>
+
+<script type="text/javascript" src="../../jquery31/js/moment.min.js"></script>
+<script type="text/javascript" src="../../jquery31/js/daterangepicker.js"></script>
+<link rel="stylesheet" type="text/css" href="../../jquery31/css/daterangepicker.css" />
+
+
+<link rel="stylesheet" type="text/css" href="../../accord/css/accord.css">
+<link rel="stylesheet" type="text/css" href="../../accord/css/tabbed-panel.css">
+
+<link rel="stylesheet" type="text/css" href="../../accord/css/demo-base.css">
+<script type="module" src="../../accord/js/accord-publish.js"></script>
+
+
+<script src="../../accord/js/demo-base.js"></script>
+
+<script src="../js/604-demo.js"></script>
+
+</head>
+<body class="acc-default-font">
+
+  <div class="basePanel">
+
+    <div class="titlePanel">
+      <h2>библиотека daterangepicker.js</h2>
+    </div>
+
+    <div class="auxPanel">
+      <div id="tabbedPanel1">
+
+        <div class="tab-container">
+          <button>Описание</button>
+          <button>Ключевой код</button>
+        </div>
+
+        <div class="tab-content">
+          <pre class="acc-desc-panel">
+Позволяет добавить к input-у функционал для выбора даты или диапазона дат.
+</pre>
+        </div>
+
+        <div class="tab-content">
+          <pre class="acc-code-panel">
+  let defaultOptions = {
+    locale: dateRangeLocale,
+  };
+  $("#tf1").daterangepicker(defaultOptions);
+</pre>
+        </div>
+
+      </div>
+
+      <div class="logPanel gray-border">
+        <div id="log1"></div>
+      </div>
+
+    </div>
+
+
+    <div class="workPanel">
+
+      <label>Вид по умолчанию - выбор диапазона дат</label>
+      <br>
+      <input type="text" id="tf1">
+
+      <br>
+      <br>
+      <label>Выбор только даты, показывать выпадающие списки для годов и месяцев</label>
+      <br>
+      <input type="text" id="tf2">
+
+      <br>
+      <br>
+      <label>С презаданными диапазонами, скрыть кнопки вроде "Применить" - записывать значение при выборе. Не скрывать при выборе</label>
+      <br>
+      <input type="text" id="tf3">
+
+      <br>
+      <br>
+      <label>Выбор диапазона</label>
+      <br>
+      <input type="text" id="tf4">
+
+
+
+    </div>
+
+
+
+  </div>
+
+
+</body>
+</html>

@@ -21,18 +21,22 @@
 	<h3>AccSplitter</h3>
 
 
-	<div class="acc-button-panel">
-		<button id="b1" type="button" class="acc-btn">Активировать панель 1</button>
-	</div>
-
 
 	<div class="acc-desc-panel">
-
+Класс AccSplitter способен добавить на панель функциональность splitter-разделителя, которым можно менять размеры вложенных панелей.
 </div>
 
 <div class="acc-code-panel">
-
+    splitterPanel1 = new AccSplitter( {
+      panelSelector: "#mySplitPanel1",
+      startLeftPanelWidth: 300
+    });
 </div>
+
+  <div class="acc-button-panel">
+    <button id="b1" type="button" class="acc-btn">Активировать панель 1</button>
+  </div>
+
 
 <h3>mySplitPanel1</h3>
 <div class="acc-simple-panel" id="mySplitPanel1">

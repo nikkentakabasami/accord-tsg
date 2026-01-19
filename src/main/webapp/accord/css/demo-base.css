@@ -19,6 +19,7 @@
 
 #tabbedPanel1 {
     height: 200px;
+    width: 100%;
 }
 
 .basePanel {
@@ -53,7 +54,7 @@
     display: flex;
 }
 
-.auxPanel .logPanel {
+.logPanel {
     flex-grow: 1;
 	overflow: scroll;
 }
@@ -86,5 +87,9 @@
 
 .green-border {
 	border: 1px solid green;
+}
+
+#log1 {
+  white-space: pre-wrap;
 }
 

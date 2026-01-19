@@ -1,30 +1,83 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>demo</title>
+<meta charset="utf-8" />
 
 <script src="../../jquery31/js/jquery.js"></script>
+
+<link rel="stylesheet" type="text/css" href="../../accord/css/accord.css">
+<link rel="stylesheet" type="text/css" href="../../accord/css/tabbed-panel.css">
+<link rel="stylesheet" type="text/css" href="../../accord/css/acc-form-elements.css">
+
+<link rel="stylesheet" type="text/css" href="../../accord/css/demo-base.css">
+<script src="../../accord/js/demo-base.js"></script>
 
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
-<link rel="stylesheet" type="text/css" href="../../accord/css/accord.css">
-<link rel="stylesheet" type="text/css" href="../../accord/css/acc-form-elements.css">
 
+<script type="module" src="../../accord/js/accord-publish.js"></script>
 
 <script src="../js/601-demo.js"></script>
 
-
 </head>
-<body>
+<body class="acc-default-font">
 
+  <div class="basePanel">
+
+    <div class="titlePanel">
   <h2>библиотека select2</h2>
+    </div>
 
-      <div id="form4" class="form-panel acc-2cols acc-form-style1" style="grid-template-columns: 200px 1fr;">
+    <div class="auxPanel">
+      <div id="tabbedPanel1">
+
+        <div class="tab-container">
+          <button>Описание</button>
+          <button>Ключевой код</button>
+        </div>
+
+        <div class="tab-content">
+          <pre class="acc-desc-panel">
+Громоздкий мультиселект
+Сложно настраивать расположение, подглючивает.
+Конфликтует с моими стилями на формы.
+</pre>
+        </div>
+
+        <div class="tab-content">
+          <pre class="acc-code-panel">
+  код
+</pre>
+        </div>
+
+      </div>
+
+      <div class="logPanel gray-border">
+        <div id="log1"></div>
+      </div>
+
+    </div>
+
+
+    <!--               button panel                -->
+
+    <div class="acc-button-panel">
+      <button id="b1" type="button" class="acc-btn">кнопка1</button>
+      <button id="b2" type="button" class="acc-btn">кнопка2</button>
+    </div>
+
+
+    <div class="workPanel">
+
+
+
+      <div id="form4" class="form-panel acc-2cols acc-form-style1">
       
-        <label>Simple select</label>
+      <h4 class="acc-row">форма с класссом acc-form-style1</h4>
+      
+      
+        <label>select1 - Simple select</label>
         <select id="select1">
           <option value="">-</option>
           <option value="1">Banana</option>
@@ -32,13 +85,16 @@
           <option value="3">Lemon</option>
         </select>
         
-        <label>Select2 by default</label>
+        <label>select1 - Select2 by default</label>
         <select id="select2">
           <option value="">-</option>
           <option value="1">Banana</option>
           <option value="2">Cherry</option>
           <option value="3">Lemon</option>
         </select>
+        
+ 
+        
 
         <label>Select5 - bugged layout</label>
         <select id="select5">
@@ -48,12 +104,9 @@
       </div>
 
 
-<!-- 
-        <select id="select4">
- -->
-
       <div id="form4" class="form-panel acc-2cols" style="grid-template-columns: 200px 1fr;">
 
+      <h4 class="acc-row">простая форма</h4>
 
         <label>Select3 - loads options from data</label>
         <select id="select3">
@@ -74,7 +127,13 @@
       </div>
 
 
+    
+    
+    </div>
 
+
+
+  </div>
 
 
 </body>

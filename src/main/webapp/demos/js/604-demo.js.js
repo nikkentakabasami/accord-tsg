@@ -200,8 +200,6 @@ $(function() {
 	let defaultOptions = {
 		locale: dateRangeLocale,
 	};
-
-
 	$("#tf1").daterangepicker(defaultOptions);
 
 

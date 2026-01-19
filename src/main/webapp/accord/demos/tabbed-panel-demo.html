@@ -8,7 +8,13 @@
 
 <!-- accord - мои вспомогательные компоненты, классы, утилиты -->
 <link rel="stylesheet" type="text/css" href="../css/tabbed-panel.css">
-<link rel="stylesheet" type="text/css" href="css/demos.css">
+<link rel="stylesheet" type="text/css" href="../css/accord.css">
+<link rel="stylesheet" type="text/css" href="../css/acc-form-elements.css">
+
+<link rel="stylesheet" type="text/css" href="../css/demo-base.css">
+<script src="../js/demo-base.js"></script>
+
+
 
 
 <script type="module" src="../js/accord-publish.js"></script>
@@ -29,7 +35,13 @@
 </head>
 <body class="acc-default-font">
 
-	<h2>Неактивная панель с закладками. Построена просто на стилях</h2>
+
+  <div class="acc-button-panel">
+    <button id="b1" type="button" class="acc-btn">Активировать</button>
+  </div>
+  
+	<h2>Панель с закладками, содержащая изначально все стили</h2>
+
 
 	<div id="myTabbedPanel1" class="tabbed-panel" style="width: 100%;">
 
@@ -58,7 +70,7 @@
 	</div>
 
 
-  <h2>Активная панель с закладками. Активируется классом TabbedPanel</h2>
+  <h2>Упрощённая панель с закладками, все стили добавятся при активации</h2>
 
   <div id="myTabbedPanel2" style="width: 100%;">
 

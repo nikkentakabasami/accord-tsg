@@ -68,9 +68,10 @@ function showMainJs(){
 //		width: "450px",
 //		height: "300px",
 		contentTextUrl: mainJsHref,
-		hideOnClick: true,
+		hideOnDblclick: true,
 		fullScreen: true,
-		cssClass: "help-panel"
+		cssClass: "help-panel",
+		panelExtraClasses: "acc-popup"
 		
 		
 	}	
@@ -80,30 +81,86 @@ function showMainJs(){
 }
 
 
+//преобразовывает объекты в строки, с форматированием, для вывода в лог
+function stringifyObject(o, indent = "", withBraces = false) {
+	
+	let t = (typeof o);
+	if (t=="string" || t=="number" || t=="boolean"){
+		return o;
+	}
+	
+	
+	let result = "";
+	
+	if ( (t == 'object') && (!Array.isArray(o)) ) {
+		
+		if (withBraces){
+			result = indent+"{";
+		}
+		for (let key in o) {
+			let val = o[key];
+			result = result+"\n"+ indent+key + ": " + stringifyObject(val, "  ", withBraces); // + ","
+		}
+		if (withBraces){
+			result = result+"\n"+ indent+"}";
+		}
+		
+	} else {
+		result = JSON.stringify(o);
+	}
+	
+	return result;	
+}
+
+
+
+
 let $log1;
 let $logPanel;
+
 function clearLog() {
 	$log1.text("");
 }
 
-function logMessage(mess) {
+function log(...vals) {
+	logMessage(...vals);
+}
+
+function logNL() {
+	logMessage("\n");
+}
+
+
+function logVal(key, val, ...vals) {
+	//вывод массивов
+//	if (Array.isArray(val)){
+//		val = JSON.stringify(val);
+//	}
+	val = stringifyObject(val);
 	
-	$log1.append(mess+"<br>");
+	logMessage(key+": "+val, ...vals);
+}
+
+function logObject(o) {
+	let s = stringifyObject(o);
+	log(s);
+	
+}
+
+
+
+function logMessage(...vals) {
+	
+	let line = vals.map(v=>stringifyObject(v)).join(" ");
+	
+//	let line = vals.join(" ");
+	
+//	$log1.append(line+"<br>");
+	$log1.append(line+"\n");
 
 	//scroll to bottom	
 	var h = $logPanel.prop('scrollHeight');
 	$logPanel.scrollTop(h);	
-	
-	/*
-	$('#log1').val(function(i, oldVal) {
-		if (oldVal){
-			return oldVal + "\n" + mess;
-		} else {
-			return mess;
-		}
-		
-	});
-	*/
 
 }
 
@@ -122,10 +179,14 @@ $(function() {
 	
 	$hideAuxButton = $("#hideAuxButton"); 
 	
-	new AccSplitter({
-		panelSelector: ".auxPanel",
-		startLeftPanelWidth: 600
-	});
+	
+	if ($log1.parents(".auxPanel").length){
+		new AccSplitter({
+			panelSelector: ".auxPanel",
+			startLeftPanelWidth: 600
+		});
+	}	
+	
 	
 	
 	//показывать исходники при нажатии на ссылку

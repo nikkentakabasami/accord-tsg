@@ -45,7 +45,8 @@ const accPopupDefaultOptions = {
 	fullScreen: false,	//растягивает панель на всё окно	
 	
     hideOnOutsideClick: false,	//скрывает панель при клике за её пределами
-	hideOnClick: false	//скрывает панель при клике
+	hideOnClick: false,	//скрывает панель при клике
+	hideOnDblclick: false,	//скрывает панель при клике
 
 
 }
@@ -164,6 +165,15 @@ class AccPopup {
 				this.hide();
 			});
 		}
+		
+		if (this.options.hideOnDblclick) {
+			//скрываем панель при клике за её пределами
+			this.$dialog.bind("dblclick", (e) => {
+				this.hide();
+			});
+		}
+		
+		
 		
 		if (this.options.cssClass) {
 			this.$dialog.addClass(this.options.cssClass);
