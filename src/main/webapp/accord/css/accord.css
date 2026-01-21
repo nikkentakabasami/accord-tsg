@@ -215,6 +215,11 @@
 	justify-content: center;
 }
 
+.acc-left-content {
+	display: flex; 
+	align-items: center; 
+	justify-content: left;
+}
 
 
 
@@ -315,15 +320,7 @@
 }
 
 
-/*
-.acc-tool-panel-select-wrapper::after {
-    content: "▼";
-    font-size: 1rem;
-    top: 6px;
-    right: 4px;
-    position: absolute;
-}
-*/
+
 .acc-dropdown-triangle::after {
     content: "▼";
     font-size: 1rem;
@@ -337,7 +334,8 @@
 .acc-tool-panel-select-wrapper select {
 	appearance: none;
     height: 30px;
-    width: 200px;
+    min-width: 100px;
+    width: 100%;
     border-radius: 5px;	
     padding: 5px;
 }

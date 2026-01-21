@@ -1,0 +1,91 @@
+
+#selectorText {
+	min-width: 300px;
+}
+
+.acc-button-panel select {
+	width: 300px;
+}
+
+.pad-panel {
+	width: 50px;
+}
+
+
+.workPanel {
+  display: flex;
+  flex-direction:column; 
+  gap: 10px;
+  padding: 15px 5px !important;
+}
+
+
+.workPanel div {
+  display: flex;
+  gap: 10px;
+  flex-basis: 40px;
+}
+
+.A div, .B div, .C div {
+  flex-basis: 40px;
+  background-color: Gold;
+  justify-content: center;
+  align-items: center;   
+  display: flex;
+  gap: 10px;
+  padding: 5px;
+}
+
+.A>div>div, .B>div>div, .C>div>div {
+  background-color: WhiteSmoke;
+}
+
+
+/* рамка с подписью */
+.label-border {
+  position: relative;
+  padding: 10px;
+  border: 2px solid #000;
+  border-radius: 4px;
+}
+
+.workPanel::before {
+  content: "workPanel";
+  position: absolute;
+  top: -10px;
+  left: 10px;
+  background: #fff;
+  padding: 0 5px;
+  font-size: 16px;
+}
+
+.A::before {
+  content: "A";
+  position: absolute;
+  top: -10px;
+  left: 10px;
+  background: #fff;
+  padding: 0 5px;
+  font-size: 16px;
+}
+
+.B::before {
+  content: "B";
+  position: absolute;
+  top: -10px;
+  left: 10px;
+  background: #fff;
+  padding: 0 5px;
+  font-size: 16px;
+}
+
+
+.C::before {
+  content: "C";
+  position: absolute;
+  top: -10px;
+  left: 10px;
+  background: #fff;
+  padding: 0 5px;
+  font-size: 16px;
+}

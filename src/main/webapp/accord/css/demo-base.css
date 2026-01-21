@@ -78,16 +78,30 @@
 }
 
 .red-border {
-	border: 1px solid red;
+	border: 1px solid red!important;
 }
 
 .blue-border {
-	border: 1px solid blue;
+	border: 1px solid blue!important;
 }
 
 .green-border {
-	border: 1px solid green;
+	border: 1px solid green!important;
 }
+
+
+.bg-smoke {
+	background-color: WhiteSmoke;
+}
+
+.bg-blue {
+	background-color: AliceBlue;
+}
+.bg-gold {
+	background-color: Gold;
+}
+
+
 
 #log1 {
   white-space: pre-wrap;

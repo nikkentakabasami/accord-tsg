@@ -35,10 +35,23 @@ let accordUtils = {
   randomDate: randomDate,
   formatDate: formatDate,
   parseDate: parseDate,
+  cloneTemplate: cloneTemplate,
+  
 
 };
 window.accordUtils = accordUtils;
 
+//Находит <template> и клонирует его содержимое
+function cloneTemplate(selector){
+	
+	let $template = $(selector);
+	let cont = $template.prop('content');
+	if (cont){
+		return $(cont).clone();
+	}
+	return null;
+	
+}
 
 //возвращает случайное целое число в заданном диапазоне
 // пример: random(5)
@@ -96,25 +109,30 @@ function generateSelect(name, data, withNullOption = true, multi = false, select
 	return $select;	
 }
 
-function fillSelect($select, data, withNullOption = false, selectedValue = null) {
-	let optionsCode = generateSelectOptions(data, withNullOption,selectedValue); 
+function fillSelect($select, data, withNullOption = false, selectedValue = null, indexAsVal = false) {
+	let optionsCode = generateSelectOptions(data, withNullOption,selectedValue,indexAsVal); 
 	$select.append(optionsCode);
 	return $select;	
 }
 
-function generateSelectOptions(data, withNullOption = false, selectedValue = null) {
+function generateSelectOptions(data, withNullOption = false, selectedValue = null, indexAsVal = false) {
 	let optionsCode = withNullOption?'<option value="">-</option>':'';
 	if (!data){
 		return optionsCode;
 	}
 	
-	data.forEach(item=>{
+	data.forEach((item, ind)=>{
 		let id = item;
 		let name = item;
 		if (typeof item=="object"){
 			id = item.id;
 			name = item.name;
 		}
+		
+		if (indexAsVal){
+			id = String(ind);
+		}
+		
 		let selectedAttr = '';
 		if (selectedValue && id==selectedValue){
 			selectedAttr = ' selected="selected"';

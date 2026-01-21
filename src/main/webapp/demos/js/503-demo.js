@@ -9,14 +9,15 @@ function createArrays(){
 	//пустые массивы
 	a.arr0 = [];
 	a.arr1 = new Array();
+	a.arrEmpty2 = Array();
 
-	//можно не задавать размер - размер массива увеличится автоматом при записи значений: 
+	//размер массива увеличится автоматом при записи значений (хотя такой подход не желателен - мешает оптимизации)
 	a.arr1[0] = "Saab";
 	a.arr1[1] = "Volvo";
 	a.arr1[2] = "BMW";
 	a.arr1[7] = "Toyota";  //length=8, ["Saab","Volvo","BMW",null,null,null,null,"Toyota"]
 
-
+	
 	//с заданием размера
 	a.arr2 = new Array(6);					//создан пустой массив с длинной 6
 
@@ -25,7 +26,7 @@ function createArrays(){
 	a.arr4 = new Array("Wind","Rain","Fire")
 	a.arr5 = ["Яблоко", "Апельсин", "Слива", "Груша","Финик","Вишня"];
 
-	//объединение массивов в один
+	//объединение массивов в один (через оператор расширения)
 	a.arr6 = [0, ...a.arr3, 2, ...a.arr4];
 	a.arr7 = a.arr3.concat(2,3);	////concat - создаёт новый массив
 	a.arr8 = a.arr3.concat(a.arr4);
@@ -34,9 +35,7 @@ function createArrays(){
 
 
 	//Создание многомерных массивов
-
 	a.arr20 = [ [1,2,3], [4,5,6], [7,8,9] ]
-
 	a.arr21 = [];
 	  for (var y = 0; y < 3; y++) {
 	      a.arr21.push(new Array());
@@ -114,6 +113,8 @@ function showArrays(){
 function iterateDemo(){
 	
 	clearLog();
+	
+	a.arr5.testField = "testValue";	
 	logVal("arr5",a.arr5);
 
 	log("<br>for (let i = 0; i < arr5.length; i++)");	
@@ -139,12 +140,18 @@ function iterateDemo(){
 		log(`arr5[${index}] = ${item}`);
 	});
 	
-	
 	let sum = 0;
 	let r = a.arr5.forEach(function(item, index, array) {
 		sum+= this+item.length;
 	},10);
 	logVal("sum",sum);
+
+
+	//итерация по индексам (и добавленным полям объекта)	
+	log("<br>for (let f in arr5)");	
+	for (let f in a.arr5) {
+		log(f);
+	}
 	
 	
 }
@@ -154,9 +161,12 @@ function iterateDemo(){
 //модификация массива
 function modify(){
 	clearLog();
-
+	
 	let a2 = [7,8];
 
+	//массив это объект – можно присваивать в него любые свойства (хоть это не рекомендуется).
+	a2.age = 25;
+	
 	//push - добавляет элементы в конец массива и возвращает его новую длину
 	let newLength = a2.push(5,6);		//[7,8,5,6]
 	logVal("a2.push(5,6)",a2,", newLength=",newLength);
@@ -332,7 +342,11 @@ function check(){
 	
 	//сравнение массивов можно делать так
 	b = JSON.stringify(a.arr5) === JSON.stringify(a.arr50)
-	logVal("arr5==arr50",b);	
+	logVal("arr5==arr50",b);
+	
+	b = Array.isArray(a.arr5);	
+	logVal("Array.isArray(a.arr5)", b);
+		
 	/*
 
 	 = Array.from(a.arr5);
