@@ -36,10 +36,30 @@ let accordUtils = {
   formatDate: formatDate,
   parseDate: parseDate,
   cloneTemplate: cloneTemplate,
+  cloneObject: cloneObject,
   
 
 };
 window.accordUtils = accordUtils;
+
+
+function cloneObject(source, ...attributes){
+	
+	let clone = {};
+	for (let key in source) {
+		if (attributes.length>0){
+			if (!attributes.includes(key)){
+				continue;
+			}
+		}
+	  clone[key] = source[key];
+	}
+	return clone;
+}
+
+
+
+
 
 //Находит <template> и клонирует его содержимое
 function cloneTemplate(selector){
@@ -84,7 +104,23 @@ function parseDate(dateStr) {
 
 
 
+const defaultGsoOptions = {
+	data: null, 
+	withNullOption: false, 
+	selectedValue: null,
+	
+	
+	valueField: "id",
+	contentField: "name",
 
+	//текстом будет значение
+	contentIsValue: false,
+	
+	valueIsIndex: false,
+		
+	//множественное выделение
+	multi: false
+}
 
 /**
  * Генерация элемента select с заданными опциями.
@@ -93,52 +129,101 @@ function parseDate(dateStr) {
  * withNullOption - включать ли строку с пустым значением.
  * Возвращает jquery объект $select.
  */
-function generateSelect(name, data, withNullOption = true, multi = false, selectedValue = null) {
+//function generateSelect(name, data, withNullOption = true, multi = false, selectedValue = null) {
+function generateSelect(name, options) {
+	
+	//упрощённое объявление
+	if (Array.isArray(options)){
+		options = {
+			data: options
+		};
+	}
 	
 	let $select = $(`select[name='${name}']`);
 	if ($select.length==0){
 		$select = $(`<select name="${name}"></select>`);
 	}
 
-	if (multi){
+	if (options.multi){
 		$select.attr("multiple","multiple");
 	}
 		
-	fillSelect($select, data, withNullOption,selectedValue);
+	fillSelect($select, options);
 	
 	return $select;	
 }
 
-function fillSelect($select, data, withNullOption = false, selectedValue = null, indexAsVal = false) {
-	let optionsCode = generateSelectOptions(data, withNullOption,selectedValue,indexAsVal); 
+function fillSelect($select, options) {
+	let optionsCode = generateSelectOptions(options); 
 	$select.append(optionsCode);
 	return $select;	
 }
 
-function generateSelectOptions(data, withNullOption = false, selectedValue = null, indexAsVal = false) {
-	let optionsCode = withNullOption?'<option value="">-</option>':'';
-	if (!data){
+	
+	
+function generateSelectOptions(options) {
+
+	options = $.extend({}, defaultGsoOptions, options);
+	
+	
+	let optionsCode = options.withNullOption?'<option value="">-</option>':'';
+	if (!options.data){
 		return optionsCode;
 	}
 	
-	data.forEach((item, ind)=>{
-		let id = item;
-		let name = item;
-		if (typeof item=="object"){
-			id = item.id;
-			name = item.name;
-		}
+	
+	
+	if (Array.isArray(options.data)){
+		options.data.forEach((item, ind)=>{
+			let id = item;
+			let name = item;
+			
+			if (options.contentIsValue){
+				name = id;
+			}
+			
+			if (options.valueIsIndex){
+				id = String(ind);
+			}
+			
+			if (typeof item=="object"){
+				id = item[options.valueField];
+				name = item[options.contentField];
+			}
+			
+			
+			let selectedAttr = '';
+			if (options.selectedValue && id==options.selectedValue){
+				selectedAttr = ' selected="selected"';
+			}
+			optionsCode+=`<option value="${id}"${selectedAttr}>${name}</option>`;
+		});		
+	} else {
 		
-		if (indexAsVal){
-			id = String(ind);
-		}
+		//данные заданы объектом. Ключи будут его полями.
+		let ind = 0;
+		for (let id in options.data) {
+		  let name = String(options.data[id]);
+		  
+		  if (options.contentIsValue){
+			name = id;
+		  }
+		  
+		  if (options.valueIsIndex){
+		  	id = String(ind++);
+		  }
+		  
+		  let selectedAttr = '';
+		  if (options.selectedValue && id==options.selectedValue){
+		  	selectedAttr = ' selected="selected"';
+		  }
+		  optionsCode+=`<option value="${id}"${selectedAttr}>${name}</option>`;
+		  
+		}//for
 		
-		let selectedAttr = '';
-		if (selectedValue && id==selectedValue){
-			selectedAttr = ' selected="selected"';
-		}
-		optionsCode+=`<option value="${id}"${selectedAttr}>${name}</option>`;
-	});
+	}
+	
+
 	
 	return optionsCode;
 }
@@ -149,7 +234,10 @@ function generateBooleanSelect(name, withNullOption = true) {
 		{id: "true",name: "Да"},
 		{id: "false",name: "Нет"},
 	];
-	return generateSelect(name,data,withNullOption);
+	return generateSelect(name,{
+		data: data,
+		withNullOption: withNullOption
+	});
 }
 
 
@@ -159,7 +247,9 @@ function generateDatalist(id, data) {
 	if ($select.length==0){
 		$select = $(`<datalist id="${id}"></select>`);
 	}
-	fillSelect($select, data);
+	fillSelect($select, {
+		data: data,
+	});
 	return $select;	
 }
 

@@ -37,7 +37,11 @@
 	position: absolute;
 }
 
-.acc-form-style1 button, .acc-form-style1 label, .acc-form-style1 input, .acc-form-style1 select,
+/*
+.acc-form-style1 button, 
+*/
+
+.acc-form-style1 label, .acc-form-style1 input, .acc-form-style1 select,
 	.acc-form-style1 progress, .acc-form-style1 meter {
 	display: block;
 	font-family: inherit;
@@ -79,6 +83,13 @@
     max-width: 300px;
     padding: 5px;
     height: 30px;
+}
+
+
+.acc-form-button-panel1 {
+    display: flex;
+    gap: 5px;
+    justify-content: flex-end;
 }
 
 

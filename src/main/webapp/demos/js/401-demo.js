@@ -6,6 +6,14 @@ let $selectors;
 let $selectors2;
 let $selectorText;
 
+let $btn;
+let boldTag = "<b></b>";
+let testHtmlSnippet = "<b>appended text</b>";
+let greenBorderDivSnippet = '<div class="green-border"></div>';
+
+
+
+
 
 let selectorsData = [
 	
@@ -105,7 +113,6 @@ let selectorsData2 = [
 	".A",	
 ];
 
-let boldTag = "<b></b>";
 let selectorsData3 = [
 	
 	//Возвращает прямого “родителя” элемента. 
@@ -122,10 +129,6 @@ let selectorsData3 = [
 	
 	//	Поиск по селектору среди предков до элемента с заданным селектором (не включая его)
 	'$(".C .c3").parentsUntil(".workPanel")',
-	
-	//объединение объектов
-	'$(".A>.c3").add(".B>.c2")',
-	'$(".A>.c3").add($(".B>.c2"))',  //то же самое
 	
 	//Ищет элементы-потомки, которые удовлетворяют указанному выражению.
 	'$(".A").find(".c2")',
@@ -148,11 +151,254 @@ let selectorsData3 = [
 	
 	//порядковый номер первого элемента в наборе
 	'$(".A>.c2").index()',
-
-		
-	
 		
 ];
+
+let selectorsData4 = [
+	
+	'$(".A>*").first()',
+	'$(".A>*").last()',
+	'$(".A>*").eq(3)',
+	'$(".A>*").slice(1,3)',
+	
+	'$(".A>*").filter(".c2")',
+	'$(".A>*").not(".c2")',
+	
+		
+	//элементы, содержащие дочерний элемент с классом c3
+	'$(".A>*").has(".c2")',
+	
+	
+	
+];
+
+//основные методы и атрибуты
+let selectorsData5 = [
+	
+
+	
+	//число элементов в объекте jQuery.
+	'$(".A>*").length',
+	
+	//возвращает true, если хотя бы один элемент соответствует выражению.
+	'$(".A>*").is(".c2")',
+	  
+	
+	
+	//массив элементов DOM.
+	'$(".A>*").get()',
+	
+	//элемент DOM по индексу
+	'$(".A>*").get(1)',
+	
+	//Селектор, определяющий селектор первоначально переданный в jQuery().
+//	'$(".A>*").filter(".c2").selector',
+//	'$(".A>*").filter(".c2").context',
+
+	//end() - Возврат к оригинальному селектору
+	'$(".A>*").filter(".c2").wrap(boldTag).end()',
+	
+	//each - Выполняет функцию для каждого элемента набора.	
+	'$(".A>*").each((ind,el)=>{log(ind,el.id)})',
+	
+	//map -	Преобразование элементов. Возвращает jquery-объект, содержащий преобразованные элементы
+	//получение списка id элементов в виде строки
+	'$(".A>*").map((ind,el)=>el.id).get().join()',
+	
+	//объединение элементов
+	'$(".A>.c3").add(".B>.c2")',
+	'$(".A>.c3").add($(".B>.c2"))',  //то же самое
+	
+	
+];
+
+
+
+//
+let selectorsData6 = [
+	'$(".A>.c2").attr("title")',
+	'$(".A>.c2").attr("title","my new title")',
+	'$(".A>.c2").removeAttr("title")',
+
+	//	Методы prop почти всегда могут заменить attr. Предпочтительнее использовать их.
+	'$(".A>.c2").prop("title")',
+	'$(".A>.c2").prop("title","my new title")',
+	'$(".B>button").prop("disabled",true)',
+	
+	'$(".B>#vehicle").prop("checked",false)',
+		
+	//возвращает строку, содержащую HTML (innerHTML) первого элемента в наборе (его содержимое)
+	'$(".A>.c4").html()',
+	
+	//возвращает строку, содержащую HTML элемента
+	'$(".A>.c4").prop("outerHTML");',	
+	
+	//совмещённое текстовое содержание всех элементов в наборе (включая их потомков)
+	'$(".A>.c4").text()',
+
+	//задание текстового содержимого
+	'$(".A>.c2").text("my new text")',
+	'$(".A>.c1").text($(".A>.c4").html())',
+	
+	//задание html содержимого
+	'$(".A>.c2").html("my new text")',
+	'$(".A>.c1").html($(".A>.c4").html())',
+		
+	//возвращает содержимое атрибута value для первого элемента ввода в наборе.
+	'$(".B>input:checkbox").val()',
+	
+	'$(".B>input:checkbox").val("train").val()',
+	
+
+	//Позволяет сохранять в элементе любые данные (и позже получать их обратно)
+	'$(".A>.c1").data()',
+	'$(".A>.c1").data("f1")',
+	'$(".A>.c1").data("f1","new data").data()',
+	
+	//Удаляет данные заданные через data()
+	//Не удаляет данные, заданые атрибутами.
+	'$(".A>.c1").removeData("f1").data()',
+	
+	//Удаляет данные заданные через атрибуты
+	'$(".A>.c1").removeAttr("data-f1").data()',
+	
+
+];
+
+//
+let selectorsData7 = [
+	'$(".A>.c1").css("background-color")',
+	'$(".A>.c1").css("background-color", "red")',
+
+	//получение классов элемента
+	'$(".A>.c2").attr("class")',	
+		
+	'$(".A>.c1").addClass("bg-red")',
+	'$(".A>.c2").toggleClass("blue-border")',
+	
+	//Возвращает true, если хотя бы один из набора совпавших элементов обладает указанным классом.
+	'$(".A>.c1").hasClass("bg-red")',
+	'$(".A").removeClass("A")',
+];
+
+
+
+//
+let selectorsData8 = [
+	
+	//размеры внутренней области элемента (не включают в себя border и padding)
+	'[$btn.width(), $btn.height()]',
+
+	//внутренние размеры (исключая border, но включая padding)
+	'[$btn.innerWidth(), $btn.innerHeight()]',
+
+	//outerHeight( includeMargin = false)
+	//внешние размеры (включая padding, border и опционально margin)
+	'[$btn.outerWidth(), $btn.outerHeight()]',
+
+	//позиция первого элемента относительно документа
+	'$btn.offset()',
+
+	//позиция первого элемента относительно родителя
+	'$btn.position()',
+	
+	//задание размеров	
+	'$btn.width(100).height(100)',
+	'$btn.innerWidth(100).innerHeight(100)',
+	'$btn.outerWidth(100).outerHeight(100)',
+
+	
+	//внешние размеры (без учёта margin) и положение относительно документа
+	//те же цифры что и $btn.offset(),  [$btn.outerWidth(), $btn.outerHeight()]
+	'$btn.get(0).getBoundingClientRect()',
+	
+	
+	
+	
+	
+	
+];
+
+
+//
+let selectorsData9 = [
+	
+	
+	//--------вставка внутрь--------
+	
+	//вставляет код/кнопку внутрь панели А, возвращает панель А
+	'$(".A").append(testHtmlSnippet)',
+	'$(".A").append($btn)',
+
+	//вставляет кнопку внутрь панели А (в начало), возвращает панель А
+	'$(".A").prepend($btn)',
+	
+	//вставляет код/кнопку внутрь панели А, возвращает панель А
+	'$(testHtmlSnippet).appendTo(".A")',
+	'$(".B>.c1").appendTo(".A")',
+	
+	'$(".B>.c1").prependTo(".A")',
+	
+	//--------вставка снаружи--------
+	
+	//вставляет кнопку после панели А, возвращает панель А
+	'$(".A").after($btn)',
+	
+	//вставляет кнопку до панели А, возвращает панель А
+	'$(".A").before($btn)',
+	
+	//вставляет кнопку после панели А, возвращает кнопку
+	'$btn.insertAfter(".A")',
+	
+	//вставляет кнопку до панели А, возвращает кнопку
+	'$btn.insertBefore(".A")',
+
+	//--------обёртывание--------
+		
+	//Заключает каждый элемент в наборе в конструкцию HTML.
+	//Если задать контейнер через селектор - контейнер будет клонирован
+	'$btn.wrap(greenBorderDivSnippet)',
+	'$btn.wrap(".A>.c1")',
+	
+	'$(".A>*:lt(3)").wrap(greenBorderDivSnippet)',
+	
+	//Заключает все элементы в наборе в единственную конструкцию HTML.
+	'$(".A>*:lt(3)").wrapAll(greenBorderDivSnippet)',
+	
+	//Заключает содержимое каждого элемента в наборе в конструкцию HTML.
+	'$(".workPanel>*").wrapInner(greenBorderDivSnippet)',
+
+	//--------Замена--------
+	
+	//Производит замену всех элементов элементами HTML или DOM. 
+	'$(".workPanel>*").replaceWith(testHtmlSnippet)',
+
+	//то же что и replaceWith, но инвертировано: код слева будет заменять элементы справа
+	'$(testHtmlSnippet).replaceAll(".workPanel>*")',
+	'$btn.replaceAll(".workPanel>*")',
+
+	//--------Удаление--------
+		
+	//Удаляет содержимое из каждого элемента в наборе
+	'$(".workPanel>*").empty()',
+	
+	//Удаляет все совпавшие элементы из DOM (и все обработчики событий).
+	//НЕ удаляет элементы из объекта jQuery, позволяя Вам воспользоваться ими позже.
+	'$btn.remove()',
+	'$btn.remove().appendTo(".A")',
+		
+	//--------Копирование--------
+	
+	'$btn.clone().appendTo(".A")',
+			
+];
+//
+let selectorsData10 = [
+];
+
+
+
+
 
 
 function reloadSandbox(){
@@ -168,32 +414,25 @@ function reloadSandbox(){
 		$sandboxPanels.find(`.B .c${i}`).attr("id",`bc${i}`);
 	}
 
-	/*	
-	$sandboxPanels.find(".c1").attr("title","c1_title");
-	$sandboxPanels.find(".c2").attr("title","c2_title");
-	$sandboxPanels.find(".c3").attr("title","c3_title");
-	$sandboxPanels.find(".c3").attr("title","c3_title");
-	*/
-	
-	
 	$sandboxPanels.appendTo($workPanel);
-	
-	
-	
-	
-//	accordUtils.cloneTemplate("");
-	
 	
 }
 
+
+
 //выделяет объекты с заданным селектором красной рамкой
+//выводит в лог значение выражения (или число найденных элементов)
 function highlight(val){
 	reloadSandbox();
 	if (!val){
 		return;
 	}
-	
+
+//	$c2 = $(".A>.c2");
+	$btn = $(".B>button.c5");
+		
 	clearLog();
+	log(val);
 	if (val.indexOf("$")>=0){
 		
 		val = eval(val); 
@@ -207,32 +446,11 @@ function highlight(val){
 		val = $(val); 
 	}
 	
-	
 	val.addClass("red-border");
 	
 	logVal("elements found",val.length);
 	
 }
-
-
-/*
-function hlExpression(expr){
-	reloadSandbox();
-	if (!expr){
-		return;
-	}
-	
-	$val = eval(expr); 
-	if (!val.jquery){
-		throw new Error('Выражение должно возвращать jquery-объект!');
-	}
-	
-	val.addClass("red-border");
-}
-*/
-
-
-//eval('$(".c1")').addClass("red-border");;
 
 
 function initSelect(selector, data){
@@ -243,7 +461,14 @@ function initSelect(selector, data){
 		let v = $sel.children("option:selected").text();
 		$selectorText.val(v);
 	});
-	accordUtils.fillSelect($sel,data,true,null,true);
+//	accordUtils.fillSelect($sel,data,true,null,true);
+	
+	accordUtils.fillSelect($sel,{
+		data: data,
+		withNullOption: true,
+		selectedValue: null,
+		valueIsIndex: true
+	});	
 	
 }
 
@@ -255,36 +480,13 @@ $(()=>{
 	
 	initSelect("#selectors", selectorsData);
 	initSelect("#selectors2", selectorsData2);
-	
 	initSelect("#selectors3", selectorsData3);
-	
-	/*
-	let $sel = $("#traverseSelect");
-	$sel.change(e=>{
-		let v = $sel.val();
-		$selectorText.val(v);
-	});
-	accordUtils.fillSelect($sel,data,true);
-	*/
-	
-	
-	
-	/*
-	$selectors = $("#selectors");
-	$selectors2 = $("#selectors2");
-	
-	$selectors.change(e=>{
-		let v = $selectors.val();
-		$selectorText.val(v);
-	});
-	$selectors2.change(e=>{
-		let v = $selectors2.val();
-		$selectorText.val(v);
-	});
-	
-	accordUtils.fillSelect($selectors,selectorsData,true);
-	accordUtils.fillSelect($selectors2,selectorsData2,true);
-	*/
+	initSelect("#selectors4", selectorsData4);
+	initSelect("#selectors5", selectorsData5);
+	initSelect("#selectors6", selectorsData6);
+	initSelect("#selectors7", selectorsData7);
+	initSelect("#selectors8", selectorsData8);
+	initSelect("#selectors9", selectorsData9);
 	
 	$("#b1").click(e=>{
 		let v = $selectorText.val();

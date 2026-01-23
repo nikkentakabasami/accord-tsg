@@ -89,6 +89,12 @@ function stringifyObject(o, indent = "", withBraces = false) {
 		return o;
 	}
 	
+	//dom-объект
+	if (o instanceof Element){
+		return o.outerHTML;
+	}
+	
+	
 	
 	let result = "";
 	
@@ -97,9 +103,34 @@ function stringifyObject(o, indent = "", withBraces = false) {
 		if (withBraces){
 			result = indent+"{";
 		}
+		
+		let first = true;
 		for (let key in o) {
 			let val = o[key];
-			result = result+"\n"+ indent+key + ": " + stringifyObject(val, "  ", withBraces); // + ","
+			
+			
+			
+			let valStr;
+			
+			let t = (typeof val);
+			
+			if (val instanceof Element){
+				valStr = val.tagName+"#"+val.id;
+			} else if (t == "function"){
+				valStr = "func";
+			} else if (t == "object"){
+				valStr = String(val);
+			} else {
+				valStr = stringifyObject(val, "  ", withBraces);
+				
+			}
+			
+			if (!first){
+				result+="\n";
+			}
+			
+			result+= indent+key + ": " + valStr;
+			first=false;
 		}
 		if (withBraces){
 			result = result+"\n"+ indent+"}";
@@ -127,7 +158,7 @@ function log(...vals) {
 }
 
 function logNL() {
-	logMessage("\n");
+	logMessage("");
 }
 
 
@@ -141,7 +172,12 @@ function logVal(key, val, ...vals) {
 	logMessage(key+": "+val, ...vals);
 }
 
-function logObject(o) {
+function logObject(o, ...attributes) {
+	
+	if (attributes.length>0){
+		o = accordUtils.cloneObject(o, ...attributes);
+	}
+	
 	let s = stringifyObject(o);
 	log(s);
 	
@@ -149,14 +185,18 @@ function logObject(o) {
 
 
 
+
+
 function logMessage(...vals) {
 	
 	let line = vals.map(v=>stringifyObject(v)).join(" ");
+
+	line = line+"\n";
 	
-//	let line = vals.join(" ");
-	
-//	$log1.append(line+"<br>");
-	$log1.append(line+"\n");
+	//чтобы избавиться от спецсимволов
+	line = document.createTextNode(line)
+
+	$log1.append(line);
 
 	//scroll to bottom	
 	var h = $logPanel.prop('scrollHeight');
@@ -172,7 +212,7 @@ $(function() {
 	$log1 = $('#log1');
 	$logPanel = $('.logPanel');
 	
-	logMessage("Запуск");
+//	logMessage("Запуск");
 	
 	addTitlePanelButtons();
 	fixSrcRef();
@@ -180,7 +220,7 @@ $(function() {
 	$hideAuxButton = $("#hideAuxButton"); 
 	
 	
-	if ($log1.parents(".auxPanel").length){
+	if ($log1.parents(".auxPanel:first div").length>=2){
 		new AccSplitter({
 			panelSelector: ".auxPanel",
 			startLeftPanelWidth: 600

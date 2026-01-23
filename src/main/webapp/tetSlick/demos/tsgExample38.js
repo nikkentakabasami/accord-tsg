@@ -105,14 +105,36 @@ $(function() {
   myGrid = new TetSlickGrid("#myGrid", dataSource.rows, columns, options);
 
   let customerColumn = myGrid.model.columnsById["customer"];
-  customerColumn.filterInput = accordUtils.generateSelect("customer", dataSource.customers, false, true);
-//  customerColumn.filterInput.attr("multiple","multiple");
-  
+//  customerColumn.filterInput = accordUtils.generateSelect("customer", dataSource.customers, false, true);
+	customerColumn.filterInput = accordUtils.generateSelect("customer", {
+		data: dataSource.customers, 
+		withNullOption: false, 
+		multi: true, 
+		selectedValue: null
+	});  
+
   let fruitColumn = myGrid.model.columnsById["fruit"];
   
   //Выбираем банан
-  fruitColumn.filterInput = accordUtils.generateSelect("fruit", dataSource.fruits, true,false,2);
+//  fruitColumn.filterInput = accordUtils.generateSelect("fruit", dataSource.fruits, true,false,2);
+fruitColumn.filterInput = accordUtils.generateSelect("fruit", {
+	data: dataSource.fruits, 
+	withNullOption: true, 
+	multi: false, 
+	selectedValue: 2
+});    
+  
+  
+  
 
+    
+
+
+
+  
+  
+  
+  
   //Инициализирует мультиселекты в полях фильтрации.
   //Для использования требуется подключить библиотеки bootstrap 3 и bootstrap-multiselect
   //селекты должны иметь атрибут multiple!

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8" />
+
+<script src="../../jquery31/js/jquery.js"></script>
+
+<link rel="stylesheet" type="text/css" href="../../accord/css/accord.css">
+<link rel="stylesheet" type="text/css" href="../../accord/css/tabbed-panel.css">
+
+<link rel="stylesheet" type="text/css" href="../../accord/css/acc-form-elements.css">
+
+
+<link rel="stylesheet" type="text/css" href="../../accord/css/demo-base.css">
+<script src="../../accord/js/demo-base.js"></script>
+
+<script type="module" src="../../accord/js/accord-publish.js"></script>
+
+<script src="../js/402-demo.js"></script>
+
+
+
+</head>
+<body class="acc-default-font">
+
+  <div class="basePanel">
+
+    <div class="titlePanel">
+      <h2>jquery events demo</h2>
+    </div>
+
+    <div class="auxPanel">
+
+      <div class="logPanel gray-border">
+        <div id="log1"></div>
+      </div>
+
+    </div>
+
+
+
+
+    <div class="acc-button-panel">
+
+      <div class="acc-left-content">Обработчики1</div>
+      <div class="acc-tool-panel-select-wrapper acc-dropdown-triangle">
+        <select id="selectors" class="acc-tool-panel-select" style="width: 200px;">
+        </select>
+      </div>
+      <button id="b1" type="button" class="acc-btn">Выполнить</button>
+
+
+    </div>
+
+
+    <div class="acc-button-panel">
+      <button id="b2" type="button" class="acc-btn">Перезагрузить песочницу</button>
+    </div>
+
+
+
+
+    <!--               work panel                -->
+
+    <div class="workPanel label-border"></div>
+
+
+  </div>
+
+
+  <template id="template1">
+
+
+    <div class="acc-2cols">
+
+
+      <div class="form-panel acc-2cols acc-form-style1 panel1">
+
+        <h3 class="acc-row">acc-2cols - расположение элементов в 2 столбца через grid layout</h3>
+
+        <label>First name:</label>
+        <input type="text" id="inp1" value="John">
+        <label>Second name:</label>
+        <input type="text" id="inp2" value="Connor">
+        <label>Datetime local:</label>
+        <input type="date" id="inp3" />
+
+        <label>Select box:</label>
+        <select id="inp4">
+          <option>Banana</option>
+          <option>Cherry</option>
+          <option>Lemon</option>
+        </select>
+        <div class="acc-row acc-form-button-panel1">
+          <button class="acc-btn" id="btn1">Ok</button>
+          <button class="acc-btn" id="btn2">Cancel</button>
+        </div>
+
+
+      </div>
+
+      <div class="form-panel acc-2cols acc-form-style1 panel2">p2</div>
+    </div>
+
+  </template>
+
+
+</body>
+</html>

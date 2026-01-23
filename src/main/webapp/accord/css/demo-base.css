@@ -73,22 +73,25 @@
 
 
 .gray-border {
-	border: 1px solid LightGray;
+	border: 2px solid LightGray;
 	border-radius: 4px;
 }
 
 .red-border {
-	border: 1px solid red!important;
+	border: 2px solid red!important;
 }
 
 .blue-border {
-	border: 1px solid blue!important;
+	border: 2px solid blue!important;
 }
 
 .green-border {
-	border: 1px solid green!important;
+	border: 2px solid green!important;
 }
 
+.bg-red {
+	background-color: red!important;
+}
 
 .bg-smoke {
 	background-color: WhiteSmoke;

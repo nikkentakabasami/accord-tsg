@@ -158,12 +158,14 @@ export class SelectFilter extends Filter {
 	
 	if (this.$filter.is('input')){
 		
-		let $select = accordUtils.generateSelect(this.columnId, null, true, false, this.initalValue);
+//		let $select = accordUtils.generateSelect(this.columnId, null, true, false, this.initalValue);
+		let $select = accordUtils.generateSelect(this.columnId, {
+			data: null, 
+			withNullOption: true, 
+			multi: false, 
+			selectedValue: this.initalValue
+		});
 		
-//		$select.after(this.$filter);
-//		this.$filter.remove();
-		
-//		this.$filter = accordUtils.generateSelect(this.columnId, data, true, false, this.initalValue);
 		this.$filter = $select;
 		this.$element = $select;
 	}
@@ -218,7 +220,10 @@ export class SelectFilter extends Filter {
 	
 	  if (data){
 		this.$filter.empty();
-	  	accordUtils.fillSelect(this.$filter,data,true);
+		accordUtils.fillSelect(this.$filter,{
+			data: data,
+			withNullOption: true
+		});
 	  }
 
   }  

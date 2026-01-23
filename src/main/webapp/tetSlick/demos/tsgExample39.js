@@ -120,8 +120,6 @@ $(function() {
   fruitColumn.filterData = dataSource.fruitsList;
   fruitColumn.filterClass = tsgUtils.filterClasses.SelectFilter;
   
-//  fruitColumn.filterInput = accordUtils.generateSelect("fruit", dataSource.fruits, true,false,2);
-
 /*
   //Инициализирует мультиселекты в полях фильтрации.
   //Для использования требуется подключить библиотеки bootstrap 3 и bootstrap-multiselect

@@ -99,7 +99,8 @@ $(function() {
 
   let customerColumn = myGrid.model.columnsById["customer"];
   customerColumn.filterInput = accordUtils.generateSelect("customer", dataSource.customers);
-
+  
+  
   let fruitColumn = myGrid.model.columnsById["fruit"];
   fruitColumn.filterInput = accordUtils.generateSelect("fruit", dataSource.fruits);
 
