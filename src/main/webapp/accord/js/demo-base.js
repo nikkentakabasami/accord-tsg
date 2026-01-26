@@ -220,7 +220,7 @@ $(function() {
 	$hideAuxButton = $("#hideAuxButton"); 
 	
 	
-	if ($log1.parents(".auxPanel:first div").length>=2){
+	if ($log1.parents(".auxPanel").children().length>=2){
 		new AccSplitter({
 			panelSelector: ".auxPanel",
 			startLeftPanelWidth: 600

@@ -16,7 +16,10 @@ let greenBorderDivSnippet = '<div class="green-border"></div>';
 
 
 let selectorsData = [
-	
+
+	//все кнопки
+	".workPanel button",
+		
 	//одновременно имеет классы acc-btn и c5
 	".workPanel button.acc-btn.c5",
 	
@@ -61,7 +64,14 @@ let selectorsData = [
 	//с заданием двух условий по атрибутам
 	".A>*[title*=1][id=ac1]",
 
+	//Соответствует всем элементам input, select, button
+	".workPanel :input",
 
+	//
+	".workPanel :hidden",
+
+
+	
 	
 ];
 
@@ -70,7 +80,7 @@ let selectorsData2 = [
 	//-------------фильтрация-------------
 	
 	//первый/последний выбранный элемент. Возвращается один элемент!
-	".A>*:first, .B *:last",
+	".A>*:first, .C *:last",
 
 	//выбранный элемент с индексом 1	
 	".A *:eq(1)",
@@ -83,21 +93,22 @@ let selectorsData2 = [
 
 	//элементы которые являются  первыми/последними дочерними объектами у родителей.
 	//Может вернуть несколько элементов
-	".A>*:first-child, .B *:last-child",
+	".A *:first-child, .C *:last-child",
 
 	//элементы с заданными дочерними индексами. Индекс начинается с 1.
-	".A>*:nth-child(1), .B *:nth-child(2)",
+	".A *:nth-child(1), .B *:nth-child(2)",
 	
 	//элементы которые являются  единственными дочками у родителей.
 	".workPanel *:only-child",
 
 	//:not - отфильтровывает все элементы с заданным селектором
-	".A>*:not(.c1):not(.c3)",
+	".A *:not(.c1):not(.c3)",
 
 	//Соответствует всем заголовкам, например h1, h2, h3 и так далее.
 	":header",
 
-	".workPanel *:contains('c1')",	
+	//все элементы которые содержат заданный текст (на любой глубине)
+	".workPanel *:contains('butto')",	
 	
 	//элементы, не содержащие дочерних элементов (текста в том числе)
 	".workPanel *:empty",
@@ -105,7 +116,7 @@ let selectorsData2 = [
 	//элементы, которые являются родителем
 	".workPanel *:parent",
 	
-	//элементы, содержащие дочерний элемент с классом c3
+	//элементы, содержащие потомка с классом c3
 	".workPanel *:has('.c3')",
 
 	//элементы, содержащие скрытые элементы
@@ -124,6 +135,11 @@ let selectorsData3 = [
 	//Поиск по селектору среди предков.
 	'$(".workPanel .c3").parents(".A")',
 	
+	//Поиск по селектору среди предков.
+	//Похоже на parents, но включает в поиск текущий элемент, и возвращает не больше одного элемента
+	//Тут - вернёт только текущий элемент (набор не изменится)
+	'$(".C .c3 .c3 .c3").closest(".c3")',
+	
 	//Возвращает ближайшего позиционированного предка (предка с атрибутом position)
 	'$(".workPanel .c3").offsetParent()',
 	
@@ -138,6 +154,7 @@ let selectorsData3 = [
 	'$(".A").contents()',
 	
 	//Поиск всех дочерних элементов (включая текстовые и комменты)
+	//в данном случае выделит жирным даже текст с пробелами
 	'$(".A").contents().filter(function(){return this.nodeType !== 1;}).wrap(boldTag)',
 	
 	//элементы до и после	
@@ -148,9 +165,6 @@ let selectorsData3 = [
 	'$(".A>.c2").siblings()',
 	
 	
-	
-	//порядковый номер первого элемента в наборе
-	'$(".A>.c2").index()',
 		
 ];
 
@@ -183,7 +197,17 @@ let selectorsData5 = [
 	//возвращает true, если хотя бы один элемент соответствует выражению.
 	'$(".A>*").is(".c2")',
 	  
+	//порядковый номер элемента среди своих сиблингов
+	//вернёт 1
+	'$(".A>.c2").index()',
 	
+	//порядковый номер элемента среди заданного набора элементов
+	'$("#tc4").index(".A>.c4>*")',
+	'$("#tc4").index(".A>.c4>*:odd")',
+	
+	//порядковый номер заданного объекта среди текущего набора
+	'$(".A>.c4>*").index($("#tc4"))',	//3
+	'$(".A *").index($("#tc4"))',		//7
 	
 	//массив элементов DOM.
 	'$(".A>*").get()',
@@ -199,11 +223,11 @@ let selectorsData5 = [
 	'$(".A>*").filter(".c2").wrap(boldTag).end()',
 	
 	//each - Выполняет функцию для каждого элемента набора.	
-	'$(".A>*").each((ind,el)=>{log(ind,el.id)})',
+	'$(".A>.c4>*").each((ind,el)=>{log(ind,el.id)})',
 	
 	//map -	Преобразование элементов. Возвращает jquery-объект, содержащий преобразованные элементы
 	//получение списка id элементов в виде строки
-	'$(".A>*").map((ind,el)=>el.id).get().join()',
+	'$(".A>.c4>*").map((ind,el)=>el.id).get().join()',
 	
 	//объединение элементов
 	'$(".A>.c3").add(".B>.c2")',
@@ -214,7 +238,7 @@ let selectorsData5 = [
 
 
 
-//
+//attr,prop,text,html,val
 let selectorsData6 = [
 	'$(".A>.c2").attr("title")',
 	'$(".A>.c2").attr("title","my new title")',
@@ -222,10 +246,11 @@ let selectorsData6 = [
 
 	//	Методы prop почти всегда могут заменить attr. Предпочтительнее использовать их.
 	'$(".A>.c2").prop("title")',
+	
 	'$(".A>.c2").prop("title","my new title")',
 	'$(".B>button").prop("disabled",true)',
-	
 	'$(".B>#vehicle").prop("checked",false)',
+	'$(".B>button").prop({disabled: true, title: "new title"})',
 		
 	//возвращает строку, содержащую HTML (innerHTML) первого элемента в наборе (его содержимое)
 	'$(".A>.c4").html()',
@@ -265,25 +290,25 @@ let selectorsData6 = [
 
 ];
 
-//
+//css, classes
 let selectorsData7 = [
-	'$(".A>.c1").css("background-color")',
-	'$(".A>.c1").css("background-color", "red")',
+	'$("#tc2").css("background-color")',
+	'$("#tc2").css("background-color", "red")',
 
 	//получение классов элемента
-	'$(".A>.c2").attr("class")',	
+	'$("#tc2").attr("class")',	
 		
-	'$(".A>.c1").addClass("bg-red")',
-	'$(".A>.c2").toggleClass("blue-border")',
+	'$("#tc2").addClass("bg-red")',
+	'$("#tc2").toggleClass("bg-red")',
 	
 	//Возвращает true, если хотя бы один из набора совпавших элементов обладает указанным классом.
-	'$(".A>.c1").hasClass("bg-red")',
+	'$("#tc2").hasClass("bg-red")',
 	'$(".A").removeClass("A")',
 ];
 
 
 
-//
+//положение, размеры
 let selectorsData8 = [
 	
 	//размеры внутренней области элемента (не включают в себя border и padding)
@@ -312,17 +337,11 @@ let selectorsData8 = [
 	//те же цифры что и $btn.offset(),  [$btn.outerWidth(), $btn.outerHeight()]
 	'$btn.get(0).getBoundingClientRect()',
 	
-	
-	
-	
-	
-	
 ];
 
 
-//
+//dom manipulation
 let selectorsData9 = [
-	
 	
 	//--------вставка внутрь--------
 	
@@ -410,8 +429,8 @@ function reloadSandbox(){
 	//добавляем атрибут title
 	for(let i=0;i<5;i++){
 		$sandboxPanels.find(`.c${i}`).attr("title",`c${i}_title`);
-		$sandboxPanels.find(`.A .c${i}`).attr("id",`ac${i}`);
-		$sandboxPanels.find(`.B .c${i}`).attr("id",`bc${i}`);
+//		$sandboxPanels.find(`.A .c${i}`).attr("id",`ac${i}`);
+//		$sandboxPanels.find(`.B .c${i}`).attr("id",`bc${i}`);
 	}
 
 	$sandboxPanels.appendTo($workPanel);
@@ -433,7 +452,7 @@ function highlight(val){
 		
 	clearLog();
 	log(val);
-	if (val.indexOf("$")>=0){
+	if (val.indexOf("$")>=0 && val.indexOf("$=")<0){
 		
 		val = eval(val); 
 		if (!val.jquery){
