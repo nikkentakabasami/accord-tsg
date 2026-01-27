@@ -48,13 +48,14 @@
         </select>
       </div>
       <button id="b1" type="button" class="acc-btn">Выполнить</button>
+      <button id="b2" type="button" class="acc-btn">Очистить лог</button>
 
 
     </div>
 
 
     <div class="acc-button-panel">
-      <button id="b2" type="button" class="acc-btn">Перезагрузить песочницу</button>
+      <button id="bReload" type="button" class="acc-btn">Перезагрузить песочницу</button>
     </div>
 
 
@@ -73,8 +74,8 @@
 
     <div class="acc-2cols">
 
-
-      <div class="form-panel acc-2cols acc-form-style1 panel1">
+      <form action="." id="form1">
+      <div class="form-panel acc-2cols acc-form-style1 panel1" id="formDiv1">
 
         <div class="acc-row acc-form-button-panel1">
           <button class="acc-btn" id="testBtn1">testBtn1</button>
@@ -86,7 +87,7 @@
         <label>inp2:</label>
         <input type="text" id="inp2" value="Connor">
         <label>inp3:</label>
-        <input type="date" id="inp3" />
+        <input type="text" id="inp3" />
 
         <label>inp4:</label>
         <select id="inp4">
@@ -99,10 +100,15 @@
           <button class="acc-btn" id="btn2">btn2</button>
         </div>
 
-
+          <input type="submit" value="Submit">
       </div>
+      </form>
 
-      <div class="form-panel acc-2cols acc-form-style1 panel2">p2</div>
+      <div class="form-panel acc-2cols acc-form-style1 panel2" id="formDiv2">
+        <label>inp11:</label>
+        <input type="text" id="inp11" value="John">
+      
+      </div>
     </div>
 
   </template>
