@@ -30,7 +30,7 @@ public class MainServletContextListener implements ServletContextListener {
 
 		File demosDir = new File(ctx.getRealPath("/demos"));
 		
-		File[] dirList = demosDir.listFiles(f -> f.isDirectory() && f.getName().startsWith("demos_"));
+		File[] dirList = demosDir.listFiles(f -> f.isDirectory() && (f.getName().startsWith("demos_") || f.getName().equals("templates") ));
 
 		List<DemoFolder> demoFolders = Arrays.stream(dirList).map(dir -> {
 			List<String> list = findPageFiles(dir);

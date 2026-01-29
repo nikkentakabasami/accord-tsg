@@ -1,10 +1,8 @@
 
 
 
-let $workPanel;
 let $selectors;
 let $selectors2;
-let $selectorText;
 
 let $btn;
 let boldTag = "<b></b>";
@@ -420,24 +418,6 @@ let selectorsData10 = [
 
 
 
-function reloadSandbox(){
-	
-	$workPanel.empty();
-	
-	let $sandboxPanels = accordUtils.cloneTemplate("#template1");
-	
-	//добавляем атрибут title
-	for(let i=0;i<5;i++){
-		$sandboxPanels.find(`.c${i}`).attr("title",`c${i}_title`);
-//		$sandboxPanels.find(`.A .c${i}`).attr("id",`ac${i}`);
-//		$sandboxPanels.find(`.B .c${i}`).attr("id",`bc${i}`);
-	}
-
-	$sandboxPanels.appendTo($workPanel);
-	
-}
-
-
 
 //выделяет объекты с заданным селектором красной рамкой
 //выводит в лог значение выражения (или число найденных элементов)
@@ -476,11 +456,9 @@ function initSelect(selector, data){
 	
 	let $sel = $(selector);
 	$sel.change(e=>{
-//		let v = $sel.val();
 		let v = $sel.children("option:selected").text();
 		$selectorText.val(v);
 	});
-//	accordUtils.fillSelect($sel,data,true,null,true);
 	
 	accordUtils.fillSelect($sel,{
 		data: data,
@@ -495,7 +473,6 @@ function initSelect(selector, data){
 $(()=>{
 	
 	$workPanel = $(".workPanel");
-	$selectorText =$("#selectorText");
 	
 	initSelect("#selectors", selectorsData);
 	initSelect("#selectors2", selectorsData2);

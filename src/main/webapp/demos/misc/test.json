@@ -1,0 +1,11 @@
+{
+  "name": "Иван",
+  "age": 30,
+  "isStudent": false,
+  "skills": ["HTML", "CSS", "JavaScript"],
+  "address": {
+    "city": "Москва",
+    "street": "Красная площадь",
+    "postalCode": "103132"
+  }
+}

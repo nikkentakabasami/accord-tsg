@@ -1,14 +1,8 @@
 
 
 
-let $workPanel;
 
-let $btn1, $btn2, $inp1, $inp2, $inp3, $inp4, $testBtn1, $testBtn2;
-
-let formDiv1, formDiv2;
-let form1, form2;
-
-
+//тестовый обработчик для всех типов событий - выводит данные из event в лог
 function universalDemoHandler(event) {
   logNL();
 
@@ -89,104 +83,81 @@ function universalDemoHandler(event) {
 }
 
 
-function clickHandler(event) {
-  logNL();
-  log(`type=${event.type}, currentTarget=${event.currentTarget.id}, pageX=${event.pageX}, pageY=${event.pageY}`);
-  log(`event (type=${event.type})`);
-  logObject(event, 'currentTarget', "pageX", "pageY");
-
-}
-
-function simpleHandler(event) {
-  log(`event (type=${event.type})`);
-}
-
-
 //тестовые функции
 //возвращают query-объекты, задействованные в тесте: они будут выделены красной рамкой
 let selectorsData1 = {
 
   bind_inp_click: function() {
 	//назначает обработчик на все инпуты
-	return $(".panel1 input").bind("click", clickHandler);
+	return $("#formDiv1 input").bind("click", universalDemoHandler);
   },
 
-  //unbind - убирает обработчик
   unbind_inp1: function() {
-	return $inp2.unbind("click", clickHandler);
+	//unbind - убирает обработчик
+	return $inp2.unbind("click", universalDemoHandler);
   },
 
 
-  //назначение обработчика
   on_inp1_click: function() {
-	return $inp1.on("click", clickHandler);
+	//on - назначение обработчика
+	return $inp1.on("click", universalDemoHandler);
   },
 
-  //назначение обработчика на 2 события
   on_two_events: function() {
+	//on - назначение обработчика на 2 события
 	return $inp1.on("mouseenter mouseleave", event => {
 	  $inp1.toggleClass("bg-red");
 	});
   },
 
-  //назначение сразу нескольких обработчиков
   on_inp1_multi_handlers: function() {
-	//назначение сразу нескольких событий
+	//назначение сразу нескольких обработчиков на разные события
 	return $inp1.on({
-	  mouseenter: simpleHandler,
-	  mouseleave: simpleHandler,
-	  click: simpleHandler
+	  mouseenter: universalDemoHandler,
+	  mouseleave: universalDemoHandler,
+	  click: universalDemoHandler
 	});
   },
 
-  //назначение обработчика с передачей data-объекта, который можно получить из event
   on_data_param: function() {
+	//назначение обработчика с передачей data-объекта, который можно получить из event
 	$inp1.on("click", { msg: "Spoon!" }, event => {
 	  log("inp1 click. event.data:", event.data);
 	});
 
 	$testBtn1.on("click", event => {
-	  //это сообщение в event.data не попадёт!
-	  $inp1.trigger("click", "Trigger message");
+	  $inp1.trigger("click");
 	});
 
 	return $().add($inp1).add($testBtn1);
   },
 
-  //при вызове trigger пожно передать data-объект.
-  //Его можно получить через доп. параметр обработчика события.
-  //В event.data он не попадёт!
   trigger_data: function() {
+	//при вызове trigger можно передать data-объект.
+	//Его можно получить через доп. параметр обработчика события.
+	//В event.data он не попадёт!
+	$testBtn1.on("click", event => {
+	  $inp1.trigger("click", "Trigger message");
+	});
+	
 	$inp1.on("click", (event, data) => {
 	  log("inp1 click. data:", data, "event.data:", event.data);
 	});
 
-	$testBtn1.on("click", event => {
-	  $inp1.trigger("click", "Trigger message");
-	});
-
 	return $().add($inp1).add($testBtn1);
   },
 
 
-  //назначение обработчика с передачей дополнительного селектора
   on_selector: function() {
-	//с передачей дополнительного селектора
-	return $(".panel1").on("click", " input:text", clickHandler);
+	//назначение обработчика с передачей дополнительного селектора-фильтра
+	//фактически будет 1 обработчик на $panel1
+	return $panel1.on("click", " input:text", universalDemoHandler);
   },
 
-
-
-  //off() - убирает все обработчики событий, привязанные к этому элементу
   off_inp1: function() {
+	//off() - убирает все обработчики событий, привязанные к этому элементу
 	return $inp1.off();
   },
-
-
-
-
-
-
 
   events_mouse1: function() {
 
@@ -244,24 +215,19 @@ let selectorsData1 = {
 
 
 
-  events_methods: function() {
+  events_preventDefault: function() {
 
 	//запрет на копирование-вставку
-	$inp1.on("cut", event => { return false });
-	$inp1.on("copy", event => { return false });
-	$inp1.on("paste", event => { return false });
-
-
+	$inp1.on("cut copy paste", event => { return false });
 
 	//event.preventDefault()- предотвратить поведение элемента по умолчанию
-
 	//запрет на submit формы 
 	$form1.submit(event => {
 	  event.preventDefault();
 	  log("form1 submit");
 	});
 
-	//запрет на печать в $inp2 
+	//запрет на клавиатурные события в $inp2 
 	$inp2.keydown(event => {
 	  event.preventDefault();
 	  log("inp2 keydown");
@@ -273,16 +239,21 @@ let selectorsData1 = {
 
 
   events_stopPropagation: function() {
-
+	//stopPropagation() - предотвращает всплытие события вверх по дереву.
+	//$panel1 это событие уже не получит
 	$inp1.click(event => {
 		event.stopPropagation();
-	  log("inp1 click");
+		log("inp1 click");
+	});
+	$inp2.click(event => {
+		log("inp2 click");
 	});
 
-	$form1.submit(event => {
-	  event.preventDefault();
-	  log("form1 submit");
+	$panel1.click(event => {
+	  log("panel1 click");
 	});
+	
+	
 	
 	return $().add($inp1).add($inp2);
   },
@@ -323,126 +294,16 @@ let selectorsData1 = {
     return $().add($inp1).add($inp2);
   },  
   
-  
-  
-  
-  
-  
-
-
 }
 
 
 
-
-function reloadSandbox() {
-
-  $workPanel.empty();
-
-  let $sandboxPanels = accordUtils.cloneTemplate("#template1");
-  $sandboxPanels.appendTo($workPanel);
-
-
-  $btn1 = $("#btn1");
-  $btn2 = $("#btn2");
-  $inp1 = $("#inp1");
-  $inp2 = $("#inp2");
-  $inp3 = $("#inp3");
-  $inp4 = $("#inp4");
-
-  $testBtn1 = $("#testBtn1");
-  $testBtn2 = $("#testBtn2");
-
-  $formDiv1 = $("#formDiv1");
-  $formDiv2 = $("#formDiv2");
-
-  $form1 = $("#form1");
-  $form2 = $("#form2");
-
-
-
-
-}
-
-
-
-function execDemoFunc(func) {
-  //	reloadSandbox();
-  if (!func) {
-	return;
-  }
-
-  $(".workPanel *").removeClass("red-border");
-
-
-  clearLog();
-  log(String(func));
-  let result = func();
-
-  let logMess = 'executed. ';
-  if (result && result.jquery) {
-	result.addClass("red-border");
-	logMess += "elements found: " + result.length;
-
-  }
-  log(logMess);
-
-}
-
-let currentFunc = null;
-
-function initSelect(selector, data) {
-
-  let $sel = $(selector);
-  $sel.change(e => {
-	clearLog();
-	let v = $sel.val();
-	//		let v = $sel.children("option:selected").text();
-	currentFunc = selectorsData1[v];
-
-	let funcCode = String(currentFunc);
-
-	log(funcCode);
-
-  });
-  accordUtils.fillSelect($sel, {
-	data: data,
-	withNullOption: true,
-	selectedValue: null,
-	contentIsValue: true,
-	//		valueIsIndex: true
-  });
-
-}
 
 
 $(() => {
-
-  $workPanel = $(".workPanel");
-
-  initSelect("#selectors", selectorsData1);
-
-  $("#b1").click(e => {
-	if (!currentFunc) {
-	  return;
-	}
-	execDemoFunc(currentFunc);
-  });
-
-  $("#b2").click(e => {
-	clearLog();
-  });
-
-  $("#bReload").click(e => {
-	reloadSandbox();
-  });
-
-
+  initDemoCodeSelect("#selectors", selectorsData1);
 
   reloadSandbox();
-
-
-
 
 });
 

@@ -2,6 +2,22 @@
 
 let mainJsHref = null;
 
+let $workPanel;
+
+let showAux = true;
+let $hideAuxButton;
+let $selectorText;
+
+let currentFunc = null;
+
+//элементы песочницы
+let $btn1, $btn2, $inp1, $inp2, $inp3, $inp4, $testBtn1, $testBtn2;
+let formDiv1, formDiv2;
+let form1, form2;
+
+let $panel1, $panel2;
+
+
 function findMainJs(){
 	
 	const scripts = document.querySelectorAll('script[src]');
@@ -204,13 +220,120 @@ function logMessage(...vals) {
 
 }
 
-let showAux = true;
-let $hideAuxButton;
+
+/*
+
+	let $sel = $(selector);
+	$sel.change(e=>{
+//		let v = $sel.val();
+		let v = $sel.children("option:selected").text();
+		$selectorText.val(v);
+	});
+//	accordUtils.fillSelect($sel,data,true,null,true);
+	
+	accordUtils.fillSelect($sel,{
+		data: data,
+		withNullOption: true,
+		selectedValue: null,
+		valueIsIndex: true
+	});	*/
+
+function initDemoCodeSelect(selector, data) {
+
+  let $sel = $(selector);
+  $sel.change(e => {
+	clearLog();
+	
+	let v = $sel.val();
+	currentFunc = data[v];
+	
+	let funcCode = String(currentFunc);
+	log(funcCode);
+
+	
+	
+  });
+  accordUtils.fillSelect($sel, {
+	data: data,
+	withNullOption: true,
+	selectedValue: null,
+	contentIsValue: true,
+	//		valueIsIndex: true
+  });
+
+}
+
+function execDemoFunc(func) {
+  if (!func) {
+	return;
+  }
+
+  $(".workPanel *").removeClass("red-border");
+
+
+  clearLog();
+  log(String(func));
+  let result = func();
+
+  let logMess = 'executed. ';
+  if (result && result.jquery) {
+	result.addClass("red-border");
+	logMess += "elements found: " + result.length;
+
+  }
+  log(logMess);
+
+}
+
+
+let reloadSandboxVars = function(){
+	
+}
+
+function reloadSandbox() {
+
+  $workPanel.empty();
+
+  let $sandboxPanels = accordUtils.cloneTemplate("#template1");
+  $sandboxPanels.appendTo($workPanel);
+
+
+  $btn1 = $("#btn1");
+  $btn2 = $("#btn2");
+  $inp1 = $("#inp1");
+  $inp2 = $("#inp2");
+  $inp3 = $("#inp3");
+  $inp4 = $("#inp4");
+
+  $testBtn1 = $("#testBtn1");
+  $testBtn2 = $("#testBtn2");
+
+  $formDiv1 = $("#formDiv1");
+  $formDiv2 = $("#formDiv2");
+
+  $form1 = $("#form1");
+  $form2 = $("#form2");
+
+  $panel1 = $("#formDiv1");
+  $panel2 = $("#formDiv2");
+  
+  
+  if (reloadSandboxVars){
+	reloadSandboxVars();
+  }
+  
+
+}
+
+
 
 $(function() {
 	
+	$workPanel = $(".workPanel");
 	$log1 = $('#log1');
 	$logPanel = $('.logPanel');
+	$selectorText =$("#selectorText");
+	
 	
 //	logMessage("Запуск");
 	
@@ -252,6 +375,22 @@ $(function() {
 	
 	let tp = new TabbedPanel("#tabbedPanel1");
 	
+	
+	
+	$("#bExecute").click(e => {
+	if (!currentFunc) {
+	  return;
+	}
+	execDemoFunc(currentFunc);
+	});
+
+	$("#bClearLog").click(e => {
+	clearLog();
+	});	
+	
+	$("#bReload").click(e => {
+		reloadSandbox();
+	});
 	
 	
 	

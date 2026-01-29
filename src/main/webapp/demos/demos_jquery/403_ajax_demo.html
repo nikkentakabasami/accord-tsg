@@ -26,7 +26,7 @@
   <div class="basePanel">
 
     <div class="titlePanel">
-      <h2>jquery events demo</h2>
+      <h2>ajax demo</h2>
     </div>
 
     <div class="auxPanel">
@@ -44,14 +44,22 @@
 
       <div class="acc-left-content">Обработчики1</div>
       <div class="acc-tool-panel-select-wrapper acc-dropdown-triangle">
-        <select id="selectors" class="acc-tool-panel-select" style="width: 200px;">
+        <select id="selectors1" class="acc-tool-panel-select" style="width: 200px;">
         </select>
       </div>
-      <button id="b1" type="button" class="acc-btn">Выполнить</button>
+      <button id="bExecute" type="button" class="acc-btn">Выполнить</button>
+      <button id="bReload" type="button" class="acc-btn">Перезагрузить песочницу</button>
+      
+      <div class="acc-filler-panel"></div>      
+      
+      <button id="bClearLog" type="button" class="acc-btn">Очистить лог</button>
 
 
     </div>
 
+
+    <div class="acc-button-panel">
+    </div>
 
 
 
@@ -63,6 +71,64 @@
 
   </div>
 
+
+  <template id="template1">
+
+
+    <div class="acc-2cols">
+
+      <form action="." id="form1">
+      <div class="form-panel acc-2cols acc-form-style1" id="formDiv1">
+
+        <div class="acc-row acc-form-button-panel1">
+          <button class="acc-btn" type="button" id="testBtn1">testBtn1</button>
+          <button class="acc-btn" type="button" id="testBtn1">testBtn2</button>
+        </div>
+
+        <label>inp1:</label>
+        <input type="text" id="inp1" value="John" autocomplete="off">
+        <label>inp2:</label>
+        <input type="text" id="inp2" value="Connor" autocomplete="off">
+        <label>inp3:</label>
+        <input type="text" id="inp3" autocomplete="off"/>
+
+        <label>inp4:</label>
+        <select id="inp4">
+          <option>Banana</option>
+          <option>Cherry</option>
+          <option>Lemon</option>
+        </select>
+        <div class="acc-row acc-form-button-panel1">
+          <button class="acc-btn" id="btn1">btn1</button>
+          <button class="acc-btn" id="btn2">btn2</button>
+        </div>
+
+          <input type="submit" value="Submit">
+      </div>
+      </form>
+
+
+
+      <form action="." id="form2">
+      <div class="form-panel acc-2cols acc-form-style1" id="formDiv2">
+
+        <div class="acc-row">
+        <h3>test form</h3>
+        </div>
+
+        <label>title:</label>
+        <input type="text" name="title" value="Иван">
+        <label>id:</label>
+        <input type="text" name="id" value="233">
+        
+          <input type="submit" value="Submit">
+      </div>
+      </form>
+      
+      
+    </div>
+
+  </template>
 
 
 </body>

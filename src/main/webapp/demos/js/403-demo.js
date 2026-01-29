@@ -1,7 +1,37 @@
 
 
+//Функция, которая будет вызвана в случае удачного завершения запроса к серверу. 
+//data	:данные, присланные сервером и уже прошедшие предварительную обработку (которая отлична для разных dataType)
+//textStatus	: Статус выполнения ("success", "notmodified", "nocontent", "error", "timeout", "abort", "parsererror")
+function debugSuccessHandler(data, textStatus) {
+  let type = typeof data;
+  log("request successfull");
+  log("textStatus: ", textStatus);
+  log("data type:", type);
+  log("data: ", data);
+}
 
-let $workPanel;
+
+
+//Функция, которая будет вызвана в случае неудачного завершения запроса к серверу.
+function debugErrorHandler(jqXHR, textStatus, errorThrown) {
+  log("textStatus:", textStatus);
+  log("errorThrown:", errorThrown);
+}
+
+
+//Функция, которая будет вызвана после завершения ajax-запроса.
+//Вызывается позднее success и error.
+function debugCompleteHandler(jqXHR, textStatus) {
+  log("all complete. textStatus:", textStatus);
+}
+
+let testJson = {
+  "title": "Иван",
+  "id": 30
+}
+
+
 
 
 
@@ -9,77 +39,131 @@ let $workPanel;
 //возвращают query-объекты, задействованные в тесте: они будут выделены красной рамкой
 let selectorsData1 = {
 
-  bind_inp_click: function() {
-	//назначает обработчик на все инпуты
-	return $(".panel1 input").bind("click", clickHandler);
+  ajax1_get_json_file: function() {
+
+	//получаем json из файла
+	$.ajax({
+	  url: "../misc/test.json",
+	  type: "GET",
+	  dataType: "json",		//Тип данных, который Вы ожидаете от сервера (text, html, xml, json, jsonp, script).
+	  success: debugSuccessHandler,
+	  error: debugErrorHandler,
+	  complete: debugCompleteHandler
+	});
+
   },
-  
+  ajax2_get_json_from_server: function() {
+
+	//получаем json из сервлета
+	//отправляем на сервер параметры запроса (в testJson)
+	$.ajax({
+	  url: "../../testAjax/getSectionsJson",
+	  type: "GET",
+	  data: testJson,
+	  dataType: "json",
+	  success: debugSuccessHandler,
+	  error: debugErrorHandler,
+	  complete: debugCompleteHandler
+	});
+
+  },
+  ajax3_post_json: function() {
+
+	//	let formData = accordUtils.formToJSON(this.grid.filtersModel.$form);
+
+	//отправляем json на сервер
+	$.ajax({
+	  url: "../../testAjax/updateTasksFilter",
+	  type: 'POST',
+	  contentType: 'application/json',		//Формат, в котором данные отправляются на сервер. По умолчанию это параметры запроса.
+	  data: JSON.stringify(testJson),
+	  success: debugSuccessHandler,
+	  error: debugErrorHandler,
+	  complete: debugCompleteHandler
+	});
+
+
+  },
+  ajax4_post_request_params: function() {
+
+	//отправляем параметры запроса на сервер
+	$.ajax({
+	  url: "../../testAjax/TestPostRequest",
+	  type: 'POST',
+	  data: testJson,
+	  contentType: 'application/x-www-form-urlencoded; charset=UTF-8',	//можно не указывать - он такой по умолчанию
+	  success: debugSuccessHandler,
+	  error: debugErrorHandler,
+	  complete: debugCompleteHandler
+	});
+
+
+  },
+  ajax5_handlers_alternative: function() {
+	
+	//альтернативный способ задания обработчиков через объект jqXHR (возвращается $.ajax())
+	$.ajax({
+	  url: "../misc/test.json",
+	  type: "GET"
+	})
+	  .done(debugSuccessHandler)
+	  .fail(debugErrorHandler)
+	  .always(debugCompleteHandler);
+
+
+  },
+  ajax5_post_form: function() {
+
+	var serializedForm = $("#form2").serialize();
+	//отправляем данные формы на сервер
+	$.ajax({
+	  url: "../../testAjax/TestPostRequest",
+	  type: 'POST',
+	  data: serializedForm,
+	  contentType: 'application/x-www-form-urlencoded; charset=UTF-8',	//можно не указывать - он такой по умолчанию
+	  success: debugSuccessHandler,
+	  error: debugErrorHandler,
+	  complete: debugCompleteHandler
+	});
+	
+	
+	
+	
+  },
+  ajax5: function() {
+
+  },
 
 
 }
 
 
-function execDemoFunc(func) {
-  if (!func) {
-	return;
-  }
 
-
-  clearLog();
-  log(String(func));
-  let result = func();
-
-  let logMess = 'executed. ';
-  if (result && result.jquery) {
-	result.addClass("red-border");
-	logMess += "elements found: " + result.length;
-
-  }
-  log(logMess);
-
-}
-
-let currentFunc = null;
-
-function initSelect(selector, data) {
-
-  let $sel = $(selector);
-  $sel.change(e => {
-	clearLog();
-	let v = $sel.val();
-	currentFunc = selectorsData1[v];
-	let funcCode = String(currentFunc);
-	log(funcCode);
-
-  });
-  accordUtils.fillSelect($sel, {
-	data: data,
-	withNullOption: true,
-	selectedValue: null,
-	contentIsValue: true,
-  });
-
-}
 
 
 $(() => {
+  initDemoCodeSelect("#selectors1", selectorsData1);
 
-  $workPanel = $(".workPanel");
+  reloadSandbox();
 
-  initSelect("#selectors", selectorsData1);
-
-  $("#b1").click(e => {
-	if (!currentFunc) {
-	  return;
-	}
-	execDemoFunc(currentFunc);
-  });
-
-
-
-
-
+  
+  //перехватываем submit формы
+  $("№form2").submit(function( event ) {
+    event.preventDefault();
+	
+	var serializedForm = $("#form2").serialize();
+	//отправляем данные формы на сервер
+	$.ajax({
+	  url: "../../testAjax/TestPostRequest",
+	  type: 'POST',
+	  data: serializedForm,
+	  success: debugSuccessHandler,
+	  error: debugErrorHandler,
+	  complete: debugCompleteHandler
+	});
+	
+  });  
+  
+  
+  
 });
-
-
-
