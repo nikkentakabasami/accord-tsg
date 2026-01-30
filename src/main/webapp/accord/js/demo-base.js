@@ -18,6 +18,11 @@ let form1, form2;
 let $panel1, $panel2;
 
 
+let $log1;
+let $log2;
+let $logPanel;
+
+
 function findMainJs(){
 	
 	const scripts = document.querySelectorAll('script[src]');
@@ -162,16 +167,20 @@ function stringifyObject(o, indent = "", withBraces = false) {
 
 
 
-let $log1;
-let $logPanel;
 
 function clearLog() {
 	$log1.text("");
+	$log2.text("");
 }
 
 function log(...vals) {
 	logMessage(...vals);
 }
+
+function log2(...vals) {
+	logMessage2(...vals);
+}
+
 
 function logNL() {
 	logMessage("");
@@ -202,7 +211,6 @@ function logObject(o, ...attributes) {
 
 
 
-
 function logMessage(...vals) {
 	
 	let line = vals.map(v=>stringifyObject(v)).join(" ");
@@ -217,6 +225,20 @@ function logMessage(...vals) {
 	//scroll to bottom	
 	var h = $logPanel.prop('scrollHeight');
 	$logPanel.scrollTop(h);	
+
+}
+
+function logMessage2(...vals) {
+	
+	let line = vals.map(v=>stringifyObject(v)).join(" ");
+
+	line = line+"\n";
+	
+	//чтобы избавиться от спецсимволов
+	line = document.createTextNode(line)
+
+	$log2.append(line);
+
 
 }
 
@@ -331,6 +353,7 @@ $(function() {
 	
 	$workPanel = $(".workPanel");
 	$log1 = $('#log1');
+	$log2 = $('#log2');
 	$logPanel = $('.logPanel');
 	$selectorText =$("#selectorText");
 	

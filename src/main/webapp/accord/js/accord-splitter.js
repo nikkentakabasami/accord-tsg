@@ -111,7 +111,7 @@ class AccSplitter {
 		let self = this;
 		this.$resizer.mousedown(e=>{
 			this.isResizing = true;
-			this.startX = e.clientX;
+			this.startX = e.pageX;
 			this.startWidth = this.$leftPanel.width();
 			document.addEventListener("mousemove", this.mousemove);
 		    document.addEventListener("mouseup", this.mouseup);
@@ -119,9 +119,10 @@ class AccSplitter {
 
 		this.mousemove = e=>{
 			if (this.isResizing) {
-				let diff = e.clientX-this.startX;
+				let diff = e.pageX-this.startX;
 			    let newWidth = Math.max(100, this.startWidth+diff);
 			    this.$leftPanel.width(newWidth);
+				this.$leftPanel.css("min-width", newWidth+"px");
 			}
 		}			
 		this.mouseup = e=>{

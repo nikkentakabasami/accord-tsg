@@ -45,8 +45,12 @@ public class JqueryAjaxDemoServlet extends HttpServlet {
 
 		logger.info("post query: " + pathInfo);
 
-		logRequestParams(req);
+		String paramsString = logRequestParams(req);
 
+		//по умолчанию кодировка обычно ISO-8859-1
+		resp.setContentType("text/plain; charset=UTF-8");
+    resp.setCharacterEncoding("UTF-8");		
+		
 		//получение json через post-запрос
 		if (pathInfo.startsWith(UPDATE_FILTER_URL)) {
 
@@ -60,9 +64,10 @@ public class JqueryAjaxDemoServlet extends HttpServlet {
 				ObjectMapper mapper = new ObjectMapper();
 				TSGTaskFilter filter = mapper.readValue(req.getInputStream(), TSGTaskFilter.class);
 
-				logger.info("aquired TSGTaskFilter object: " + filter);
+				String filterJson = mapper.writeValueAsString(filter);
+				logger.info("aquired TSGTaskFilter object: " + filterJson);
 
-				resp.getWriter().write("filter object aquired!");
+				resp.getWriter().write("filter object aquired: "+filterJson);
 
 			} catch (Exception e) {
 				resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
@@ -71,6 +76,7 @@ public class JqueryAjaxDemoServlet extends HttpServlet {
 			}
 
 		} else if (pathInfo.startsWith(TEST_POST_REQUEST_URL)) {
+			resp.getWriter().write("test post request handled! received params: "+paramsString);
 
 		} else {
 			resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
@@ -100,13 +106,19 @@ public class JqueryAjaxDemoServlet extends HttpServlet {
 
 	}
 
-	private void logRequestParams(HttpServletRequest req) {
+	private String logRequestParams(HttpServletRequest req) {
+		if (!req.getParameterNames().hasMoreElements()) {
+			return "";
+		}
+		StringBuilder sb = new StringBuilder();
 		logger.info("params:");
 		for (Iterator<String> iterator = req.getParameterNames().asIterator(); iterator.hasNext();) {
 			String paramName = iterator.next();
 			String paramValue = req.getParameter(paramName);
+			sb.append(paramName).append(": ").append(paramValue).append("; ");
 			logger.info(paramName + ":" + paramValue);
 		}
+		return sb.toString();
 	}
 
 }
