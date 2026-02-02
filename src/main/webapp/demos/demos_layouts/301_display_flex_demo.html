@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8" />
+
+<script src="../../jquery31/js/jquery.js"></script>
+
+<link rel="stylesheet" type="text/css" href="../../accord/css/accord.css">
+<script type="module" src="../../accord/js/accord-publish.js"></script>
+
+<link rel="stylesheet" type="text/css" href="../../accord/css/demo-base.css">
+<script src="../../accord/js/demo-base.js"></script>
+
+<link rel="stylesheet" type="text/css" href="../css/301-demo.css">
+<script src="../js/301-demo.js"></script>
+
+</head>
+<body>
+
+<h1>display: flex;</h1>
+
+<h3>display: flex;flex-direction: row;</h3>
+<p>
+Простейший пример со значениями 
+</p>
+<div class="flexPane">
+  <div class="b1">b1</div>
+  <div class="b2">b2</div>
+  <div class="b3">b3</div>
+</div>
+
+
+<h3 class="red">justify-content</h3>
+<p>
+Как будут выровнены элементы вдоль главной оси.
+<br>flex-start(default): блоки прижаты к началу главной оси
+<br>flex-end: блоки прижаты к концу главной оси
+<br>center: блоки располагаются в центре главной оси
+<br>space-between:первый блок располагается в начале главной оси, последний блок – в конце, все остальные блоки равномерно распределены в оставшемся пространстве.
+<br>space-around
+</p>
+
+<h4>-</h4>
+<div class="flexPane" style="justify-content: center;">
+  <div class="b1">b1</div>
+  <div class="b2">b2</div>
+  <div class="b3">b3</div>
+</div>
+
+<h4>-</h4>
+<div class="flexPane" style="justify-content: space-between;">
+  <div class="b1">b1</div>
+  <div class="b2">b2</div>
+  <div class="b3">b3</div>
+</div>
+
+<h4>-</h4>
+<div class="flexPane" style="justify-content: space-around;">
+  <div class="b1">b1</div>
+  <div class="b2">b2</div>
+  <div class="b3">b3</div>
+  <div class="b4">b4</div>
+</div>
+
+<h3 class="red">align-items</h3>
+<p>
+Как будут выровнены элементы вдоль поперечной оси.
+<br>flex-start  : блоки прижаты к началу поперечной оси
+<br>flex-end  : блоки прижаты к концу поперечной оси
+<br>center  : блоки располагаются в центре поперечной оси
+<br>stretch (default): блоки растянуты, занимая все доступное место по поперечной оси
+</p>
+
+
+<h4>-</h4>
+<div class="flexPane" style="align-items: flex-start;">
+  <div class="b1">b1</div>
+  <div class="b2">b2</div>
+  <div class="b3">b3</div>
+</div>
+
+<h4>-</h4>
+<div class="flexPane" style="align-items: center;">
+  <div class="b1">b1</div>
+  <div class="b2">b2</div>
+  <div class="b3">b3</div>
+</div>
+
+<h4>-</h4>
+<div class="flexPane" style="align-items: flex-end;">
+  <div class="b1">b1</div>
+  <div class="b2">b2</div>
+  <div class="b3">b3</div>
+</div>
+
+
+<h3 class="red">flex-wrap</h3>
+<p>
+отвечает за многострочность
+<br>nowrap (default) : блоки расположены в одну линию слева направо
+<br>wrap: блоки расположены в несколько горизонтальных рядов (если не помещаются в один ряд).
+<br>wrap-reverse: то-же что и wrap, но блоки располагаются в обратном порядке
+</p>
+<h4>-</h4>
+<div class="flexPane" style="flex-wrap: wrap;">
+  <div class="b1">b</div>
+  <div class="b2">b</div>
+  <div class="b3">b</div>
+  <div class="b4">b</div>
+  <div class="b5">b</div>
+  <div class="b6">b</div>
+  <div class="b7">b</div>
+  <div class="b8">b</div>
+</div>
+
+
+<h3 class="red">align-content</h3>
+<p>
+работает только в многострочном режиме.
+<br>определяет каким образом образовавшиеся ряды блоков будут выровнены по поперечной оси
+<br>flex-start  ряды блоков прижаты к началу
+<br>flex-end  к концу
+<br>center  находятся в центре
+<br>space-between
+<br>space-around
+<br>stretch (default)растянуты, чтобы занять все имеющееся пространство
+</p>
+
+<h4>-</h4>
+<div class="flexPane" style="flex-wrap: wrap;align-content: flex-end;height: 100px;">
+  <div class="b1">b</div>
+  <div class="b2">b</div>
+  <div class="b3">b</div>
+  <div class="b4">b</div>
+  <div class="b5">b</div>
+  <div class="b6">b</div>
+  <div class="b7">b</div>
+  <div class="b8">b</div>
+</div>
+
+<h4>-</h4>
+<div class="flexPane" style="flex-wrap: wrap-reverse;align-content: center;height: 100px;">
+  <div class="b1">b</div>
+  <div class="b2">b</div>
+  <div class="b3">b</div>
+  <div class="b4">b</div>
+  <div class="b5">b</div>
+  <div class="b6">b</div>
+  <div class="b7">b</div>
+  <div class="b8">b</div>
+</div>
+  
+
+
+
+<!-- 
+<h3 class="red"></h3>
+<p>
+<br>
+</p>
+
+<h4>-</h4>
+<div class="flexPane">
+  <div class="b1" style="">b1</div>
+  <div class="b2" style="">b2</div>
+  <div class="b3" style="">b3</div>
+</div>
+
+<h4>-</h4>
+<div class="flexPane">
+  <div class="b1">b1</div>
+  <div class="b2">b2</div>
+  <div class="b3">b3</div>
+</div>
+ -->
+
+
+</body>
+</html>

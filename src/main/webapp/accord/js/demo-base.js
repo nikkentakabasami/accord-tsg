@@ -348,6 +348,87 @@ function reloadSandbox() {
 }
 
 
+//let emptyDiv = $("<div></div>");
+//let defaultStyles = window.getComputedStyle(emptyDiv.get(0));
+
+let showCssStylesDefaultOptions = {
+	showInContent: false,
+	showInPrevSibling: false
+}
+
+function showCssStylesForElements(selector, opt){
+	
+	let options = $.extend({}, showCssStylesDefaultOptions, opt);
+	
+	
+	$(selector).each((index, el) => {
+		let $el = $(el);
+		let styleText = $(el).attr("style"); 
+		if (!styleText){
+			return;
+		}
+		let infoPanelSelector = $el.data("show-style-in");
+		if (infoPanelSelector){
+			$("#"+infoPanelSelector).text(styleText);
+		}
+		if (options.showInContent){
+			$el.text(styleText);
+		}
+		if (options.showInPrevSibling){
+			$el.prevAll(":header:first").text(styleText);
+		}
+	});
+	
+}
+
+
+
+
+
+
+
+
+/*
+function getStylesString(el, styleNames, defaultEl){
+	
+	const styles = window.getComputedStyle(el);
+	const defaultStyles = window.getComputedStyle(defaultEl);
+	
+	
+	let result = styleNames.map(sn=>{
+		let style = styles[sn];
+
+		if (defaultStyles){
+			let defStyle = defaultStyles[sn];
+			if (style==defStyle){
+				return null;
+			}
+		}		
+		return sn+": "+styles[sn]
+		
+	}).filter(el=>el!=null).join(", ");
+	return result;
+}
+
+
+function showStyleAttrForElements(selector, styleNames, defaultElSelector){
+	
+	let elements = $(selector);
+	let defaultEl = defaultElSelector?$(defaultElSelector).get(0):null;
+	
+	$(selector).each((index, el) => {
+		let s = getStylesString(el, styleNames, defaultEl);
+		if (s){
+			$(el).attr("title",s);
+		}
+	});
+	
+}
+*/
+
+
+
+
 
 $(function() {
 	

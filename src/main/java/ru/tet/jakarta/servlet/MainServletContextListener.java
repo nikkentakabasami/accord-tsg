@@ -3,6 +3,7 @@ package ru.tet.jakarta.servlet;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.LogManager;
@@ -32,7 +33,7 @@ public class MainServletContextListener implements ServletContextListener {
 		
 		File[] dirList = demosDir.listFiles(f -> f.isDirectory() && (f.getName().startsWith("demos_") || f.getName().equals("templates") ));
 
-		List<DemoFolder> demoFolders = Arrays.stream(dirList).map(dir -> {
+		List<DemoFolder> demoFolders = Arrays.stream(dirList).sorted().map(dir -> {
 			List<String> list = findPageFiles(dir);
 			DemoFolder f = new DemoFolder(dir.getName(), list);
 			ctx.setAttribute(dir.getName(), f);
@@ -51,7 +52,8 @@ public class MainServletContextListener implements ServletContextListener {
 				pageNames.add(file.getName());
 			}
 		}
-
+		Collections.sort(pageNames);
+		
 		String s = Arrays.toString(pageNames.toArray());
 		logger.info(dir.getName() + ": found files: " + s);
 

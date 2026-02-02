@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8" />
+
+<script src="../../jquery31/js/jquery.js"></script>
+
+<link rel="stylesheet" type="text/css" href="../../accord/css/accord.css">
+<script type="module" src="../../accord/js/accord-publish.js"></script>
+
+<link rel="stylesheet" type="text/css" href="../../accord/css/demo-base.css">
+<script src="../../accord/js/demo-base.js"></script>
+
+<link rel="stylesheet" type="text/css" href="../css/301-demo.css">
+<script src="../js/301-demo.js"></script>
+
+</head>
+<body>
+
+<h1>display: flex; Стили дочерних элементов</h1>
+
+
+<h3 class="red">flex-grow</h3>
+<p>
+Определяет то, на сколько отдельный flex-блок может быть больше соседних элементов, если это необходимо. 
+<br>default: 0
+</p>
+
+
+<h4>-</h4>
+<div class="flexPane">
+  <div class="b1" style="flex-grow: 1">b1</div>
+  <div class="b2" style="flex-grow: 1">b2</div>
+  <div class="b3" style="flex-grow: 0">b3</div>
+</div>
+
+<h4>-</h4>
+<div class="flexPane">
+  <div class="b1" style="flex-grow: 0">b1</div>
+  <div class="b2" style="flex-grow: 0.5">b2</div>
+  <div class="b3" style="flex-grow: 1">b3</div>
+</div>
+
+
+<h3 class="red">flex-shrink</h3>
+<p>
+default: 1
+<br>сжимаемость блока - насколько он будет уменьшаться в случае недостатка свободного места
+</p>
+
+
+<h4>-</h4>
+<div class="flexPane">
+  <div class="b1">b</div>
+  <div class="b2">b</div>
+  <div class="b3" style="flex-shrink:0">b</div>
+  <div class="b4" style="flex-shrink:0">b</div>
+  <div class="b5" style="flex-shrink:0.5">b</div>
+  <div class="b6" style="flex-shrink:0.5">b</div>
+  <div class="b7" style="">b</div>
+  <div class="b8" style="">b</div>
+  <div class="b1" style="">b</div>
+  <div class="b2" style="">b</div>
+</div>
+
+
+<h3 class="red">flex-basis</h3>
+<p>
+default: auto
+<br>Задает изначальный размер по главной оси для flex-блока
+<br>Аналог width. Можно задавать в пикселях, процентах...
+</p>
+
+<h4>-</h4>
+<div class="flexPane">
+  <div class="b1" style="flex-basis: 100px;">b1</div>
+  <div class="b2" style="flex-basis: 500px;">b2</div>
+  <div class="b3" style="flex-grow: 1">b3</div>
+</div>
+
+
+<h3 class="red">flex</h3>
+<p>
+сокращение для "flex-grow  flex-shrink  flex-basis"
+</p>
+
+
+<h4>-</h4>
+<div class="flexPane">
+  <div class="b1" style="flex: 0 1 150px;">b1</div>
+  <div class="b2" style="flex: 1 0 auto">b2</div>
+  <div class="b3" style="flex: 50%;">b3</div>
+</div>
+
+
+
+<!-- 
+<h3 class="red"></h3>
+<p>
+<br>
+</p>
+
+<h4>-</h4>
+<div class="flexPane">
+  <div class="b1" style="">b1</div>
+  <div class="b2" style="">b2</div>
+  <div class="b3" style="">b3</div>
+</div>
+
+<h4>-</h4>
+<div class="flexPane">
+  <div class="b1">b1</div>
+  <div class="b2">b2</div>
+  <div class="b3">b3</div>
+</div>
+ -->
+
+
+</body>
+</html>
