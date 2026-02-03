@@ -410,46 +410,32 @@ let selectorsData9 = [
 			
 ];
 //
-let selectorsData10 = [
-];
-
-
-
-
-
-
-
-//выделяет объекты с заданным селектором красной рамкой
-//выводит в лог значение выражения (или число найденных элементов)
-function highlight(val){
-	reloadSandbox();
-	if (!val){
-		return;
-	}
-
-//	$c2 = $(".A>.c2");
-	$btn = $(".B>button.c5");
+let selectorsData10 = {
+	
+	
+	each: ()=>{
+		$(".A").contents().each(function(){
+			log("nodeType",this.nodeType);
+			log("textContent",this.textContent);
+		});
+				
+	},
+	
+	filter: ()=>{
 		
-	clearLog();
-	log(val);
-	if (val.indexOf("$")>=0 && val.indexOf("$=")<0){
+		//выделяем жирным текстовые узлы с текстом
+		$(".A").contents().filter(function(){
+			return (this.nodeType==3) && (this.textContent.trim().length);
+		}).wrap(boldTag);
+
 		
-		val = eval(val); 
-		if (!val.jquery){
-			log(val);
-			return;
-//			throw new Error('Выражение должно возвращать jquery-объект!');
-		}
-		
-	} else {
-		val = $(val); 
+				
 	}
 	
-	val.addClass("red-border");
 	
-	logVal("elements found",val.length);
-	
-}
+};
+
+
 
 
 function initSelect(selector, data){
@@ -458,6 +444,7 @@ function initSelect(selector, data){
 	$sel.change(e=>{
 		let v = $sel.children("option:selected").text();
 		$selectorText.val(v);
+		currentFunc = null;
 	});
 	
 	accordUtils.fillSelect($sel,{
@@ -472,6 +459,11 @@ function initSelect(selector, data){
 
 $(()=>{
 	
+	beforeHighlight = ()=>{
+		$btn = $(".B>button.c5");
+	}
+	
+	
 	$workPanel = $(".workPanel");
 	
 	initSelect("#selectors", selectorsData);
@@ -483,13 +475,8 @@ $(()=>{
 	initSelect("#selectors7", selectorsData7);
 	initSelect("#selectors8", selectorsData8);
 	initSelect("#selectors9", selectorsData9);
-	
-	$("#b1").click(e=>{
-		let v = $selectorText.val();
-		
-		highlight(v);
-	});
-	
+//	initSelect("#selectors10", selectorsData10);
+	initDemoCodeSelect("#selectors10", selectorsData10);
 
 	reloadSandbox();
 	

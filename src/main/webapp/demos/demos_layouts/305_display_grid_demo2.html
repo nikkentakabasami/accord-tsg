@@ -12,17 +12,16 @@
 <script src="../../accord/js/demo-base.js"></script>
 
 
-<link rel="stylesheet" type="text/css" href="../css/305-demo.css">
 <script src="../js/305-demo.js"></script>
 
 <style>
-h3 {
-  white-space: pre-wrap;
-}
+</style>
+
+<style id="style1">
 
 .d2 {
   display: grid;
-  grid-auto-rows: minmax(100px, auto);
+  grid-auto-rows: minmax(50px, auto);
   grid-template-columns: 1fr;
   grid-template-areas: "hd" "main" "sd" "ft";
 }
@@ -55,13 +54,15 @@ h3 {
   
 <h3 class="red">grid-template-areas</h3>
 <p>
-Задание положения элементов макетом
+Задание положения элементов макетом.
+<br>minmax(min, max) - функция, задающая диапазон размеров от min до max.
 </p>
   <h3>-</h3>
   <div class="wrapper" 
-    style="display: grid;
+    style="
+    display: grid;
     grid-template-columns: repeat(9, 1fr);
-    grid-auto-rows: minmax(100px, auto);
+    grid-auto-rows: minmax(50px, auto);
     grid-template-areas: 
       'hd hd hd hd   hd   hd   hd   hd   hd' 
       'sd sd sd main main main main main main' 
@@ -79,7 +80,7 @@ h3 {
 </p>
 
 
-  <h3>-</h3>
+  <h4 data-style-element="style1">-</h4>
 
   <div class="wrapper d2">
     <div style="grid-area: hd;">Header</div>

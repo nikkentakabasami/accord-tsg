@@ -139,6 +139,8 @@ function stringifyObject(o, indent = "", withBraces = false) {
 				valStr = val.tagName+"#"+val.id;
 			} else if (t == "function"){
 				valStr = "func";
+			} else if (Array.isArray(val)){
+				valStr = JSON.stringify(val);
 			} else if (t == "object"){
 				valStr = String(val);
 			} else {
@@ -180,22 +182,31 @@ function log(...vals) {
 function log2(...vals) {
 	logMessage2(...vals);
 }
+function log2NL(...vals) {
+	logMessage2();
+	logMessage2(...vals);
+}
 
 
-function logNL() {
-	logMessage("");
+function logNL(...vals) {
+	logMessage("\n", ...vals);
 }
 
 
 function logVal(key, val, ...vals) {
-	//вывод массивов
-//	if (Array.isArray(val)){
-//		val = JSON.stringify(val);
-//	}
 	val = stringifyObject(val);
-	
 	logMessage(key+": "+val, ...vals);
 }
+
+function logVal2NL(key, val, ...vals) {
+	logMessage2();
+	logVal2(key, val, ...vals);
+}
+function logVal2(key, val, ...vals) {
+	val = stringifyObject(val);
+	logMessage2(key+": "+val, ...vals);
+}
+
 
 function logObject(o, ...attributes) {
 	
@@ -267,21 +278,37 @@ function initDemoCodeSelect(selector, data) {
 	clearLog();
 	
 	let v = $sel.val();
-	currentFunc = data[v];
-	
-	let funcCode = String(currentFunc);
-	log(funcCode);
 
-	
+	if (Array.isArray(data)){
+//		reloadSandbox();
+		let v = $sel.children("option:selected").text();
+		$selectorText.val(v);
+		currentFunc = null;
+		log(v);
+	} else {
+		$selectorText.val(v);
+		currentFunc = data[v];
+		let funcCode = String(currentFunc);
+		log(funcCode);
+	}	
 	
   });
-  accordUtils.fillSelect($sel, {
-	data: data,
-	withNullOption: true,
-	selectedValue: null,
-	contentIsValue: true,
-	//		valueIsIndex: true
-  });
+  
+  
+  let opts =   {
+  	data: data,
+  	withNullOption: true,
+  	selectedValue: null,
+  	contentIsValue: true,
+	valueIsIndex: false
+    };
+
+	if (Array.isArray(data)){
+		opts.valueIsIndex = true;
+		opts.contentIsValue = false;
+	}
+  
+  accordUtils.fillSelect($sel, opts);
 
 }
 
@@ -381,7 +408,22 @@ function showCssStylesForElements(selector, opt){
 	
 }
 
+function showStyleTagText(){
+	
+	
+	$(":header[data-style-element]").each((index, el) => {
+		let $el = $(el);
+		let styleElement = $(el).data("style-element");
 
+		let styleText = $("#"+styleElement).text();
+				
+		$el.text(styleText)
+	});
+
+	
+	//	$("#style1").text()
+	
+}
 
 
 
@@ -426,7 +468,42 @@ function showStyleAttrForElements(selector, styleNames, defaultElSelector){
 }
 */
 
+let beforeHighlight = null;
 
+
+//выделяет объекты с заданным селектором красной рамкой
+//выводит в лог значение выражения (или число найденных элементов)
+function highlight(val){
+	reloadSandbox();
+	if (!val){
+		return;
+	}
+
+	if (beforeHighlight){
+		beforeHighlight();
+	}
+	
+		
+	clearLog();
+	log(val);
+	if (val.indexOf("$")>=0 && val.indexOf("$=")<0){
+		
+		val = eval(val); 
+		if (!val.jquery){
+			log(val);
+			return;
+//			throw new Error('Выражение должно возвращать jquery-объект!');
+		}
+		
+	} else {
+		val = $(val); 
+	}
+	
+	val.addClass("red-border");
+	
+	logVal("elements found",val.length);
+	
+}
 
 
 
@@ -482,10 +559,12 @@ $(function() {
 	
 	
 	$("#bExecute").click(e => {
-	if (!currentFunc) {
-	  return;
-	}
-	execDemoFunc(currentFunc);
+		if (!currentFunc) {
+			let v = $selectorText.val();
+			highlight(v);
+		  return;
+		}
+		execDemoFunc(currentFunc);
 	});
 
 	$("#bClearLog").click(e => {

@@ -12,6 +12,9 @@ $(()=>{
 			showInContent: true,
 			showInPrevSibling: false
 		});
+		
+	showStyleTagText();
+		
 	
 //	makeFlexStylesTooltip();
 })

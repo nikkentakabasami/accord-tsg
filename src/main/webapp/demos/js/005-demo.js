@@ -16,11 +16,15 @@ let selectorsData1 = {
 }
 
 
-
+let selectorsData2 = [
+	"#inp1",
+	".workPanel *:input",
+];
 
 
 $(() => {
   initDemoCodeSelect("#selectors1", selectorsData1);
+  initDemoCodeSelect("#selectors2", selectorsData2);
 
   reloadSandbox();
 

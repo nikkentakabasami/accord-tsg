@@ -35,7 +35,10 @@
 </p>
 
 	<h3>-</h3>
-	<div class="wrapper" style="display: grid; grid-template-columns: 200px auto 20%; grid-template-rows: 90px 30px;">
+	<div class="wrapper" style="
+      display: grid;
+      grid-template-columns: 200px auto 20%; 
+      grid-template-rows: 90px 30px;">
 		<div>One</div>
 		<div>Two</div>
 		<div>Three</div>
@@ -47,7 +50,11 @@
 
 
 	<h3>-</h3>
-	<div class="wrapper" style="display: grid;grid-template-columns: 2fr 1fr 1fr;grid-column-gap: 10px;grid-row-gap: 1em;">
+	<div class="wrapper" style="
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr;
+        grid-column-gap: 10px;
+        grid-row-gap: 1em;">
 		<div>One</div>
 		<div>Two</div>
 		<div>Three</div>
@@ -57,7 +64,9 @@
 
 
     <h3>-</h3>
-  <div class="wrapper" style="display: grid; grid-template-columns: 50px repeat(3, 1fr) 50px;">
+  <div class="wrapper" style="
+      display: grid; 
+      grid-template-columns: 50px repeat(3, 1fr) 50px;">
     <div>One</div>
     <div>Two</div>
     <div>Three</div>
@@ -72,7 +81,11 @@
 </p>
 
   <h3>-</h3>
-  <div class="wrapper" style="display: grid;grid-template-columns: 200px 1fr 1fr;grid-auto-rows: 150px;gap: 20px;">
+  <div class="wrapper" style="
+      display: grid;
+      grid-template-columns: 200px 1fr 1fr;
+      grid-auto-rows: 50px;
+      gap: 20px;">
     <div>One</div>
     <div>Two</div>
     <div>Three</div>
@@ -84,9 +97,14 @@
 
 
   <h3>-</h3>
-  <p>высота строки будет минимум 100px, максимум - высота самой высокой ячейки</p>
+  <p>
+minmax(min, max) - функция, задающая диапазон размеров от min до max.
+</p>
   
-  <div class="wrapper" style="display: grid;grid-template-columns: repeat(3, 1fr);grid-auto-rows: minmax(20px, auto);">
+  <div class="wrapper" style="
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-auto-rows: minmax(20px, auto);">
     <div>One</div>
     <div>
       Two<p>I have some more content in.</p>
@@ -97,7 +115,10 @@
   </div>
   
   <h3>-</h3>
-  <div class="wrapper" style="display: grid;grid-template-columns: repeat(3, 1fr);grid-auto-rows: 40px;">
+  <div class="wrapper" style="
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: 40px;">
     <div>One</div>
     <div>
       Two111<p>I have some more content in.</p>
@@ -115,13 +136,18 @@
 <h3 class="red">grid-column, grid-row</h3>
 <p>
 Позволяет задавать размер грид-области относительно грид-линий
+<br>"grid-row: 1/3" - высота области в 2 ряда
+<br>"grid-column: 1/4" - ширина области в 3 столбца
 </p>
 
 
   <h3>-</h3>
-  <div class="wrapper" style="display: grid;grid-template-columns: repeat(3, 1fr);grid-auto-rows: 100px;">
-    <div style="grid-column: 1 / 4;grid-row: 1 / 3;">One</div>
-    <div style="grid-column: 1;grid-row: 3 / 5;">Two</div>
+  <div class="wrapper" style="
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-auto-rows: 50px;">
+    <div style="grid-column: 1/4;grid-row: 1/3;">One</div>
+    <div style="grid-column: 1;grid-row: 3/5;">Two</div>
     <div>Three</div>
     <div>Four</div>
     <div>Five</div>
@@ -130,7 +156,7 @@
 <h3 class="red">grid-area</h3>
 <p>
 Задание области одной строкой
-<br>grid-area: row-start / column-start / row-end / column-end;
+<br>grid-area: row-start/column-start/row-end/column-end;
 </p>
 
 
@@ -138,11 +164,15 @@
 
   <h3>-</h3>
   <p>С наложением</p>
-  <div class="wrapper" style="display: grid;grid-template-columns: repeat(3, 1fr);grid-auto-rows: 100px;">
-    <div style="grid-area: 1 / 1 / 3 / 4;">One</div>
-    <div style="grid-column: 1 / 2;grid-row: 2 / 4;">Two</div>
+  <div class="wrapper" style="
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-auto-rows: 50px;
+      gap: 10px;">
+    <div style="grid-area: 1/1/3/4;">One</div>
+    <div style="grid-column: 1/2;grid-row: 2/4;">Two</div>
     <div>Three</div>
-    <div>Four</div>
+    <div style="grid-area: 1/3/5/4;">Four</div>
     <div>Five</div>
   </div>
 

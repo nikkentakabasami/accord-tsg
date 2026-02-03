@@ -1,6 +1,11 @@
 /* разнообразные стили для демок  */
 
 
+h3, h4 {
+  white-space: pre-wrap;
+}
+
+
 h3 {
     margin-block-end: 5px;
     margin-block-end: 5px;
@@ -16,6 +21,10 @@ h4 {
 p {
 	margin-block-start: 0px;
     margin-block-end: 10px;
+}
+
+.full-width {
+    flex-grow: 1;
 }
 
 
