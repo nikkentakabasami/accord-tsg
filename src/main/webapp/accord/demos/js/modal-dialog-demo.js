@@ -18,10 +18,10 @@ $(document).ready(function() {
 		immediateInit: false,
 		closeOnEsc: true,
 		onOk: ()=>{
-			logMessage("dialog1 сохранён.");
+			log("dialog1 сохранён.");
 		},
 		onCancel: ()=>{
-			logMessage("dialog1 закрытие без сохранения.");
+			log("dialog1 закрытие без сохранения.");
 		},
 		onInitiated: ()=>{
 //			dialog1.show();
@@ -47,10 +47,10 @@ $(document).ready(function() {
 		contentSelector: "#dialogContent1",
 		title: "Диалог 2",
 		onOk: ()=>{
-			logMessage("dialog2 сохранён.");
+			log("dialog2 сохранён.");
 		},
 		onCancel: ()=>{
-			logMessage("dialog2 закрытие без сохранения.");
+			log("dialog2 закрытие без сохранения.");
 		},
 //		autosize: true,
 		

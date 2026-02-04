@@ -24,13 +24,13 @@ $(function(){
 	
 	$("#b2").click(e=>{
 		accordUtils.loadHtmlFragmentXHR("demos/misc/testFragment.html","#testFragment1",true);
-		logMessage("loadHtmlFragmentXHR finished");
+		log("loadHtmlFragmentXHR finished");
 	});
 	
 	$("#b3").click(e=>{
 		accordUtils.loadHtmlFragmentFetch("demos/misc/testFragment.html","#testFragment2",true)
 		.then(result => {
-			logMessage("loadHtmlFragmentFetch finished");
+			log("loadHtmlFragmentFetch finished");
 		});
 	});
 		
@@ -48,12 +48,12 @@ $(function(){
 		clearLog();
 		let today= new Date();
 		
-		logMessage("accordUtils.accordPath="+accordUtils.accordPath);
+		log("accordUtils.accordPath="+accordUtils.accordPath);
 		
-		logMessage("accordUtils.random(10)="+accordUtils.random(10));
-		logMessage("accordUtils.randomDate()="+accordUtils.randomDate());
-		logMessage("accordUtils.formatDate(today)="+accordUtils.formatDate(today));
-		logMessage('accordUtils.parseDate("05.05.2025")='+accordUtils.parseDate("05.05.2025"));
+		log("accordUtils.random(10)="+accordUtils.random(10));
+		log("accordUtils.randomDate()="+accordUtils.randomDate());
+		log("accordUtils.formatDate(today)="+accordUtils.formatDate(today));
+		log('accordUtils.parseDate("05.05.2025")='+accordUtils.parseDate("05.05.2025"));
 		
 	});
 	

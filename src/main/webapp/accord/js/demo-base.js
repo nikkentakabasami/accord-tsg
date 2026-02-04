@@ -22,6 +22,8 @@ let $log1;
 let $log2;
 let $logPanel;
 
+let greenSpan = '<span class="green"></span>';
+
 
 function findMainJs(){
 	
@@ -54,16 +56,6 @@ function fixSrcRef(){
 
 }
 
-
-/*
-<div class="titlePanel">
-  <h2>AccModalDialog - получение содержимого по ссылке</h2>
-  <button id="hideAuxButton" type="button" class="acc-btn">Скрыть описание</button>
-  <a href="#" target="source">Исходники</a>
-</div>
-
-*/
-
 function addTitlePanelButtons(){
 	
 	let $tp = $(".titlePanel");
@@ -82,23 +74,16 @@ function addTitlePanelButtons(){
 
 
 function showMainJs(){
-	
 	let  options = {
 		draggable: false,
-//		centered: true,
-//		width: "450px",
-//		height: "300px",
 		contentTextUrl: mainJsHref,
 		hideOnDblclick: true,
 		fullScreen: true,
 		cssClass: "help-panel",
 		panelExtraClasses: "acc-popup"
-		
-		
 	}	
 	let p1 = new AccPopup(options);
 	p1.show();
-	
 }
 
 
@@ -115,8 +100,6 @@ function stringifyObject(o, indent = "", withBraces = false) {
 		return o.outerHTML;
 	}
 	
-	
-	
 	let result = "";
 	
 	if ( (t == 'object') && (!Array.isArray(o)) ) {
@@ -128,8 +111,6 @@ function stringifyObject(o, indent = "", withBraces = false) {
 		let first = true;
 		for (let key in o) {
 			let val = o[key];
-			
-			
 			
 			let valStr;
 			
@@ -145,7 +126,6 @@ function stringifyObject(o, indent = "", withBraces = false) {
 				valStr = String(val);
 			} else {
 				valStr = stringifyObject(val, "  ", withBraces);
-				
 			}
 			
 			if (!first){
@@ -162,12 +142,76 @@ function stringifyObject(o, indent = "", withBraces = false) {
 	} else {
 		result = JSON.stringify(o);
 	}
-	
 	return result;	
 }
 
 
 
+//убирает лишние отступы в коде
+function removeOddIndent(code){
+	
+	let lines = code.split("\n")
+	if (lines.length==1){
+		return code.trim();
+	}
+	
+	lines = lines.map(line=>line.replaceAll("\t","  "));
+
+	//убираем пустые строки в начале	
+	while(lines.length>0 && lines[0].trim().length==0){
+		lines.shift();
+	}
+
+	//убираем пустые строки в конце	
+	while(lines.length>0 && lines[lines.length-1].trim().length==0){
+		lines.pop();
+	}
+	
+		
+	let minIndent = 0;
+	for (let i = 0; i < lines.length; i++) {
+		let line = lines[i];
+		
+//		line = line.replaceAll("\t","  ");
+//		lines[i] = line;
+		
+		if (line.trim().length==0){
+			continue;
+		}
+		
+		let r = line.match( /^ +/i );
+		if (r){
+			
+			let indent = r[0].length;
+			if (!minIndent){
+				minIndent = indent;
+				continue;
+			}
+			if (indent<minIndent){
+				minIndent = indent;
+			}
+		}
+	}  
+
+	if (minIndent){
+		lines = lines.map(line=>line.substring(minIndent));
+	}
+
+	return lines.join("\n");
+	
+}
+
+//возвращает код заданной функции.
+//убирает её объявление, убирает лишние отступы
+function trimFuncCode(func){
+	let code = String(func);
+
+	let ind1 = code.indexOf("{");
+	let ind2 = code.lastIndexOf("}");
+	code = code.substring(ind1+1, ind2);
+	code = removeOddIndent(code);
+	return  code;
+}
 
 
 function clearLog() {
@@ -176,100 +220,145 @@ function clearLog() {
 }
 
 function log(...vals) {
-	logMessage(...vals);
+	logMessage($log1, ...vals);
 }
-
 function log2(...vals) {
-	logMessage2(...vals);
+	logMessage($log2, ...vals);
 }
+
+//выводит в лог заданное выражение, выполняет его через eval(), выводит в лог результат
+function le(exp) {
+	return _le($log1, exp)
+}
+function le2(exp) {
+	return _le($log2, exp)
+}
+function _le($log, exp) {
+	if (!exp){
+		return;
+	}
+	let val = eval(exp);
+	let codeNode = logMessage($log, exp);
+	$(codeNode).wrap(greenSpan);
+	if (val!=null){
+		logMessage($log, " ", val, "\n");
+	}
+}
+
+
+//выводит в лог код заданной функции, выполняет её, выводит в лог результат функции
+function _lf($log, func) {
+	let code = trimFuncCode(func);
+//	let codeNode = logMessage($log, code+"\n");
+	let codeNode = logMessage($log, code);
+	//выделяем код зелёным
+	$(codeNode).wrap(greenSpan);
+	
+	let val = func();
+	if (val!=null){
+		val = stringifyObject(val);
+		logMessage($log, "result: "+val);  //+"\n"
+	}
+//	logMessage($log);
+}
+function lf(func) {
+	return _lf($log1, func);
+}
+function lf2(func) {
+	return _lf($log2, func);
+}
+function lf2NL(func) {
+	log2();
+	return _lf($log2, func);
+}
+
+
+
+
+
 function log2NL(...vals) {
-	logMessage2();
-	logMessage2(...vals);
+	log2();
+	log2(...vals);
 }
-
-
 function logNL(...vals) {
-	logMessage("\n", ...vals);
+	log();
+	log(...vals);
 }
 
 
 function logVal(key, val, ...vals) {
 	val = stringifyObject(val);
-	logMessage(key+": "+val, ...vals);
-}
-
-function logVal2NL(key, val, ...vals) {
-	logMessage2();
-	logVal2(key, val, ...vals);
+	log(key+": "+val, ...vals);
 }
 function logVal2(key, val, ...vals) {
 	val = stringifyObject(val);
-	logMessage2(key+": "+val, ...vals);
+	log2(key+": "+val, ...vals);
+}
+function logVal2NL(key, val, ...vals) {
+	log2();
+	logVal2(key, val, ...vals);
 }
 
-
+//выводит в лог только указанные атрибуты объекта
 function logObject(o, ...attributes) {
-	
 	if (attributes.length>0){
 		o = accordUtils.cloneObject(o, ...attributes);
 	}
-	
 	let s = stringifyObject(o);
 	log(s);
-	
 }
 
 
 
-
-function logMessage(...vals) {
+function logMessage($log, ...vals) {
 	
 	let line = vals.map(v=>stringifyObject(v)).join(" ");
-
+	
+//	$(line).wrap(greenSpan);
+	
 	line = line+"\n";
 	
 	//чтобы избавиться от спецсимволов
-	line = document.createTextNode(line)
+	let lineNode = document.createTextNode(line)
 
-	$log1.append(line);
+	
+	$log.append(lineNode);
 
+//	$log.append('<div class="green">'+line+'</div>');
+//	$(lineNode).wrap(greenSpan);
+	
 	//scroll to bottom	
 	var h = $logPanel.prop('scrollHeight');
 	$logPanel.scrollTop(h);	
 
+	return lineNode;
 }
 
-function logMessage2(...vals) {
-	
-	let line = vals.map(v=>stringifyObject(v)).join(" ");
-
-	line = line+"\n";
-	
-	//чтобы избавиться от спецсимволов
-	line = document.createTextNode(line)
-
-	$log2.append(line);
-
-
+function highlightLogComments1(){
+	highlightLogComments($log1);
 }
+function highlightLogComments2(){
+	highlightLogComments($log2);
+}
+	function highlightLogComments($log){
+	
+	const text = $log.html();
+	const lines = text.split('\n');
 
-
-/*
-
-	let $sel = $(selector);
-	$sel.change(e=>{
-//		let v = $sel.val();
-		let v = $sel.children("option:selected").text();
-		$selectorText.val(v);
+	const processedLines = lines.map(line => {
+		let ind = line.indexOf('//');
+		if (ind>=0) {
+			return line.substring(0, ind) + '<span class="gray">' + line.substring(ind) + '</span>';
+		} else {
+		  return line;
+		}
 	});
-//	accordUtils.fillSelect($sel,data,true,null,true);
+
+	let newText = processedLines.join('\n');
 	
-	accordUtils.fillSelect($sel,{
-		data: data,
-		withNullOption: true,
-		selectedValue: null,
-		valueIsIndex: true
-	});	*/
+	$log.html(newText);
+}
+
 
 function initDemoCodeSelect(selector, data) {
 
@@ -288,8 +377,10 @@ function initDemoCodeSelect(selector, data) {
 	} else {
 		$selectorText.val(v);
 		currentFunc = data[v];
-		let funcCode = String(currentFunc);
-		log(funcCode);
+//		let funcCode = String(currentFunc);
+		let code = trimFuncCode(currentFunc);
+		
+		log(code);
 	}	
 	
   });
@@ -321,17 +412,27 @@ function execDemoFunc(func) {
 
 
   clearLog();
-  log(String(func));
-  let result = func();
+  let code = trimFuncCode(func);
+  log(code);
+	
+	let result = null;
+	try {
+		result = func();
+		
+		let logMess = '\nexecuted. ';
+		if (result && result.jquery) {
+			result.addClass("red-border");
+			logMess += "elements found: " + result.length;
+		}
+		log(logMess);
+		
+	} catch (error) {
+	  log("Error:", error.message);
+	}	
 
-  let logMess = 'executed. ';
-  if (result && result.jquery) {
-	result.addClass("red-border");
-	logMess += "elements found: " + result.length;
-
-  }
-  log(logMess);
-
+	highlightLogComments1();
+	highlightLogComments2();
+	
 }
 
 
@@ -516,7 +617,7 @@ $(function() {
 	$selectorText =$("#selectorText");
 	
 	
-//	logMessage("Запуск");
+//	log("Запуск");
 	
 	addTitlePanelButtons();
 	fixSrcRef();

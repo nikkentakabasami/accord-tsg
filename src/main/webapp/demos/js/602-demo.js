@@ -147,9 +147,9 @@ $(() => {
 
   $("#b6").click(e => {
 	clearLog();
-	logMessage("select1:"+select1.selectedValues);
-	logMessage("select2:"+select2.selectedValues);
-	logMessage("select3:"+select3.selectedValues);
+	log("select1:"+select1.selectedValues);
+	log("select2:"+select2.selectedValues);
+	log("select3:"+select3.selectedValues);
 	
 	
   });

@@ -5,6 +5,9 @@ let a = {};
 let testArray1, testArray2;
 let testString1, testMap1;
 
+let testArray;
+
+
 function initArrays(){
 	testArray1 = ["Яблоко", "Апельсин", "Слива", "Груша","Финик","Вишня"];
 	testArray2 = new Array(11, 3, 5, 2, 7, 9, 13, 3, 33 );
@@ -18,6 +21,13 @@ function initArrays(){
 	
 	
 }
+
+
+function logTAF(func){
+	let r = lf2(func);
+	log2(testArray,"\n")
+}
+
 
 
 //тестовые функции
@@ -119,194 +129,186 @@ let selectorsData1 = {
 	iterateDemo: () => {
 		a = {};
 
-
-		//итерация через for	
-		log2("for (let i = 0; i < testArray1.length; i++)");	
-		for (let i = 0; i < testArray1.length; i++) {
-			let val = testArray1[i];
-			if (i==1){
-				continue;
-			}
-			if (i>4){
-				break;
-			}
-			
-			log2(`testArray1[${i}] = ${val}`);
-		}
-
-		//итерация по индексам (и добавленным полям объекта)	
-		testArray1.testField = "testValue";	
-		log2NL("for (let f in testArray1)");	
-		for (let f in testArray1) {
-			log2(f);
-		}		
+		le2("testArray1");
 		
-		//итерация по значениям	
-		log2NL("for (let f of testArray1)");	
-		for (let f of testArray1) {
-			log2(f);
-		}
+		lf2(()=>{
+			//итерация через for	
+			for (let i = 0; i < testArray1.length; i++) {
+				let val = testArray1[i];
+				if (i==1){
+					continue;
+				}
+				if (i>4){
+					break;
+				}
+				log2(`testArray1[${i}] = ${val}`);
+			}
+		});
 
-		log2NL("testArray1.forEach((item, index, array) => {});");	
-		testArray1.forEach((item, index, array) => {
-			log2(`testArray1[${index}] = ${item}`);
+		lf2NL(()=>{
+			//итерация по индексам (и добавленным полям объекта)	
+			testArray1.testField = "testValue";	
+			for (let f in testArray1) {
+				log2(f);
+			}
+		});
+		
+		lf2NL(()=>{
+			//итерация по значениям	
+			for (let v of testArray1) {
+				log2(v);
+			}
+		});
+		
+		lf2NL(()=>{
+			//arr.forEach
+			testArray1.forEach((item, index, array) => {
+				log2(`testArray1[${index}] = ${item}`);
+			});
+		});
+		
+	},
+	
+
+	
+	//модификация массива
+	modify: () => {
+
+		le2("testArray = [7,8];");
+		
+		logTAF(()=>{
+			//push - добавляет элементы в конец массива и возвращает его новую длину
+			let newLength = testArray.push(5,6);
+		});
+		logTAF(()=>{
+			//pop- Удаляет последний элемент из массива и возвращает его
+			let v = testArray.pop();
+		});
+
+		logTAF(()=>{
+			//unshift - Добавляет элементы в начало массива
+			let newLength = testArray.unshift(1,1);
+		});
+		logTAF(()=>{
+			//shift - Удаляет из массива первый элемент и возвращает его:
+			let v = testArray.shift();
+		});
+		logTAF(()=>{
+			//укоротить до 2 элементов
+			testArray.length = 2;
+		});
+		logTAF(()=>{
+			//вернуть length обратно, как было
+			testArray.length = 4;
+		});
+		logTAF(()=>{
+			//Очистка массива
+			testArray.length = 0;
+			//генерируем новый массив
+			testArray = Array.from({ length: 9 }, (el, index) => index+1);
 		});
 		
 		
+		logTAF(()=>{
+			testArray.reverse();
+		});
+		logTAF(()=>{
+			testArray.sort();
+		});
 		
-	},
-	//модификация массива
-	modify: () => {
-		
-		let a1 = [7,8];
-		logVal2("a1",a1);
-
-		//push - добавляет элементы в конец массива и возвращает его новую длину
-		let newLength = a1.push(5,6);
-		log2NL("a1.push(5,6);", a1);
-
-		//pop- Удаляет последний элемент из массива и возвращает его
-		let v = a1.pop();
-		log2NL("let v = a1.pop();", a1);
-		logVal2("v", v);
-		
-		//unshift - Добавляет элементы в начало массива
-		newLength = a1.unshift(1,1);
-		log2NL("a1.unshift(1,1);", a1);
-		
-		//shift - Удаляет из массива первый элемент и возвращает его:
-		a1.shift();
-		log2NL("a1.shift();",a1);
-
-		//укоротить до 2 элементов
-		a1.length = 2;	//[1,7]
-		log2NL("a1.length = 2;",a1);
-
-		//вернуть length обратно, как было
-		a1.length = 4;	//[1,7,null,null]
-		log2NL("a1.length = 4;",a1);
-
-		//Очистка массива
-		a1.length = 0;
-		log2NL("a1.length = 0;",a1);
-		
-		//генерируем новый массив
-		let a3 = Array.from({ length: 9 }, (el, index) => index+1);
-		log2NL("a3: ", a3)
-
-		a3.reverse();
-		log2NL("a3.reverse()", a3)
-
-
-		a3.sort();
-		log2NL("a3.sort()", a3)
-		
-		//числа больше 5 - в начало списка	
-		a3.sort((a, b) => a>5?-1:1 );
-		log2NL("a3.sort((a, b) => a>5?-1:1 )", a3)
-
-		//удаление значения (вставляет в ячейку null)
-		delete a3[3];
-		log2NL("delete a3[3]", a3)
-								
-		//arr.splice(index[, deleteCount, elem1, ..., elemN])
-		//Удаляет deleteCount элементов, начиная с номера index, а затем вставляет elem1, ..., elemN на их место. 
-		//Возвращает массив из удалённых элементов.
-
-		//удаляем 4 элемента, начиная со второго
-		a3.splice(2, 4);
-		log2NL("a3.splice(2, 4)", a3)
-
-		a3.splice(0, 2, 21, 22, 23);
-		log2NL("a3.splice(0, 2, 21, 22, 23)", a3)		
-	},
+		logTAF(()=>{
+			//числа больше 5 - в начало списка	
+			testArray.sort((a, b) => a>5?-1:1 );
+		});
+		logTAF(()=>{
+			//удаление значения (вставляет в ячейку null)
+			delete testArray[3];
+		});
+		logTAF(()=>{
+			//arr.splice(index[, deleteCount, elem1, ..., elemN])
+			//Удаляет deleteCount элементов, начиная с номера index, а затем вставляет elem1, ..., elemN на их место. 
+			//Возвращает массив из удалённых элементов.
 	
-	
+			//удаляем 4 элемента, начиная со второго
+			let removedArr = testArray.splice(2, 4);
+			log2("removed:",removedArr);
+		});
+		logTAF(()=>{
+			let removedArr = testArray.splice(0, 2, 11, 12, 13);
+			log2("removed:",removedArr);
+		});
 
+				
+	},	
+	
 	
 	
 	//преобразование массива (в другой массив/объект)
 	transform: () => {
+		testArray = Array.from({ length: 9 }, (el, index) => index+1);
 		
-		let a2 = Array.from({ length: 9 }, (el, index) => index+1);
-		logVal2("a2", a2)
-		
-		//arr.join([separator]) - связывает все элементы массива в строку (через запятую по умолчанию);
-		let str = a2.join(';');
-		logVal2NL("a2.join(';')",str);
-		
-		//arr.concat(value1, value2, … valueN)
-		//создаёт новый массив, в который копируются элементы из arr, а также value1, value2, ... valueN.
-		//Если аргумент массив - добавятся элементы из него.
-		let a3 = a2.concat(2,3);
-		logVal2NL("a2.concat(2,3)",a3);
-	
+		lf2(()=>{
+			//arr.join([separator]) - связывает все элементы массива в строку (через запятую по умолчанию);
+			return testArray.join(';');
+		});
+		lf2NL(()=>{
+			//arr.concat(value1, value2, … valueN)
+			//создаёт новый массив, в который копируются элементы из arr, а также value1, value2, ... valueN.
+			//Если аргумент массив - добавятся элементы из него.
+			return testArray.concat(2,3);
+		});
+		lf2NL(()=>{
 		//arr.slice(start, end) - копирует участок массива от begin до end, не включая end
-	
-		//копирование массива
-		let a4 = a2.slice();
-		logVal2NL("a2.slice()",a4);
-	
-		//подмножество массива
-		let a5 = a2.slice(1,5);
-		logVal2NL("a2.slice(1,5)",a5);
-		
-		//фильтрация
-		let a6 = a2.filter(item=>item>5);
-		logVal2NL("a2.filter(item=>item>5)",a6);
-	
-		//преобразование элементов
-		let a7 = a2.map((item,i)=>item*2);
-		logVal2NL("a2.map(item=>item*2)",a7);
-		
-		//arr.reduce(callback[, initialValue])
-		//используется для последовательной обработки каждого элемента массива с сохранением промежуточного результата.
-		
-		//получение суммы всех чисел
-		let a8 = a2.reduce((sum, current)=>sum+current);
-		logVal2NL("a2.reduce((sum, current)=>sum+current)",a8);
+		return testArray.slice();
+		});
+		lf2NL(()=>{
+			//подмножество массива
+			return testArray.slice(1,5);
+		});
+		lf2NL(()=>{
+			//фильтрация
+			return testArray.filter(item=>item>5);
+		});
+		lf2NL(()=>{
+			//преобразование элементов
+			return testArray.map((item,i)=>item*2);
+		});
+		lf2NL(()=>{
+			//arr.reduce(callback, initialValue = 0)
+			//используется для последовательной обработки каждого элемента массива с сохранением промежуточного результата.
 			
-		//получение суммы всех чисел + initialValue
-		let a9 = a2.reduce((sum, current)=>sum+current, 100);
-		logVal2NL("a2.reduce((sum, current)=>sum+current, 100)",a9);		
+			//получение суммы всех чисел
+			return testArray.reduce((sum, current)=>sum+current);
+		});
+		lf2NL(()=>{
+			//получение суммы всех чисел + initialValue
+			return testArray.reduce((sum, current)=>sum+current, 100);
+		});
 		
 	},
-	//
-	check: () => {
-
-//		let a2 = Array.from({ length: 9 }, (el, index) => accordUtils.random(5));
-		logVal2NL("testArray2", testArray2)
-
-		let ind = testArray2.indexOf(3);
-		logVal2NL("testArray2.indexOf(3)", ind);
-
-		ind = testArray2.lastIndexOf(3);
-		logVal2NL("testArray2.lastIndexOf(3)", ind);
-
-		let b = testArray2.includes(3);
-		logVal2NL("testArray2.includes(3)", b);
-			
-		b = testArray2.every(item=>item>3);
-		logVal2NL("testArray2.every(item=>item>3)", b);
-
-		b = testArray2.some(item=>item>3);
-		logVal2NL("testArray2.some(item=>item>3)", b);
-
-		//arr.find(callback) - возвращает значение первого найденного в массиве элемента, которое удовлетворяет условию
-		//В противном случае возвращается undefined.
-			
-		let val = testArray2.find(item=>item>=3);
-		logVal2NL("testArray2.find(item=>item>=3)", val);
-
-		//сравнение массивов можно делать так
-		b = JSON.stringify(testArray1) === JSON.stringify(testArray2)
-		logVal2NL("testArray1==testArray2",b);
-
-		//проверка на массив
-		b = Array.isArray(testArray2);	
-		logVal2NL("Array.isArray(testArray2)", b);		
-		
-	},
+	
+		check: () => {
+			le2("testArray = testArray2.slice();");
+			le2("testArray.indexOf(3);");
+			le2("testArray.lastIndexOf(3);");
+			le2("testArray.includes(3);");
+			le2("testArray.some(item=>item>3);");
+			le2("testArray.every(item=>item>3);");
+			lf2NL(()=>{
+				//arr.find(callback) - возвращает значение первого найденного в массиве элемента, которое удовлетворяет условию
+				//В противном случае возвращается undefined.
+				return testArray.find(item=>item>11);
+			});
+			lf2NL(()=>{
+				//сравнение массивов можно делать так
+				return JSON.stringify(testArray) === JSON.stringify(testArray2)
+			});
+			lf2NL(()=>{
+				//проверка на массив
+				return Array.isArray(testArray);	
+			});
+		},	
+	
 	
 	
 	
@@ -316,55 +318,13 @@ let selectorsData1 = {
 
 
 
-
-
 $(() => {
   initDemoCodeSelect("#selectors1", selectorsData1);
 
   initArrays();
+//	$workPanel.text(String(initArrays));
   
 //  reloadSandbox();
-
-  $workPanel.text(String(initArrays));
   
 });
 
-
-/*
-	transform: () => {
-		a = {};
-	
-		a.testArray2 = testArray2;
-		
-//		a.a2 = Array.from({ length: 9 }, (el, index) => index+1);
-		
-		//arr.join([separator]) - связывает все элементы массива в строку (через запятую по умолчанию);
-		a.joinString = testArray2.join(';');
-		
-		//arr.concat(value1, value2, … valueN)
-		//создаёт новый массив, в который копируются элементы из arr, а также value1, value2, ... valueN.
-		//Если аргумент массив - добавятся элементы из него.
-		a.a3 = testArray2.concat(2,3);
-
-		//arr.slice(start, end) - копирует участок массива от begin до end, не включая end
-
-		//копирование массива
-		a.a4 = testArray2.slice();
-
-		a.a5 = testArray2.slice(1,5);
-		
-		a.a6 = testArray2.filter(item=>item>5);
-
-		a.a7 = testArray2.map((item,i)=>item*2);
-		
-		//arr.reduce(callback[, initialValue])
-		//используется для последовательной обработки каждого элемента массива с сохранением промежуточного результата.
-		
-		//получение суммы всех чисел
-		a.a8 = testArray2.reduce((sum, current)=>sum+current);
-			
-		//получение суммы всех чисел + initialValue
-		a.a9 = testArray2.reduce((sum, current)=>sum+current, 100);
-		
-		log2(a);
-	},	*/

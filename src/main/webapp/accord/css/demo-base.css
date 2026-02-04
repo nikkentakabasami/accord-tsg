@@ -133,8 +133,13 @@ p {
 .red {
 	color: red;
 }
+.gray {
+	color: Gray;
+}
 
-
+.green {
+	color: green;
+}
 
 #log1, #log2 {
   white-space: pre-wrap;

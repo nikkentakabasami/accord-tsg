@@ -27,8 +27,8 @@ $(() => {
   $ms1 = $('#ms1').multiselect({
 	onChange: function(option, checked) {
 	  clearLog();
-	  logMessage('Changed option: ' + $(option).val());
-	  logMessage('$ms.val(): ' + $ms1.val());
+	  log('Changed option: ' + $(option).val());
+	  log('$ms.val(): ' + $ms1.val());
 	}
   });
   
@@ -49,10 +49,10 @@ $(() => {
 	buttonText: multiselectButtonText,
 	maxHeight: 500,
 	onDropdownShow: event => {
-		logMessage("onDropdownShow");
+		log("onDropdownShow");
   },
   onDropdownHide: event => {
-	logMessage("onDropdownHide. val:"+ $ms3.val());
+	log("onDropdownHide. val:"+ $ms3.val());
   }
 
   },  
@@ -66,7 +66,7 @@ $(() => {
   $("#b1").click(e => {
 	clearLog();
 	mss.forEach(($ms, index)=>{
-		logMessage(`$ms${index+1}.val(): ${$ms.val()}`);
+		log(`$ms${index+1}.val(): ${$ms.val()}`);
 	});
   });
 

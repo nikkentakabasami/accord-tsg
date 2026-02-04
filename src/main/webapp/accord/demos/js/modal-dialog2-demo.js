@@ -15,10 +15,10 @@ $(document).ready(function() {
     fragmentLoadMode: AccModalDialog.LoadModes.FETCH,
     autosize: true,
     onOk: () => {
-      logMessage("dialog1 сохранён.");
+      log("dialog1 сохранён.");
     },
     onCancel: () => {
-      logMessage("dialog1 закрытие без сохранения.");
+      log("dialog1 закрытие без сохранения.");
     },
     onInitiated: () => {
       dialog1.show();

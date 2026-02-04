@@ -1,25 +1,6 @@
 
 let a = {};
 
-//способы объявления массивов
-function createArrays1(){
-	
-	a = {};
-	
-	//пустые массивы
-	a.arr0 = [];
-	a.arr1 = new Array();
-	a.arrEmpty2 = Array();
-
-	//размер массива увеличится автоматом при записи значений (хотя такой подход не желателен - мешает оптимизации)
-	a.arr1[0] = "Saab";
-	a.arr1[1] = "Volvo";
-	a.arr1[2] = "BMW";
-	a.arr1[7] = "Toyota";  //length=8, ["Saab","Volvo","BMW",null,null,null,null,"Toyota"]
-
-	log2(a);
-//	return a;	
-}
 
 
 
@@ -27,16 +8,64 @@ function createArrays1(){
 //возвращают query-объекты, задействованные в тесте: они будут выделены красной рамкой
 let selectorsData1 = {
 
-  test_func1: function() {
-	//назначает обработчик на все инпуты
-	return $("#formDiv1 input").bind("click", event => {
-		  log("inp click.");
-		});
+
+
+
+
+  test_func1: () => {
+    //функция для работы с dom.
+    //возвращает jquery объект. Эти элементы будут выделены рамкой.
+    return $("#formDiv1 input").bind("click", event => {
+      log("inp click.");
+    });
   },
 
-  createArrays1: createArrays1,
-  
-  
+
+  createArrays1: () => {
+		//log(...vals), log2(...vals) - выводит в лог заданные сообщения (через пробел) 
+		//корректно форматирует их
+
+    a = {};
+    a.arr0 = [];
+    a.arr1 = new Array();
+    a.arrEmpty2 = Array();
+    log2(a);
+  },
+
+  lf_demo: () => {
+    //lf(func), lf2(func)
+		//1) выводит в лог код заданной функции 
+		//2) выполняет её 
+		//3) выводит в лог результат функции
+
+    let testArray1 = Array.from("testString");
+    lf2(() => {
+      for (let f in testArray1) {
+        log2(f);
+      }
+      return testArray1;
+    });
+
+  },
+
+
+
+	  le_demo: () => {
+			//le(exp), le2(exp)
+			//1) выводит в лог заданное выражение 
+			//2) выполняет его 
+			//3) выводит в лог результат
+
+			le2("a.d1 = new Date();");
+			le2("a.d2 = new Date(2014, 11, 31, 12, 30, 0);");
+			
+			le2("a.d1.toString()");
+			le2("a.d1.toJSON()");
+			le2("a.d2.getFullYear()");
+			le2("a.d2.getMonth()");
+	  },	
+	
+
 }
 
 
