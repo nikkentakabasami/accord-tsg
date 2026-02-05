@@ -102,6 +102,10 @@ function stringifyObject(o, indent = "", withBraces = false) {
 	
 	let result = "";
 	
+	if (o instanceof Map){
+		o = Array.from(o);		
+	}
+	
 	if ( (t == 'object') && (!Array.isArray(o)) ) {
 		
 		if (withBraces){
@@ -122,6 +126,8 @@ function stringifyObject(o, indent = "", withBraces = false) {
 				valStr = "func";
 			} else if (Array.isArray(val)){
 				valStr = JSON.stringify(val);
+			} else if (val instanceof Map){
+				valStr = stringifyObject(val);
 			} else if (t == "object"){
 				valStr = String(val);
 			} else {
@@ -227,22 +233,35 @@ function log2(...vals) {
 }
 
 //выводит в лог заданное выражение, выполняет его через eval(), выводит в лог результат
+function _le($log, exp) {
+	if (!exp){
+		return;
+	}
+
+	try {
+		let val = eval(exp);
+	} catch (err) {
+	  console.error('Произошла ошибка:', err.message);
+	  console.error('Стек вызовов:', err.stack);
+		log2('Произошла ошибка:', err.message);
+		return;
+	}
+	
+	let codeNode = logMessage($log, exp);
+	$(codeNode).wrap(greenSpan);
+	if (val!=null){
+		logMessage($log, " ", val, "\n");
+	}
+}
 function le(exp) {
 	return _le($log1, exp)
 }
 function le2(exp) {
 	return _le($log2, exp)
 }
-function _le($log, exp) {
-	if (!exp){
-		return;
-	}
-	let val = eval(exp);
-	let codeNode = logMessage($log, exp);
-	$(codeNode).wrap(greenSpan);
-	if (val!=null){
-		logMessage($log, " ", val, "\n");
-	}
+function le2NL(exp) {
+	log2();
+	return _le($log2, exp)
 }
 
 
@@ -257,7 +276,7 @@ function _lf($log, func) {
 	let val = func();
 	if (val!=null){
 		val = stringifyObject(val);
-		logMessage($log, "result: "+val);  //+"\n"
+		logMessage($log, val);  //+"\n"
 	}
 //	logMessage($log);
 }
@@ -273,6 +292,17 @@ function lf2NL(func) {
 }
 
 
+//вывод комментов
+function lc(comment) {
+	log("//"+comment);
+}
+function lc2(comment) {
+	log2("//"+comment);
+}
+function lc2NL(comment) {
+	log2();
+	log2("//"+comment);
+}
 
 
 
@@ -428,6 +458,7 @@ function execDemoFunc(func) {
 		
 	} catch (error) {
 	  log("Error:", error.message);
+		console.error(error.stack);
 	}	
 
 	highlightLogComments1();

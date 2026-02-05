@@ -141,10 +141,13 @@ p {
 	color: green;
 }
 
-#log1, #log2 {
+#log1 {
   white-space: pre-wrap;
 }
 
+#log2 {
+  white-space: pre;
+}
 
 
 /* оформление контейнера и вложенных элементов */

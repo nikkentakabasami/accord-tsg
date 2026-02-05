@@ -90,6 +90,7 @@ class AccSplitter {
 		
 		if (this.options.startLeftPanelWidth) {
 			this.$leftPanel.width(this.options.startLeftPanelWidth);
+			this.$leftPanel.css("min-width", this.options.startLeftPanelWidth+"px");
 		}
 		
 		

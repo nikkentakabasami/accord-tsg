@@ -43,9 +43,14 @@ MainServletContextListener
 массив из функций
   вывести код и результат.
 
+---------------------
 
+todo
 
+console.log(Object.keys(fruits)); // ['0', '1', '2', '5']
 
+			//мап из объекта
+			a.map3 = new Map(Object.entries(testObject1));
 
 
 
