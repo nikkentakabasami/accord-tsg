@@ -18,8 +18,7 @@ let form1, form2;
 let $panel1, $panel2;
 
 
-let $log1;
-let $log2;
+let $log1, $log2, $log3;
 let $logPanel;
 
 let greenSpan = '<span class="green"></span>';
@@ -105,7 +104,11 @@ function stringifyObject(o, indent = "", withBraces = false) {
 	if (o instanceof Map){
 		o = Array.from(o);		
 	}
-	
+
+	if (o instanceof RegExp){
+		return String(o);		
+	}
+		
 	if ( (t == 'object') && (!Array.isArray(o)) ) {
 		
 		if (withBraces){
@@ -231,6 +234,9 @@ function log(...vals) {
 function log2(...vals) {
 	logMessage($log2, ...vals);
 }
+function log3(...vals) {
+	logMessage($log3, ...vals);
+}
 
 //выводит в лог заданное выражение, выполняет его через eval(), выводит в лог результат
 function _le($log, exp) {
@@ -240,6 +246,17 @@ function _le($log, exp) {
 
 	try {
 		let val = eval(exp);
+		let codeNode = logMessage($log, exp);
+		$(codeNode).wrap(greenSpan);
+		if (val!=null){
+			
+//			if (val instanceof String){
+			if (typeof val === "string") {
+				val = '"'+val+'"';
+			}
+			logMessage($log, " ", val, "\n");
+			return val;
+		}
 	} catch (err) {
 	  console.error('Произошла ошибка:', err.message);
 	  console.error('Стек вызовов:', err.stack);
@@ -247,11 +264,6 @@ function _le($log, exp) {
 		return;
 	}
 	
-	let codeNode = logMessage($log, exp);
-	$(codeNode).wrap(greenSpan);
-	if (val!=null){
-		logMessage($log, " ", val, "\n");
-	}
 }
 function le(exp) {
 	return _le($log1, exp)
@@ -275,8 +287,9 @@ function _lf($log, func) {
 	
 	let val = func();
 	if (val!=null){
-		val = stringifyObject(val);
-		logMessage($log, val);  //+"\n"
+//		val = stringifyObject(val);
+		logMessage($log, val);
+		return val;
 	}
 //	logMessage($log);
 }
@@ -432,6 +445,7 @@ function initDemoCodeSelect(selector, data) {
   accordUtils.fillSelect($sel, opts);
 
 }
+
 
 function execDemoFunc(func) {
   if (!func) {
@@ -644,6 +658,7 @@ $(function() {
 	$workPanel = $(".workPanel");
 	$log1 = $('#log1');
 	$log2 = $('#log2');
+	$log3 = $('#log3');
 	$logPanel = $('.logPanel');
 	$selectorText =$("#selectorText");
 	

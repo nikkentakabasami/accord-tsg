@@ -145,7 +145,7 @@ p {
   white-space: pre-wrap;
 }
 
-#log2 {
+#log2, #log3 {
   white-space: pre;
 }
 

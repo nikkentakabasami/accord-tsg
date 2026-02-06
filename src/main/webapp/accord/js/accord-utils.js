@@ -17,6 +17,7 @@ let accordUtils = {
   addCssFile: addCssFile,
   loadHtmlFragmentXHR: loadHtmlFragmentXHR,
   loadHtmlFragmentFetch: loadHtmlFragmentFetch,
+	loadFileAsString: loadFileAsString,
   deleteAllCookies: deleteAllCookies,
   deleteAllCookiesAndReload: deleteAllCookiesAndReload,
   copyTextToBuffer: copyTextToBuffer,
@@ -300,6 +301,21 @@ function addCssFile(filename) {
   var head = document.getElementsByTagName('head')[0];
   head.appendChild(link);
 }
+
+function loadFileAsString(fileUrl){
+	
+	let xhr = new XMLHttpRequest();
+	xhr.open("GET", fileUrl, false); // false для синхронного вызова
+	xhr.send();
+
+	console.log(`status: ${xhr.status}, statusText: ${xhr.statusText}`);
+	if (xhr.status === 200) {
+		return xhr.responseText;
+	} else {
+	  console.log("Ошибка загрузки");
+	}
+	
+};
 
 
 //загружает html-фрагмент через XMLHttpRequest. Синхронно

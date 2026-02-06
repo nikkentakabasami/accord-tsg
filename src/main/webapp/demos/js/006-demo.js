@@ -7,6 +7,7 @@ let testMap1 = new Map([
   [3, "c"],
 ]);
 
+let result;
 
 
 //тестовые функции
@@ -14,7 +15,20 @@ let testMap1 = new Map([
 let selectorsData1 = {
 
 
+	test1: () => {
 
+		lc2("test_comment");
+		
+		result = lf2NL(() => {
+			return "test_func_result";
+		});
+		le2NL("result.length");
+		
+	},	
+	test2: () => {
+	},	
+	test3: () => {
+	},	
 
 
   test_func1: () => {
