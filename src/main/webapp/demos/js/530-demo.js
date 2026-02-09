@@ -1,7 +1,6 @@
 
 let a = {};
 
-let textSample1;
 let result;
 let regex;
 let textSample;
@@ -9,7 +8,26 @@ let textSample;
 
 let textSample2 = "_ОЙ-Ой-ой";
 let textSample3 = "  The quick brown fox jumps over the lazy dog. It barked.";
-let textSample4 = "see Chapter 1.2.3.4";
+let textSample4 = "then see Chapter 1.2.3.4.5";
+
+
+
+function testExpression(text, re){
+	textSample = text;
+	regex = re;
+//	logRegexParams();
+
+	le2("regex");
+	
+	const matches = textSample.matchAll(regex);
+	for (const match of matches) {
+		log2("match=",match,", match.index=",match.index);
+	}
+	
+	result = lf2(() => {
+	});
+	
+}
 
 
 
@@ -17,6 +35,83 @@ function logRegexParams(){
 	le2("textSample");
 	le2("regex");
 }
+
+
+//выполняет все основные функции над заданными выражениями
+function global_and_local_regexp(text, re){
+	textSample = text;
+	regex = re;
+	
+	if (regex.global){
+		lc2("использование глобальных regexp");
+
+		logRegexParams();
+		
+		lc2NL("matchAll(regexp) - возвращает iterator по всем совпадениям regexp (включая группы)");
+		lc2("Самый универсальный способ поиска!")
+		result = lf2(() => {
+			const matches = textSample.matchAll(regex);
+			for (const match of matches) {
+				log2("match=",match,", match.index=",match.index);
+			}
+		});
+
+
+		lc2NL("str.search(regexp) - возвращает позицию первого совпадения или -1, если ничего не найдено.");
+		le2("textSample.search(regex)");
+
+		lc2NL("str.match(reg) - возвращает обычный массив из всех совпадений.");
+		le2("textSample.match(regex)");
+
+		lc2NL("regexp.test(str) - проверяет, есть ли хоть одно совпадение в строке str.");
+		lc2NL("В глобальных выражениях его можно вызвать несколько  раз, при этом он меняет поле lastIndex!");
+		le2("regex.test(textSample)");
+		le2("regex.lastIndex");
+		le2("regex.test(textSample)");
+		le2("regex.lastIndex");
+		le2("regex.test(textSample)");
+		le2("regex.lastIndex");
+
+
+		lc2NL("regexp.exec(str) - устаревшая версия matchAll.");
+		lf2(() => {
+			regex.lastIndex = 0;
+			while (result = regex.exec(textSample)) {
+				log2("result=",result,", result.index=",result.index,", regexp.lastIndex=",regex.lastIndex);
+			}
+		});
+
+		le2NL("textSample.replace(regex,'A')");				
+		
+		
+	} else {
+		lc2NL("использование одинарных regexp");
+
+		logRegexParams();
+
+		le2("textSample.search(regex)");
+		
+		result = le2("textSample.match(regex)");
+		le2NL("result.index");
+		
+		le2("textSample.replace(regex,'A')");
+		
+		le2("regex.test(textSample)");
+		
+		lf2NL(() => {
+			result = regex.exec(textSample)
+			if (result){
+				log2("result=",result,", result.index=",result.index,", regexp.lastIndex=",regex.lastIndex);
+			}
+		});				
+	}
+
+	
+}
+
+
+
+
 
 
 //тестовые функции
@@ -32,60 +127,58 @@ let selectorsData1 = {
 		
 */	
 
-  global_and_local_regexp: () => {
-
-		lc2("использование глобальных regexp");
-		
-		textSample = textSample2;
-		regex = /ой/ig;
-		logRegexParams();
-
-		le2("textSample.search(regex)");
-		
-		le2("textSample.match(regex)");
-		
-		le2("textSample.replace(regex,'A')");
-		
-		le2("regex.test(textSample)");
-		
-		lf2NL(() => {
-			while (result = regex.exec(textSample)) {
-				log2("result[0]=",result[0],", result.index=",result.index,", regexp.lastIndex=",regex.lastIndex);
-			}
-		});
-		
-		result = lf2NL(() => {
-			const matches = textSample.matchAll(regex);
-			for (const match of matches) {
-				log2(`match[0]="${match[0]}", match.index=${match.index}`);
-			}
-		});		
-		
-		
-		lc2NL("использование одинарных regexp");
-
-		regex = /ой/i;
-
-		logRegexParams();
-
-		le2("textSample.search(regex)");
-		
-		le2("textSample.match(regex)");
-		
-		le2("textSample.replace(regex,'A')");
-		
-		le2("regex.test(textSample)");
-		
-		lf2NL(() => {
-			result = regex.exec(textSample)
-			if (result){
-				log2("result[0]=",result[0],", result.index=",result.index);
-			}
-		});
-		
-		
+  global_and_local_regexp1: () => {
+//		textSample = textSample4;
+//		regex = ;
+		global_and_local_regexp(textSample4, /(\.\d)(\.\d)/g);
+		global_and_local_regexp(textSample4, /(\.\d)(\.\d)/);
 	},
 
+	global_and_local_regexp2: () => {
+		global_and_local_regexp(textSample2, /ой/gi);
+		global_and_local_regexp(textSample2, /ой/i);
+	},
+	
+	
+	
+	regexp: () => {
+		
+		
+		lc2("поля RegExp:");
+		
+		textSample = textSample4;
+		regex = /(\.\d)(\.\d)/g;
+		logRegexParams();
+				
+				
+		le2("regex.flags");
+		le2("regex.global");
+		le2("regex.ignoreCase");
+		le2("regex.multiline");
+		le2("regex.source");
+		
+		lc2("Индекс, с которого надо начать поиск (в методах exec, test)");
+		lc2("Это поле меняют методы test, exec!");
+		le2("regex.lastIndex");
+		le2("regex.test(textSample)");
+		le2("regex.lastIndex");
+
+//		le2("regex.lastIndex=20;");
+//		le2("textSample.search(regex);");
+
+		
+		lc2("RegExp.escape(string) - помогает эскейпить спецсимволы в строке, чтобы использовать её в паттерне");
+		lc2("Поддерживается только в новых браузерах!");
+		
+		lf2NL(() => {
+			let ss = RegExp.escape("1.2.");
+			regex = new RegExp(ss+"\\d+", "g");
+			return textSample.match(regex);
+		});
+		le2("regex");
+		
+	},
+	
 
 	match_demo: () => {
 		
@@ -98,7 +191,11 @@ let selectorsData1 = {
 		
 		let textSample = textSample2;
 		logTextSample2(textSample);
+
+//		regex = /(\.\d)(\.\d)/g;
+//		logRegexParams();
 		
+				
 		lf2NL(() => {
 			//поиск повторяющегося паттерна
 			return textSample.match( /ой/ig );
@@ -163,7 +260,7 @@ let selectorsData1 = {
 			result = lf2NL(() => {
 				const matches = textSample.matchAll(regex);
 				for (const match of matches) {
-					log2(`match[0]="${match[0]}", match.index=${match.index}, match.length=${match.length}`);
+					log2("match=",match,", match.index=",match.index);
 				}
 			});
 			
@@ -179,8 +276,7 @@ let selectorsData1 = {
 			result = lf2NL(() => {
 				const matches = textSample.matchAll(regex);
 				for (const match of matches) {
-					log2("match",match);
-					log2(`match.index=${match.index}`);
+					log2("match=",match,", match.index=",match.index);
 				}
 			});
 			
@@ -268,7 +364,7 @@ let selectorsData1 = {
 
 		result = lf2NL(() => {
 			//замена групп функцией - меняем группы местами, окружаем скобками
-			return textSample.replace(/(\.\d)(\.\d)/,(str,g1,g2,offset)=>{
+			return textSample.replace(/(\.\d)(\.\d)/g,(str,g1,g2,offset)=>{
 				return "["+g2+g1+"]";
 			});
 			
@@ -279,16 +375,19 @@ let selectorsData1 = {
 		
 		lc2("regexp.test(str) - проверяет, есть ли хоть одно совпадение в строке str.");
 		lc2("Возвращает true/false. Работает так же, как и проверка str.search(reg) != -1");
-		lc2("");
-		lc2("");
-		lc2("");
-		
-		textSample = textSample2;
-		logTextSample2(textSample);
-		
-		result = lf2NL(() => {
-			return /ой/i.test(textSample)
-		});
+		lc2("В глобальных выражениях его можно вызвать несколько  раз, при этом он меняет поле lastIndex!");
+		lc2("Довольно бесполезная функция...");
+
+		textSample = textSample4;
+		regex = /(\.\d)(\.\d)/g;
+		logRegexParams();
+
+		le2("regex.test(textSample)");
+		le2("regex.lastIndex");
+		le2("regex.test(textSample)");
+		le2("regex.lastIndex");
+		le2("regex.test(textSample)");
+		le2("regex.lastIndex");
 		
 	},
 
@@ -299,9 +398,6 @@ let selectorsData1 = {
 		lc2("Если флага g нет, то regexp.exec(str) ищет и возвращает первое совпадение");
 		lc2("Если флаг g есть - возвращает первое совпадение и записывает в regexp.lastIndex позицию, с которой нужно возобновить поиск.");
 		lc2("Последующий поиск он начнёт уже с этой позиции. Если совпадений не найдено, то сбрасывает regexp.lastIndex в ноль.");
-		lc2("");
-		
-		
 				
 		textSample = textSample2;
 		logTextSample2(textSample);
@@ -315,7 +411,7 @@ let selectorsData1 = {
 		});
 
 		lf2NL(() => {
-			//поиск первого совпадения			
+			//поиск только первого совпадения			
 			regex = /ой/i;
 			
 			result = regex.exec(textSample)
@@ -323,15 +419,16 @@ let selectorsData1 = {
 				log2("result[0]=",result[0],", result.index=",result.index);
 			}
 		});
-		
-		textSample = textSample4;
-		logTextSample2(textSample);
 
-		result = lf2NL(() => {
-			//поиск с группами - результат будет содержать так же найденные группы.
-			regex = /(\.\d)(\.\d)/;
-			return result = regex.exec(textSample)
-		});
+		log2NL();		
+		lc2("поиск с группами - результат будет содержать так же найденные группы.");
+		textSample = textSample4;
+		regex = /(\.\d)(\.\d)/;
+		logRegexParams();
+
+		le2NL("result = regex.exec(textSample);");
+		
+		
 		le2NL("result.index");
 //		le2NL("result.indices");
 		
@@ -341,9 +438,23 @@ let selectorsData1 = {
 		
 	},	
 	
+	expressions1: () => {
+		logTextSample(textSample2);
+		testExpression(textSample2, /ой/gi);
+	},	
 	
+	expressions2: () => {
+		logTextSample(textSample1);
+		lc2("Поиск по файлу 006-demo.js")
+		
+		testExpression(textSample1, /^.*le2.*$/g);
+		testExpression(textSample1, /\(\) *=/g);
+		testExpression(textSample1, / *\/\//g);
+		
+		
+		
+	},	
 	
-
 
 	
 	
@@ -351,25 +462,7 @@ let selectorsData1 = {
 
 }
 
-//выводит в лог фрагент найденного текста
-function logTextFragment(text, title="found fragment"){
-	
-	log2("----------"+(title?title:"")+"------------");
-	log2(text);
-	log2("----------------------");
-	
-}
 
-function logTextSample(text, title="textSample"){
-	log("----------"+(title?title:"")+"------------");
-	log(text);
-	log("----------------------");
-}
-function logTextSample2(text, title="textSample"){
-	log2("----------"+(title?title:"")+"------------");
-	log2(text);
-	log2("----------------------");
-}
 
 
 $(() => {
@@ -377,9 +470,8 @@ $(() => {
 
   reloadSandbox();
 	
-//	textSample1 = accordUtils.loadFileAsString("../js/006-demo.js");
 	
-	$("#selectors1").val("matchall_demo").trigger("change");	
+	$("#selectors1").val("expressions2").trigger("change");	
 	
 
 });

@@ -38,10 +38,53 @@ let accordUtils = {
   parseDate: parseDate,
   cloneTemplate: cloneTemplate,
   cloneObject: cloneObject,
+	highlightText: highlightText,
   
 
 };
 window.accordUtils = accordUtils;
+
+
+
+const defaultHighlightOptions = {
+	regex: null,
+	class: "gray",
+	startIndex: -1,
+	length: -1,
+	sections: [],
+	
+}
+
+
+function highlightText($div, options){
+	
+	options = $.extend({}, defaultHighlightOptions, options);
+	let sections = options.sections;
+	
+	
+	const text = $div.html();
+	if (options.regex){
+		const matches = text.matchAll(options.regex);
+		for (const match of matches) {
+			sections.push([match.index, match[0].length]);
+		}
+	}
+
+	if (options.startIndex && options.length){
+		sections.push([options.startIndex, options.length]);
+	}
+		
+	sections.sort((a, b) => a[0]>b[0]).reverse();
+	
+	let newText = text;
+	sections.forEach(section=>{
+		let startIndex = section[0];
+		let endIndex = startIndex+section[1];
+		newText = newText.substring(0, startIndex) + '<span class="'+options.class+'">'+ newText.substring(startIndex,endIndex) + '</span>'+ newText.substring(endIndex);
+	});
+	
+	$div.html(newText);
+}
 
 
 function cloneObject(source, ...attributes){

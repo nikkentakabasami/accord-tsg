@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8" />
+
+<script src="../../jquery31/js/jquery.js"></script>
+
+<link rel="stylesheet" type="text/css" href="../../accord/css/accord.css">
+<link rel="stylesheet" type="text/css" href="../../accord/css/tabbed-panel.css">
+
+<link rel="stylesheet" type="text/css" href="../../accord/css/acc-form-elements.css">
+
+
+<link rel="stylesheet" type="text/css" href="../../accord/css/demo-base.css">
+<script src="../../accord/js/demo-base.js"></script>
+
+<script type="module" src="../../accord/js/accord-publish.js"></script>
+
+<script src="../js/531-demo.js"></script>
+
+
+
+</head>
+<body class="acc-default-font">
+
+  <div class="basePanel">
+
+    <div class="titlePanel">
+      <h2>Шаблон_для_тестирования_js_кода</h2>
+    </div>
+
+    <div class="auxPanel" style="height: 600px;">
+
+      <div class="logPanel gray-border">
+        <div id="log1"></div>
+      </div>
+
+      <div class="logPanel gray-border">
+        <div id="log2"></div>
+      </div>
+
+    </div>
+
+
+
+
+    <div class="acc-button-panel">
+
+      <div class="acc-left-content">Обработчики1</div>
+      <div class="acc-tool-panel-select-wrapper acc-dropdown-triangle">
+        <select id="selectors1" class="acc-tool-panel-select" style="width: 200px;">
+        </select>
+      </div>
+      
+      <div class="acc-filler-panel"></div>      
+      
+      <button id="bClearLog" type="button" class="acc-btn">Очистить лог</button>
+
+
+    </div>
+
+    <div class="acc-button-panel">
+      <div class="acc-centered-content">Текущий селектор:</div>
+      <input type="text" id="selectorText" />
+
+      <button id="bTestRegex" type="button" class="acc-btn">Выполнить</button>
+      
+      <div class="acc-filler-panel"></div>      
+
+    </div>
+
+
+
+    <!--               work panel                -->
+
+    <div class="workPanel label-border"></div>
+
+
+  </div>
+
+
+  <template id="template1">
+
+
+  </template>
+
+
+</body>
+</html>

@@ -434,8 +434,8 @@ function initDemoCodeSelect(selector, data) {
   	withNullOption: true,
   	selectedValue: null,
   	contentIsValue: true,
-	valueIsIndex: false
-    };
+		valueIsIndex: false
+  };
 
 	if (Array.isArray(data)){
 		opts.valueIsIndex = true;
@@ -651,6 +651,26 @@ function highlight(val){
 	
 }
 
+
+//выводит в лог фрагент найденного текста
+function logTextFragment(text, title="found fragment"){
+	
+	log2("----------"+(title?title:"")+"------------");
+	log2(text);
+	log2("----------------------");
+	
+}
+
+function logTextSample(text, title="textSample"){
+	log("----------"+(title?title:"")+"------------");
+	log(text);
+	log("----------------------");
+}
+function logTextSample2(text, title="textSample"){
+	log2("----------"+(title?title:"")+"------------");
+	log2(text);
+	log2("----------------------");
+}
 
 
 $(function() {
