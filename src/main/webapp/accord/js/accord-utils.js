@@ -39,13 +39,22 @@ let accordUtils = {
   cloneTemplate: cloneTemplate,
   cloneObject: cloneObject,
 	highlightText: highlightText,
-	stringToRegex: stringToRegex
+	stringToRegex: stringToRegex,
+	escapeHTML: escapeHTML
   
 
 };
 window.accordUtils = accordUtils;
 
 
+//экранирует спецсимволы в тексте перед вставкой в html 
+function escapeHTML(str) {
+    const temp = document.createElement('div');
+    temp.textContent = str;
+    return temp.innerHTML;
+}
+
+//преобразовывает строку с регулярным выражением (например "/a{3}/g") в объект RegExp
 function stringToRegex(str){
 	if (str instanceof RegExp){
 		return str;
@@ -69,9 +78,10 @@ const defaultHighlightOptions = {
 	class: "green",
 	startIndex: -1,
 	length: -1,
-	sections: [],
+	sections: null,
 	text: null,
-	$div: null
+	$div: null,
+	matchHandler: null
 	
 }
 
@@ -82,17 +92,13 @@ function highlightText(options){
 	
 	options = $.extend({}, defaultHighlightOptions, options);
 	let sections = options.sections;
+	if (!sections){
+		sections = [];
+	}
 	
 	let $div = options.$div;
 	
 	let text = options.text?options.text:$div.text();
-	
-	if (options.regex){
-		const matches = text.matchAll(options.regex);
-		for (const match of matches) {
-			sections.push([match.index, match[0].length]);
-		}
-	}
 
 	if (options.startIndex>0 && options.length>0){
 		sections.push([options.startIndex, options.length]);
@@ -107,11 +113,17 @@ function highlightText(options){
 			const matches = text.matchAll(regex);
 			for (const match of matches) {
 				sections.push([match.index,match[0].length]);
+				if (options.matchHandler){
+					options.matchHandler(match);
+				}
 			}
 		} else {
 			const match = text.match(regex);
 			if (match){
 				sections.push([match.index,match[0].length]);
+				if (options.matchHandler){
+					options.matchHandler(match);
+				}
 			}
 		}
 	}
@@ -271,8 +283,9 @@ function generateSelectOptions(options) {
 	
 	if (Array.isArray(options.data)){
 		options.data.forEach((item, ind)=>{
-			let id = item;
-			let name = item;
+			
+			let name = escapeHTML(item);
+			let id = name;
 			
 			if (options.contentIsValue){
 				name = id;
@@ -318,8 +331,6 @@ function generateSelectOptions(options) {
 		}//for
 		
 	}
-	
-
 	
 	return optionsCode;
 }

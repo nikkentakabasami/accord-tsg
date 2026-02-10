@@ -130,6 +130,11 @@ p {
 	background-color: Gold;
 }
 
+.bg-green {
+	background-color: lightGreen;
+}
+
+
 .red {
 	color: red;
 }
