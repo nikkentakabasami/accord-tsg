@@ -411,6 +411,7 @@ function initDemoCodeSelect(selector, data) {
 	
 	let v = $sel.val();
 
+	
 	if (Array.isArray(data)){
 //		reloadSandbox();
 		let v = $sel.children("option:selected").text();
@@ -420,10 +421,15 @@ function initDemoCodeSelect(selector, data) {
 	} else {
 		$selectorText.val(v);
 		currentFunc = data[v];
-//		let funcCode = String(currentFunc);
-		let code = trimFuncCode(currentFunc);
+
+		if (typeof currentFunc=="string"){
+			log(currentFunc);
+			
+		} else {
+			let code = trimFuncCode(currentFunc);
+			log(code);
+		}		
 		
-		log(code);
 	}	
 	
   });

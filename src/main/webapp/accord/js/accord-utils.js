@@ -39,30 +39,54 @@ let accordUtils = {
   cloneTemplate: cloneTemplate,
   cloneObject: cloneObject,
 	highlightText: highlightText,
+	stringToRegex: stringToRegex
   
 
 };
 window.accordUtils = accordUtils;
 
 
-
-const defaultHighlightOptions = {
-	regex: null,
-	class: "gray",
-	startIndex: -1,
-	length: -1,
-	sections: [],
+function stringToRegex(str){
+	if (str instanceof RegExp){
+		return str;
+	}
 	
+	const match = str.match(/^\/(.*)\/([a-z]*)$/);
+	if (match) {
+	  const pattern = match[1];
+	  const flags = match[2];
+		
+	  const regex = new RegExp(pattern, flags);
+		return regex;
+	} else {
+		throw new Error("Строка не в правильном формате");
+	}	
 }
 
 
-function highlightText($div, options){
+const defaultHighlightOptions = {
+	regex: null,
+	class: "green",
+	startIndex: -1,
+	length: -1,
+	sections: [],
+	text: null,
+	$div: null
+	
+}
+
+//подсвечивает текст в заданном div, заданным цветовым классом.
+//области подсветки можно задавать регулярным выражением или массивом sections.
+//возвращает результат поиска и модифицированный текст (в формате options)
+function highlightText(options){
 	
 	options = $.extend({}, defaultHighlightOptions, options);
 	let sections = options.sections;
 	
+	let $div = options.$div;
 	
-	const text = $div.html();
+	let text = options.text?options.text:$div.text();
+	
 	if (options.regex){
 		const matches = text.matchAll(options.regex);
 		for (const match of matches) {
@@ -70,20 +94,48 @@ function highlightText($div, options){
 		}
 	}
 
-	if (options.startIndex && options.length){
+	if (options.startIndex>0 && options.length>0){
 		sections.push([options.startIndex, options.length]);
+	}
+	
+	if (options.regex){
+		
+		let regex = options.regex; 
+		regex = stringToRegex(regex);
+			
+		if (regex.global){
+			const matches = text.matchAll(regex);
+			for (const match of matches) {
+				sections.push([match.index,match[0].length]);
+			}
+		} else {
+			const match = text.match(regex);
+			if (match){
+				sections.push([match.index,match[0].length]);
+			}
+		}
 	}
 		
 	sections.sort((a, b) => a[0]>b[0]).reverse();
 	
-	let newText = text;
 	sections.forEach(section=>{
 		let startIndex = section[0];
 		let endIndex = startIndex+section[1];
-		newText = newText.substring(0, startIndex) + '<span class="'+options.class+'">'+ newText.substring(startIndex,endIndex) + '</span>'+ newText.substring(endIndex);
+		text = text.substring(0, startIndex) 
+			+ '<span class="'+options.class+'">'+ text.substring(startIndex,endIndex) + '</span>'
+			+ text.substring(endIndex);
 	});
 	
-	$div.html(newText);
+	if ($div){
+		$div.html(text);
+	}
+	
+	options.text = text;
+	delete options.startIndex;
+	delete options.length;
+	
+	return options;
+	
 }
 
 
@@ -446,6 +498,9 @@ function deleteAllCookiesAndReload(event) {
 
 function copyTextToBuffer(textValue) {
   window.getSelection().removeAllRanges();
+	if (!$copyDiv){
+		$copyDiv = $('<div id="copyDiv" style="height: 0px;"></div>').appendTo(document.body);
+	}	
   $copyDiv.text(textValue);
   let range = document.createRange();
   range.selectNode($copyDiv.get(0));
@@ -578,7 +633,6 @@ function formToJSON ($form) {
 
 $(document).ready(function() {
 
-  $copyDiv = $('<div id="copyDiv" style="height: 0px;"></div>').appendTo(document.body);
 
 });
 

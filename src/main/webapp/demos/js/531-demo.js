@@ -2,6 +2,7 @@
 
 
 let textSample1;
+let regex;
 
 
 
@@ -15,26 +16,41 @@ let textSample1;
 let selectorsData1 = [
 
 	"/ой/gi",
-	"/ОЙ/g",
+	"/reloa/g",
+	
+	//выделить комменты
+	"/^.*\\/\\/.*/gm",
 		
 ]
 
+let textSampleData = {
+	
+	sample1: "hellow",
+	sample2: "momiji",
+	demojs: ""
+	
+	
+}
 
 
-function testExpression(text, re){
-	textSample = text;
-	regex = re;
+function testExpression(re){
+	
+	regex = accordUtils.stringToRegex(re);
+	
 //	logRegexParams();
+
+	//копируем текст в буфер обмена
+//	accordUtils.copyTextToBuffer(currentFunc);		
 
 	le2("regex");
 	
-	const matches = textSample.matchAll(regex);
-	for (const match of matches) {
-		log2("match=",match,", match.index=",match.index);
-	}
-	
-	result = lf2(() => {
+	accordUtils.highlightText({
+		$div: $log1,
+		regex: re
 	});
+	
+	
+	
 	
 }
 
@@ -63,31 +79,29 @@ function initRegexSelect(selector, data) {
 
 
 
-$(() => {
-	textSample1 = accordUtils.loadFileAsString("../js/006-demo.js");
-	logTextSample(textSample1);
-	
-  initRegexSelect("#selectors1", selectorsData1);
 
-	$("#selectors1").val("1").trigger("change");	
+$(() => {
+	textSampleData.demojs = accordUtils.loadFileAsString("../js/006-demo.js");
+	
+//	textSample1 = accordUtils.loadFileAsString("../js/006-demo.js");
+//	logTextSample(textSample1);
+	
+	initDemoCodeSelect("#selectors1", textSampleData);
+	
+  initRegexSelect("#regexps", selectorsData1);
+
+	$("#selectors1").val("demojs").trigger("change");
+	$("#regexps").val("2").trigger("change");
 	
 	
 	$("#bTestRegex").click(e => {
-		let v = $selectorText.val();
 		$log2.text("");
-
-		let re = v.split("/");
+		let v = $selectorText.val();
 		
-		let regExp = new RegExp(re[1],re[2]);
-		
-		testExpression(textSample1, /ой/gi);
+		testExpression(v);
 		
 		});	
 	
-		accordUtils.highlightText($log1, {
-			startIndex: 5,
-			length: 40,
-		});
 	
 
 		
