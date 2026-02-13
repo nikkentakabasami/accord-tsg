@@ -1,65 +1,86 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>test</title>
-
-
-
-<link rel="stylesheet" type="text/css" href="../../accord/css/accord.css">
-<link rel="stylesheet" type="text/css" href="../css/demo-base.css">
-
+<meta charset="utf-8" />
 
 <script src="../../jquery31/js/jquery.js"></script>
-
 <script type="text/javascript" src="../../jquery31/js/moment.min.js"></script>
-<script type="text/javascript" src="../../jquery31/js/daterangepicker.js"></script>
-<link rel="stylesheet" type="text/css" href="../../jquery31/css/daterangepicker.css" />
 
 <link rel="stylesheet" type="text/css" href="../../accord/css/accord.css">
 <link rel="stylesheet" type="text/css" href="../../accord/css/tabbed-panel.css">
+
+<link rel="stylesheet" type="text/css" href="../../accord/css/acc-form-elements.css">
+
+
+<link rel="stylesheet" type="text/css" href="../../accord/css/demo-base.css">
+<script src="../../accord/js/demo-base.js"></script>
+
 <script type="module" src="../../accord/js/accord-publish.js"></script>
 
-
 <script src="../js/501-demo.js"></script>
-
+<script src="../js/501-demo2.js"></script>
 
 
 
 </head>
-<body>
+<body class="acc-default-font">
+
+  <div class="basePanel">
 
     <div class="titlePanel">
-      <h2>класс Date - работа с датами</h2>
-      <a href="../js/501-demo.js" target="source">Исходники</a>
+      <h2>Date, moment.js, String</h2>
+    </div>
+
+    <div class="auxPanel" style="height: 600px;">
+
+      <div class="logPanel gray-border">
+        <div id="log1"></div>
+      </div>
+
+      <div class="logPanel gray-border">
+        <div id="log2"></div>
+      </div>
+
     </div>
 
 
-<div style="display: flex; flex-direction: column;gap: 10px;">
-
-        <pre class="acc-code-panel">
-  let d1= new Date();
-  let d2 = new Date(2014, 11, 31, 12, 30, 0);
-  let d3 = new Date(2011, 0, 1, 0, 0, 0, 0);  // 1 января 2011, 00:00:00  (январь - нулевой месяц)
-  let d4 = new Date(2011, 0, 1);    // то же самое
-  let d5 = new Date(1241777298123); //milliseconds since 1970/01/01
-  let d6 = new Date("May 21, 1958 10:15 AM");
-  let d7 = new Date(2013, 0, 32);   // 1 февраля 2013!
-
-  //копирование
-  let copyDate1 = new Date(d1);
-  let copyDate2 = new Date(d1.getTime());
-  
-  
-</pre>
 
 
-  <div id="desc1" class="acc-desc-panel"></div>
+    <div class="acc-button-panel">
+
+      <div class="acc-left-content">Date, moment: </div>
+      <div class="acc-tool-panel-select-wrapper acc-dropdown-triangle">
+        <select id="selectors1" class="acc-tool-panel-select" style="width: 200px;">
+        </select>
+      </div>
+      <div class="acc-left-content">String, Number: </div>
+      <div class="acc-tool-panel-select-wrapper acc-dropdown-triangle">
+        <select id="selectors2" class="acc-tool-panel-select" style="width: 200px;">
+        </select>
+      </div>
+      
 
 
+    </div>
 
-</div>
+    <div class="acc-button-panel">
+      <button id="bExecute" type="button" class="acc-btn">Выполнить</button>
+      <div class="acc-filler-panel"></div>      
+      
+      <button id="bClearLog" type="button" class="acc-btn">Очистить лог</button>
+    </div>
+    <!--               work panel                -->
+
+    <div class="workPanel label-border"></div>
+
+
+  </div>
+
+
+  <template id="template1">
+
+
+  </template>
 
 
 </body>

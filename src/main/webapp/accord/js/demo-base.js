@@ -104,7 +104,18 @@ function stringifyObject(o, indent = "", withBraces = false) {
 	if (o instanceof Map){
 		o = Array.from(o);		
 	}
-
+	if (o instanceof Set){
+		o = Array.from(o);		
+	}
+	if (o instanceof Date){
+		return formatDateTime(o);
+	}
+	
+	if (o._isAMomentObject){
+		return o.format('DD.MM.YYYY, hh:mm:ss');
+	}	
+	
+	
 	if (o instanceof RegExp){
 		return String(o);		
 	}
@@ -125,11 +136,13 @@ function stringifyObject(o, indent = "", withBraces = false) {
 			
 			if (val instanceof Element){
 				valStr = val.tagName+"#"+val.id;
+			} else if (val instanceof Date){
+				valStr = formatDateTime(val);
 			} else if (t == "function"){
 				valStr = "func";
 			} else if (Array.isArray(val)){
 				valStr = JSON.stringify(val);
-			} else if (val instanceof Map){
+			} else if (val instanceof Map || val instanceof Set){
 				valStr = stringifyObject(val);
 			} else if (t == "object"){
 				valStr = String(val);
@@ -244,6 +257,21 @@ function _le($log, exp) {
 		return;
 	}
 
+	//многострочное выражение
+	if (exp.includes("\n")){
+		let lines = exp.split("\n");
+		lines.forEach(line=>{
+			_le($log, line);
+		});
+		return;
+	};
+	
+	exp = exp.trim();
+	if (exp.startsWith("//")){
+		let codeNode = logMessage($log, exp);
+		return;
+	}
+	
 	try {
 		let val = eval(exp);
 		let codeNode = logMessage($log, exp);
@@ -677,6 +705,32 @@ function logTextSample2(text, title="textSample"){
 	log2(text);
 	log2("----------------------");
 }
+
+
+function formatDateTime(date) {
+	let r = formatDate(date);
+	let t = formatTime(date);
+	if (t!="00:00:00"){
+		r = r+" "+t;
+	}
+	return r;
+//	return formatDate(date)+" "+formatTime(date);
+}
+
+function formatTime(date) {
+  let h = date.getHours();
+  let m = date.getMinutes();
+  let s = date.getSeconds();
+  return (h <= 9 ? '0' + h : h) + ':' + (m<=9 ? '0' + m : m) + ':' + (s<=9 ? '0' + s : s);
+}
+
+function formatDate(date) {
+  let d = date.getDate();
+  let m = date.getMonth() + 1;
+  let y = date.getFullYear();
+  return (d <= 9 ? '0' + d : d) + '.' + (m<=9 ? '0' + m : m) + '.' + y;
+}
+
 
 
 $(function() {

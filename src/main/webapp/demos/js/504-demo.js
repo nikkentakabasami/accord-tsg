@@ -2,17 +2,21 @@
 let a = {};
 
 
-let testArray1, testArray2;
+let testArray1, testArray2, testArray3;
 let testString1, testMap1;
 let testObject1;
+let testSet1;
 
 let testArray, testMap;
-
+let removed;
 
 function initArrays(){
 	testArray1 = ["Яблоко", "Апельсин", "Слива", "Груша","Финик","Вишня"];
 	testArray2 = new Array(11, 3, 5, 2, 7, 9, 13, 3, 33 );
 	testString1 = "Привет мир!";
+	
+	testArray3 = Array.from({ length: 9 }, (el, index) => index);	// [0, 1, 2, 3...]
+	
 	
 	testObject1 = {
 	  name: "John",
@@ -68,6 +72,9 @@ let selectorsData1 = {
 		a.arr8 = a.arr4.concat(2,3);	//concat - создаёт новый массив
 		a.arr9 = a.arr4.concat(a.arr5);
 
+		a.arr10 = Array.of(5, 2, 7, 77 );
+		
+		
 		log2(a);
 	},
   
@@ -98,13 +105,16 @@ let selectorsData1 = {
 		//генерация массива
 		a.arr13 = Array.from({ length: 5 }, (el, index) => index);	// [0, 1, 2, 3, 4]
 		
-		//копирование массива через оператор расширения
+		//создание на основе строки через оператор расширения
 		a.arr14 = [...testString1]; 
 
+		//копирование массива через оператор расширения
+		a.arr16 = [...testArray1]; 
+		
+				
+		
 		//Создание массива на основе итератора
 		a.arr15 = [...testMap1.values()]; 
-		
-//		const totalDeposit = nameToDeposit.values().reduce((a, b) => a + b);
 		
 		//создание на основе Map
 		a.arr20 = Array.from(testMap1); 		//[[1,"a"],[2,"b"]]
@@ -366,19 +376,6 @@ The copyWithin() method of Array instances shallow copies part of this array to 
 			return testArray.join(';');
 		});
 		
-		
-		
-		/*
-		lc2NL("");
-		lc2NL("");
-		lc2NL("");
-		le2NL("testArray");
-		le2NL("");
-		le2NL("");
-		le2NL("");
-*/		
-		
-		
 	},
 	
 		check: () => {
@@ -403,6 +400,41 @@ The copyWithin() method of Array instances shallow copies part of this array to 
 			});
 		},	
 	
+		splice: () => {
+			
+			le2("testArray3");
+			
+			lf2NL(()=>{
+				testArray = testArray3.slice();
+				
+				//удаляем все элементы начиная со 2-го
+				removed = testArray.splice(2);
+			});
+			le2("removed");
+			le2("testArray");
+
+			lf2NL(()=>{
+				testArray = testArray3.slice();
+				
+				//удаляем 3 элемента начиная со 2-го
+				removed = testArray.splice(2,3);
+			});
+			le2("removed");
+			le2("testArray");
+			
+			lf2NL(()=>{
+				testArray = testArray3.slice();
+				
+				//удаляем 3 элемента начиная со 2-го, вставляем 3 других
+				removed = testArray.splice(2,3,111,222,333);
+			});
+			le2("removed");
+			le2("testArray");
+			
+			
+		},	
+		
+		
 	
 	
 	
@@ -542,6 +574,104 @@ let selectorsData2 = {
 		
 		
 	},		
+	
+	
+	
+	set_create: () => {
+		
+		lc2NL("множество уникальных значений");
+		
+		lf2NL(()=>{
+			//Способы создания
+			a = {};
+			
+			a.set1 = new Set();
+			a.set2 = new Set(["апельсин", "яблоко", "банан"]);
+			
+			
+			return a;
+		});		
+		
+	},		
+	
+	set_mod: () => {
+		
+		let john = { name: "John" };
+		let pete = { name: "Pete" };
+		let mary = { name: "Mary" };
+
+		
+		lf2(()=>{
+						
+			testSet1 = new Set();
+			
+			// считаем гостей, некоторые приходят несколько раз
+			testSet1.add(john);
+			testSet1.add(pete);
+			testSet1.add(mary);
+			testSet1.add(john);
+			testSet1.add(mary);
+
+			return testSet1;
+		});	
+		
+		lf2NL(()=>{
+			
+			testSet1.delete(john);
+			
+			testSet1.forEach((value, valueAgain, set) => {
+				log2(value);
+			});
+		});	
+
+		lf2NL(()=>{
+			for (let v of testSet1) {
+				log2(v.name);
+			}
+		});
+		
+		
+		
+	},		
+	
+	
+	weak_set: () => {
+		
+		
+		lf2NL(()=>{
+			let john = { name: "John" };
+			let pete = { name: "Pete" };
+	
+			testSet1 = new WeakSet();
+			testSet1.add(john);
+			testSet1.add(pete);
+	
+			john = null; // перезаписываем ссылку на объект
+			
+		});	
+
+		
+		testSet1.forEach((value, valueAgain, set) => {
+			log2(value);
+		});
+				
+		
+		
+		
+	},		
+	
+			
+			
+			/*
+			lc2NL("");
+			lc2NL("");
+			le2NL("testArray");
+			le2NL("");
+			le2NL("");
+			le2NL("");
+	*/		
+				
+	
 	
 }
 
