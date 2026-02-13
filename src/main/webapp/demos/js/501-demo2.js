@@ -3,7 +3,7 @@
 let testString = "  Seishun tte a to iu ma to iu koto.";
 let testString2;
 
-let n1, n2;
+let n1, n2, n3, n4;
 
 //тестовые функции
 //возвращают query-объекты, задействованные в тесте: они будут выделены красной рамкой
@@ -28,26 +28,36 @@ let selectorsData2 = {
 			a.s5 = String(22);
 			a.s6 = String(false);
 
+			
+			//backslash escape character - Экранирование спецсимволов
+			a.s10= 'It\'s alright.\\';
+			
+			a.s11 = "I'm a JavaScript \"programmer\".";
+						
+			//escape sequences
+			a.s12= "\n-New Line,\r-Carriage Return,\t-tab";
+
+			//Переноc строки
+			a.s13 = "Hello \n\
+				World!";
+						
 			return a;
 		});
 		
 		
 		a= {};
 		lf2NL(()=>{
-			//Переноc строки
-			a.s10 = "Hello \n\
-				World!";
-				
+
+			//Template Strings - обратные кавычки.
+			//позволяют встраивать выражения в строку, заключая их в ${…}
+			//позволяют выполнять перенос строк (multiline string), использовать любые кавычки
 			a.s11 = `Это очень длинная строка,
 					которая продолжается на следующей строке.`;
 			
-			//Обратные кавычки позволяют встраивать выражения в строку, заключая их в ${…}	
 			let name = "Иван";
 			a.s12 = `Привет, ${name}!`;
 			a.s13 = `результат: ${1 + 2}`;
 			
-			//Экранирование спецсимволов
-			a.s14 = "I'm a JavaScript \"programmer\".";
 
 			return a;
 		});		
@@ -74,220 +84,135 @@ let selectorsData2 = {
 			return a;
 		});
 
-		//			
-		lc2NL("String.fromCharCode() - создание строк из кодов UTF-16.");
-		lc2("Работает только с кодами в диапазоне от 0 до 65535.");
-		lc2("Не поддерживает эмодзи или исторические символы, у которых кодовые точки выше 0xFFFF.");
-		le2("String.fromCharCode(189, 43, 190, 61);");
 		
-		lc2("String.fromCodePoint() - то же что и fromCharCode, но поддерживает значения выше 0xFFFF.");
-		le2("String.fromCodePoint(189, 43, 190, 61);");
-		le2("String.fromCodePoint(9731, 9733, 9842, 0x2f804)");
-		
-		
+		le2(`
+			//String.fromCharCode() - создание строк из кодов UTF-16.
+			//Работает только с кодами в диапазоне от 0 до 65535.
+			//Не поддерживает эмодзи или исторические символы, у которых кодовые точки выше 0xFFFF.
+			String.fromCharCode(189, 43, 190, 61);
 
-		lc2("str.charCodeAt(pos) - Возвращает код символа на позиции pos");
-		le2("testString.charCodeAt(0);");
-		le2("testString.codePointAt(0);");
-		
-		
-		le2("");
-		le2("");
-		
+			//String.fromCodePoint() - то же что и fromCharCode, но поддерживает значения выше 0xFFFF.
+			String.fromCodePoint(189, 43, 190, 61);
+			String.fromCodePoint(9731, 9733, 9842, 0x2f804)
+
+			//str.charCodeAt(pos) - Возвращает код символа на позиции pos (0-65535)
+			testString.charCodeAt(0);
+
+			//str.codePointAt(pos) - Возвращает полный код символа на позиции.
+			//Этот код может стостоять из двух суррогатных пар
+			testString.codePointAt(0);			
+		`);
 		
 	},
 	
 	String2: () => {
 		
-		le2("testString;");
-		le2("testString.length;");
-		
-		lc2("str.charAt(ind) - Получение символа по индексу.");
-		lc2("В JavaScript нет отдельного типа «символ», так что charAt возвращает строку, состоящую из выбранного символа.");
-		lc2("Символ так же можно получить квадратными скобками, как в массиве.");
-		le2("testString.charAt(5);");
-		le2("testString[5];");
-
-		lc2("str.at(ind) - Аналог charAt, но поддерживает отрицательный индекс.");
-		le2("testString.at(-5);");
-		
-		
+	le2(`
+		testString;
+		testString.length;
 				
-		le2("testString.toLowerCase();");
-		le2("testString.toUpperCase();");
-		
-		lc2("str.indexOf(searchValue, fromIndex)");
-		le2("testString.indexOf('to');");
-		
-		lc2("str.lastIndexOf(searchValue, fromIndex)");
-		le2("testString.lastIndexOf('to');");
-		
-		le2("testString.substring(5,10);");
-		
-		
-		lc2("str.slice(start, end) - аналог substring, но удобнее.");
-		lc2("Отличие: Отрицательные значения отсчитываются от конца строки (-1 - последний символ)");
-		le2("testString.slice(-5);  //5 последних символов");
-		le2("testString.slice(1,-1);  //убрать первый и последний символы");
-		
-		
-		le2("testString.replace('to','AA');");
-		le2("testString.replaceAll('to','AA');");
-		le2("testString.replace(/to/g,'AA');	//Чтобы заменить все значения - можно использовать регулярные выражения");
-		
-		lc2("str.match(re) - поиск регулярным выражением. Возвращает массив найденных значений");
-		le2("testString.match(/(?<= )\\w+/g);  //слова, перед которыми пробел");
-		
-		lc2("str.split(separator, limit) - разбиение строки");
-		le2("testString.split(' ',3);");
-		
-		lc2("str.concat(...o) - склеивание строк");
-		le2("'ae'.concat(true,'-',66);");
-		
-		le2("testString.trim();");
-		le2("testString.trimEnd();");
-		le2("testString.trimStart();");
-		
-		
-		
-		lc2("str.toWellFormed() - устраняет некорректные последовательности символов Unicode");
+		//str.charAt(ind) - Получение символа по индексу.
+		//В JavaScript нет отдельного типа «символ», так что charAt возвращает строку, состоящую из выбранного символа.
+		//Символ так же можно получить квадратными скобками, как в массиве.
+		testString.charAt(5);
+		testString[5];
+
+		//str.at(ind) - Аналог charAt, но поддерживает отрицательный индекс.
+		testString.at(-5);
+						
+		testString.toLowerCase();
+		testString.toUpperCase();
+				
+		//str.indexOf(searchValue, fromIndex)
+		testString.indexOf('to');
+				
+		//str.lastIndexOf(searchValue, fromIndex)
+		testString.lastIndexOf('to');
+				
+		testString.substring(5,10);
+				
+		//str.slice(start, end) - аналог substring, но удобнее.
+		//Отличие: Отрицательные значения отсчитываются от конца строки (-1 - последний символ)
+		testString.slice(-5);  //5 последних символов
+		testString.slice(1,-1);  //убрать первый и последний символы
+				
+		testString.replace('to','AA');
+		testString.replaceAll('to','AA');
+		testString.replace(/to/g,'AA');	//Чтобы заменить все значения - можно использовать регулярные выражения
+				
+		//str.match(re) - поиск регулярным выражением. Возвращает массив найденных значений
+		testString.match(/(?<= )\\w+/g);  //слова, перед которыми пробел
+				
+		//str.split(separator, limit) - разбиение строки
+		testString.split(' ',3);
+				
+		//str.concat(...o) - склеивание строк
+		'ae'.concat(true,'-',66);
+				
+		testString.trim();
+		testString.trimEnd();
+		testString.trimStart();
+				
+		//str.toWellFormed() - устраняет некорректные последовательности символов Unicode
 		testString2 = "Hello World \uD800";
-		le2("testString2;");
-		le2("testString2.isWellFormed();");
-		le2("testString2 = testString2.toWellFormed();");
-		le2("testString2.isWellFormed();");
+		testString2;
+		testString2.isWellFormed();
+		testString2 = testString2.toWellFormed();
+		testString2.isWellFormed();
 				
+		//padStart(targetLength, padString), padEnd(...) - дополнят строку до нужной длины повтором заданной строки
+		testString.padStart(40,'*');
+		testString.padEnd(40,'*#');
+		'hello_'.repeat(5);
 		
-		lc2("padStart(targetLength, padString) - дополнят строку до нужной длины повтором заданной строки");
-		le2("testString.padStart(40,'*');");
-		le2("testString.padEnd(40,'*#');");
-		le2("'hello_'.repeat(5);");
-
+	`);
 		
 				
 	},
 	
 	Number_declaration: () => {
-		a= {};
-		
-		lf2NL(()=>{
-			
-			//Все числа имеют один и тот же тип, и занимают 64 бита (double precision)
-			a.n1=34.00;
-			a.n2=34
-			a.n3=123e5;    	// 12300000
-			a.n4=123e-5;  	// 0.00123
-
-			//Можно использовать символ _ в качестве разделителя:
-			a.n5=1_000_000_000;
-			
-			a.n10=0o377;     		//octal 255
-			a.n11=0xFF;     			//hexadecimal 255
-			a.n12 = 0b11111111; // бинарная форма 255
-
-			return a;			
-		});
-
-		lc2NL('new Number() - возвращает объект Number, а не примитив');
-		le2('n1 = new Number("123");');
-		le2('n1 === 123;');
-		le2('n1 instanceof Number;');
-		le2('typeof n1');
-		
-		lc2('функция Number - конвертирует значение в число-примитив');
-		le2('n2 = Number("123");');
-		le2('n2 === 123;');
-		le2('n2 instanceof Number;');
-		le2('typeof n2');
-		
-		le2('Number(true);');
-		le2('Number(false);');
-		le2('Number(new Date());');
-		le2('Number("10 20");');
-		
-		
-		lc2('Функции на числе можно вызывать тремя способами:');
-		le2('Number(123).toString();');
-		le2('(123).toString();');
-		le2('123..toString();');
-
-
-	},	
-	
-	
-	Number_format: () => {
-		
-
-		lc2('--------Функции преобразования в число.---------');
-		
-		
-		lc2('num.toString(radix) - Преобразование числа в строку в заданной системе исчисления (2-36)');
-		le2('255..toString()');
-		le2('255..toString(16)');
-		le2('255..toString(2)');
-		le2('255..toString(36)');
-		
-				
-		lc2('num.toFixed(digits) - округляет число до заданного числа чисел после точки');
-		le2('(3.2489).toFixed(2);');
-
-		lc2('num.toPrecision(precision) - округляет число до заданного числа чисел');
-		le2('(0.004).toPrecision(4);');
-		le2('(60.1234).toPrecision(4);');
-
-		lc2('num.toExponential(digits) - округляет число и записывает его в экпоненциальной нотации');
-		le2('n1 = 9056.65612;');
-		le2('n1.toExponential(2);');
-		le2('n1.toExponential(4);');
-		le2('n1.toExponential(6);');
-		
-		
-		lc2('num.toLocaleString(locales, options) - форматирует строку, используя настройки локализации');
-		le2('n1.toLocaleString()');
-		le2('n1.toLocaleString("ru-RU", {style:"percent"})');
-		le2('n1.toLocaleString("en-US", {style:"currency", currency:"USD"})');
-				
-		
-
-
-		
-		
-	},	
-	
-	
-	Number_nan_infinity: () => {
 		
 		le2(`
+			//Все числа имеют один и тот же тип, и занимают 64 бита (double precision)
+			n1=34.00;
+			n1=34;
+			n1=123e5;		//экспоненциальный формат
+			n1=123e-5;
+			//Можно использовать символ _ в качестве разделителя:
+			n1=1_000_000_000;
+
+			n1=0o377;     		//octal
+			n1=0xFF;     			//hexadecimal
+			n1 = 0b11111111;  //binary
 			
-			//Существуют специальные числовые значения: Infinity (бесконечность) и NaN (ошибка вычислений).
-			Number.parseFloat("нечисло");
-			NaN;
-			NaN==NaN;
-			0/0;
-			Number.isNaN(0/0);
-			Number.isNaN(Infinity);
+		`);
+		le2(`
+			//new Number() - возвращает объект Number, а не примитив
+			n1 = new Number("123");
+			n1 === 123;
+			n1 == 123;
+			n1 instanceof Number;
+			typeof n1;
+
+			//функция Number - конвертирует значение в число-примитив
+			n2 = Number("123");
+			n2 === 123;
+			n2 instanceof Number;
+			typeof n2
+
+			Number(true);
+			Number(false);
+			Number(new Date());
+			Number("10 20");
 			
-			1/0;
-			-1/0;
-			1e500;
-			Infinity;
-			Infinity+5;
-			Infinity > 12345;
-			Number.isFinite(1/0);
-			Number.isFinite(NaN);
-			
-			//проверка на корректное числовое значение
-			n1=12.34;
-			!isNaN(parseFloat(n1)) && isFinite(n1);
-		`);		
-		
-	},	
-	
+	`);
+	},
 	
 	Number_parse: () => {
-		
 
 		le2(`
+			//--------Парсинг строки в число.---------
+			
 			//Number.parseInt(string, radix) - парсит строку и возвращает целое число
 			//глобальная функция parseInt(string, radix) - её алиас
 			Number.parseInt("10");
@@ -321,27 +246,227 @@ let selectorsData2 = {
 			parseFloat("H40");
 			Number.parseFloat("нечисло");
 			
+			//преобразование строки в число унарным плюсом (лаконичный способ)
+			testString2 = "22";
+			n1 = +testString2;
+			+"3.14";
+			+"-100"
+			+" "
+			+"abc"
 		`);
 		
-		},	
+	},
 		
-		Number_misc: () => {
-			
-			le2(`
-				//Неточные вычисления
-				0.1 + 0.2;
-				9999999999999999;
+	
+	
+	Number_format: () => {
 
-				//Причина в том, что число 0.1 в двоичной системе счисления - бесконечная дробь, 
-				//Двоичное значение бесконечных дробей хранится только определённого знака 
-				(0.1).toFixed(20);
-				//Чтобы отсечь ошибку, достаточно округления до 10-го знака
-				+(0.1).toFixed(10);
-			`);
+		le2(`
+			//Функции на числе можно вызывать тремя способами:
+			Number(123).toString();
+			(123).toString();
+			123..toString();
 			
-		},	
+			//--------Форматирование числа в строку.---------
+								
+			//num.toString(radix) - Преобразование числа в строку в заданной системе исчисления (2-36)
+			255..toString();
+			255..toString(16);
+			255..toString(2);
+			255..toString(36);
+							
+			//num.toFixed(digits) - округляет число до заданного числа чисел после точки
+			(3.2489).toFixed(2);
+
+			//num.toPrecision(precision) - округляет число до заданного числа чисел
+			(0.004).toPrecision(4);
+			(60.1234).toPrecision(4);
+
+			//num.toExponential(digits) - округляет число и записывает его в экпоненциальной нотации
+			n1 = 9056.65612;
+			n1.toExponential(2);
+			n1.toExponential(4);
+			n1.toExponential(6);
+					
+					
+			//num.toLocaleString(locales, options) - форматирует строку, используя настройки локализации
+			n1.toLocaleString();
+			n1.toLocaleString("ru-RU", {style:"percent"})
+			n1.toLocaleString("en-US", {style:"currency", currency:"USD"})
+		`);
 		
 		
+	},	
+	
+	
+	Number_nan_infinity: () => {
+		
+		le2(`
+			//Специальное числовое значение: NaN (ошибка вычислений).
+			Number.parseFloat("нечисло");
+			Number.NaN;
+			NaN;
+			NaN==NaN;
+			0/0;
+			Number.isNaN(0/0);
+			Number.isNaN(Infinity);
+			
+			//Специальное числовое значение: Infinity (бесконечность)
+			1/0;
+			-1/0;
+			1e500;
+			Infinity;
+			Infinity+5;
+			Infinity > 12345;
+			Number.POSITIVE_INFINITY;
+			Number.NEGATIVE_INFINITY;
+			
+			
+			Number.isFinite(1/0);
+			Number.isFinite(NaN);
+			
+			//проверка на корректное числовое значение
+			n1=12.34;
+			!isNaN(parseFloat(n1)) && isFinite(n1);
+		`);		
+		
+	},	
+		
+	Number_misc: () => {
+		
+		le2(`
+			//Неточные вычисления
+			0.1 + 0.2;
+			9999999999999999;
+
+			//Причина в том, что число 0.1 в двоичной системе счисления - бесконечная дробь, 
+			//Двоичное значение бесконечных дробей хранится только до 15 знака 
+			(0.1).toFixed(20);
+			//Чтобы отсечь ошибку, достаточно округления до 10-го знака
+			+(0.1).toFixed(10);
+			
+			//difference between the smallest floating point number greater than 1 and 1
+			Number.EPSILON;
+
+			//числа за пределами этих пределов - теряют в точности
+			Number.MAX_SAFE_INTEGER;
+			Number.MIN_SAFE_INTEGER;								
+			
+							
+			//самое большое и малое возможно число в js
+			Number.MAX_VALUE;
+			Number.MIN_VALUE;
+			
+			
+			
+			//Number.isInteger() - returns true if a value is an integer of the datatype Number.
+			Number.isInteger(4-2);
+			Number.isInteger(4/2);
+			Number.isInteger(5-2);
+			Number.isInteger(5/2);
+		`);
+		
+	},	
+		
+	BigInt: () => {
+	le2(`
+		
+		//Способы создания BigInt
+		n1 = 9007199254740995n;
+		n2 = BigInt("9007199254740995");
+		
+		typeof n1;
+		
+		//можно записать в 2, 8, 16-ричных нотациях
+		n1 = 256n;
+		n2 = 0o400n;
+		n3 = 0x100n;
+		n4 = 0b100000000n;		
+		
+		
+		//BigInt supports standard JavaScript arithmetic operators.
+		n1*n2;
+		
+		//арифметические операции между BigInt и Number не разрешены
+		//n1*5;
+
+		//для них нужно конвертировать BigInt в Number
+		Number(n1)*5;
+				
+		//поддерживают битовые операции
+		n1 = 5n; // 0101
+		n2 = 3n; // 0011
+
+		(n1 & n2); //0001
+		(n1 | n2); //0111
+		(n1 ^ n2); //0110
+		(~n1);     //1010
+		
+		n1 = 10n; // binary: 1010
+		(n1 << 2n); //101000
+		(n1 >> 1n); //0101		
+		
+		
+	`);
+	},	
+		
+	Math: () => {
+	le2(`
+		n1 = 3.4451;
+		
+		//константы
+		Math.E;
+		Math.PI;
+		Math.SQRT2;
+			
+		//округление
+		Math.round(n1);
+		Math.floor(n1);
+		Math.ceil(n1);
+	
+		//округление за заданного знака
+		Math.round(n1*100)/100;
+	
+		//Math.random() - Возвращает случайное число между 0 и 1
+		Math.random();
+		Math.floor(Math.random()*11));	//число до 11
+		
+	
+		//E^x
+		Math.exp(3);
+			
+	
+		Math.sin(0);
+		Math.sin(Math.PI/6);
+		Math.sin(Math.PI/2);
+		Math.sin(Math.PI);	
+		
+		Math.cos(0);
+		Math.cos(Math.PI/6);
+		Math.cos(Math.PI/2);
+		Math.cos(Math.PI);	
+	
+	  Math.pow(0, 1);
+	  Math.pow(3, 2);
+	  Math.pow(-3, 3);
+
+		//натуральный логарифм
+		Math.log(Math.E);
+		Math.log(10);
+		Math.log(20);
+		
+		//десятичный логарифм
+		Math.log10(2);
+		Math.log10(10);
+		Math.log10(100);
+		
+		//логарифм по заданному основанию
+		Math.log(8)/Math.log(2);
+		Math.log(90)/Math.log(3);
+		
+		
+	`);
+	},	
 			
 			
 
@@ -354,7 +479,7 @@ let selectorsData2 = {
 
 $(() => {
   initDemoCodeSelect("#selectors2", selectorsData2);
-	$("#selectors2").val("Number_parse").trigger("change");
+	$("#selectors2").val("BigInt").trigger("change");
 
 });
 

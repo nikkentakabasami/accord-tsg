@@ -25,11 +25,16 @@ let selectorsData1 = {
 		le2NL("result.length");
 		
 	},	
+	
 	test2: () => {
+		
+		lf2NL(()=>{
+		});
+		
+		le2NL(`
+		`);				
+		
 	},	
-	test3: () => {
-	},	
-
 
   test_func1: () => {
     //функция для работы с dom.
@@ -67,43 +72,41 @@ let selectorsData1 = {
 
   },
 
+  le_demo: () => {
+		//le(exp), le2(exp)
+		//1) выводит в лог заданное выражение 
+		//2) выполняет его 
+		//3) выводит в лог результат
+
+		//lc2(exp) - вывод логов
+		
+		
+		le2("a.d1 = new Date();");
+		le2("a.d2 = new Date(2014, 11, 31, 12, 30, 0);");
+		
+		le2("a.d1.toString()");
+		le2("a.d1.toJSON()");
+		le2("a.d2.getFullYear()");
+		le2("a.d2.getMonth()");
+		
+
+		lf2NL(()=>{
+			return testMap1.set(22, "aku");
+		});
+		
+		lc2NL("my comment");
+		le2("testMap1.get(22)");
+		
+		lc2NL("Проверка на тип");
+		le2("testMap1 instanceof Map;");
+		
+		
+  },	
 
 
-	  le_demo: () => {
-			//le(exp), le2(exp)
-			//1) выводит в лог заданное выражение 
-			//2) выполняет его 
-			//3) выводит в лог результат
-
-			//lc2(exp) - вывод логов
-			
-			
-			le2("a.d1 = new Date();");
-			le2("a.d2 = new Date(2014, 11, 31, 12, 30, 0);");
-			
-			le2("a.d1.toString()");
-			le2("a.d1.toJSON()");
-			le2("a.d2.getFullYear()");
-			le2("a.d2.getMonth()");
-			
-
-			lf2NL(()=>{
-				return testMap1.set(22, "aku");
-			});
-			
-			lc2NL("my comment");
-			le2("testMap1.get(22)");
-			
-			lc2NL("Проверка на тип");
-			le2("testMap1 instanceof Map;");
-			
-			
-	  },	
-	
-
-		le_err_demo: () => {
-			le2("d1.dosome();");
-		},			
+	le_err_demo: () => {
+		le2("d1.dosome();");
+	},			
 		
 }
 

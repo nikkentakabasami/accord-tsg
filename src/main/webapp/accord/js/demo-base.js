@@ -119,7 +119,11 @@ function stringifyObject(o, indent = "", withBraces = false) {
 	if (o instanceof RegExp){
 		return String(o);		
 	}
-		
+
+	if (t == 'bigint') {
+		return String(o);		
+	}
+			
 	if ( (t == 'object') && (!Array.isArray(o)) ) {
 		
 		if (withBraces){
@@ -250,6 +254,48 @@ function log2(...vals) {
 function log3(...vals) {
 	logMessage($log3, ...vals);
 }
+
+
+//вывести содержимое объектов
+function lo2(exp){
+
+	if (!exp){
+		return;
+	}
+
+	//многострочное выражение
+	if (exp.includes("\n")){
+		let lines = exp.split("\n");
+		lines.forEach(line=>{
+			lo2(line);
+		});
+		return;
+	};
+	
+	exp = exp.trim();
+	if (exp.startsWith("//")){
+		logMessage($log2, exp);
+		return;
+	}
+	
+	try {
+		let val = eval(exp);
+		val = JSON.stringify(val);
+		
+		let codeNode = logMessage($log2, exp);
+		$(codeNode).wrap(greenSpan);
+		if (val!=null){
+			logMessage($log2, val);
+			return val;
+		}
+	} catch (err) {
+		log2('Произошла ошибка:', err.message);
+		return;
+	}	
+	
+	
+}
+
 
 //выводит в лог заданное выражение, выполняет его через eval(), выводит в лог результат
 function _le($log, exp) {
