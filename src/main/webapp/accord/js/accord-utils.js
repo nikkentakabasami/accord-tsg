@@ -150,7 +150,8 @@ function highlightText(options){
 	
 }
 
-
+//поверхностное клонирование объекта
+//Обычно проще использовать Object.assign({}, o2); или structuredClone(o2);
 function cloneObject(source, ...attributes){
 	
 	let clone = {};
