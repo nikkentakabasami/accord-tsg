@@ -31,10 +31,6 @@ let flexCss = ["display",
 	
 ];
 
-function makeFlexStylesTooltip(){
-//	makeCssTitle(".flexPane",flexCss)
-	makeCssTitle("div",flexCss,"#fp1")
-}
 
 
 $(()=>{
@@ -48,5 +44,4 @@ $(()=>{
 			showInPrevSibling: false
 		});
 	
-//	makeFlexStylesTooltip();
 })

@@ -1,9 +1,9 @@
 .dfgrid {
+	display: grid;
+	grid-template-columns: 400px 1fr;
 	border: 2px solid #f76707;
 	border-radius: 5px;
 	background-color: #fff4e6;
-	display: grid;
-	grid-template-columns: 400px 1fr;
 }
 
 .dfgrid>div {
@@ -33,9 +33,18 @@
 	grid-row-gap: 5px;
 }
 
+/* 
+  grid-area: 1 / 1 / 2 / 5;
+
+*/
+
+
+.myForm1>#buttonPanel {
+  grid-column: 1/5;
+}
 
 .myForm1>h3 {
-  grid-area: 1 / 1 / 2 / 5;
+  grid-column: 1/5;
 }
 
 

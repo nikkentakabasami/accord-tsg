@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8" />
+
+<script src="../../jquery31/js/jquery.js"></script>
+
+
+<link rel="stylesheet" type="text/css" href="../../accord/css/accord.css">
+<link rel="stylesheet" type="text/css" href="../../accord/css/tabbed-panel.css">
+
+<link rel="stylesheet" type="text/css" href="../../accord/css/demo-base.css">
+<script src="../../accord/js/demo-base-log.js"></script>
+<script src="../../accord/js/demo-base.js"></script>
+
+<!-- 
+<link rel="stylesheet" type="text/css" href="../css/demo000.css">
+ -->
+
+<script type="module" src="../../accord/js/accord-publish.js"></script>
+
+<!-- for glyphicons -->
+<link rel="stylesheet" type="text/css" href="../../bootstrap3/css/bootstrap.min.css">
+<script src="../../bootstrap3/js/bootstrap.js"></script>
+
+
+<link rel="stylesheet" href="../../jquery31/themes/default/style.min.css" />
+<script src="../../jquery31/js/jstree.min.js"></script>
+
+
+
+<script src="../js/610-demo.js"></script>
+
+</head>
+<body class="acc-default-font">
+
+  <div class="basePanel">
+
+    <div class="titlePanel">
+      <h2>jstree demo</h2>
+    </div>
+
+    <div class="auxPanel" style="height: 300px;">
+
+      <div class="logPanel gray-border">
+        <div id="log1"></div>
+      </div>
+
+      <div class="logPanel gray-border">
+        <div id="log2"></div>
+      </div>
+
+    </div>
+
+
+    <!--               button panel                -->
+
+    <div class="acc-button-panel">
+      <div class="acc-left-content">Способ создания jstree</div>
+      
+      <!-- 
+      <div class="acc-tool-panel-select-wrapper acc-dropdown-triangle">
+        <select id="selectors1" class="acc-tool-panel-select" style="width: 200px;">
+          <option value="" >-</option>
+          <option value="1" >local json</option>
+          <option value="2" >local json2</option>
+          <option value="3" >ajax - json</option>
+          <option value="4" >ajax - html</option>
+          <option value="5" >checkbox plugin</option>
+        </select>
+      </div>
+       -->
+    
+      <div class="acc-tool-panel-select-wrapper acc-dropdown-triangle">
+        <select id="selectors1" class="acc-tool-panel-select" style="width: 200px;">
+        </select>
+      </div>
+      <button id="bExecute" type="button" class="acc-btn">Выполнить</button>
+      <div class="acc-filler-panel"></div>      
+      <button id="bClearLog" type="button" class="acc-btn">Очистить лог</button>
+    </div>
+    <div class="acc-button-panel">
+      <button id="btn1" type="button" class="acc-btn">select tn3</button>
+      <button id="btn2" type="button" class="acc-btn">open tn1 and tn2</button>
+      <button id="btn3" type="button" class="acc-btn">b3</button>
+      <button id="btn4" type="button" class="acc-btn">add new node</button>
+    </div>
+
+    <!--               work panel                -->
+
+    <div class="workPanel">
+
+      <div id="tabbedPanel2" style="height: 100%;">
+
+        <!--               tab panel if needed                -->
+        <div class="tab-container">
+          <button>заполнение дерева через ajax</button>
+          <button>заполнение дерева через html</button>
+        </div>
+
+        <div class="tab-content">
+        <div class="acc-flex-row" style="height: 100%;">
+
+          <div id="jstree1">
+          tree1
+          </div>
+
+
+        </div>
+        </div>
+
+        <div class="tab-content">
+        <div class="acc-flex-row" style="height: 100%;">
+
+
+
+          <div id="jstree2">
+            <ul>
+              <li class="jstree-open">Root node 1
+                <ul>
+                  <li id="cn1">Child node 1</li>
+                  <li id="cn2">Child node 2</li>
+                  <li id="cn3"><a href="#" class="jstree-clicked">Child 3</a></li>
+                </ul>
+              </li>
+              <li>Root node 2</li>
+              <li data-jstree='{"opened":true,"selected":true}'>Root node 3
+                <ul>
+                  <li data-jstree='{"disabled":true}'>disabled child</li>
+                  <li data-jstree='{"icon":"../../accord/icons/briefcase.png"}'>iconed child</li>
+                  <li data-jstree='{"icon":"glyphicon glyphicon-leaf"}'>glyphicon child</li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+
+<!-- 
+          <div id="jstree2">
+          tree2
+          </div>
+
+          <div id="jstree3">
+          tree3
+          </div>
+ -->
+        
+        
+        </div>
+        </div>
+      </div>
+
+
+    </div>
+
+
+
+  </div>
+
+
+</body>
+</html>

@@ -23,6 +23,41 @@ const testMap1 = new Map([
 //возвращают query-объекты, задействованные в тесте: они будут выделены красной рамкой
 let selectorsData1 = {
 
+	
+	
+	basic_functions(){
+		
+		
+		le2NL(`
+			
+			//основные функции
+
+			Object.keys(testObject1);
+			Object.values(testObject1);
+			Object.entries(testObject1);
+			
+			//Object.fromEntries(iterable) - создание объекта на основе двумерного массива (или похожего итерируемого объекта)
+			Object.fromEntries(testMap1);		~
+						
+		`);			
+				
+		lf2NL(()=>{
+
+			//Object.entries(obj) - возвращает property объекта в виде двумерного массива.
+			//каждый элемент массива - массив вида [property, value]
+			
+			for (const [key, value] of Object.entries(testObject1)) {
+			  log2(`${key}: ${value}`);
+			}
+			
+		});
+		
+	
+		
+	},		
+	
+	
+	
 	assign(){
 		
 		le2(`
@@ -86,43 +121,9 @@ let selectorsData1 = {
 		
 	},	
 	
-	funcs: `
-	//основные функции
-	
-	Object.keys(testObject1);
-	Object.values(testObject1);
-	Object.entries(testObject1);
-	
-	
-	
-	`,
-	
-	entries(){
-		
-		lf2NL(()=>{
 
-			//Object.entries(obj) - возвращает property объекта в виде двумерного массива.
-			//каждый элемент массива - массив вида [property, value]
-			
-			for (const [key, value] of Object.entries(testObject1)) {
-			  log2(`${key}: ${value}`);
-			}
-			
-		});
-		
-		le2NL(`
-			
-			Object.entries(testObject1);
-			
-			//Object.fromEntries(iterable) - создание объекта на основе двумерного массива (или похожего итерируемого объекта)
-			Object.fromEntries(testMap1);		~
-			
-			
-				
-						
-		`);				
-		
-	},	
+	
+
 	
 }
 

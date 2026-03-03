@@ -76,7 +76,9 @@ let selectorsData1 = {
 			
 			//перебросить ошибку заново
 			throw new Error("New error message", { cause: err });
-		}		
+		} finally {
+			log2('finally');
+		}
 		
 		
   },
@@ -87,10 +89,30 @@ let selectorsData1 = {
 			try {
 				throw new Error("My error.");
 			} catch (err) {
-			  console.log('Произошла тестовая ошибка:', err.message);
+			  log2('тестовая ошибка:', err.message);
 				console.error(err.stack);
 			}			
-		
+
+			//Ошибкой может быть String, Number, Boolea, Object
+			try {
+				throw "Too big";
+			} catch (err) {
+			  log2('тестовая ошибка:', err);
+				console.error(err.stack);
+			}			
+			
+			try {
+				throw 500;			
+			} catch (err) {
+			  log2('тестовая ошибка:', err);
+				console.error(err.stack);
+			}			
+			
+
+			
+			
+			
+					
 	},	
 	
 

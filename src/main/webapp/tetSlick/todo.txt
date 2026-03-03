@@ -1,3 +1,5 @@
+          <a href="../../jsTree/getNode2?id=tn1">даные через JSTreeServlet</a>
+          <a href="../../demos/demos_jsp/jstreeDemo1Nodes.jsp?id=tn1">даные через jstreeDemo1Nodes.jsp</a>
 
 
 modal dialog

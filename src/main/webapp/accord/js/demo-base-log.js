@@ -6,7 +6,11 @@ let $logPanel;
 
 //преобразовывает объекты в строки, с форматированием, для вывода в лог
 function stringifyObject(o, indent = "", withBraces = false) {
-	
+
+	if (!o){
+		return "";
+	}
+		
 	let t = (typeof o);
 	if (t=="string" || t=="number" || t=="boolean"){
 		return o;
@@ -234,6 +238,9 @@ function lc2NL(comment) {
 	log2("//"+comment);
 }
 
+function la2(href, mess) {
+	$log2.append(`<a href="${href}" target="logref">${mess}</a> \n`);
+}
 
 
 function log2NL(...vals) {

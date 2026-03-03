@@ -13,6 +13,10 @@ export class TabbedPanel {
 
 		this.$tabPanel = $(tabPanelSelector);
 
+		if (!this.$tabPanel.length){
+			return;
+		}
+		
 		this.$tabPanel.addClass("tabbed-panel");
 		
 		let $tabContainer = this.$tabPanel.children(".tab-container");

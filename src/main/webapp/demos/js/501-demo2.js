@@ -420,16 +420,30 @@ let selectorsData2 = {
 		Math.SQRT2;
 			
 		//округление
-		Math.round(n1);
-		Math.floor(n1);
-		Math.ceil(n1);
+		Math.round(4.9);
+		Math.round(4.2);
+		
+		//округление вверх
+		Math.ceil(4.9);
+		Math.ceil(4.2);
+		Math.ceil(-4.2);		
 	
-		//округление за заданного знака
-		Math.round(n1*100)/100;
+		//округление вниз
+		Math.floor(4.9);
+		Math.floor(4.2);
+		Math.floor(-4.2);		
+		
+		//получение целой части числа
+		Math.trunc(4.9);
+		Math.trunc(4.2);
+		Math.trunc(-4.2);		
+		
+		//округление до заданного знака
+		Math.round(Math.PI*100)/100;
 	
-		//Math.random() - Возвращает случайное число между 0 и 1
+		//Math.random() - Возвращает случайное число от 0 до 1 (не включая 1)
 		Math.random();
-		Math.floor(Math.random()*11));	//число до 11
+		Math.floor(Math.random()*11);	//число до 11
 		
 	
 		//E^x
@@ -446,10 +460,24 @@ let selectorsData2 = {
 		Math.cos(Math.PI/2);
 		Math.cos(Math.PI);	
 	
+		
+		//Math.pow(x, y) returns x^y
 	  Math.pow(0, 1);
 	  Math.pow(3, 2);
 	  Math.pow(-3, 3);
 
+		Math.sqrt(64);
+		
+		//положительное значение
+		Math.abs(-4.7);
+		
+		
+		
+		Math.min(0, 150, 30, 20, -8, -200);
+		Math.max(0, 150, 30, 20, -8, -200);
+		
+		
+		
 		//натуральный логарифм
 		Math.log(Math.E);
 		Math.log(10);
@@ -479,7 +507,7 @@ let selectorsData2 = {
 
 $(() => {
   initDemoCodeSelect("#selectors2", selectorsData2);
-	$("#selectors2").val("BigInt").trigger("change");
+	$("#selectors2").val("Math").trigger("change");
 
 });
 

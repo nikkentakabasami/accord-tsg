@@ -18,12 +18,18 @@ let selectorsData1 = {
 			
 			user = new User("Иван"); ~
 			
-			user.age;		//using getter
-			user.age = 33;   //using setter !
+			//using getter
+			user.age;
+			user.fullName;
+			
+			//using setter
+			user.age = 33; !
+			user.password = "orbital"; !
 			
 			user.age = 2;   //Ошибочное значение !
 
-			user.password = "orbital";
+			
+			
 						
 			user.name = "Коля"; !
 			user.sayHi();
