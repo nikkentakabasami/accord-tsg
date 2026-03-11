@@ -8,6 +8,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import ru.tet.demos.aux.JSTreeDataSamples;
 import ru.tet.demos.beans.JSTreeNode;
 
+//тестируем преобразование в json JSTreeNode
 public class DataBindingDemo1 {
 
 	public static String test1() throws Exception {

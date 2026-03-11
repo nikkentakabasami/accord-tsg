@@ -28,6 +28,11 @@ let afterExecDemoFunc = null;
 let greenSpan = '<span class="green"></span>';
 
 
+//счётчик для добавления новых демо-кнопок
+let newButtonNo = 1;
+
+
+
 //возвращает ссылку на главный js-файл этой демки
 function findMainJs() {
 
@@ -68,6 +73,11 @@ function addTitlePanelButtons() {
     $tp.append('<button id="hideAuxButton" type="button" class="acc-btn">Скрыть описание</button>');
   }
 
+	if (!$("#bClearLog").length){
+		$tp.append('<button id="bClearLog" type="button" class="acc-btn">Очистить логи</button>');
+		
+	}	
+	
   if (!$tp.children("a").length) {
     $tp.append('<a href="#" target="source">Исходники</a>');
   }
@@ -189,7 +199,11 @@ function highlightLogComments($log) {
 
 function initDemoCodeSelect(selector, data) {
 
-  let $sel = $(selector);
+	let $sel = selector;
+	if (!selector.jquery){
+		$sel = $(selector);
+	}
+	
   $sel.change(e => {
     clearLog();
 
@@ -440,6 +454,44 @@ function formatDate(date) {
   let y = date.getFullYear();
   return (d <= 9 ? '0' + d : d) + '.' + (m <= 9 ? '0' + m : m) + '.' + y;
 }
+
+
+//добавляет набор демо кнопок на панель
+//при клике на кнопку - показывает код демо-функции и выполняет её
+function addDemoButtons(handlers, panelSelector = ".acc-button-panel"){
+	
+	let $panel = $(panelSelector);
+	
+	for(let handlerName in handlers){
+		let $newButton = $(`<button id="b${newButtonNo}" type="button" class="acc-btn">${handlerName}</button>`);
+		
+		let handler = handlers[handlerName];
+		
+		$newButton.click(event=>{
+			let code = trimFuncCode(handler);
+			clearLog1();
+			log("//функция: "+handler.name);
+			log(code);
+			
+			//указана доп. функция инициализации - вывести её в лог
+			if (handler.init){
+				log();
+				lognl("//функция инициализации:");
+				log(String(handler.init));
+			}
+			
+			highlightLogComments1();
+
+			handler(event);
+		});
+		
+		
+		$panel.append($newButton);
+	}
+	
+	newButtonNo++;
+}
+
 
 
 $(function() {

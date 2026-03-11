@@ -3,6 +3,10 @@
 let $log1, $log2, $log3;
 let $logPanel;
 
+let autoscrollLog1 = false;
+let autoscrollLog2 = true;
+
+
 
 //преобразовывает объекты в строки, с форматированием, для вывода в лог
 function stringifyObject(o, indent = "", withBraces = false) {
@@ -161,9 +165,12 @@ function le(exp) {
 function le2(exp) {
 	return _le($log2, exp)
 }
-function le2NL(exp) {
+function le2nl(exp) {
 	log2();
 	return _le($log2, exp)
+}
+function le2NL(exp) {
+	return le2nl(exp);
 }
 
 
@@ -180,6 +187,12 @@ function le2NL(exp) {
 
 function clearLog() {
 	$log1.text("");
+	$log2.text("");
+}
+function clearLog1() {
+	$log1.text("");
+}
+function clearLog2() {
 	$log2.text("");
 }
 
@@ -220,10 +233,14 @@ function lf(func) {
 function lf2(func) {
 	return _lf($log2, func);
 }
-function lf2NL(func) {
+function lf2nl(func) {
 	log2();
 	return _lf($log2, func);
 }
+function lf2NL(exp) {
+	return lf2nl(exp);
+}
+
 
 
 //вывод комментов
@@ -233,9 +250,12 @@ function lc(comment) {
 function lc2(comment) {
 	log2("//"+comment);
 }
-function lc2NL(comment) {
+function lc2nl(comment) {
 	log2();
 	log2("//"+comment);
+}
+function lc2NL(comment) {
+	lc2nl(comment);
 }
 
 function la2(href, mess) {
@@ -243,13 +263,19 @@ function la2(href, mess) {
 }
 
 
-function log2NL(...vals) {
+function log2nl(...vals) {
 	log2();
 	log2(...vals);
 }
-function logNL(...vals) {
+function lognl(...vals) {
 	log();
 	log(...vals);
+}
+function log2NL(...vals) {
+	log2nl(...vals);
+}
+function logNL(...vals) {
+	lognl(...vals);
 }
 
 
@@ -294,9 +320,15 @@ function logMessage($log, ...vals) {
 //	$log.append('<div class="green">'+line+'</div>');
 //	$(lineNode).wrap(greenSpan);
 	
-	//scroll to bottom	
-	var h = $logPanel.prop('scrollHeight');
-	$logPanel.scrollTop(h);	
+
+	if (autoscrollLog1 && $log==$log1 || autoscrollLog2 && $log==$log2){
+		//scroll to bottom	
+		var h = $logPanel.prop('scrollHeight');
+		$logPanel.scrollTop(h);	
+		
+	}
+
+
 
 	return lineNode;
 }

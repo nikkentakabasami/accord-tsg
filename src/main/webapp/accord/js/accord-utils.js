@@ -40,11 +40,45 @@ let accordUtils = {
   cloneObject: cloneObject,
 	highlightText: highlightText,
 	stringToRegex: stringToRegex,
-	escapeHTML: escapeHTML
+	escapeHTML: escapeHTML,
+	addJSToPage: addJSToPage,
+	removeJSFromPage: removeJSFromPage,
   
 
 };
 window.accordUtils = accordUtils;
+
+
+//добавляет в документ js-файл (и выполняет его)
+function addJSToPage(jsHref, onload) {
+	
+	const script = document.createElement('script');
+  script.src = jsHref;
+  script.type = 'text/javascript';
+
+  script.onload = () => {
+		if (onload){
+			onload();
+		}
+		
+    console.log(jsHref+' added and executed');
+  };
+
+  // Добавляем элемент в DOM, обычно в head или body
+  document.body.appendChild(script);	
+	
+	return script;
+}
+
+//удаляет js-файл из документа
+function removeJSFromPage(script) {
+	
+	if (script){
+		document.body.removeChild(script);
+		console.log(`${script.src} removed!`);
+	}
+	
+}
 
 
 //экранирует спецсимволы в тексте перед вставкой в html 
@@ -316,7 +350,7 @@ function generateSelectOptions(options) {
 		  let name = String(options.data[id]);
 		  
 		  if (options.contentIsValue){
-			name = id;
+				name = id;
 		  }
 		  
 		  if (options.valueIsIndex){

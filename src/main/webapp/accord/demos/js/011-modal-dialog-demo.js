@@ -10,8 +10,32 @@ let dialog4;
 
 
 
-$(document).ready(function() {
 
+
+let buttonHandlers1 = {
+	
+	showDialog1(){
+		dialog1.show();
+	},
+	showDialog2(){
+		dialog2.show();
+	},
+	showDialog3(){
+		dialog3.show();
+	},
+	showDialog4(){
+		dialog4.show();
+	},
+	hideAll(){
+		dialog1.hide();
+		dialog2.hide();
+		dialog3.hide();
+	},
+	
+}
+
+
+function createDialog1(){
 	dialog1 = new AccModalDialog({
 		title: "Диалог по умолчанию",
 		contentText: "Этот диалог показывается после инициализации.<br>Содержит заданный текст. <br> Диалог можно перетаскивать за заголовок",
@@ -36,12 +60,11 @@ $(document).ready(function() {
 	
 	dialog1.init().then(()=>{
 		console.log("dialog1 инициализирован.");
-	});
-	
-		
-	/*
-	*/
+	});	
+}
 
+
+function createDialog2(){
 	dialog2 = new AccModalDialog({
 		dialogHeight: "150px",
 		contentSelector: "#dialogContent1",
@@ -55,56 +78,43 @@ $(document).ready(function() {
 //		autosize: true,
 		
 	});
-//	dialog2.show();
-
+//	dialog2.show();	
 	
+}
+function createDialog3(){
 	
 	dialog3 = new AccModalDialog({
 		autosize: true,
 		contentSelector: "#dialogContent2",
 		immediateInit: false
 	});
-	dialog3.init();
+	dialog3.init();	
+	
+}
 
-
+function createDialog4(){
+	
 	dialog4 = new AccModalDialog({
 		dialogSelector: "#myCustomDialog"
 	});
-
 	
+}
 
+$(document).ready(function() {
+
+	addDemoButtons(buttonHandlers1)
+
+	buttonHandlers1.showDialog1.init = createDialog1;
+	buttonHandlers1.showDialog2.init = createDialog2;
+	buttonHandlers1.showDialog3.init = createDialog3;
+	buttonHandlers1.showDialog4.init = createDialog4;
 	
-	
-	/*
-*/
-	
-	//	dialog.makeDraggable();
-
-
-
-	$("#b1").click(e => {
-		dialog1.show();
 		
-	});
-	$("#b2").click(e => {
-		dialog2.show();
-	});
-	$("#b3").click(e => {
-		dialog3.show();
-	});
-	$("#b4").click(e => {
-		dialog4.show();
-	});
-
-
-
-	$("#b5").click(function() {
-		dialog1.hide();
-		dialog2.hide();
-		dialog3.hide();
-	});
-
-
+	createDialog1();
+	createDialog2();
+	createDialog3();
+	createDialog4();
+		
 
 });
 

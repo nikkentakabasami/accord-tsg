@@ -3,19 +3,16 @@
 <head>
 <meta charset="utf-8" />
 
-<!-- jquery 3.1 -->
 <script src="../../jquery31/js/jquery.js"></script>
-
-<!-- accord - мои вспомогательные компоненты, классы, утилиты -->
 <link rel="stylesheet" type="text/css" href="../css/accord.css">
 <link rel="stylesheet" type="text/css" href="../css/tabbed-panel.css">
-
+<link rel="stylesheet" type="text/css" href="../css/acc-form-elements.css">
 <link rel="stylesheet" type="text/css" href="../css/demo-base.css">
 <script src="../js/demo-base-log.js"></script>
 <script src="../js/demo-base.js"></script>
-
 <script type="module" src="../js/accord-publish.js"></script>
-<script type="module" src="js/modal-dialog-demo.js"></script>
+
+<script type="module" src="js/011-modal-dialog-demo.js"></script>
 
 
 </head>
@@ -26,59 +23,27 @@
 
     <div class="titlePanel">
       <h2>Компонент AccModalDialog - модальный диалог</h2>
-      <button id="hideAuxButton" type="button" class="acc-btn">Скрыть описание</button>
-      <a href="#" target="source">Исходники</a>
     </div>
 
-    <div class="auxPanel">
-      <div id="tabbedPanel1">
-
-        <div class="tab-container">
-          <button>Описание</button>
-          <button>Ключевой код</button>
-        </div>
-
-        <div class="tab-content">
-          <pre class="acc-desc-panel">
-Модальные диалоги создаются классом AccModalDialog:
-  dialog3 = new AccModalDialog({
-    autosize: true,
-    contentSelector: "#dialogContent2"
-  });
-  
-  dialog3.show();
-  ...
-  dialog3.hide();
-
-Содержимое задаётся css-селектором, либо через template:
-&lt;template id="dialogContent2"&gt;...
-Либо через обычный div.
-Либо текстом: опция "contentText".
-</pre>
-        </div>
-
-        <div class="tab-content">
-          <pre class="acc-code-panel">
-  код
-</pre>
-        </div>
-
-      </div>
-
+    <div class="auxPanel" style="height: 600px;">
       <div class="logPanel gray-border">
         <div id="log1"></div>
       </div>
-
+      <div class="logPanel gray-border">
+        <div id="log2"></div>
+      </div>
     </div>
 
-
     <div class="acc-button-panel">
+    </div>
+
+<!-- 
       <button id="b1" type="button" class="acc-btn">Показать диалог по умолчанию с заданным текстом</button>
       <button id="b2" type="button" class="acc-btn">Показать диалог с заданным содержимым</button>
       <button id="b3" type="button" class="acc-btn">Показать диалог с заданным содержимым из шаблона</button>
       <button id="b4" type="button" class="acc-btn">Показать кастомный диалог</button>
       <button id="b5" type="button" class="acc-btn">Скрыть все диалоги</button>
-    </div>
+ -->
 
     <!--               work panel                -->
 

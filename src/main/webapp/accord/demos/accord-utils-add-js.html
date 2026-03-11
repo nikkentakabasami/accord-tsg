@@ -9,13 +9,14 @@
 <!-- accord - мои вспомогательные компоненты, классы, утилиты -->
 <link rel="stylesheet" type="text/css" href="../css/accord.css">
 <link rel="stylesheet" type="text/css" href="../css/tabbed-panel.css">
+<script type="module" src="../js/accord-publish.js"></script>
 
 <link rel="stylesheet" type="text/css" href="../css/demo-base.css">
 <script src="../js/demo-base-log.js"></script>
 <script src="../js/demo-base.js"></script>
 
-<script type="module" src="../js/accord-publish.js"></script>
-<script type="module" src="js/modal-dialog2-demo.js"></script>
+
+<script type="module" src="js/accord-utils-add-js.js"></script>
 
 
 </head>
@@ -25,7 +26,7 @@
   <div class="basePanel">
 
     <div class="titlePanel">
-      <h2>AccModalDialog - получение содержимого по ссылке</h2>
+      <h2>accordUtils - addJSToPage</h2>
     </div>
 
     <div class="auxPanel">
@@ -38,19 +39,12 @@
 
         <div class="tab-content">
           <pre class="acc-desc-panel">
-Загрузка содержимого диалога из заданного файла: 
-
-  dialog1 = new AccModalDialog({
-    title: "Диалог по умолчанию",
-    contentUrl: accordUtils.accordPath+"demos/contentFragment.html",
-    fragmentLoadMode: LoadModes.FETCH,
-    autosize: true,
 </pre>
         </div>
 
         <div class="tab-content">
           <pre class="acc-code-panel">
-  код
+
 </pre>
         </div>
 
@@ -65,15 +59,19 @@
 
     <!--               button panel                -->
 
-  <div class="acc-button-panel">
-    <button id="b1" type="button" class="acc-btn">Показать диалог</button>
-  </div>
+    <div class="acc-button-panel">
+      <button id="b1" type="button" class="acc-btn">accordUtils.addJSToPage 1</button>
+      <button id="b2" type="button" class="acc-btn">accordUtils.addJSToPage 2</button>
+      <button id="b3" type="button" class="acc-btn">accordUtils.remove js 1</button>
+    </div>
 
     <!--               work panel                -->
 
     <div class="workPanel">
-    
-    
+
+
+
+
     </div>
 
 

@@ -4,20 +4,18 @@ import {AccDaterangepickerUtils} from '../../js/accord-bundle.js';
 
 
 
-$(function() {
+function init(){
+	
 
-
-	//	this.options = $.extend({}, tableDefaults, options);
-
+	//	Вид по умолчанию (только задан локализация) - выбор диапазона дат
 	let defaultOptions = {
 		locale: AccDaterangepickerUtils.dateRangeLocale,
 	};
-
-
 	$("#tf1").daterangepicker(defaultOptions);
 
 
 
+	//Выбор только даты, показывать выпадающие списки для годов и месяцев
 	let options = $.extend(
 		{},
 		defaultOptions,
@@ -28,8 +26,6 @@ $(function() {
 			maxYear: parseInt(moment().format('YYYY'), 10),
 			startDate: "20.04.1982",
 		});
-
-
 	$("#tf2").daterangepicker(options, function(start, end, label) {
 		var years = moment().diff(start, 'years');
 		alert("You are " + years + " years old!");
@@ -45,7 +41,7 @@ $(function() {
 			console.log('selected date:'+val);
 		}
 	});
-	
+
 	AccDaterangepickerUtils.initDateRangeEditor($("#tf4")	, {
 			decorInput: true,
 			decorButtonClasses: "acc-btn-eye",
@@ -60,8 +56,17 @@ $(function() {
 			changeCallback: (val,$input)=>{
 				console.log('selected date:'+val);
 			}
-		});
+		});	
 	
+}
+
+
+$(function() {
+
+
+	init();
+	
+	log(String(init));
 	
 
 
