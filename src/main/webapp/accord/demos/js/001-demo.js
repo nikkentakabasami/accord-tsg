@@ -1,3 +1,6 @@
+
+//демо-функции.
+//при вызове addDemoButtons - для каждой такой функции будет создана и добавлена демо-кнопка (на acc-button-panel)
 let buttonHandlers1 = {
 	
 	test1(){
@@ -27,6 +30,18 @@ $(document).ready(function() {
 	
 	//добавляем демо-кнопки
 	addDemoButtons(buttonHandlers1)
+	
+	
+	demoOptions.beforeExecDemoFunc = ()=>{
+		reloadSandbox();
+	};
+
+	demoOptions.afterExecDemoFunc	= ()=>{
+	};
+
+	//сразу запускаем первую демку
+	demoButtons[0].trigger("click");
+		
 	
 });
 

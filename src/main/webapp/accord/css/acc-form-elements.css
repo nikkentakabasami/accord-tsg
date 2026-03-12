@@ -17,11 +17,14 @@
 /* класс acc-form-style1 придаёт элементам ввода приличный вид */
 
 
-.acc-form-style1 select {
+.acc-form-style1 .select-wrapper select {
 	appearance: none;
-	width: 100%;
-	height: 100%;
 }
+
+.acc-form-style1 select {
+	width: 100%;
+}
+
 
 .acc-form-style1 .select-wrapper {
 	position: relative;

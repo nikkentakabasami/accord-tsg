@@ -1,4 +1,4 @@
 
 myVar = 123;
 
-log(`dt1 loaded. myVar=${myVar}`);
+log2(`dt1 loaded. myVar=${myVar}`);

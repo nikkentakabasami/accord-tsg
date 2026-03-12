@@ -1,28 +1,43 @@
 
+let result;
 
 let mainJsHref = null;
 
 let $workPanel;
 
+//показывается ли сейчас auxPanel
 let showAux = true;
+
+//кнопка показа/скрытия auxPanel
 let $hideAuxButton;
+
+//input с текущим селектором
 let $selectorText;
 
+//выбранная функция/код
 let currentFunc = null;
 
 //элементы песочницы
 let $btn1, $btn2, $inp1, $inp2, $inp3, $inp4, $testBtn1, $testBtn2;
 let formDiv1, formDiv2;
 let form1, form2;
-
 let $panel1, $panel2;
-
 let $sel1, $sel2, $sel3, $sel4;
 
+//демо-кнопки
+let demoButtons = [];
 
-//выполняются до и после выполнения currentFunc
-let beforeExecDemoFunc = null;
-let afterExecDemoFunc = null;
+//опции, определяющий, как будет работать текущая демка
+let demoOptions = {
+
+	//выполняются до и после выполнения currentFunc/демо-кнопок
+	beforeExecDemoFunc: null,
+	afterExecDemoFunc: null,
+	
+		
+};
+
+
 
 
 let greenSpan = '<span class="green"></span>';
@@ -75,9 +90,12 @@ function addTitlePanelButtons() {
 
 	if (!$("#bClearLog").length){
 		$tp.append('<button id="bClearLog" type="button" class="acc-btn">Очистить логи</button>');
-		
 	}	
-	
+
+	if (!$("#bReload").length && $("#template1").length){
+		$tp.append('<button id="bReload" type="button" class="acc-btn">Перезагрузить песочницу</button>');
+	}	
+		
   if (!$tp.children("a").length) {
     $tp.append('<a href="#" target="source">Исходники</a>');
   }
@@ -456,6 +474,7 @@ function formatDate(date) {
 }
 
 
+
 //добавляет набор демо кнопок на панель
 //при клике на кнопку - показывает код демо-функции и выполняет её
 function addDemoButtons(handlers, panelSelector = ".acc-button-panel"){
@@ -464,6 +483,7 @@ function addDemoButtons(handlers, panelSelector = ".acc-button-panel"){
 	
 	for(let handlerName in handlers){
 		let $newButton = $(`<button id="b${newButtonNo}" type="button" class="acc-btn">${handlerName}</button>`);
+		demoButtons.push($newButton);
 		
 		let handler = handlers[handlerName];
 		
@@ -481,8 +501,15 @@ function addDemoButtons(handlers, panelSelector = ".acc-button-panel"){
 			}
 			
 			highlightLogComments1();
-
+			
+			if (demoOptions.beforeExecDemoFunc){
+				demoOptions.beforeExecDemoFunc();
+			}
 			handler(event);
+			if (demoOptions.afterExecDemoFunc){
+				demoOptions.afterExecDemoFunc();
+			}
+			
 		});
 		
 		
@@ -556,14 +583,14 @@ $(function() {
       return;
     }
 		
-		if (beforeExecDemoFunc){
-			beforeExecDemoFunc();
+		if (demoOptions.beforeExecDemoFunc){
+			demoOptions.beforeExecDemoFunc();
 		}
 		
     execDemoFunc(currentFunc);
 		
-		if (afterExecDemoFunc){
-			afterExecDemoFunc();
+		if (demoOptions.afterExecDemoFunc){
+			demoOptions.afterExecDemoFunc();
 		}
 		
   });

@@ -13,9 +13,6 @@ const testObject1 = {
 };
 
 
-let result;
-
-
 currentSelectorsData = {
 
 	le_demo2:`

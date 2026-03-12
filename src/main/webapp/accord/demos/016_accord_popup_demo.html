@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8" />
+
+<script src="../../jquery31/js/jquery.js"></script>
+<link rel="stylesheet" type="text/css" href="../css/accord.css">
+<link rel="stylesheet" type="text/css" href="../css/tabbed-panel.css">
+<link rel="stylesheet" type="text/css" href="../css/acc-form-elements.css">
+<link rel="stylesheet" type="text/css" href="../css/demo-base.css">
+<script src="../js/demo-base-log.js"></script>
+<script src="../js/demo-base.js"></script>
+<script type="module" src="../js/accord-publish.js"></script>
+
+<script type="text/javascript" src="js/016-demo.js"></script>
+
+
+</head>
+
+<body class="acc-default-font">
+
+  <div class="basePanel">
+
+    <div class="titlePanel">
+      <h2>демо, использующее демо-кнопки</h2>
+    </div>
+
+    <div class="auxPanel" style="height: 600px;">
+      <div class="logPanel gray-border">
+        <div id="log1"></div>
+      </div>
+      <div class="logPanel gray-border">
+        <div id="log2"></div>
+      </div>
+    </div>
+
+    <!--               button panel                -->
+    <div class="acc-button-panel"></div>
+
+    <!--               work panel                -->
+    <div class="workPanel">
+
+      <div class="acc-popup no-select acc-popup-default" style="top: 520px; left: 100px;">
+        <div class="acc-centered-content">
+          тестовый статичный popup, содержащий acc-button-panel.
+          <br>
+          Просто пример использования стилей
+        </div>
+        <input type="text" />
+        <button type="button" class="acc-btn acc-btn-icon-text acc-btn-add">button1</button>
+      </div>
+
+      <div class="acc-desc-panel" id="popupContent3" style="display: none;">p3 - Панель с сообщением. Задана опцией panelSelector.</div>
+
+
+
+    </div>
+
+
+
+
+    <template id="popupContent2">
+      <div class="acc-vert-button-panel">
+        <div class="acc-filler-panel acc-centered-content">p2 - Панель с кнопками из template. Загружается опцией contentSelector. Перетаскивается за текст.</div>
+
+
+        <button type="button" class="acc-btn acc-btn-icon acc-btn-check"></button>
+        <button type="button" class="acc-btn acc-btn-icon acc-btn-add"></button>
+      </div>
+
+    </template>
+
+
+
+  </div>
+
+
+</body>
+</html>
+

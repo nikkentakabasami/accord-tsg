@@ -459,8 +459,9 @@ function loadFileAsString(fileUrl){
 };
 
 
-//загружает html-фрагмент через XMLHttpRequest. Синхронно
-//считается устаревшим способом
+//загружает html-фрагмент в заданный контейнер ($target) или body (если контейнер не задан)
+//использует для этого объект XMLHttpRequest (считается устаревшим способом).
+//Загружает синхронно.
 function loadHtmlFragmentXHR(fragmentUrl, $target, relativeToAccord = false) {
   let xhr = new XMLHttpRequest();
 
@@ -491,7 +492,9 @@ function loadHtmlFragmentXHR(fragmentUrl, $target, relativeToAccord = false) {
 
 }
 
-//загружает html-фрагмент через fetch. Возвращает promise
+//загружает html-фрагмент в заданный контейнер ($target) или body (если контейнер не задан)
+//использует для этого метод fetch(url).
+//Возвращает promise, так что загружать можно синхронно или асинхронно.
 async function loadHtmlFragmentFetch(fragmentUrl, $target, relativeToAccord = false) {
 
   let url = fragmentUrl;

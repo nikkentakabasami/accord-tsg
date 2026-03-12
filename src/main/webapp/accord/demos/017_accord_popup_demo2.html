@@ -3,33 +3,16 @@
 <head>
 <meta charset="utf-8" />
 
-<!-- jquery 3.1 -->
 <script src="../../jquery31/js/jquery.js"></script>
-
-<script type="text/javascript" src="../../jquery31/js/moment.min.js"></script>
-<script type="text/javascript" src="../../jquery31/js/daterangepicker.js"></script>
-<link rel="stylesheet" type="text/css" href="../../jquery31/css/daterangepicker.css" />
-
-
-<!-- accord - мои вспомогательные компоненты, классы, утилиты -->
 <link rel="stylesheet" type="text/css" href="../css/accord.css">
 <link rel="stylesheet" type="text/css" href="../css/tabbed-panel.css">
-<script type="module" src="../js/accord-publish.js"></script>
-
+<link rel="stylesheet" type="text/css" href="../css/acc-form-elements.css">
 <link rel="stylesheet" type="text/css" href="../css/demo-base.css">
 <script src="../js/demo-base-log.js"></script>
 <script src="../js/demo-base.js"></script>
-<link rel="stylesheet" type="text/css" href="../css/acc-form-elements.css">
+<script type="module" src="../js/accord-publish.js"></script>
 
-<script type="module" src="js/020-daterangepicker-utils-demo.js"></script>
-
-<style>
-
-.workPanel .acc-code-panel {
-  margin-top: 20px;
-}
-
-</style>
+<script type="text/javascript" src="js/017-demo.js"></script>
 
 
 </head>
@@ -39,7 +22,7 @@
   <div class="basePanel">
 
     <div class="titlePanel">
-      <h2>daterangepicker, </h2>
+      <h2>демо, использующее демо-кнопки</h2>
     </div>
 
     <div class="auxPanel" style="height: 400px;">
@@ -52,25 +35,10 @@
     </div>
 
     <!--               button panel                -->
-
-    <div class="acc-button-panel">
-    </div>
+    <div class="acc-button-panel"></div>
 
     <!--               work panel                -->
-
     <div class="workPanel">
-    
-    
-    </div>
-
-
-
-  </div>
-
-
-
-<template id="template1">
-
 
     <div  class="form-panel acc-form-style1">
 
@@ -84,10 +52,28 @@
           <input type="text"  id="tf2">
         </div>
       
+        <div class="form-group">
+          <label>Select box:</label>
+          <select  id="sel1">
+            <option>Banana</option>
+            <option>Cherry</option>
+            <option>Lemon</option>
+          </select>
+        </div>
+      
+      
+        <div class="acc-row acc-form-button-panel1">
+          <button class="acc-btn">Ok</button>
+          <button class="acc-btn">Cancel</button>
+        </div>
+    </div>
     </div>
 
 
-</template>
+
+
+
+  </div>
 
 
 </body>
