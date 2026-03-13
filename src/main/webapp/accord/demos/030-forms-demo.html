@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8" />
+
+<script src="../../jquery31/js/jquery.js"></script>
+<link rel="stylesheet" type="text/css" href="../css/accord.css">
+<link rel="stylesheet" type="text/css" href="../css/tabbed-panel.css">
+<link rel="stylesheet" type="text/css" href="../css/acc-form-elements.css">
+<link rel="stylesheet" type="text/css" href="../css/demo-base.css">
+<script src="../js/demo-base-log.js"></script>
+<script src="../js/demo-base.js"></script>
+<script type="module" src="../js/accord-publish.js"></script>
+
+<script type="text/javascript" src="js/030-demo.js"></script>
+
+
+<style>
+</style>
+
+</head>
+
+
+
+
+<body class="acc-default-font">
+
+  <div class="basePanel" style="bottom: auto;">
+
+    <div class="titlePanel">
+      <h2>acc-form-elements.css - Набор стилей для форм и элементов ввода</h2>
+    </div>
+
+    <div class="auxPanel" style="height: 300px;">
+      <div class="logPanel gray-border">
+        <div id="log1"></div>
+      </div>
+      <div class="logPanel gray-border">
+        <div id="log2"></div>
+      </div>
+    </div>
+
+    <div class="acc-button-panel"></div>
+
+    <div class="workPanel acc-2cols">
+
+
+
+
+      <!-- form1 -->
+      <form id="form1">
+        <div class="form-panel">
+          <h3>форма со стилями по умолчанию</h3>
+          <label>First name:</label>
+          <br>
+          <input type="text" name="fn" value="John" autocomplete="off">
+          <br>
+          <label>Last name:</label>
+          <br>
+          <input type="text" name="ln" value="Doe" autocomplete="off">
+
+          <fieldset>
+            <legend>radio group</legend>
+            <input type="radio" name="size" id="r1" value="small" checked="checked" />
+            <label for="r1">Small</label>
+            <br>
+            <input type="radio" name="size" id="r2" value="medium" />
+            <label for="r2">Medium</label>
+            <br>
+            <input type="radio" name="size" id="r3" value="large" />
+            <label for="r3">Large</label>
+          </fieldset>
+
+          <fieldset>
+            <legend>checkbox group</legend>
+            <input type="checkbox" name="c1" id="с1" value="Bike">
+            <label for="с1"> I have a bike</label>
+            <br>
+            <input type="checkbox" name="c2" id="с2" value="Car" checked="checked">
+            <label for="с2"> I have a car</label>
+            <br>
+            <input type="checkbox" name="c3" id="с3" value="Boat">
+            <label for="с3"> I have a boat</label>
+          </fieldset>
+
+
+          <label for="cars">select:</label>
+          <select name="cars">
+            <option value="volvo">Volvo</option>
+            <option value="saab">Saab</option>
+            <option value="fiat">Fiat</option>
+            <option value="audi">Audi</option>
+          </select>
+          <br>
+          <label for="cars2">select multiple:</label>
+          <select name="cars2" multiple>
+            <option value="volvo">Volvo</option>
+            <option value="saab">Saab</option>
+            <option value="fiat">Fiat</option>
+            <option value="audi">Audi</option>
+          </select>
+          <br>
+
+          <label for="date1">Date input:</label>
+          <input type="date" name="date1" />
+
+          <br>
+          <input type="submit" value="Submit">
+
+
+        </div>
+      </form>
+
+
+      <!-- form2 -->
+      <form id="form2">
+        <div class="form-panel acc-form-style1">
+          <h3>форма acc-form-style1, с использованием form-group</h3>
+
+          <div class="form-group">
+            <label for="cars">select:</label>
+            <select name="cars">
+              <option value="volvo">Volvo</option>
+              <option value="saab">Saab</option>
+              <option value="fiat">Fiat</option>
+              <option value="audi">Audi</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="cars2">select multiple:</label>
+            <select name="cars2" multiple>
+              <option value="volvo">Volvo</option>
+              <option value="saab">Saab</option>
+              <option value="fiat">Fiat</option>
+              <option value="audi">Audi</option>
+            </select>
+          </div>
+
+
+
+
+
+
+          <div class="form-group">
+            <label>First name:</label>
+            <input type="text" name="fname" value="John">
+          </div>
+
+          <div class="form-group">
+            <label>Second name:</label>
+            <input type="text" name="sname" value="Connor">
+          </div>
+
+
+          <div class="form-group">
+            <label>Datetime local:</label>
+            <input type="date" name="expiration" />
+          </div>
+
+          <fieldset>
+            <legend>radio group</legend>
+            <input type="radio" name="size" id="r11" value="small" checked="checked" />
+            <label for="r11">Small</label>
+            <br>
+            <input type="radio" name="size" id="r12" value="medium" />
+            <label for="r12">Medium</label>
+            <br>
+            <input type="radio" name="size" id="r13" value="large" />
+            <label for="r13">Large</label>
+          </fieldset>
+
+          <fieldset>
+            <legend>checkbox group</legend>
+            <input type="checkbox" name="c11" id="с11" value="Bike">
+            <label for="с11"> I have a bike</label>
+            <br>
+            <input type="checkbox" name="c12" id="с12" value="Car" checked="checked">
+            <label for="с12"> I have a car</label>
+            <br>
+            <input type="checkbox" name="c13" id="с13" value="Boat">
+            <label for="с13"> I have a boat</label>
+          </fieldset>
+
+          <div class="acc-row acc-form-button-panel1">
+            <button class="acc-btn">Ok</button>
+            <button class="acc-btn">Cancel</button>
+          </div>
+
+
+        </div>
+      </form>
+
+
+
+
+
+      <!-- form3 -->
+      <form id="form3">
+        <div class="form-panel acc-form-style1 acc-2cols">
+          <h3 class="acc-row">форма с использованием form-group, с расположением элементов в 2 столбца</h3>
+
+            <div>
+              <div class="form-group">
+                <label for="select">Select with select-wrapper:</label>
+                <div class="select-wrapper">
+                  <select name="select">
+                    <option>Banana</option>
+                    <option>Cherry</option>
+                    <option>Lemon</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="myFruit">Select with datalist:</label>
+                <input type="text" name="myFruit" list="mySuggestion" />
+                <datalist>
+                  <option>Apple</option>
+                  <option>Banana</option>
+                  <option>Blackberry</option>
+                  <option>Blueberry</option>
+                  <option>Lemon</option>
+                  <option>Lychee</option>
+                  <option>Peach</option>
+                  <option>Pear</option>
+                </datalist>
+              </div>
+
+              <div class="form-group">
+                <label for="number"> Card number:</label>
+                <input type="number" name="cardnumber" />
+              </div>
+
+              <div class="form-group">
+                <label for="fname">First name:</label>
+                <input type="text" name="fname" value="John">
+              </div>
+
+              <div class="form-group">
+                <label for="date">Datetime local:</label>
+                <input type="date" name="expiration" />
+              </div>
+
+            </div>
+
+            <div>
+
+
+              <div class="form-group">
+                <label for="range">Range: </label>
+                <input name="range" type="range" />
+              </div>
+
+              <div class="form-group">
+                <label for="color">Color: </label>
+                <input name="color" type="color" />
+              </div>
+
+              <div class="form-group">
+                <label for="file">File picker: </label>
+                <input name="file" type="file" multiple />
+              </div>
+
+              <div class="form-group">
+                <label for="progress">Progress: </label>
+                <progress max="100" value="75">75/100</progress>
+              </div>
+              <div class="form-group">
+                <label for="meter">Meter: </label>
+                <meter min="0" max="100" value="75" low="33" high="66" optimum="50"> 75 </meter>
+              </div>
+              <div class="acc-row acc-form-button-panel1">
+                <button class="acc-btn">Ok</button>
+                <button class="acc-btn">Cancel</button>
+              </div>
+
+            </div>
+
+        </div>
+      </form>
+
+
+      <!-- form4 -->
+      <form id="form4">
+      <div  class="form-panel acc-4cols acc-form-style1">
+
+        <h3 class="acc-row">acc-4cols - расположение элементов в 4 столбца</h3>
+
+
+        <label for="select">Select box:</label>
+        <select  name="select">
+          <option>Banana</option>
+          <option>Cherry</option>
+          <option>Lemon</option>
+        </select>
+
+        <label>First name:</label>
+        <input type="text"  name="fname" value="John">
+        <label>Second name:</label>
+        <input type="text"  name="sname" value="Connor">
+        <label>Datetime local:</label>
+        <input type="date"  name="expiration" />
+
+        <div class="acc-row acc-form-button-panel1">
+          <button class="acc-btn">Ok</button>
+          <button class="acc-btn">Cancel</button>
+        </div>
+
+      </div>      
+      
+      </form>
+
+      <!-- form5 -->
+      <form id="form5">
+      
+      <div  class="form-panel acc-2cols acc-form-style1">
+        <h3 class="acc-row">acc-2cols - расположение элементов в 2 столбца через grid layout</h3>
+
+        <label>First name:</label>
+        <input type="text"  name="fname" value="John">
+        <label>Second name:</label>
+        <input type="text"  name="sname" value="Connor">
+        <label>Datetime local:</label>
+        <input type="date"  name="expiration" />
+
+        <label for="select">Select box:</label>
+        <select  name="select">
+          <option>Banana</option>
+          <option>Cherry</option>
+          <option>Lemon</option>
+        </select>
+        <div class="acc-row acc-form-button-panel1">
+          <button class="acc-btn">Ok</button>
+          <button class="acc-btn">Cancel</button>
+        </div>
+
+
+      </div>      
+      
+      
+      </form>
+
+
+
+
+
+
+
+
+
+
+    </div>
+
+
+
+  </div>
+</body>
+
+
+
+
+
+</html>

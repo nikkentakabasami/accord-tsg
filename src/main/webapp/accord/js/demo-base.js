@@ -34,6 +34,8 @@ let demoOptions = {
 	beforeExecDemoFunc: null,
 	afterExecDemoFunc: null,
 	
+	//функция инициализации всего кода: выводить её при нажатии каждой демо-кнопки
+	initFunction: null
 		
 };
 
@@ -479,44 +481,58 @@ function formatDate(date) {
 //при клике на кнопку - показывает код демо-функции и выполняет её
 function addDemoButtons(handlers, panelSelector = ".acc-button-panel"){
 	
-	let $panel = $(panelSelector);
 	
 	for(let handlerName in handlers){
-		let $newButton = $(`<button id="b${newButtonNo}" type="button" class="acc-btn">${handlerName}</button>`);
-		demoButtons.push($newButton);
-		
 		let handler = handlers[handlerName];
-		
-		$newButton.click(event=>{
-			let code = trimFuncCode(handler);
-			clearLog1();
-			log("//функция: "+handler.name);
-			log(code);
-			
-			//указана доп. функция инициализации - вывести её в лог
-			if (handler.init){
-				log();
-				lognl("//функция инициализации:");
-				log(String(handler.init));
-			}
-			
-			highlightLogComments1();
-			
-			if (demoOptions.beforeExecDemoFunc){
-				demoOptions.beforeExecDemoFunc();
-			}
-			handler(event);
-			if (demoOptions.afterExecDemoFunc){
-				demoOptions.afterExecDemoFunc();
-			}
-			
-		});
-		
-		
-		$panel.append($newButton);
+		addDemoButton(handlerName, handler, panelSelector);
 	}
 	
-	newButtonNo++;
+}
+
+
+function addDemoButton(handlerName, handler, panelSelector = ".acc-button-panel"){
+	let $panel = $(panelSelector);
+	
+	let $newButton = $(`<button id="b${newButtonNo++}" type="button" class="acc-btn">${handlerName}</button>`);
+	demoButtons.push($newButton);
+	$panel.append($newButton);
+	
+	$newButton.click(event=>{
+		let isScript = (typeof handler == "string"); 
+		clearLog1();
+		
+		//выделяем последнюю нажатую кнопку
+		$panel.find("button").removeClass("blue-border");
+		$newButton.addClass("blue-border");
+		
+		if (demoOptions.beforeExecDemoFunc){
+			demoOptions.beforeExecDemoFunc();
+		}
+
+		if (isScript) {
+			le2(handler);
+		} else {
+
+			let code = trimFuncCode(handler);
+			log(code);
+			handler(event);
+		}
+
+		if (demoOptions.afterExecDemoFunc){
+			demoOptions.afterExecDemoFunc();
+		}
+					
+		let initFunction = handler.init || demoOptions.initFunction;
+
+		//указана доп. функция инициализации - вывести её в лог
+		if (initFunction){
+			log();
+			lognl("//функция инициализации:");
+			log(String(initFunction));
+		}
+		highlightLogComments1();
+	});
+	
 }
 
 

@@ -107,7 +107,11 @@ export class TsgView extends AbstractModule {
 
 		this.clearRows();
 		this.$headers.empty();
-		this.$headerRow.empty();
+		
+		if (this.$headerRow) {
+			this.$headerRow.empty();
+		}
+		
 		if (this.$style) {
 			this.$style.remove();
 			this.$style = null;

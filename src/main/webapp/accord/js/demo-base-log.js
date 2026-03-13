@@ -302,6 +302,14 @@ function logObject(o, ...attributes) {
 }
 
 
+//Показ функции в логе
+function logFunc(f){
+	clearLog1();
+	log(String(f));
+	highlightLogComments1();
+}
+
+
 
 function logMessage($log, ...vals) {
 	

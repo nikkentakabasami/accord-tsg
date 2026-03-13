@@ -1,5 +1,5 @@
 
-import { AccModalDialog } from '../../js/accord-bundle.js';
+//import { AccModalDialog } from '../../js/accord-bundle.js';
 
 
 
@@ -12,7 +12,7 @@ let dialog4;
 
 
 
-let buttonHandlers1 = {
+let bh1 = {
 	
 	showDialog1(){
 		dialog1.show();
@@ -33,6 +33,10 @@ let buttonHandlers1 = {
 	},
 	
 }
+bh1.showDialog1.init = createDialog1;
+bh1.showDialog2.init = createDialog2;
+bh1.showDialog3.init = createDialog3;
+bh1.showDialog4.init = createDialog4;
 
 
 function createDialog1(){
@@ -78,7 +82,6 @@ function createDialog2(){
 //		autosize: true,
 		
 	});
-//	dialog2.show();	
 	
 }
 function createDialog3(){
@@ -102,12 +105,8 @@ function createDialog4(){
 
 $(document).ready(function() {
 
-	addDemoButtons(buttonHandlers1)
+	addDemoButtons(bh1)
 
-	buttonHandlers1.showDialog1.init = createDialog1;
-	buttonHandlers1.showDialog2.init = createDialog2;
-	buttonHandlers1.showDialog3.init = createDialog3;
-	buttonHandlers1.showDialog4.init = createDialog4;
 	
 		
 	createDialog1();

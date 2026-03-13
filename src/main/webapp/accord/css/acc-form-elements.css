@@ -44,7 +44,10 @@
 .acc-form-style1 button, 
 */
 
-.acc-form-style1 label, .acc-form-style1 input, .acc-form-style1 select,
+
+.acc-form-style1 input[type="text"], .acc-form-style1 input[type="number"], .acc-form-style1 input[type="date"],
+.acc-form-style1>label, .form-group>label,
+.acc-form-style1 select,
 	.acc-form-style1 progress, .acc-form-style1 meter {
 	display: block;
 	font-family: inherit;
@@ -56,6 +59,12 @@
 	padding: 5px;
 	height: 30px;
 }
+
+
+.acc-form-style1 select[multiple] {
+	height: 80px;
+}
+
 
 .acc-form-element-style1 {
 	display: block;

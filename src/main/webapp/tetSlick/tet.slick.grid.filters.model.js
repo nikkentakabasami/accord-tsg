@@ -175,6 +175,10 @@ export class FiltersModel  extends AbstractModule {
 	//закидывает инпуты в заголовочную строку (и выполняет их инициализацию, если она не выполнена)
 	//может вызываться после перестройки таблицы (скрытие, показ столбцов)
 	moveFiltersToHeaderRow(){
+		if (!this.grid.view.$headerRow){
+			return;
+		}		
+		
 		let columns = this.grid.model.columns;
 		
 	    let $headerRowCells = this.grid.view.$headerRow.children('div');

@@ -9,18 +9,23 @@ import { accordUtils } from './accord-utils.js';
 const accSplitterDefaultOptions = {
 
 	panelSelector: null,	//панель, на которую нужно добавить splitter
-	id: null,				//id диалога.
+	id: null,				//id, которое будет задано на родительскую панель. По умолчанию генерируется: accsp1, accsp2..
 	immediateInit: true,
 	panelExtraClasses: "",	//дополнительные классы, которые будут заданы на панель
-	startLeftPanelWidth: null
+	startLeftPanelWidth: null	//начальная ширина левой панели
 	
 }
 
 
 /**
- * Добавляет на заданную div-панель splitter, 
- * который позволяет менять размеры подпанелей.
- * 
+ * Добавляет на заданную div-панель splitter, который позволяет менять размеры подпанелей.
+ * Всё что надо - передать в конструктор селектор родительской панели, содержащей 2 дочерние div-панели.
+ *
+ * Пример: 
+  splitterPanel1 = new AccSplitter(	{
+		panelSelector: "#mySplitPanel1",
+		startLeftPanelWidth: 300
+	});	
  * 
  */
 class AccSplitter {
@@ -29,17 +34,17 @@ class AccSplitter {
 
     id;
 
-    //dom элементы
-    $panel;
-	$resizer;
-	$leftPanel;
-	$rightPanel;
+	    //dom элементы
+	    $panel;
+		$resizer;
+		$leftPanel;
+		$rightPanel;
+		
 	
-
-	startX;
-	startWidth;
-	isResizing = false;	
-	
+		startX;
+		startWidth;
+		isResizing = false;	
+		
 	
     options;
 
@@ -92,7 +97,6 @@ class AccSplitter {
 			this.$leftPanel.width(this.options.startLeftPanelWidth);
 			this.$leftPanel.css("min-width", this.options.startLeftPanelWidth+"px");
 		}
-		
 		
 		this.$rightPanel = this.$panel.children("div.acc-sp-right");
 		if (!this.$rightPanel.length){
